@@ -25,7 +25,7 @@ jobs:
 
     - name: Install missing requirements
       run: |
-        apt install libudev-dev
+        sudo apt install libudev-dev
 
     - name: Install dependencies
       run: |
