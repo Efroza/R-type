@@ -25,7 +25,8 @@ jobs:
 
     - name: Install missing requirements
       run: |
-        sudo apt update 
+        sudo apt update
+        sudo apt --only-upgrade install libseccomp2
         sudo apt install libudev-dev
         sudo apt install pkg-config
 
