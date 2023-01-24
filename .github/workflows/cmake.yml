@@ -26,7 +26,6 @@ jobs:
     - name: Install missing requirements
       run: |
         sudo apt update
-        conan profile update settings.compiler.libcxx=libstdc++11 default
         sudo apt --only-upgrade install libseccomp2
         sudo apt install libudev-dev
         sudo apt install pkg-config
@@ -35,6 +34,8 @@ jobs:
 
     - name: Install dependencies
       run: |
+        conan config install https://github.com/includeos/conan_config.git
+        conan profile update settings.compiler.libcxx=libstdc++11 default
         conan install . --build=missing
 
     - name: Build with CMake
