@@ -27,6 +27,7 @@ jobs:
       run: |
         sudo apt update 
         sudo apt install libudev-dev
+        sudo apt install pkg-config
 
     - name: Install dependencies
       run: |
