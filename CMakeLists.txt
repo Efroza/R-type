@@ -14,16 +14,17 @@ endif()
 
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
-# conan_cmake_configure(REQUIRES fmt/6.1.2
-#   GENERATORS cmake_find_package)
+conan_cmake_configure(REQUIRES sfml/2.5.1
+  GENERATORS cmake)
 
-# conan_cmake_autodetect(settings)
+conan_cmake_autodetect(settings)
 
 conan_cmake_install(PATH_OR_REFERENCE .
                         BUILD missing
                         REMOTE conancenter
                         SETTINGS ${settings})
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
 message("before conanfile.txt")
 # conan_cmake_run(CONANFILE conanfile.txt
 #                 BASIC_SETUP)
@@ -42,8 +43,7 @@ set(SRCS2
 set(HEADERS2
     )    
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-message ("adding executable ${PROJECT_NAME}_server")
+# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 add_executable(${PROJECT_NAME}_server ${SRCS1} ${HEADERS1})
 add_executable(${PROJECT_NAME}_client ${SRCS2} ${HEADERS2})
 target_link_libraries(${PROJECT_NAME}_server ${CONAN_LIBS})
