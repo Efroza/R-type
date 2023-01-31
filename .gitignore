@@ -29,3 +29,5 @@ conan.cmake
 findfmt.cmake
 conanbuildinfo*
 *.dir
+conan.cmake
+conanfile.txt

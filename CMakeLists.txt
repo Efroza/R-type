@@ -4,9 +4,16 @@ project(r-type)
 
 set(CMAKE_CXX_STANDARD 17)
 
-message("Checking if conan exist in ${CMAKE_BINARY_DIR}")
+if (NOT WIN32)
+    string(ASCII 27 Esc)
+    set(ColorReset "${Esc}[m")
+    set(Red         "${Esc}[31m")
+    set(Green       "${Esc}[32m")
+endif()
+
+message("${Green}Checking if conan exist in ${CMAKE_BINARY_DIR}${ColorReset}")
 if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
-    message("Downloading conan.cmake from https://raw.githubusercontent.com/conan-io/cmake-conan/0.18.1/conan.cmake")
+    message("${Red}Downloading conan.cmake from https://raw.githubusercontent.com/conan-io/cmake-conan/0.18.1/conan.cmake${ColorReset}")
     file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/0.18.1/conan.cmake"
                     "${CMAKE_BINARY_DIR}/conan.cmake"
                     TLS_VERIFY ON)
@@ -14,6 +21,7 @@ endif()
 
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
+message("${Green} Installing dependencies${ColorReset}")
 conan_cmake_configure(REQUIRES sfml/2.5.1
   GENERATORS cmake)
 
@@ -23,11 +31,10 @@ conan_cmake_install(PATH_OR_REFERENCE .
                         BUILD missing
                         REMOTE conancenter
                         SETTINGS ${settings})
+
+message("${Green} Loading dependencies${ColorReset}")
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
-message("before conanfile.txt")
-# conan_cmake_run(CONANFILE conanfile.txt
-#                 BASIC_SETUP)
 
 set(SRCS1
     ./server/src/main.cpp
@@ -43,8 +50,9 @@ set(SRCS2
 set(HEADERS2
     )    
 
-# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+message("${Green} Building ${PROJECT_NAME}${ColorReset}")
 add_executable(${PROJECT_NAME}_server ${SRCS1} ${HEADERS1})
 add_executable(${PROJECT_NAME}_client ${SRCS2} ${HEADERS2})
 target_link_libraries(${PROJECT_NAME}_server ${CONAN_LIBS})
 target_link_libraries(${PROJECT_NAME}_client ${CONAN_LIBS})
+message("${Green} Done${ColorReset}")
