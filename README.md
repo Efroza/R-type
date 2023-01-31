@@ -2,11 +2,7 @@
 ![](https://img.shields.io/badge/Project-Made%20with%20Love-ff69b4)
 
 ## Installation
-Pour lancer le projet sur Linux, la commande:
-```
-conan install . --build=missing && cmake .
-```
-et sur Windows, via Visual Studio:
+Lancez cette commande pour installer le projet sur Linux ou sur Windows, via Visual Studio:
 ```
 cmake . -DCMAKE_BUILD_TYPE=Release
 cmake --build . --config Release
