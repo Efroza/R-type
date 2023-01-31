@@ -8,7 +8,8 @@ conan install . --build=missing && cmake .
 ```
 et sur Windows, via Visual Studio:
 ```
-cmake
+cmake . -DCMAKE_BUILD_TYPE=Release
+cmake --build . --config Release
 ```
 
 ## Lancer le jeu
