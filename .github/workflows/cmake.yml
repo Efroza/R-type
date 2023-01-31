@@ -34,9 +34,6 @@ jobs:
 
     - name: Install dependencies
       run: |
-        conan config install https://github.com/includeos/conan_config.git
-        y
-        y
         conan profile update settings.compiler.libcxx=libstdc++11 default
         conan install . --build=missing
 

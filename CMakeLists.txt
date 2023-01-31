@@ -20,7 +20,7 @@ endif()
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
 message("${Green} Installing dependencies${ColorReset}")
-conan_cmake_configure(REQUIRES sfml/2.5.1
+conan_cmake_configure(REQUIRES sfml/2.5.1 asio/1.24.0
   GENERATORS cmake)
 
 conan_cmake_autodetect(settings)
