@@ -4,12 +4,10 @@ project(r-type)
 
 set(CMAKE_CXX_STANDARD 17)
 
-if (NOT WIN32)
-    string(ASCII 27 Esc)
-    set(ColorReset "${Esc}[m")
-    set(Red         "${Esc}[31m")
-    set(Green       "${Esc}[32m")
-endif()
+string(ASCII 27 Esc)
+set(ColorReset "${Esc}[m")
+set(Red         "${Esc}[31m")
+set(Green       "${Esc}[32m")
 
 message("${Green}Checking if conan exist in ${CMAKE_BINARY_DIR}${ColorReset}")
 if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
