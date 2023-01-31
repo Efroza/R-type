@@ -25,3 +25,6 @@ r-type_server
 r-type_client
 bin
 .vs
+conan.cmake
+findfmt.cmake
+conanbuildinfo*
