@@ -52,6 +52,7 @@ class data
         }
 
     private:
+        std::unordered_map<std::type_index, std::any> db;
 };
 
 #endif /* !DATA_HPP_ */
