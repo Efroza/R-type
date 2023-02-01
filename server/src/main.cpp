@@ -15,6 +15,7 @@ using namespace asio;
 const int BUFSIZE = 1024;
 const std::string HOST = "127.0.0.1"; // Localhost : 127.0.0.1
 const int PORT = 12345; // Port to listen on
+short no_co = 0;
 
 char buf[BUFSIZE];
 
@@ -34,15 +35,14 @@ void receive_thread(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vec
 void send_thread(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vector<ip::udp::endpoint>& endpoints) { // Send data to clients
     
     if (endpoints.empty()) {
-            std::cout << "No clients connected." << std::endl;
-            while (true)
-                if (endpoints.size() > 0) {
-                    std::cout << "A client has connected to the server" << std::endl;
-                    std::cout << "Number of clients : " << endpoints.size() << std::endl;
-                    break;
-                }
+        std::cout << "No clients connected." << std::endl;
+        if (endpoints.empty() == false) {
+            std::cout << "A client has connected to the server" << std::endl;
+            std::cout << "Number of clients : " << endpoints.size() << std::endl;
+            no_co = 1;
+        }
     }
-    while (true) { // Loop forever thread will send data to clients
+    while (true && no_co == 1) { // Loop forever thread will send data to clients
         std::cout << "Enter message to send: ";
         std::string message;
         std::getline(std::cin, message);
