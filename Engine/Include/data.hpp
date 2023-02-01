@@ -45,6 +45,13 @@ class data
             return data[id];
         }
         template <typename Type>
+        size_t new_id()
+        {
+            std::vector<Type> &data = get_data<Type>();
+            return data.size();
+        }
+
+        template <typename Type>
         void add_data(Type &&new_data)
         {
             std::vector<Type> &data = get_data<Type>();

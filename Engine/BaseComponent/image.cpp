@@ -14,8 +14,15 @@ component::image::image(const std::string &file, data &db, entity_t const &e) : 
     sprite.setTexture(texture);
 }
 
+component::image::image(const std::string &file, data &db) : db(&db), id(db.new_id<sf::Texture>())
+{
+    load_texture(file);
+    sf::Texture &texture = db.get_data<sf::Texture>(id);
+    sprite.setTexture(texture);
+}
+
 component::image::image(component::image const &copy)
-: sprite(copy.sprite)
+: db(copy.db), id(copy.id), sprite(copy.sprite)
 {
 }
 

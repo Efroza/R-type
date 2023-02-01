@@ -19,6 +19,7 @@ namespace component
     {
         public:
             image(const std::string &file, data &db, entity_t const &e);
+            image(const std::string &file, data &db);
             image(image const &move);
             ~image();
             sf::Sprite &get_sprite();
