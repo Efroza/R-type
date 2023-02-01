@@ -73,3 +73,39 @@ int main() {
 
     return 0;
 }
+
+// void receive_thread(ip::tcp::socket& socket) { // Receive data from clients
+//     while (true) { // Loop forever thread will receive data from clients
+//         size_t len = socket.read_some(buffer(buf, BUFSIZE));
+//         std::cout << "Received data from client: ";
+//         std::cout.write(buf, len) << std::endl;
+//     }
+// }
+
+// void send_thread(ip::tcp::socket& socket) { // Send data to clients
+//     while (true) { // Loop forever thread will send data to clients
+//         std::cout << "Enter message to send: ";
+//         std::string message;
+//         std::getline(std::cin, message);
+//         socket.write_some(buffer(message));
+//     }
+// }
+
+// int main() {
+//     io_service io_service;
+//     ip::tcp::endpoint endpoint(ip::tcp::v4(), PORT);
+//     ip::tcp::acceptor acceptor(io_service, endpoint);
+//     ip::tcp::socket socket(io_service);
+
+//     std::cout << "Waiting for client connection..." << std::endl;
+//     acceptor.accept(socket);
+//     std::cout << "Client connected." << std::endl;
+
+//     std::thread receive(receive_thread, std::ref(socket)); // Create thread to receive data from clients
+//     std::thread send(send_thread, std::ref(socket)); // Create thread to send data to clients
+
+//     receive.join(); // Wait for threads 'receive' to finish
+//     send.join(); // Wait for threads 'send' to finish
+
+//     return 0;
+// }
