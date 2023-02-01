@@ -71,6 +71,9 @@ void async_udp_client(const std::string& host, const std::string& port)
 
     udp::socket socket(io_context);
     socket.open(udp::v4());
+    socket.send_to(asio::buffer("Connected to server"), server_endpoint);
+    std::cout << "Connected to server" << std::endl;
+
 
     std::thread receive_thread([&socket, &io_context](){
         while (true)
