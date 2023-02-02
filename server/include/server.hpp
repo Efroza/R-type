@@ -14,9 +14,11 @@
 
 #include <iostream>
 #include <asio.hpp>
+#include <thread>
+#include <vector>
 
-using asio::ip::tcp;
-using asio::ip::udp;
+void launch_tcp_server();
+void launch_udp_server();
 
 // class TcpServer
 // {
