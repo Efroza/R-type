@@ -36,16 +36,22 @@ conan_basic_setup()
 
 set(SRCS1
     ./server/src/main.cpp
+    ./server/src/tcp.cpp
+    ./server/src/udp.cpp
     )
 
 set(HEADERS1
+    ./server/include/server.hpp
     )
 
 set(SRCS2
     ./client/src/main.cpp
+    ./client/src/tcp.cpp
+    ./client/src/udp.cpp
     )
     
 set(HEADERS2
+    ./client/include/client.hpp
     )
 
 message("${Green} Building ${PROJECT_NAME}${ColorReset}")
