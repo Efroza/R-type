@@ -46,7 +46,7 @@ set(SRCS2
     )
     
 set(HEADERS2
-    )    
+    )
 
 message("${Green} Building ${PROJECT_NAME}${ColorReset}")
 add_executable(${PROJECT_NAME}_server ${SRCS1} ${HEADERS1})
