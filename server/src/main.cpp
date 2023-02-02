@@ -32,12 +32,27 @@ void receive_thread(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vec
     }
 }
 
+// int32_t lose_hp(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vector<ip::udp::endpoint>& endpoints, std::string message) {
+//     if (message.find("Player Hit") != std::string::npos) {
+//         // Get what's after : , the string will look like Player Hit : (1),(1)
+//         std::string player_hit = message.substr(message.find(":") + 2);
+//         // Get the first number
+//         std::string player_hit_hp_lost = player_hit.substr(0, player_hit.find(","));
+//         // Get the second number
+//         std::string player_hit_id = player_hit.substr(player_hit.find(",") + 1);
+//         // Convert the string to int
+//         int32_t player_hit_hp_lost_int = std::stoi(player_hit_hp_lost);
+//         int32_t player_hit_id_int = std::stoi(player_hit_id);
+//     }
+// }
+
 void send_thread(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vector<ip::udp::endpoint>& endpoints) { // Send data to clients
     
     while (true) { // Loop forever thread will send data to clients
         std::cout << "Enter message to send: ";
         std::string message;
         std::getline(std::cin, message);
+        // lose_hp(socket, remote, endpoints, message);
         for (auto &endpoint : endpoints)
             socket.send_to(buffer(message), endpoint); // Send message to all clients
     }
