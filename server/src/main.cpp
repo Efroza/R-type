@@ -5,10 +5,12 @@
 ** main
 */
 
-#include "iostream"
+#include "../include/server.hpp"
 
-int main()
-{
-    std::cout << "Hello World server" << std::endl;
+int main() {
+    // Uncomment the line for the desired server
+    launch_tcp_server();
+    // launch_udp_server();
+
     return 0;
 }

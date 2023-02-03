@@ -5,11 +5,16 @@
 ** main
 */
 
-#include "iostream"
-#include "stdio.h"
+#include "../include/client.hpp"
 
 int main()
 {
-    std::cout << "Hello World client" << std::endl;
+    std::string host = "localhost";
+    std::string port = "12345";
+
+    // Uncomment the line for the desired client
+    async_tcp_client(host, port);
+    // async_udp_client(host, port);
+
     return 0;
 }
