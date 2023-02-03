@@ -19,9 +19,33 @@ set(SRCS2
     )
     
 set(HEADERS2
-    )    
+    )
+set(SRCS3
+    #Game
+    ./Engine/Game/main.cpp
+    ./Engine/Game/load_component.cpp
+    ./Engine/Game/load_systems.cpp
+    #BaseComponent
+    ./Engine/BaseComponent/image.cpp
+    #BaseSystems
+    ./Engine/BaseSystems/draw_system.cpp
+    ./Engine/BaseSystems/position_system.cpp
+    )
+set(HEADERS3
+    #Include
+    ./Engine/Include/entity.hpp
+    ./Engine/Include/registry.hpp
+    ./Engine/Include/sparse_array.hpp
+    ./Engine/Includ/systems.hpp
+    #BaseComponent
+    ./Engine/BaseComponent/draw.hpp
+    ./Engine/BaseComponent/image.hpp
+    ./Engine/BaseComponent/position.hpp
+)
 
 add_executable(r-type_server ${SRCS1} ${HEADERS1})
 add_executable(r-type_client ${SRCS2} ${HEADERS2})
-target_link_libraries(r-type_server ${CONAN_LIBS})
+add_executable(r-type ${SRCS3} ${HEADERS3})
 target_link_libraries(r-type_client ${CONAN_LIBS})
+target_link_libraries(r-type_server ${CONAN_LIBS})
+target_link_libraries(r-type ${CONAN_LIBS})
