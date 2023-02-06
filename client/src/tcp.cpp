@@ -42,16 +42,7 @@ void async_tcp_client(const std::string& host, const std::string& port)
                         std::cout << "Received from server: ";
                         std::cout.write(response, bytes_received) << std::endl;
                     }
-                    else
-                    {
-                        // Could not receive response from server
-                        std::cout << "No response from server." << std::endl;
-                    }
                 }
-            }
-            else
-            {
-                std::cerr << "Error connecting to the server: " << ec.message() << std::endl;
             }
         });
 
