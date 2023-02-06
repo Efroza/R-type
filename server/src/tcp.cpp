@@ -31,7 +31,7 @@ void handle_client(tcp::socket socket)
 void launch_tcp_server()
 {
   io_context io_context;
-  tcp::acceptor acceptor(io_context, tcp::endpoint(tcp::v4(), 12345));
+  tcp::acceptor acceptor(io_context, tcp::endpoint(tcp::v4(), 12346));
   while (true) {
     tcp::socket socket(io_context);
     acceptor.accept(socket);

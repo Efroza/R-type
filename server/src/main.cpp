@@ -9,8 +9,11 @@
 
 int main() {
     // Uncomment the line for the desired server
-    launch_tcp_server();
-    // launch_udp_server();
+    // std::thread first(launch_tcp_server);
+    std::thread second(launch_udp_server);
+
+    // first.join();
+    second.join();
 
     return 0;
 }
