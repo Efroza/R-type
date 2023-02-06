@@ -6,6 +6,7 @@
 */
 
 #include "../include/server.hpp"
+#include <fstream>
 
 using namespace asio;
 
@@ -15,43 +16,43 @@ const int PORT = 12345; // Port to listen on
 
 char buf[BUFSIZE];
 
+struct message {
+    int32_t id;
+    int32_t len;
+    char data[1024];
+};
+
 void receive_thread(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vector<ip::udp::endpoint>& endpoints) { // Receive data from clients
     while (true) { // Loop forever thread will receive data from clients
-        size_t len = socket.receive_from(buffer(buf, BUFSIZE), remote);
+        message msg;
+        std::memset(&msg, 0, sizeof(msg));
 
 
+        size_t len = socket.receive_from(buffer(&msg, sizeof(msg)), remote);
         if (std::find(endpoints.begin(), endpoints.end(), remote) == endpoints.end()) {
             endpoints.push_back(remote);
+            msg.id = endpoints.size();
             std::cout << "New client connected: " << remote.address().to_string() << ":" << remote.port() << ". Id = " << endpoints.size() << "." << std::endl;
         }
-        std::cout << "Received data from client " << std::find(endpoints.begin(), endpoints.end(), remote) - endpoints.begin() + 1 << ": ";
-        std::cout.write(buf, len) << std::endl;
+        else
+            msg.id = std::find(endpoints.begin(), endpoints.end(), remote) - endpoints.begin() + 1;
+        std::cout << "Received data from client " << msg.id << ": ";
+        std::cout.write(msg.data, msg.len) << std::endl;
     }
 }
-
-// int32_t lose_hp(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vector<ip::udp::endpoint>& endpoints, std::string message) {
-//     if (message.find("Player Hit") != std::string::npos) {
-//         // Get what's after : , the string will look like Player Hit : (1),(1)
-//         std::string player_hit = message.substr(message.find(":") + 2);
-//         // Get the first number
-//         std::string player_hit_hp_lost = player_hit.substr(0, player_hit.find(","));
-//         // Get the second number
-//         std::string player_hit_id = player_hit.substr(player_hit.find(",") + 1);
-//         // Convert the string to int
-//         int32_t player_hit_hp_lost_int = std::stoi(player_hit_hp_lost);
-//         int32_t player_hit_id_int = std::stoi(player_hit_id);
-//     }
-// }
 
 void send_thread(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vector<ip::udp::endpoint>& endpoints) { // Send data to clients
     
     while (true) { // Loop forever thread will send data to clients
         std::cout << "Enter message to send: ";
-        std::string message;
-        std::getline(std::cin, message);
-        // lose_hp(socket, remote, endpoints, message);
+        std::string message_client;
+        std::getline(std::cin, message_client);
+        message msg;
+        msg.id = 1;
+        msg.len = message_client.size();
+        std::memcpy(&msg.data, message_client.c_str(), message_client.size());
         for (auto &endpoint : endpoints)
-            socket.send_to(buffer(message), endpoint); // Send message to all clients
+            socket.send_to(asio::buffer(&msg, sizeof(msg)), endpoint);
     }
 }
 

@@ -14,6 +14,9 @@
 
 #include <iostream>
 #include <asio.hpp>
+#include <thread>
+#include <cstdint>
+#include <array>
 
 using asio::ip::tcp;
 using asio::ip::udp;

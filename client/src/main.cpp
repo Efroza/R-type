@@ -14,8 +14,8 @@ int main()
     std::string tcp_port = "12346";
 
     // Uncomment the line for the desired client
+    // async_tcp_client(host, port);
     async_udp_client(host, port);
-    // async_tcp_client(host, tcp_port);
 
     return 0;
 }

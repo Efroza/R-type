@@ -14,8 +14,11 @@
 
 #include <iostream>
 #include <asio.hpp>
+#include <algorithm>
 #include <thread>
 #include <vector>
+#include <cstdint>
+#include <cstring>
 
 void launch_tcp_server();
 void launch_udp_server();
