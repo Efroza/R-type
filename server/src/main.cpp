@@ -9,8 +9,8 @@
 
 int main() {
     // Uncomment the line for the desired server
-    launch_tcp_server();
-    // launch_udp_server();
+    // launch_tcp_server();
+    launch_udp_server();
 
     return 0;
 }
