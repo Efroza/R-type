@@ -11,6 +11,7 @@ int main()
 {
     std::string host = "localhost";
     std::string port = "12345";
+    std::string tcp_port = "12346";
 
     // Uncomment the line for the desired client
     // async_tcp_client(host, port);
