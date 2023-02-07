@@ -58,24 +58,27 @@ void async_udp_client(const std::string& host, const std::string& port)
 
     while (true)
     {
-        Messages message_to_send;
-        Position position_to_send;
-        Header header_to_send;
         std::cout << "Enter message to send: ";
         std::string input;
         std::getline(std::cin, input);
-        if (message_client.find(',') != std::string::npos) {
+        Messages message_to_send;
+        Position position_to_send;
+        Header header_to_send;
+        header_to_send.id = 0;
+        if (input.find(',') != std::string::npos) {
             header_to_send.data_type = POSITION;
-            position_to_send.x = std::stoi(message_client.substr(0, message_client.find(',')));
-            position_to_send.y = std::stoi(message_client.substr(message_client.find(',') + 1, message_client.size()));
-            socket.send_to(asio::buffer(&header_to_send, sizeof(Header)), server_endpoint);
-            socket.send_to(asio::buffer(&position_to_send, sizeof(Position)), server_endpoint);
+            position_to_send.x = std::stoi(input.substr(0, input.find(',')));
+            std::cout << "X: " << position_to_send.x << std::endl;
+            position_to_send.y = std::stoi(input.substr(input.find(',') + 1, input.size()));
+            std::cout << "Y: " << position_to_send.y << std::endl;
+            socket.send_to(asio::buffer(&header_to_send, sizeof(header_to_send)), server_endpoint);
+            socket.send_to(asio::buffer(&position_to_send, sizeof(position_to_send)), server_endpoint);
         } else {
             header_to_send.data_type = MESSAGE;
             message_to_send.size = input.size();
             std::memcpy(&message_to_send.message, input.c_str(), input.size());
-            socket.send_to(asio::buffer(&header_to_send, sizeof(Header)), server_endpoint);
-            socket.send_to(asio::buffer(&message_to_send, sizeof(Messages)), server_endpoint);
+            socket.send_to(asio::buffer(&header_to_send, sizeof(header_to_send)), server_endpoint);
+            socket.send_to(asio::buffer(&message_to_send, sizeof(message_to_send)), server_endpoint);
         }
         // std::strcpy(&msg.data, input.c_str());
         // std::memcpy(&msg.data, input.c_str(), input.length());

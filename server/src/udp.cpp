@@ -24,20 +24,59 @@ struct message {
 
 void receive_thread(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vector<ip::udp::endpoint>& endpoints) { // Receive data from clients
     while (true) { // Loop forever thread will receive data from clients
-        message msg;
-        std::memset(&msg, 0, sizeof(msg));
+        Header header;
+        Position position;
+        Messages message;
+        std::memset(&header, 0, sizeof(Header));
 
-
-        size_t len = socket.receive_from(buffer(&msg, sizeof(msg)), remote);
+        size_t len = socket.receive_from(buffer(&header, sizeof(Header)), remote);
         if (std::find(endpoints.begin(), endpoints.end(), remote) == endpoints.end()) {
             endpoints.push_back(remote);
-            msg.id = endpoints.size();
+            // header.id = endpoints.size();
             std::cout << "New client connected: " << remote.address().to_string() << ":" << remote.port() << ". Id = " << endpoints.size() << "." << std::endl;
+            continue;
+        } else {
+            header.id = std::find(endpoints.begin(), endpoints.end(), remote) - endpoints.begin() + 1;
         }
-        else
-            msg.id = std::find(endpoints.begin(), endpoints.end(), remote) - endpoints.begin() + 1;
-        std::cout << "Received data from client " << msg.id << ": ";
-        std::cout.write(msg.data, msg.len) << std::endl;
+        // std::cout << header.id << "+" << header.data_type << std::endl;
+        if (header.data_type == POSITION) {
+            std::cout << "POSITION" << std::endl;
+            socket.receive_from(asio::buffer(&position, sizeof(Position)), remote);
+            std::cout << "Received from client " << header.id << ": " << position.x << " " << position.y << std::endl;
+        } else {
+            std::cout << "MESSAGE" << std::endl;
+            socket.receive_from(asio::buffer(&message, sizeof(Messages)), remote);
+            std::cout << "Received from client " << header.id << ": " << message.size << " ";
+            std::cout.write(message.message, message.size) << std::endl;
+        }
+        // else
+            // header.id = std::find(endpoints.begin(), endpoints.end(), remote) - endpoints.begin() + 1;
+        // if (header.data_type == 1) {
+        //     socket.receive_from(asio::buffer(&message, sizeof(Messages)), remote);
+        //     std::cout << "MESSAGE" << std::endl;
+        //     std::cout << "Received from client " << header.id << ": " << message.size << " ";
+        //     std::cout.write(message.message, message.size) << std::endl;
+        // } else {
+        //     socket.receive_from(asio::buffer(&position, sizeof(Position)), remote);
+        //     std::cout << "POSITION" << std::endl;
+        //     std::cout << "Received from client " << header.id << ": " << position.x << " " << position.y << std::endl;
+        // }
+
+        
+        // message msg;
+        // std::memset(&msg, 0, sizeof(msg));
+
+
+        // size_t len = socket.receive_from(buffer(&msg, sizeof(msg)), remote);
+        // if (std::find(endpoints.begin(), endpoints.end(), remote) == endpoints.end()) {
+        //     endpoints.push_back(remote);
+        //     msg.id = endpoints.size();
+        //     std::cout << "New client connected: " << remote.address().to_string() << ":" << remote.port() << ". Id = " << endpoints.size() << "." << std::endl;
+        // }
+        // else
+        //     msg.id = std::find(endpoints.begin(), endpoints.end(), remote) - endpoints.begin() + 1;
+        // std::cout << "Received data from client " << msg.id << ": ";
+        // std::cout.write(msg.data, msg.len) << std::endl;
     }
 }
 
@@ -52,7 +91,6 @@ void send_thread(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vector
         Header header;
         // header.size = message_client.size();
         header.data_type = MESSAGE;
-        // if find ','
         if (message_client.find(',') != std::string::npos) {
             header.data_type = POSITION;
             position_to_send.x = std::stoi(message_client.substr(0, message_client.find(',')));
