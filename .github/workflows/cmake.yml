@@ -45,6 +45,10 @@ jobs:
         conan user
         conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
         conan remote add conan-center https://conan.bintray.com
+          
+    - name: Install CMake
+      run: |
+        sudo apt-get update && sudo apt-get install cmake -y
 
     - name: Checkout repository
       uses: actions/checkout@v3
