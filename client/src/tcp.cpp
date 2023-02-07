@@ -7,6 +7,37 @@
 
 #include "../include/client.hpp"
 
+void receive_tcp_client(Header header, tcp::socket &socket) {
+        if (header.data_type == POSITION) {
+            Position position;
+            socket.receive(asio::buffer(&position, sizeof(Position)));
+            std::cout << "Received from server " << header.id << ": " << position.x << " " << position.y << std::endl;
+        } else {
+            Messages message;
+            socket.receive(asio::buffer(&message, sizeof(Messages)));
+            std::cout << "Received from server " << header.id << ": " << message.size << " ";
+            std::cout.write(message.message, message.size) << std::endl;
+        }            
+}
+
+void send_tcp_client(Header header, tcp::socket &socket, std::string message) {
+    if (std::find(message.begin(), message.end(), ',') != message.end()) { //  If the input contains a comma, it's a position
+        header.data_type = POSITION;
+        Position position_to_send;
+        position_to_send.x = std::stoi(message.substr(0, message.find(',')));
+        position_to_send.y = std::stoi(message.substr(message.find(',') + 1, message.size()));
+        socket.send(asio::buffer(&header, sizeof(header)));
+        socket.send(asio::buffer(&position_to_send, sizeof(position_to_send)));
+    } else { // If the input doesn't contain a comma, it's a message
+        header.data_type = MESSAGE;
+        Messages message_to_send;
+        message_to_send.size = message.size();
+        std::memcpy(&message_to_send.message, message.c_str(), message.size());
+        socket.send(asio::buffer(&header, sizeof(header)));
+        socket.send(asio::buffer(&message_to_send, sizeof(message_to_send)));
+    }
+}
+
 void async_tcp_client(const std::string& host, const std::string& port)
 {
     asio::io_context io_context;
@@ -28,20 +59,17 @@ void async_tcp_client(const std::string& host, const std::string& port)
                     std::cout << "Enter message to send: ";
                     std::string message;
                     std::getline(std::cin, message);
-
+                    Header header;
+                    header.id = 1;
                     // Send the message to the server
-                    asio::write(socket, asio::buffer(message));
-
-                    // Try to receive the response from the server
-                    char response[1024];
-                    size_t bytes_received = socket.read_some(asio::buffer(response, 1024));
-
+                    // send_tcp_client(header, socket, message);
+                    send_tcp_client(header, std::ref(socket), message);
+                    
+                    std::memset(&header, 0, sizeof(header));
+                    size_t bytes_received = socket.receive(asio::buffer(&header, sizeof(header)));
+                    // If the server has sent a message, receive it
                     if (!ec)
-                    {
-                        // Received response from server
-                        std::cout << "Received from server: ";
-                        std::cout.write(response, bytes_received) << std::endl;
-                    }
+                        receive_tcp_client(header, std::ref(socket));
                 }
             }
         });
