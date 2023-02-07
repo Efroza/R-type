@@ -12,7 +12,7 @@
 #include "../../framework.h"
 #endif
 
-#include <iostream>
+#include "../../include/headers.hpp"
 #include <asio.hpp>
 #include <thread>
 #include <cstdint>

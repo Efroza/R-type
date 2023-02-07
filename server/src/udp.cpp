@@ -47,12 +47,37 @@ void send_thread(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vector
         std::cout << "Enter message to send: ";
         std::string message_client;
         std::getline(std::cin, message_client);
-        message msg;
-        msg.id = 1;
-        msg.len = message_client.size();
-        std::memcpy(&msg.data, message_client.c_str(), message_client.size());
-        for (auto &endpoint : endpoints)
-            socket.send_to(asio::buffer(&msg, sizeof(msg)), endpoint);
+        Messages message_to_send;
+        Position position_to_send;
+        Header header;
+        // header.size = message_client.size();
+        header.data_type = MESSAGE;
+        // if find ','
+        if (message_client.find(',') != std::string::npos) {
+            header.data_type = POSITION;
+            position_to_send.x = std::stoi(message_client.substr(0, message_client.find(',')));
+            position_to_send.y = std::stoi(message_client.substr(message_client.find(',') + 1, message_client.size()));
+            for (auto &endpoint : endpoints) {
+                header.id = std::find(endpoints.begin(), endpoints.end(), endpoint) - endpoints.begin() + 1;
+                // Link header and Position then send it
+                socket.send_to(asio::buffer(&header, sizeof(header)), endpoint);
+                socket.send_to(asio::buffer(&position_to_send, sizeof(position_to_send)), endpoint);
+                // socket.send_to(asio::buffer(&position_to_send, sizeof(position_to_send)), endpoint);
+                // socket.send_to(asio::buffer(&header, sizeof(header)), endpoint);
+            }
+            continue;
+        }
+        message_to_send.size = message_client.size();
+        // message_to_send.data_type = MESSAGE;
+        std::memcpy(&message_to_send.message, message_client.c_str(), message_client.size());
+        for (auto &endpoint : endpoints) {
+            // message_to_send.id = std::find(endpoints.begin(), endpoints.end(), endpoint) - endpoints.begin() + 1;
+            header.id = std::find(endpoints.begin(), endpoints.end(), endpoint) - endpoints.begin() + 1;
+            // Link header and Message then send it
+            // socket.send_to(asio::buffer(&message_to_send, sizeof(message_to_send)), endpoint);
+            socket.send_to(asio::buffer(&header, sizeof(header)), endpoint);
+            socket.send_to(asio::buffer(&message_to_send, sizeof(message_to_send)), endpoint);
+        }
     }
 }
 

@@ -33,34 +33,55 @@ void async_udp_client(const std::string& host, const std::string& port)
     std::cout << "Connected to server" << std::endl;
 
     std::thread receive_thread([&socket, &io_context](){
-        while (true)
-    {
-        message response;
-        udp::endpoint sender_endpoint;
-        asio::error_code ec;
-        size_t bytes_received = socket.receive_from(asio::buffer(&response, sizeof(message)), sender_endpoint, 0, ec);
-
-        if (!ec)
-        {
-            // Received response from server
-            std::cout << "Received from server: " << response.id << " " << response.len << " ";
-            std::cout.write(response.data, response.len) << std::endl;
+        while (true) {
+            Messages response;
+            Position position;
+            Header header;
+            udp::endpoint sender_endpoint;
+            asio::error_code ec;
+            size_t bytes_received = socket.receive_from(asio::buffer(&header, sizeof(Header)), sender_endpoint, 0, ec);
+            
+            if (!ec) {
+                if (header.data_type == MESSAGE) {
+                    socket.receive_from(asio::buffer(&response, sizeof(Messages)), sender_endpoint, 0, ec);
+                    std::cout << "MESSAGE" << std::endl;
+                    std::cout << "Received from server: " << response.size << " ";
+                    std::cout.write(response.message, response.size) << std::endl;
+                } else {
+                    socket.receive_from(asio::buffer(&position, sizeof(Position)), sender_endpoint, 0, ec);
+                    std::cout << "POSITION" << std::endl;
+                    std::cout << "Received from server: " << position.x << " " << position.y << std::endl;
+                }
+            }
         }
-    }
     });
 
     while (true)
     {
+        Messages message_to_send;
+        Position position_to_send;
+        Header header_to_send;
         std::cout << "Enter message to send: ";
         std::string input;
         std::getline(std::cin, input);
-        msg.id = 1;
-        msg.len = input.length();
+        if (message_client.find(',') != std::string::npos) {
+            header_to_send.data_type = POSITION;
+            position_to_send.x = std::stoi(message_client.substr(0, message_client.find(',')));
+            position_to_send.y = std::stoi(message_client.substr(message_client.find(',') + 1, message_client.size()));
+            socket.send_to(asio::buffer(&header_to_send, sizeof(Header)), server_endpoint);
+            socket.send_to(asio::buffer(&position_to_send, sizeof(Position)), server_endpoint);
+        } else {
+            header_to_send.data_type = MESSAGE;
+            message_to_send.size = input.size();
+            std::memcpy(&message_to_send.message, input.c_str(), input.size());
+            socket.send_to(asio::buffer(&header_to_send, sizeof(Header)), server_endpoint);
+            socket.send_to(asio::buffer(&message_to_send, sizeof(Messages)), server_endpoint);
+        }
         // std::strcpy(&msg.data, input.c_str());
-        std::memcpy(&msg.data, input.c_str(), input.length());
+        // std::memcpy(&msg.data, input.c_str(), input.length());
 
         // Send the message to the server
-        socket.send_to(asio::buffer(&msg, sizeof(message)), server_endpoint);
+        // socket.send_to(asio::buffer(&msg, sizeof(message)), server_endpoint);
     }
 
     receive_thread.join();

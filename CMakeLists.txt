@@ -42,6 +42,7 @@ set(SRCS1
 
 set(HEADERS1
     ./server/include/server.hpp
+    ./include/headers.hpp
     )
 
 set(SRCS2
@@ -52,6 +53,7 @@ set(SRCS2
     
 set(HEADERS2
     ./client/include/client.hpp
+    ./include/headers.hpp
     )
 
 message("${Green} Building ${PROJECT_NAME}${ColorReset}")
