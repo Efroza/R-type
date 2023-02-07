@@ -7,61 +7,83 @@
 
 #include "../include/client.hpp"
 
-struct message {
-    int32_t id;
-    int32_t len;
-    char data[1024];
-};
+void send_struct_client_udp(udp::socket& socket, udp::endpoint& server_endpoint, std::string input) {
+    Messages message_to_send;
+    Position position_to_send;
+    Header header_to_send;
+
+    header_to_send.id = 0;
+    if (input.find(',') != std::string::npos) { //  If the input contains a comma, it's a position
+        header_to_send.data_type = POSITION;
+        position_to_send.x = std::stoi(input.substr(0, input.find(',')));
+        position_to_send.y = std::stoi(input.substr(input.find(',') + 1, input.size()));
+        socket.send_to(asio::buffer(&header_to_send, sizeof(header_to_send)), server_endpoint);
+        socket.send_to(asio::buffer(&position_to_send, sizeof(position_to_send)), server_endpoint);
+    } else { // If the input doesn't contain a comma, it's a message
+        header_to_send.data_type = MESSAGE;
+        message_to_send.size = input.size();
+        std::memcpy(&message_to_send.message, input.c_str(), input.size());
+        socket.send_to(asio::buffer(&header_to_send, sizeof(header_to_send)), server_endpoint);
+        socket.send_to(asio::buffer(&message_to_send, sizeof(message_to_send)), server_endpoint);
+    }
+}
+
+void send_data_client_udp(udp::socket& socket, udp::endpoint& server_endpoint) {
+    while (true) // Infinite loop to send data to server
+    {
+        std::cout << "Enter message to send: ";
+        std::string input;
+        std::getline(std::cin, input); // Get the input from the user, will be removed later
+        send_struct_client_udp(socket, server_endpoint, input);
+    }
+}
+
+void receive_data_client_udp(Header header, udp::socket& socket, udp::endpoint& sender_endpoint, asio::error_code& ec) {
+    Messages response;
+    Position position;
+
+    if (header.data_type == MESSAGE) { // If the data received is a message
+        socket.receive_from(asio::buffer(&response, sizeof(Messages)), sender_endpoint, 0, ec);
+        std::cout << "MESSAGE" << std::endl;
+        std::cout << "Received from server: " << response.size << " ";
+        std::cout.write(response.message, response.size) << std::endl;
+    } else { // If the data received is a position
+        socket.receive_from(asio::buffer(&position, sizeof(Position)), sender_endpoint, 0, ec);
+        std::cout << "POSITION" << std::endl;
+        std::cout << "Received from server: " << position.x << " " << position.y << std::endl;
+    }
+}
+
+void receive_thread_client_udp(udp::socket& socket, asio::io_context& io_context)
+{
+    while (true) { // Infinite loop to receive data from server
+        Header header;
+        udp::endpoint sender_endpoint;
+        asio::error_code ec;
+        size_t bytes_received = socket.receive_from(asio::buffer(&header, sizeof(Header)), sender_endpoint, 0, ec);
+        
+        if (!ec)
+            receive_data_client_udp(header, socket, sender_endpoint, ec);
+    }
+}
 
 void async_udp_client(const std::string& host, const std::string& port)
 {
     asio::io_context io_context;
 
     udp::resolver resolver(io_context);
-    // asio::ip::udp::endpoint server_endpoint = *resolver.resolve(udp::v4(), host, port).begin();
     udp::endpoint server_endpoint = *resolver.resolve(udp::v4(), host, port).begin();
 
     udp::socket socket(io_context);
     socket.open(udp::v4());
 
-    message msg;
-    msg.id = 0;
-    msg.len = 12;
-    std::memcpy(&msg.data, "Connected", 12);
+    Header connect_server;
+    connect_server.id = 0;
+    connect_server.data_type = MESSAGE;
+    socket.send_to(asio::buffer(&connect_server, sizeof(connect_server)), server_endpoint); // Connect to server
+    std::cout << "Connected to server" << std::endl; // TODO: remove
 
-    socket.send_to(asio::buffer(&msg, sizeof(msg)), server_endpoint);
-    std::cout << "Connected to server" << std::endl;
-
-    std::thread receive_thread([&socket, &io_context](){
-        while (true)
-    {
-        message response;
-        udp::endpoint sender_endpoint;
-        asio::error_code ec;
-        size_t bytes_received = socket.receive_from(asio::buffer(&response, sizeof(message)), sender_endpoint, 0, ec);
-
-        if (!ec)
-        {
-            // Received response from server
-            std::cout << "Received from server: " << response.id << " " << response.len << " ";
-            std::cout.write(response.data, response.len) << std::endl;
-        }
-    }
-    });
-
-    while (true)
-    {
-        std::cout << "Enter message to send: ";
-        std::string input;
-        std::getline(std::cin, input);
-        msg.id = 1;
-        msg.len = input.length();
-        // std::strcpy(&msg.data, input.c_str());
-        std::memcpy(&msg.data, input.c_str(), input.length());
-
-        // Send the message to the server
-        socket.send_to(asio::buffer(&msg, sizeof(message)), server_endpoint);
-    }
-
+    std::thread receive_thread(receive_thread_client_udp, std::ref(socket), std::ref(io_context)); // Receive from server thread
+    send_data_client_udp(socket, server_endpoint); // Send to server
     receive_thread.join();
 }
