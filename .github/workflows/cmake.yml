@@ -48,11 +48,16 @@ jobs:
           
     - name: Install CMake
       run: |
-        sudo apt-get update
-        sudo apt-get install software-properties-common
-        sudo add-apt-repository ppa:deadsnakes/ppa -y
-        sudo apt-get update
-        sudo apt-get install cmake -y
+        sudo apt-get update -y
+        sudo apt-get install -y software-properties-common lsb-release
+        sudo apt-clean all
+        wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null
+        sudo apt-add-repository "deb https://apt.kitware.com/ubuntu/ $(lsb_release -cs) main"
+        sudo apt-get update -y
+        sudo apt-get install -y kitware-archive-keyring
+        sudo rm /etc/apt/trusted.gpg.d/kitware.gpg
+        sudo apt-get update -y
+        sudo apt-get install -y cmake
 
     - name: Checkout repository
       uses: actions/checkout@v3
