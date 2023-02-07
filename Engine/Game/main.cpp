@@ -45,6 +45,8 @@ void game(registry &reg)
 int main(void)
 {
     registry reg(sf::VideoMode(800, 600), "Rtype");
+    add_entity(component::position(5, 5), 1);
+    add_entity(component::position(10, 10), 1);
     game(reg);
     return 0;
 }
