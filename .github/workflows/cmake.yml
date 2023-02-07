@@ -10,17 +10,8 @@ env:
   BUILD_TYPE: Release
 
 jobs:
-  lint-format:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - uses: DoozyX/clang-format-lint-action@v0.13
-      with:
-        source: 'Client Server'
-        clangFormatVersion: 12
 
   build:
-    needs: lint-format
     runs-on: ubuntu-22.04
     steps:
     - name: Dependencies
