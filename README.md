@@ -34,7 +34,7 @@ cmake . -DCMAKE_BUILD_TYPE=Release && cmake --build . --config Release
 ```
 
 ## Usage
-**For the server, in a termianl :**
+**For the server, in a terminal :**
 ```
 ./bin/r-type_server
 ```
