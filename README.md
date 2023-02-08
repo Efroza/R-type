@@ -51,6 +51,17 @@ cmake . -DCMAKE_BUILD_TYPE=Release && cmake --build . --config Release
 * **Library : SFML**
 
 ## Documentation
+Our documentation is made with doxygen.
+Here are the commands if you wanna check it.
+**How to read it :**
+* **Linux :**
+```
+your_web_browser html/index.html
+```
+* **Windows :**
+```
+start (your_web_browser).exe html/index.html
+```
 
 ## Authors
   * **Yosra Hassan** - [@yosracandy](https://github.com/yosracandy)
