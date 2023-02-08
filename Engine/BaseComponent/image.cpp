@@ -36,7 +36,7 @@ void component::image::load_texture(const std::string &file)
     if (!texture.loadFromFile(file))
         throw std::runtime_error("error load file " + file + " into texture");
     texture.setSmooth(true);
-    db->add_data<sf::Texture>(std::move(texture));
+    db->insert_data<sf::Texture>(std::move(texture), id);
 }
 
 sf::Sprite &component::image::get_sprite()

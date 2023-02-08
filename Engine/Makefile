@@ -8,6 +8,7 @@
 SRCS	=	Game/main.cpp	\
 	Game/load_component.cpp	\
 	Game/load_systems.cpp	\
+	Game/handle_entity.cpp	\
 	BaseComponent/image.cpp	\
 	BaseSystems/draw_system.cpp	\
 	BaseSystems/position_system.cpp	\
