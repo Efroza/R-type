@@ -1,0 +1,120 @@
+\hypertarget{server_2src_2tcp_8cpp}{}\doxysection{server/src/tcp.cpp File Reference}
+\label{server_2src_2tcp_8cpp}\index{server/src/tcp.cpp@{server/src/tcp.cpp}}
+{\ttfamily \#include \char`\"{}../include/server.\+hpp\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{server_2src_2tcp_8cpp_ad557691524522fa298bf615721f5d3c5}{receive\+\_\+tcp\+\_\+server}} (Header header, tcp\+::socket \&socket)
+\begin{DoxyCompactList}\small\item\em This function will translate the data received from the client. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{server_2src_2tcp_8cpp_a7d624b19936306c378617721d70a750c}{send\+\_\+tcp\+\_\+server}} (Header header, tcp\+::socket \&socket, std\+::string message)
+\begin{DoxyCompactList}\small\item\em This function will send data to the client. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{server_2src_2tcp_8cpp_a3dcf11dc26b0c1d25c12bfa98837eb19}{handle\+\_\+client}} (tcp\+::socket socket)
+\begin{DoxyCompactList}\small\item\em This function will handle the client. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{server_2src_2tcp_8cpp_adfd64d09546148e1df9babbb7bf6c7c7}{launch\+\_\+tcp\+\_\+server}} ()
+\begin{DoxyCompactList}\small\item\em This function will launch the tcp server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{server_2src_2tcp_8cpp_a3dcf11dc26b0c1d25c12bfa98837eb19}\label{server_2src_2tcp_8cpp_a3dcf11dc26b0c1d25c12bfa98837eb19}} 
+\index{tcp.cpp@{tcp.cpp}!handle\_client@{handle\_client}}
+\index{handle\_client@{handle\_client}!tcp.cpp@{tcp.cpp}}
+\doxysubsubsection{\texorpdfstring{handle\_client()}{handle\_client()}}
+{\footnotesize\ttfamily void handle\+\_\+client (\begin{DoxyParamCaption}\item[{tcp\+::socket}]{socket }\end{DoxyParamCaption})}
+
+
+
+This function will handle the client. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & The socket that will be used to send and receive data from the client. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+void \mbox{\hyperlink{server_2src_2tcp_8cpp_ad557691524522fa298bf615721f5d3c5}{receive\+\_\+tcp\+\_\+server(\+Header header, tcp\+::socket \&socket)}} 
+
+void \mbox{\hyperlink{server_2src_2tcp_8cpp_a7d624b19936306c378617721d70a750c}{send\+\_\+tcp\+\_\+server(\+Header header, tcp\+::socket \&socket, std\+::string message)}}
+\end{DoxySeeAlso}
+This function will handle the client, it will receive data from the client and send data to the client. \mbox{\Hypertarget{server_2src_2tcp_8cpp_adfd64d09546148e1df9babbb7bf6c7c7}\label{server_2src_2tcp_8cpp_adfd64d09546148e1df9babbb7bf6c7c7}} 
+\index{tcp.cpp@{tcp.cpp}!launch\_tcp\_server@{launch\_tcp\_server}}
+\index{launch\_tcp\_server@{launch\_tcp\_server}!tcp.cpp@{tcp.cpp}}
+\doxysubsubsection{\texorpdfstring{launch\_tcp\_server()}{launch\_tcp\_server()}}
+{\footnotesize\ttfamily void launch\+\_\+tcp\+\_\+server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This function will launch the tcp server. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em void} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+void \mbox{\hyperlink{server_2src_2tcp_8cpp_a3dcf11dc26b0c1d25c12bfa98837eb19}{handle\+\_\+client(tcp\+::socket socket)}}
+\end{DoxySeeAlso}
+This function will launch the tcp server, it will create one thread, a thread that has the function handling the clients.
+
+It will create a socket and an acceptor, the acceptor will accept the connection from the client and the socket will be used to send and receive data from the client
+
+The thread will be detached so it will be able to run in the background and the main thread will be able to continue. \mbox{\Hypertarget{server_2src_2tcp_8cpp_ad557691524522fa298bf615721f5d3c5}\label{server_2src_2tcp_8cpp_ad557691524522fa298bf615721f5d3c5}} 
+\index{tcp.cpp@{tcp.cpp}!receive\_tcp\_server@{receive\_tcp\_server}}
+\index{receive\_tcp\_server@{receive\_tcp\_server}!tcp.cpp@{tcp.cpp}}
+\doxysubsubsection{\texorpdfstring{receive\_tcp\_server()}{receive\_tcp\_server()}}
+{\footnotesize\ttfamily void receive\+\_\+tcp\+\_\+server (\begin{DoxyParamCaption}\item[{Header}]{header,  }\item[{tcp\+::socket \&}]{socket }\end{DoxyParamCaption})}
+
+
+
+This function will translate the data received from the client. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em header} & the header of the data to know the type of data \\
+\hline
+{\em socket} & the socket of the server to receive data from client\\
+\hline
+\end{DoxyParams}
+This function will read the data that was sent from the client and will print it.
+
+It creates two struct one if it is a position and another one if it is a message.
+
+Depending of the data type it will print the data. \mbox{\Hypertarget{server_2src_2tcp_8cpp_a7d624b19936306c378617721d70a750c}\label{server_2src_2tcp_8cpp_a7d624b19936306c378617721d70a750c}} 
+\index{tcp.cpp@{tcp.cpp}!send\_tcp\_server@{send\_tcp\_server}}
+\index{send\_tcp\_server@{send\_tcp\_server}!tcp.cpp@{tcp.cpp}}
+\doxysubsubsection{\texorpdfstring{send\_tcp\_server()}{send\_tcp\_server()}}
+{\footnotesize\ttfamily void send\+\_\+tcp\+\_\+server (\begin{DoxyParamCaption}\item[{Header}]{header,  }\item[{tcp\+::socket \&}]{socket,  }\item[{std\+::string}]{message }\end{DoxyParamCaption})}
+
+
+
+This function will send data to the client. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em header} & the header of the data to know the type of data \\
+\hline
+{\em socket} & the socket of the server to send data to client \\
+\hline
+{\em message} & the message to send to the client\\
+\hline
+\end{DoxyParams}
+This function will send data to the client.
+
+It will create a header with a data type depending of the message.
+
+It will also create a struct depending of the data type.
+
+It will send the header and the struct to the client.
+
+If the message contains a comma it will be a position and if not, it will be a message. 

@@ -14,6 +14,21 @@ const int BUFSIZE = 1024;
 const std::string HOST = "127.0.0.1"; // Localhost : 127.0.0.1
 const int PORT = 12345; // Port to listen on
 
+/**
+ *@file udp.cpp
+ */
+
+/**
+ *@brief This function will translate the message received from a client.
+ *@return void
+ *@param socket the socket of the server to send data to client
+ *@param remote the remote endpoint of the client
+ *@param endpoints the vector of all the endpoints of the clients
+ *@param header the header of the data to know the type of data
+ *@details This function will read the message that was sent from the client and will print it.
+ *@details It creates two struct one if it is a position and another one if it is a message.
+ *@details Depending of the data type it will print the data.
+*/
 void receive_data(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vector<ip::udp::endpoint>& endpoint, Header header) {
     Position position;
     Messages message;
@@ -29,6 +44,16 @@ void receive_data(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vecto
     }
 }
 
+/**
+ * @brief This function will receive data from the clients.
+ * @return void
+ * @param socket the socket of the server to send data to client
+ * @param remote the remote endpoint of the client
+ * @param endpoints the vector of all the endpoints of the clients
+ * @see void receive_data(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vector<ip::udp::endpoint>& endpoint, Header header)
+ * @details This function will receive data from the clients and will call receive_data to get the data.
+ * @details It will also check if the client is already connected and if not it will add it to the vector of endpoints.
+*/
 void receive_thread(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vector<ip::udp::endpoint>& endpoints) { // Receive data from clients
     while (true) { // Loop forever thread will receive data from clients
         Header header;
@@ -46,6 +71,15 @@ void receive_thread(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vec
     }
 }
 
+/**
+ * @brief This function will send the struct position to the clients.
+ * @return void
+ * @param socket the socket of the server to send data to client
+ * @param endpoints the vector of all the endpoints of the clients
+ * @param message_client the message to send to the clients
+ * @details This function will send a certain position to the clients.
+ * @details It will first send the struct position to the clients, then the struct header to know that it is a position.
+*/
 void send_position(ip::udp::socket& socket, std::vector<ip::udp::endpoint>& endpoints, std::string message_client) { // Send struct position to clients
     Header header;
     Position position_to_send;
@@ -59,6 +93,15 @@ void send_position(ip::udp::socket& socket, std::vector<ip::udp::endpoint>& endp
     }
 }
 
+/**
+ * @brief this function will send the struct message to the clients.
+ * @return void
+ * @param socket the socket of the server to send data to client
+ * @param endpoints the vector of all the endpoints of the clients
+ * @param message_client the message to send to the clients
+ * @details This function will send a certain message to the clients.
+ * @details It will first send the struct message to the clients, then the struct header to know that it is a message.
+*/
 void send_message(ip::udp::socket& socket, std::vector<ip::udp::endpoint>& endpoints, std::string message_client) { // Send struct message to clients
     Header header;
     Messages message_to_send;
@@ -72,6 +115,17 @@ void send_message(ip::udp::socket& socket, std::vector<ip::udp::endpoint>& endpo
     }
 }
 
+/**
+ * @brief This function will send data to the clients.
+ * @return void
+ * @param socket the socket of the server to send data to client
+ * @param remote the remote endpoint of the client
+ * @param endpoints the vector of all the endpoints of the clients
+ * @see void send_position(ip::udp::socket& socket, std::vector<ip::udp::endpoint>& endpoints, std::string message_client)
+ * @see void send_message(ip::udp::socket& socket, std::vector<ip::udp::endpoint>& endpoints, std::string message_client)
+ * @details This function will send data to the clients. It will send a struct position or a struct message to the clients depending if in the message there is a comma or no.
+ * @details If there is a comma, it will send a struct position, if not it will send a struct message.
+*/
 void send_thread(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vector<ip::udp::endpoint>& endpoints) { // Send data to clients
     
     while (true) { // Loop forever thread will send data to clients
@@ -85,6 +139,14 @@ void send_thread(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vector
     }
 }
 
+/**
+ * @brief This function will launch the udp server.
+ * @return void
+ * @param void
+ * @see void receive_thread(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vector<ip::udp::endpoint>& endpoints)
+ * @see void send_thread(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vector<ip::udp::endpoint>& endpoints)
+ * @details This function will launch the udp server, it will create two threads, one to receive data from clients and one to send data to clients. After the threads are created it will wait for them to finish with join().
+*/
 void launch_udp_server() {
     io_service io_service;
     ip::udp::socket socket(io_service, ip::udp::endpoint(ip::udp::v4(), PORT)); // Bind to port

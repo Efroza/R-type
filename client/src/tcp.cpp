@@ -7,6 +7,19 @@
 
 #include "../include/client.hpp"
 
+/**
+ * @file tcp.cpp
+ */
+
+/**
+ * @brief This function will translate the data received from the server.
+ * @return void
+ * @param header the header of the data to know the type of data
+ * @param socket the socket of the client to receive data from server
+ * @details This function will read the data that was sent from the server and will print it.
+ * @details It creates two struct one if it is a position and another one if it is a message.
+ * @details Depending of the data type it will print the data.
+*/
 void receive_tcp_client(Header header, tcp::socket &socket) {
         if (header.data_type == POSITION) {
             Position position;
@@ -20,6 +33,18 @@ void receive_tcp_client(Header header, tcp::socket &socket) {
         }            
 }
 
+/**
+ * @brief This function will send data to the server.
+ * @return void
+ * @param header the header of the data to know the type of data
+ * @param socket the socket of the client to send data to server
+ * @param message the message to send to the server
+ * @details This function will send data to the server.
+ * @details It will create a header with a data type depending of the message.
+ * @details It will also create a struct depending of the data type.
+ * @details It will send the header and the struct to the server.
+ * @details If the message contains a comma it will be a position and if not, it will be a message.
+ */
 void send_tcp_client(Header header, tcp::socket &socket, std::string message) {
     if (std::find(message.begin(), message.end(), ',') != message.end()) { //  If the input contains a comma, it's a position
         header.data_type = POSITION;
@@ -38,6 +63,17 @@ void send_tcp_client(Header header, tcp::socket &socket, std::string message) {
     }
 }
 
+/**
+ * @brief Launch a TCP client.
+ * @param host represents the host of the server
+ * @param port represents the port of the server
+ * @return void
+ * @see send_tcp_client(Header header, tcp::socket &socket, std::string message)
+ * @see receive_tcp_client(Header header, tcp::socket &socket)
+ * @details Launch an asynchronous TCP client.
+ * @details The client can either send a message or a position.
+ * 
+ */
 void async_tcp_client(const std::string& host, const std::string& port)
 {
     asio::io_context io_context;

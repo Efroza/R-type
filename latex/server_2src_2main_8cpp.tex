@@ -1,23 +1,25 @@
 \hypertarget{server_2src_2main_8cpp}{}\doxysection{server/src/main.cpp File Reference}
 \label{server_2src_2main_8cpp}\index{server/src/main.cpp@{server/src/main.cpp}}
-
-
-Launch a TCP server and UDP server.  
-
-
 {\ttfamily \#include \char`\"{}../include/server.\+hpp\char`\"{}}\newline
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
+int \mbox{\hyperlink{server_2src_2main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Launch a TCP server and UDP server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
 \mbox{\Hypertarget{server_2src_2main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{server_2src_2main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
-int {\bfseries main} ()
-\end{DoxyCompactItemize}
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
-\doxysubsection{Detailed Description}
+
 Launch a TCP server and UDP server. 
 
 \begin{DoxyReturn}{Returns}
 int
 \end{DoxyReturn}
-Launch a TCP server and UDP server both of them are called in threads. They are both in threads so we can use them at the same time and they are joined at the end of the main so the program doesn\textquotesingle{}t end before the threads 
+Launch a TCP server and UDP server both of them are called in threads. They are both in threads so we can use them at the same time and they are joined at the end of the main so the program doesn\textquotesingle{}t end before the threads. 

@@ -11,6 +11,19 @@ using asio::io_context;
 using asio::ip::tcp;
 using asio::buffer;
 
+/**
+ * @file tcp.cpp
+*/
+
+/**
+ * @brief This function will translate the data received from the client.
+ * @return void
+ * @param header the header of the data to know the type of data
+ * @param socket the socket of the server to receive data from client
+ * @details This function will read the data that was sent from the client and will print it.
+ * @details It creates two struct one if it is a position and another one if it is a message.
+ * @details Depending of the data type it will print the data.
+*/
 void receive_tcp_server(Header header, tcp::socket &socket) {
   if (header.data_type == POSITION) {
     Position position;
@@ -24,6 +37,18 @@ void receive_tcp_server(Header header, tcp::socket &socket) {
   }            
 }
 
+/**
+ * @brief This function will send data to the client.
+ * @return void
+ * @param header the header of the data to know the type of data
+ * @param socket the socket of the server to send data to client
+ * @param message the message to send to the client
+ * @details This function will send data to the client.
+ * @details It will create a header with a data type depending of the message.
+ * @details It will also create a struct depending of the data type.
+ * @details It will send the header and the struct to the client.
+ * @details If the message contains a comma it will be a position and if not, it will be a message.
+*/
 void send_tcp_server(Header header, tcp::socket &socket, std::string message) {
   header.id = 1;
   if (std::find(message.begin(), message.end(), ',') != message.end()) { //  If the input contains a comma, it's a position
@@ -43,6 +68,14 @@ void send_tcp_server(Header header, tcp::socket &socket, std::string message) {
   }
 }
 
+/**
+ * @brief This function will handle the client.
+ * @return void
+ * @param socket The socket that will be used to send and receive data from the client.
+ * @see void receive_tcp_server(Header header, tcp::socket &socket)
+ * @see void send_tcp_server(Header header, tcp::socket &socket, std::string message)
+ * @details This function will handle the client, it will receive data from the client and send data to the client.
+*/
 void handle_client(tcp::socket socket)
 {
   std::cout << "Accepted connection from " << socket.remote_endpoint().address() << std::endl;
@@ -60,6 +93,15 @@ void handle_client(tcp::socket socket)
   }
 }
 
+/**
+ * @brief This function will launch the tcp server.
+ * @return void
+ * @param void
+ * @see void handle_client(tcp::socket socket)
+ * @details This function will launch the tcp server, it will create one thread, a thread that has the function handling the clients.
+ * @details It will create a socket and an acceptor, the acceptor will accept the connection from the client and the socket will be used to send and receive data from the client
+ * @details The thread will be detached so it will be able to run in the background and the main thread will be able to continue.
+*/
 void launch_tcp_server()
 {
   io_context io_context;

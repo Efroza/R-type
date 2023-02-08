@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>R-TYPE: server/src/main.cpp File Reference</title>
+<title>R-TYPE: File Members</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -45,6 +45,7 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -59,48 +60,66 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_41e1742e44e2de38b3bc91f993fed282.html">server</a></li><li class="navelem"><a class="el" href="dir_a063914ab482288b7b0e1b2fca86158c.html">src</a></li>  </ul>
-</div>
-</div><!-- top -->
-<div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a>  </div>
-  <div class="headertitle">
-<div class="title">main.cpp File Reference</div>  </div>
-</div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;../include/server.hpp&quot;</code><br />
-</div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_2src_2main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
-<tr class="memdesc:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Launch a TCP server and UDP server.  <a href="server_2src_2main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">More...</a><br /></td></tr>
-<tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">&#9670;&nbsp;</a></span>main()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int main </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Launch a TCP server and UDP server. </p>
-<dl class="section return"><dt>Returns</dt><dd>int</dd></dl>
-<p>Launch a TCP server and UDP server both of them are called in threads. They are both in threads so we can use them at the same time and they are joined at the end of the main so the program doesn't end before the threads. </p>
-
-</div>
-</div>
+<div class="textblock">Here is a list of all documented file members with links to the documentation:</div><ul>
+<li>async_tcp_client()
+: <a class="el" href="client_2src_2tcp_8cpp.html#ae04762361f5d4ba00bc82add148ca1b3">tcp.cpp</a>
+</li>
+<li>async_udp_client()
+: <a class="el" href="client_2src_2udp_8cpp.html#a49ce0f9ae838decb9091026c0712b3ee">udp.cpp</a>
+</li>
+<li>handle_client()
+: <a class="el" href="server_2src_2tcp_8cpp.html#a3dcf11dc26b0c1d25c12bfa98837eb19">tcp.cpp</a>
+</li>
+<li>launch_tcp_server()
+: <a class="el" href="server_2src_2tcp_8cpp.html#adfd64d09546148e1df9babbb7bf6c7c7">tcp.cpp</a>
+</li>
+<li>launch_udp_server()
+: <a class="el" href="server_2src_2udp_8cpp.html#a3fb73de016fec1b0a989b6bac61aa380">udp.cpp</a>
+</li>
+<li>main()
+: <a class="el" href="server_2src_2main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main.cpp</a>
+</li>
+<li>receive_data()
+: <a class="el" href="server_2src_2udp_8cpp.html#abc10516419cd6af838a8c6d87884d32d">udp.cpp</a>
+</li>
+<li>receive_data_client_udp()
+: <a class="el" href="client_2src_2udp_8cpp.html#aec9e0b7a3008e3d2b56cd39cabcf4a25">udp.cpp</a>
+</li>
+<li>receive_tcp_client()
+: <a class="el" href="client_2src_2tcp_8cpp.html#ada474af6be4a2bdc798b9dde61d30e24">tcp.cpp</a>
+</li>
+<li>receive_tcp_server()
+: <a class="el" href="server_2src_2tcp_8cpp.html#ad557691524522fa298bf615721f5d3c5">tcp.cpp</a>
+</li>
+<li>receive_thread()
+: <a class="el" href="server_2src_2udp_8cpp.html#a0a799251ccb5ddc996bfe1e3d4e084d6">udp.cpp</a>
+</li>
+<li>receive_thread_client_udp()
+: <a class="el" href="client_2src_2udp_8cpp.html#a243d014db993350d43bc69d3f9d52719">udp.cpp</a>
+</li>
+<li>send_data_client_udp()
+: <a class="el" href="client_2src_2udp_8cpp.html#ad2385b067be92e91bc85293e79c71da6">udp.cpp</a>
+</li>
+<li>send_message()
+: <a class="el" href="server_2src_2udp_8cpp.html#a5df84b9ea4bea72f4f4ac5ba5b4d18bc">udp.cpp</a>
+</li>
+<li>send_position()
+: <a class="el" href="server_2src_2udp_8cpp.html#a07f9da6e69b5f3b18322daebb4eece5f">udp.cpp</a>
+</li>
+<li>send_struct_client_udp()
+: <a class="el" href="client_2src_2udp_8cpp.html#a46e1dc7ee76f4561887118c5fff17aad">udp.cpp</a>
+</li>
+<li>send_tcp_client()
+: <a class="el" href="client_2src_2tcp_8cpp.html#a8306b0d83bc71929fcf90d297e81cbdb">tcp.cpp</a>
+</li>
+<li>send_tcp_server()
+: <a class="el" href="server_2src_2tcp_8cpp.html#a7d624b19936306c378617721d70a750c">tcp.cpp</a>
+</li>
+<li>send_thread()
+: <a class="el" href="server_2src_2udp_8cpp.html#aa3722f3c29807aa29856c209d8a128c9">udp.cpp</a>
+</li>
+</ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
