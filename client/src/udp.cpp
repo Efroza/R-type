@@ -7,6 +7,21 @@
 
 #include "../include/client.hpp"
 
+/**
+ * @file udp.cpp
+ */
+
+/**
+ * @details This function will send data to the server.
+ * @param socket represents the socket of the client.
+ * @param server_endpoint represents the endpoint of the server.
+ * @param input represents the input of the user.
+ * @return void
+ * @details This function will send a certain stuct to the server depending of the message.
+ * @details It will create a header with a data type depending of the message.
+ * @details If the message contains a comma, it will send a position. If not, it will send a message.
+ * @details It will send the header and the struct to the server.
+*/
 void send_struct_client_udp(udp::socket& socket, udp::endpoint& server_endpoint, std::string input) {
     Messages message_to_send;
     Position position_to_send;
@@ -28,6 +43,16 @@ void send_struct_client_udp(udp::socket& socket, udp::endpoint& server_endpoint,
     }
 }
 
+/**
+ * @brief Loop to send data to the server.
+ * @param socket represents the socket of the client.
+ * @param server_endpoint represents the endpoint of the server.
+ * @return void
+ * @see send_struct_client_udp(udp::socket& socket, udp::endpoint& server_endpoint, std::string input)
+ * @details This function will loop to send data to the server.
+ * @details It will call send_struct_client_udp to send data to the server.
+ * @details It will send data to the server until the server is closed.
+*/
 void send_data_client_udp(udp::socket& socket, udp::endpoint& server_endpoint) {
     while (true) // Infinite loop to send data to server
     {
@@ -38,6 +63,18 @@ void send_data_client_udp(udp::socket& socket, udp::endpoint& server_endpoint) {
     }
 }
 
+/**
+ * @brief This function will translate the data received from the server into a struct.
+ * @param header represents the header of the data received.
+ * @param socket represents the socket of the client.
+ * @param sender_endpoint represents the endpoint of the server.
+ * @param ec represents the error code.
+ * @return void
+ * @details This function will read the data received from the server.
+ * @details It creates two struct one if it is a position and another one if it is a message.
+ * @details Depending of the data type it will print the data.
+ * 
+*/
 void receive_data_client_udp(Header header, udp::socket& socket, udp::endpoint& sender_endpoint, asio::error_code& ec) {
     Messages response;
     Position position;
@@ -54,6 +91,16 @@ void receive_data_client_udp(Header header, udp::socket& socket, udp::endpoint& 
     }
 }
 
+/**
+ * @brief Loop to receive data from the server.
+ * @param socket represents the socket of the client.
+ * @param io_context represents the io_context of the client.
+ * @return void
+ * @see receive_data_client_udp(Header header, udp::socket& socket, udp::endpoint& sender_endpoint, asio::error_code& ec)
+ * @details This function will loop to receive data from the server.
+ * @details It will call receive_data_client_udp to receive data from the server.
+ * @details It will receive data from the server until the server is closed.
+*/
 void receive_thread_client_udp(udp::socket& socket, asio::io_context& io_context)
 {
     while (true) { // Infinite loop to receive data from server
@@ -67,6 +114,16 @@ void receive_thread_client_udp(udp::socket& socket, asio::io_context& io_context
     }
 }
 
+/**
+ * @brief Launch a UDP client.
+ * @param host represents the host of the server.
+ * @param port represents the port of the server.
+ * @return void
+ * @see receive_thread_client_udp(udp::socket& socket, asio::io_context& io_context)
+ * @see send_data_client_udp(udp::socket& socket, udp::endpoint& server_endpoint)
+ * @details This function will launch a UDP client.
+ * @details It will create a thread to receive data from the server and a there is a call to send_data_client_udp to send data to the server.
+*/
 void async_udp_client(const std::string& host, const std::string& port)
 {
     asio::io_context io_context;

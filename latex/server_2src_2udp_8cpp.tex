@@ -1,0 +1,190 @@
+\hypertarget{server_2src_2udp_8cpp}{}\doxysection{server/src/udp.cpp File Reference}
+\label{server_2src_2udp_8cpp}\index{server/src/udp.cpp@{server/src/udp.cpp}}
+{\ttfamily \#include \char`\"{}../include/server.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{server_2src_2udp_8cpp_abc10516419cd6af838a8c6d87884d32d}{receive\+\_\+data}} (ip\+::udp\+::socket \&socket, ip\+::udp\+::endpoint \&remote, std\+::vector$<$ ip\+::udp\+::endpoint $>$ \&endpoint, Header header)
+\begin{DoxyCompactList}\small\item\em This function will translate the message received from a client. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{server_2src_2udp_8cpp_a0a799251ccb5ddc996bfe1e3d4e084d6}{receive\+\_\+thread}} (ip\+::udp\+::socket \&socket, ip\+::udp\+::endpoint \&remote, std\+::vector$<$ ip\+::udp\+::endpoint $>$ \&endpoints)
+\begin{DoxyCompactList}\small\item\em This function will receive data from the clients. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{server_2src_2udp_8cpp_a07f9da6e69b5f3b18322daebb4eece5f}{send\+\_\+position}} (ip\+::udp\+::socket \&socket, std\+::vector$<$ ip\+::udp\+::endpoint $>$ \&endpoints, std\+::string message\+\_\+client)
+\begin{DoxyCompactList}\small\item\em This function will send the struct position to the clients. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{server_2src_2udp_8cpp_a5df84b9ea4bea72f4f4ac5ba5b4d18bc}{send\+\_\+message}} (ip\+::udp\+::socket \&socket, std\+::vector$<$ ip\+::udp\+::endpoint $>$ \&endpoints, std\+::string message\+\_\+client)
+\begin{DoxyCompactList}\small\item\em this function will send the struct message to the clients. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{server_2src_2udp_8cpp_aa3722f3c29807aa29856c209d8a128c9}{send\+\_\+thread}} (ip\+::udp\+::socket \&socket, ip\+::udp\+::endpoint \&remote, std\+::vector$<$ ip\+::udp\+::endpoint $>$ \&endpoints)
+\begin{DoxyCompactList}\small\item\em This function will send data to the clients. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{server_2src_2udp_8cpp_a3fb73de016fec1b0a989b6bac61aa380}{launch\+\_\+udp\+\_\+server}} ()
+\begin{DoxyCompactList}\small\item\em This function will launch the udp server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{server_2src_2udp_8cpp_ad69f678058ac1e2c6d82212fd735b7a4}\label{server_2src_2udp_8cpp_ad69f678058ac1e2c6d82212fd735b7a4}} 
+const int {\bfseries BUFSIZE} = 1024
+\item 
+\mbox{\Hypertarget{server_2src_2udp_8cpp_a31286b5babe41e1c44365f96f223780b}\label{server_2src_2udp_8cpp_a31286b5babe41e1c44365f96f223780b}} 
+const std\+::string {\bfseries HOST} = \char`\"{}127.\+0.\+0.\+1\char`\"{}
+\item 
+\mbox{\Hypertarget{server_2src_2udp_8cpp_a11717c934f77ad5167dac5d28562d85a}\label{server_2src_2udp_8cpp_a11717c934f77ad5167dac5d28562d85a}} 
+const int {\bfseries PORT} = 12345
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{server_2src_2udp_8cpp_a3fb73de016fec1b0a989b6bac61aa380}\label{server_2src_2udp_8cpp_a3fb73de016fec1b0a989b6bac61aa380}} 
+\index{udp.cpp@{udp.cpp}!launch\_udp\_server@{launch\_udp\_server}}
+\index{launch\_udp\_server@{launch\_udp\_server}!udp.cpp@{udp.cpp}}
+\doxysubsubsection{\texorpdfstring{launch\_udp\_server()}{launch\_udp\_server()}}
+{\footnotesize\ttfamily void launch\+\_\+udp\+\_\+server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This function will launch the udp server. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em void} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+void \mbox{\hyperlink{server_2src_2udp_8cpp_a0a799251ccb5ddc996bfe1e3d4e084d6}{receive\+\_\+thread(ip\+::udp\+::socket\& socket, ip\+::udp\+::endpoint\& remote, std\+::vector$<$ip\+::udp\+::endpoint$>$\& endpoints)}} 
+
+void \mbox{\hyperlink{server_2src_2udp_8cpp_aa3722f3c29807aa29856c209d8a128c9}{send\+\_\+thread(ip\+::udp\+::socket\& socket, ip\+::udp\+::endpoint\& remote, std\+::vector$<$ip\+::udp\+::endpoint$>$\& endpoints)}}
+\end{DoxySeeAlso}
+This function will launch the udp server, it will create two threads, one to receive data from clients and one to send data to clients. After the threads are created it will wait for them to finish with join(). \mbox{\Hypertarget{server_2src_2udp_8cpp_abc10516419cd6af838a8c6d87884d32d}\label{server_2src_2udp_8cpp_abc10516419cd6af838a8c6d87884d32d}} 
+\index{udp.cpp@{udp.cpp}!receive\_data@{receive\_data}}
+\index{receive\_data@{receive\_data}!udp.cpp@{udp.cpp}}
+\doxysubsubsection{\texorpdfstring{receive\_data()}{receive\_data()}}
+{\footnotesize\ttfamily void receive\+\_\+data (\begin{DoxyParamCaption}\item[{ip\+::udp\+::socket \&}]{socket,  }\item[{ip\+::udp\+::endpoint \&}]{remote,  }\item[{std\+::vector$<$ ip\+::udp\+::endpoint $>$ \&}]{endpoint,  }\item[{Header}]{header }\end{DoxyParamCaption})}
+
+
+
+This function will translate the message received from a client. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & the socket of the server to send data to client \\
+\hline
+{\em remote} & the remote endpoint of the client \\
+\hline
+{\em endpoints} & the vector of all the endpoints of the clients \\
+\hline
+{\em header} & the header of the data to know the type of data\\
+\hline
+\end{DoxyParams}
+This function will read the message that was sent from the client and will print it.
+
+It creates two struct one if it is a position and another one if it is a message.
+
+Depending of the data type it will print the data. \mbox{\Hypertarget{server_2src_2udp_8cpp_a0a799251ccb5ddc996bfe1e3d4e084d6}\label{server_2src_2udp_8cpp_a0a799251ccb5ddc996bfe1e3d4e084d6}} 
+\index{udp.cpp@{udp.cpp}!receive\_thread@{receive\_thread}}
+\index{receive\_thread@{receive\_thread}!udp.cpp@{udp.cpp}}
+\doxysubsubsection{\texorpdfstring{receive\_thread()}{receive\_thread()}}
+{\footnotesize\ttfamily void receive\+\_\+thread (\begin{DoxyParamCaption}\item[{ip\+::udp\+::socket \&}]{socket,  }\item[{ip\+::udp\+::endpoint \&}]{remote,  }\item[{std\+::vector$<$ ip\+::udp\+::endpoint $>$ \&}]{endpoints }\end{DoxyParamCaption})}
+
+
+
+This function will receive data from the clients. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & the socket of the server to send data to client \\
+\hline
+{\em remote} & the remote endpoint of the client \\
+\hline
+{\em endpoints} & the vector of all the endpoints of the clients \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+void \mbox{\hyperlink{server_2src_2udp_8cpp_abc10516419cd6af838a8c6d87884d32d}{receive\+\_\+data(ip\+::udp\+::socket\& socket, ip\+::udp\+::endpoint\& remote, std\+::vector$<$ip\+::udp\+::endpoint$>$\& endpoint, Header header)}}
+\end{DoxySeeAlso}
+This function will receive data from the clients and will call receive\+\_\+data to get the data.
+
+It will also check if the client is already connected and if not it will add it to the vector of endpoints. \mbox{\Hypertarget{server_2src_2udp_8cpp_a5df84b9ea4bea72f4f4ac5ba5b4d18bc}\label{server_2src_2udp_8cpp_a5df84b9ea4bea72f4f4ac5ba5b4d18bc}} 
+\index{udp.cpp@{udp.cpp}!send\_message@{send\_message}}
+\index{send\_message@{send\_message}!udp.cpp@{udp.cpp}}
+\doxysubsubsection{\texorpdfstring{send\_message()}{send\_message()}}
+{\footnotesize\ttfamily void send\+\_\+message (\begin{DoxyParamCaption}\item[{ip\+::udp\+::socket \&}]{socket,  }\item[{std\+::vector$<$ ip\+::udp\+::endpoint $>$ \&}]{endpoints,  }\item[{std\+::string}]{message\+\_\+client }\end{DoxyParamCaption})}
+
+
+
+this function will send the struct message to the clients. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & the socket of the server to send data to client \\
+\hline
+{\em endpoints} & the vector of all the endpoints of the clients \\
+\hline
+{\em message\+\_\+client} & the message to send to the clients\\
+\hline
+\end{DoxyParams}
+This function will send a certain message to the clients.
+
+It will first send the struct message to the clients, then the struct header to know that it is a message. \mbox{\Hypertarget{server_2src_2udp_8cpp_a07f9da6e69b5f3b18322daebb4eece5f}\label{server_2src_2udp_8cpp_a07f9da6e69b5f3b18322daebb4eece5f}} 
+\index{udp.cpp@{udp.cpp}!send\_position@{send\_position}}
+\index{send\_position@{send\_position}!udp.cpp@{udp.cpp}}
+\doxysubsubsection{\texorpdfstring{send\_position()}{send\_position()}}
+{\footnotesize\ttfamily void send\+\_\+position (\begin{DoxyParamCaption}\item[{ip\+::udp\+::socket \&}]{socket,  }\item[{std\+::vector$<$ ip\+::udp\+::endpoint $>$ \&}]{endpoints,  }\item[{std\+::string}]{message\+\_\+client }\end{DoxyParamCaption})}
+
+
+
+This function will send the struct position to the clients. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & the socket of the server to send data to client \\
+\hline
+{\em endpoints} & the vector of all the endpoints of the clients \\
+\hline
+{\em message\+\_\+client} & the message to send to the clients\\
+\hline
+\end{DoxyParams}
+This function will send a certain position to the clients.
+
+It will first send the struct position to the clients, then the struct header to know that it is a position. \mbox{\Hypertarget{server_2src_2udp_8cpp_aa3722f3c29807aa29856c209d8a128c9}\label{server_2src_2udp_8cpp_aa3722f3c29807aa29856c209d8a128c9}} 
+\index{udp.cpp@{udp.cpp}!send\_thread@{send\_thread}}
+\index{send\_thread@{send\_thread}!udp.cpp@{udp.cpp}}
+\doxysubsubsection{\texorpdfstring{send\_thread()}{send\_thread()}}
+{\footnotesize\ttfamily void send\+\_\+thread (\begin{DoxyParamCaption}\item[{ip\+::udp\+::socket \&}]{socket,  }\item[{ip\+::udp\+::endpoint \&}]{remote,  }\item[{std\+::vector$<$ ip\+::udp\+::endpoint $>$ \&}]{endpoints }\end{DoxyParamCaption})}
+
+
+
+This function will send data to the clients. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & the socket of the server to send data to client \\
+\hline
+{\em remote} & the remote endpoint of the client \\
+\hline
+{\em endpoints} & the vector of all the endpoints of the clients \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+void \mbox{\hyperlink{server_2src_2udp_8cpp_a07f9da6e69b5f3b18322daebb4eece5f}{send\+\_\+position(ip\+::udp\+::socket\& socket, std\+::vector$<$ip\+::udp\+::endpoint$>$\& endpoints, std\+::string message\+\_\+client)}} 
+
+void \mbox{\hyperlink{server_2src_2udp_8cpp_a5df84b9ea4bea72f4f4ac5ba5b4d18bc}{send\+\_\+message(ip\+::udp\+::socket\& socket, std\+::vector$<$ip\+::udp\+::endpoint$>$\& endpoints, std\+::string message\+\_\+client)}}
+\end{DoxySeeAlso}
+This function will send data to the clients. It will send a struct position or a struct message to the clients depending if in the message there is a comma or no.
+
+If there is a comma, it will send a struct position, if not it will send a struct message. 

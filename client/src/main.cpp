@@ -7,6 +7,16 @@
 
 #include "../include/client.hpp"
 
+/**
+ * @file main.cpp
+ */
+
+/**
+ * @brief Launch a TCP client and UDP client.
+ * @return int
+ * @details Launch a TCP client and UDP client uncomment desired client.
+ */
+
 int main()
 {
     std::string host = "localhost";
