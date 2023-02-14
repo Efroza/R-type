@@ -6,18 +6,31 @@
 */
 
 #include <SFML/Window.hpp>
+#include <unistd.h>
 #include "systems.hpp"
 #include "draw.hpp"
 #include "handle_entity.hpp"
+#include "rect.hpp"
+#include "interaction.hpp"
+#include "interactive.hpp"
 
 void create_spaceShip(registry &reg, data &db)
 {
     entity_t spaceship = reg.spawn_entity();
+    component::interaction inter;
+
+    inter.new_interaction(sf::Keyboard::Space, up_deplacement);
+
     try {
         reg.add_component<component::position>(spaceship, std::move(component::position(100, 100)));
-        reg.add_component<component::image>(spaceship, std::move(component::image("Image/spaceship_jet.png", db, spaceship)));
+        reg.add_component<component::image>(spaceship, std::move(component::image("Image/spaceship.png", db, spaceship)));
+        reg.add_component<component::interaction>(spaceship, std::move(inter));
+        reg.add_component<component::rect>(spaceship, std::move(component::rect(1, 6)));
+        reg.add_component<component::animation>(spaceship, std::move(component::animation(50)));
         reg.add_component<component::draw>(spaceship, std::move(component::draw()));
-    } catch (const std::exception &e) {
+    }
+    catch (const std::exception &e)
+    {
         std::cout << e.what() << std::endl;
     }
 }
@@ -32,16 +45,10 @@ void game(registry &reg)
     load_system(reg);
     load_component(reg);
     create_spaceShip(reg, db);
-    handle.manage_entity(component::position(0, 0), reg.spawn_entity());
-    handle.manage_entity(component::position(400, 400), reg.spawn_entity());
     while (window.isOpen())
     {
         window.clear(sf::Color::Black);
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
+        usleep(2000);
         reg.run_systems();
         window.display();
     }

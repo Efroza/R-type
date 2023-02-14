@@ -10,8 +10,17 @@ SRCS	=	Game/main.cpp	\
 	Game/load_systems.cpp	\
 	Game/handle_entity.cpp	\
 	BaseComponent/image.cpp	\
+	BaseComponent/interaction.cpp	\
+	BaseComponent/rect.cpp	\
 	BaseSystems/draw_system.cpp	\
 	BaseSystems/position_system.cpp	\
+	BaseSystems/animation_system.cpp	\
+	BaseSystems/rect_system.cpp	\
+	BaseSystems/interaction_system.cpp	\
+	Interaction/up_deplacement.cpp	\
+	Interaction/left_deplacement.cpp	\
+	Interaction/right_deplacement.cpp	\
+	Interaction/down_deplacement.cpp	\
 
 
 CC	= 	g++ -o

@@ -43,3 +43,8 @@ sf::Sprite &component::image::get_sprite()
 {
     return sprite;
 }
+
+sf::Texture &component::image::get_texture() const noexcept
+{
+    return db->get_data<sf::Texture>(id);
+}
