@@ -23,6 +23,7 @@ namespace component
             image(image const &move);
             ~image();
             sf::Sprite &get_sprite();
+            sf::Texture &get_texture() const noexcept;
 
         private:
             void load_texture(const std::string &file);

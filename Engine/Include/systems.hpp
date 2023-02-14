@@ -12,11 +12,18 @@
 #include "draw.hpp"
 #include "image.hpp"
 #include "position.hpp"
-
+#include "rect.hpp"
+#include "interaction.hpp"
+#include "animation.hpp"
 
 //system
 void draw_system(registry &reg, sparse_array<component::draw> &draw, sparse_array<component::image> &image);
 void position_system(registry &reg, sparse_array<component::position> &position, sparse_array<component::image> &image);
+void animation_system(registry &reg
+,sparse_array<component::image> &images, sparse_array<component::rect> &rects, sparse_array<component::animation> &animations);
+void interaction_system(registry &reg, sparse_array<component::interaction> &interactions);
+void set_rect_system(registry &reg, sparse_array<component::image> &images, sparse_array<component::rect> &rect);
+
 //
 
 // load ECS
