@@ -1,0 +1,25 @@
+Protocol for R-Type
+Every message send by the client will be accompanied with the id of the player
+Every message send by the server will be accompanied with the id of the client it is talking to.
+
+The server use both TCP and UDP, when in wait for game to start, it is TCP, when in game it is UDP
+
+Client to server with server response:
+    CONNECTED (0) : When user connect to server
+     -> (Int32, [(Int32)]) : Client id + list of client already connected
+    POSITION (1, Int32, Int32) : When user move (poistion)
+     -> X
+    SPEED (2, Int32) : When user change speed (speed +-)
+     -> X
+    DISCONNECTED (3) : When user crash or disconnect
+     -> X
+
+Server to client (no client response) :
+    START (0) : When the game start
+    ENNEMY (1, Int32, Int32, Int32) : When an ennemy spawn (Position + Speed)
+    DEAD (2, Int32) : When an user die
+    LOSE (3) : No user left, game lost
+    WIN (4) : No ennemy left, game win
+    HIT (5, Int32) : Player hit (hp lost)
+    ENNEMY DEAD (6, Int32, Int32) : Ennemy dead (Position)
+    BONUS (7) : Gain bonus when ennemy dead
