@@ -10,8 +10,14 @@
 component::image::image(const std::string &file, data &db, entity_t const &e) : db(&db), id(e._id)
 {
     load_texture(file);
-    sf::Texture &texture = db.get_data<sf::Texture>(id);
-    sprite.setTexture(texture);
+    try {
+        sf::Texture &texture = db.get_data<sf::Texture>(id);
+        sprite.setTexture(texture);
+    } catch(const std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+        std::cout << "error occured in image constructor" << std::endl;
+    }
 }
 
 component::image::image(const std::string &file, data &db) : db(&db), id(db.new_id<sf::Texture>())
