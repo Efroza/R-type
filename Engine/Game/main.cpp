@@ -45,6 +45,7 @@ void game(registry &reg)
     load_system(reg);
     load_component(reg);
     create_spaceShip(reg, db);
+    handle.create_entity(component::position(100, 100), reg.spawn_entity());
     while (window.isOpen())
     {
         window.clear(sf::Color::Black);
