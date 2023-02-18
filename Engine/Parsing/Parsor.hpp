@@ -43,32 +43,21 @@ class Parsor {
 
             if (!Json::parseFromStream(read, _file, &root, nullptr))
                 throw std::runtime_error("Error: Can't parse file");
+            for (auto &val : root)
+                std::cout << '[' << val << ']' << std::endl;
             if (root[info].empty())
                 throw std::runtime_error("Error: Can't find info");
             else
-                std::cout << root[info] << std::endl;
+                std::cout << "" << std::endl; // << root[info] << std::endl;
         };
 
-        // template <typename... T>
-        // void getJsonInfo(T... args) {
-        //     constexpr auto size = sizeof...(args);
-        //     std::string arr[size] = {args...};
-        //     std::vector<std::string> res;
+        Json::Value &getJson() {
+            Json::CharReaderBuilder read;
 
-        //     if (!Json::parseFromStream(_read, _file, &_root, nullptr))
-        //         throw std::runtime_error("Error: Can't parse file");
-        //     for (size_t i = 0; i < size; i++) {
-        //         std::cout << arr[i] << std::endl;
-        //         boost::split(res, arr[i], boost::is_any_of(";"));
-        //         for (auto &it : res)
-        //             std::cout << it << std::endl;
-
-        //         // if (_root[arr[i]].empty())
-        //         //     throw std::runtime_error("Error: Can't find info");
-        //         // else
-        //         //     std::cout << _root[arr[i]] << std::endl;
-        //     }
-        // };
+            if (!Json::parseFromStream(read, _file, &_root, nullptr))
+                throw std::runtime_error("Error: Can't parse file");
+            return _root;
+        }
 
     protected:
     private:

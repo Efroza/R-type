@@ -14,6 +14,8 @@
 #include "interaction.hpp"
 #include "interactive.hpp"
 
+void handle_config_files(std::vector<std::string> const &files, registry &reg, data &db);
+
 void create_spaceShip(registry &reg, data &db)
 {
     entity_t spaceship = reg.spawn_entity();
@@ -44,8 +46,10 @@ void game(registry &reg)
 
     load_system(reg);
     load_component(reg);
-    create_spaceShip(reg, db);
-    handle.create_entity(component::position(100, 100), reg.spawn_entity());
+    // create_spaceShip(reg, db);
+    // handle.create_entity(component::position(100, 100), reg.spawn_entity());
+    std::vector<std::string> config = {"./Config/spaceship.json"};
+    handle_config_files(config, reg, db);
     while (window.isOpen())
     {
         window.clear(sf::Color::Black);
