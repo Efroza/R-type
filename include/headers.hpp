@@ -15,19 +15,60 @@ enum Type {
     MESSAGE = 1,
 };
 
+enum Client_data {
+    CONNECTED = 0,
+    DIRECTION = 1,
+    SPEED = 2,
+    DISCONNECTED = 3,
+};
+
+enum Server_data {
+    START = 0,
+    ENNEMY = 1,
+    DEAD = 2,
+    LOSE = 3,
+    WIN = 4,
+    HIT = 5,
+    ENNEMY_DEAD = 6,
+    BONUS = 7,
+};
+
 struct Header {
     uint32_t id;
     Type data_type;
 };
 
-struct Position {
-    uint32_t x;
-    uint32_t y;
+struct Direction {
+    Direction_enum direction;
 };
 
-struct Messages {
-    uint32_t size;
-    char message[1024];
+enum Direction_enum {
+    UP = 0,
+    DOWN = 1,
+    LEFT = 2,
+    RIGHT = 3,
+};
+struct Connected {
+    std::vector<uint16_t> clients_id;
+};
+
+struct Speed {
+    uint32_t speed;
+};
+
+struct Ennemy {
+    uint32_t x;
+    uint32_t y;
+    uint32_t speed;
+};
+
+struct Hit {
+    uint32_t hp;
+};
+
+struct ennemy_dead {
+    uint32_t x;
+    uint32_t y;
 };
 
 #endif /* !HEADERS_HPP_ */
