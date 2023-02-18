@@ -9,6 +9,7 @@
 #define HEADERS_HPP_
 
 #include <iostream>
+#include <vector>
 
 enum Type {
     POSITION = 0,
@@ -16,30 +17,29 @@ enum Type {
 };
 
 enum Client_data {
-    CONNECTED = 0,
-    DIRECTION = 1,
-    SPEED = 2,
-    DISCONNECTED = 3,
+    CONNECTED = 0, // TCP
+    DIRECTION = 1, // UDP
+    SPEED = 2, // UDP
+    DISCONNECTED = 3, // TCP and UDP
+    LOBBY = 4, // TCP
 };
 
 enum Server_data {
-    START = 0,
-    ENNEMY = 1,
-    DEAD = 2,
-    LOSE = 3,
-    WIN = 4,
-    HIT = 5,
-    ENNEMY_DEAD = 6,
-    BONUS = 7,
+    START = 0, // TCP 
+    ENNEMY = 1, // UDP
+    DEAD = 2, // UDP
+    LOSE = 3, // UDP
+    WIN = 4, // UDP
+    HIT = 5, // UDP
+    ENNEMY_DEAD = 6, // UDP
+    BONUS = 7, // UDP
+    NEW_CLIENT = 8, // TCP
+    ALREADY_IN_GAME = 9, // TCP
 };
 
 struct Header {
-    uint32_t id;
+    uint16_t id;
     Type data_type;
-};
-
-struct Direction {
-    Direction_enum direction;
 };
 
 enum Direction_enum {
@@ -48,27 +48,42 @@ enum Direction_enum {
     LEFT = 2,
     RIGHT = 3,
 };
+
+struct Direction {
+    Direction_enum direction;
+};
+
 struct Connected {
     std::vector<uint16_t> clients_id;
 };
 
 struct Speed {
-    uint32_t speed;
+    uint16_t speed;
 };
 
 struct Ennemy {
-    uint32_t x;
-    uint32_t y;
-    uint32_t speed;
+    uint16_t x;
+    uint16_t y;
+    uint16_t speed;
 };
 
 struct Hit {
-    uint32_t hp;
+    uint16_t hp;
 };
 
 struct ennemy_dead {
-    uint32_t x;
-    uint32_t y;
+    uint16_t x;
+    uint16_t y;
+};
+
+struct Messages {
+    char message[1024];
+    uint16_t size;
+};
+
+struct Position {
+    uint16_t x;
+    uint16_t y;
 };
 
 #endif /* !HEADERS_HPP_ */
