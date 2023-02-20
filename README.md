@@ -25,12 +25,12 @@ Other similar and well known games are the Gradius series and Blazing Star on Ne
 
 **Linux :**
 ```
-cmake . -DCMAKE_BUILD_TYPE=Release && cmake --build . --config Release
+cmake . -DCMAKE_BUILD_TYPE=Release && cmake --build . --config Release && cpack -C Release
 ```
 **Windows :**
 ```
 Launch Visual Studio
-cmake . -DCMAKE_BUILD_TYPE=Release && cmake --build . --config Release
+(cmake . -DCMAKE_BUILD_TYPE=Release) -and (cmake --build . --config Release) -and (cpack -C Release)
 ```
 
 ## Usage
