@@ -29,14 +29,14 @@ OBJS	= 	$(SRCS:.cpp=.o)
 
 NAME	= 	rtype
 
-CXXFLAGS	=	-I ./Include -I ./BaseComponent -std=c++20 #  -Wall -Wextra -Werror -ljsoncp
+CXXFLAGS	=	-I ./Include -I ./BaseComponent -I ./Graphic -std=c++20 #  -Wall -Wextra -Werror -ljsoncp
 
 RM	= 	rm -f
 
 all: 		$(NAME)
 
 $(NAME): 	$(OBJS)
-	 	$(CC) $(NAME) $(OBJS) -lsfml-graphics -lsfml-window -lsfml-system
+	 	$(CC) $(NAME) $(OBJS) -lsfml-graphics -lsfml-window -lsfml-system -ldl
 
 debug:	$(OBJS)
 		$(CC) $(NAME) $(OBJS) -lsfml-graphics -lsfml-window -lsfml-system -g3

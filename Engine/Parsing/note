@@ -1,3 +1,0 @@
-// Don't forget to add the jsoncpp library to your CMakeLists.txt OR
-// if already installed compile it with the -ljsoncpp flag
-// if not, you can install it with the command: sudo dnf install jsoncpp-devel
