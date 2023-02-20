@@ -64,7 +64,7 @@ Launch Visual Studio
 * **Library : SFML**
 
 ## Documentation
-**Doxygen :**
+**Doxygen :**   
 Our documentation is made with doxygen. Here are the commands if you wanna check it.
 * **Linux :**
 ```
@@ -75,7 +75,7 @@ your_web_browser html/index.html
 start (your_web_browser).exe html/index.html
 ```
 
-**Engine-focused/Network focused documentation :**
+**Engine-focused/Network focused documentation :**  
 With those two documentations you'll be able to understand the engine or network and use them.
 
 * **[Engine](https://github.com/EpitechPromo2025/B-CPP-500-PAR-5-2-rtype-luc1.schmitt/tree/main/Engine/README.md)**
