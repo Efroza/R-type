@@ -20,7 +20,6 @@ bool got_time(Json::Value const &json)
 {
     if (json.isObject() == false)
         return false;
-    std::cout << "hello" << std::endl;
     for (auto &name : json.getMemberNames())
     {
         if (name == "time")

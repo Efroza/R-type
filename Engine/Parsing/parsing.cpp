@@ -14,6 +14,8 @@
 #include "parse_image.hpp"
 #include "parse_rect.hpp"
 #include "parse_animation.hpp"
+#include "parse_interaction.hpp"
+#include "handling_interaction.hpp"
 
 static std::unordered_map<std::string, std::function<IParseComponent *()>> const map = {
     {"position", [](){return new parse_component::position();}},
@@ -21,6 +23,7 @@ static std::unordered_map<std::string, std::function<IParseComponent *()>> const
     {"draw", [](){return new parse_component::draw();}},
     {"rect", [](){return new parse_component::rect();}},
     {"animation", [](){return new parse_component::animation();}},
+    {"interaction", [](){return new parse_component::interaction();}}
 };
 
 static bool arguments_is_set(IParseComponent *component, Json::Value &json,registry &reg, data &db)
@@ -35,7 +38,7 @@ static bool arguments_is_set(IParseComponent *component, Json::Value &json,regis
     return true;
 }
 
-static void handle_entites(Json::Value &entitie, registry &reg, data &db)
+static void handle_entites(Json::Value &entitie, registry &reg, data &db, handling_interaction &data_interaction)
 {
     entity_t entity = reg.spawn_entity();
 
@@ -44,6 +47,9 @@ static void handle_entites(Json::Value &entitie, registry &reg, data &db)
         if (map.find(name) == map.end())
             continue;
         std::unique_ptr<IParseComponent> component(map.at(name)());
+        AParseInteraction *interaction = dynamic_cast<AParseInteraction *>(component.get());
+        if (interaction)
+            interaction->set_interaction(data_interaction);
         if (component->number_arguments_needed() != 0) {
             if (arguments_is_set(component.get(), entitie[name],reg, db))
                 component->load_component(entity, reg, db, entitie[name]);
@@ -55,24 +61,24 @@ static void handle_entites(Json::Value &entitie, registry &reg, data &db)
     }
 }
 
-static void config_file(Parsor &pars, registry &reg, data &db)
+static void config_file(Parsor &pars, registry &reg, data &db, handling_interaction &data_interaction)
 {
     Json::Value &json = pars.getJson();
 
     for (auto &name : json.getMemberNames()) {
         if (json[name].isObject()) {
-            handle_entites(json[name], reg, db);
+            handle_entites(json[name], reg, db, data_interaction);
         }
     }
 }
 
-void handle_config_files(std::vector<std::string> const &files, registry &reg, data &db)
+void handle_config_files(std::vector<std::string> const &files, registry &reg, data &db, handling_interaction &data_interaction)
 {
     for (auto &file : files)
     {
         try {
             Parsor pars(file);
-            config_file(pars, reg, db);
+            config_file(pars, reg, db, data_interaction);
         } catch (std::exception const &e) {
             std::cout << file << ' ' << e.what() << std::endl;
         }

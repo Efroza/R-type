@@ -10,9 +10,9 @@
 
     #include "registry.hpp"
 
-void down_deplacement(entity_t e, registry &reg);
-void up_deplacement(entity_t e, registry &reg);
-void right_deplacement(entity_t e, registry &reg);
-void left_deplacement(entity_t e, registry &reg);
+void down_deplacement(entity_t &e, registry &reg);
+void up_deplacement_function(entity_t &e, registry &reg);
+void right_deplacement(entity_t &e, registry &reg);
+void left_deplacement(entity_t &e, registry &reg);
 
 #endif /* !INTERACTIVE_HPP_ */

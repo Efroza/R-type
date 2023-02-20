@@ -5,23 +5,24 @@
 ** main
 */
 
-#include <SFML/Window.hpp>
 #include <unistd.h>
-#include "systems.hpp"
+#include <SFML/Window.hpp>
 #include "draw.hpp"
 #include "handle_entity.hpp"
 #include "rect.hpp"
+#include "systems.hpp"
 #include "interaction.hpp"
 #include "interactive.hpp"
+#include "handling_interaction.hpp"
 
-void handle_config_files(std::vector<std::string> const &files, registry &reg, data &db);
+void handle_config_files(std::vector<std::string> const &files, registry &reg, data &db, handling_interaction &interaction);
 
 void create_spaceShip(registry &reg, data &db)
 {
     entity_t spaceship = reg.spawn_entity();
     component::interaction inter;
 
-    inter.new_interaction(sf::Keyboard::Space, up_deplacement);
+    inter.new_interaction(sf::Keyboard::Space, up_deplacement_function);
 
     try {
         reg.add_component<component::position>(spaceship, std::move(component::position(100, 100)));
@@ -37,19 +38,19 @@ void create_spaceShip(registry &reg, data &db)
     }
 }
 
-void game(registry &reg)
+void game(registry &reg, data &db)
 {
-    data db;
     sf::RenderWindow &window = reg.get_window();
     sf::Event event;
     handle_entity handle(reg, db);
 
     load_system(reg);
     load_component(reg);
-    // create_spaceShip(reg, db);
-    // handle.create_entity(component::position(100, 100), reg.spawn_entity());
     std::vector<std::string> config = {"./Config/spaceship.json"};
-    handle_config_files(config, reg, db);
+    std::vector<std::string> interaction_config = {"./Interaction/up_deplacement.so"};
+    handling_interaction interaction(interaction_config);
+    // create_spaceShip(reg, db);
+    handle_config_files(config, reg, db, interaction);
     while (window.isOpen())
     {
         window.clear(sf::Color::Black);
@@ -59,9 +60,18 @@ void game(registry &reg)
     }
 }
 
+void init_databases(data &db)
+{
+
+    db.add_list_data<sf::Texture>();
+}
+
 int main(void)
 {
     registry reg(sf::VideoMode(800, 600), "Rtype");
-    game(reg);
+    data db;
+
+    init_databases(db);
+    game(reg, db);
     return 0;
 }

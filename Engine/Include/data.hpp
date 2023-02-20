@@ -21,8 +21,6 @@ class data
     public:
         data()
         {
-            std::list<sf::Texture> texture;
-            db[std::type_index(typeid(sf::Texture))] = std::move(std::any(texture));
         }
         ~data() {}
         template <typename Type>
@@ -30,6 +28,13 @@ class data
         {
             return db.find(std::type_index(typeid(Type))) != db.end();
         }
+        template <typename Type>
+        void add_list_data()
+        {
+            std::list<Type> list;
+            db[std::type_index(typeid(Type))] = std::move(std::any(list));
+        }
+
         template <typename Type>
         std::list<Type> &get_data()
         {
