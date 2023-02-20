@@ -22,6 +22,7 @@ enum Client_data {
     SPEED = 2, // UDP
     DISCONNECTED = 3, // TCP and UDP
     LOBBY = 4, // TCP
+    MESSAGES = 5,
 };
 
 enum Server_data {
@@ -35,11 +36,17 @@ enum Server_data {
     BONUS = 7, // UDP
     NEW_CLIENT = 8, // TCP
     ALREADY_IN_GAME = 9, // TCP
+    MESSAGESS = 10, // TCP
 };
 
 struct Header {
     uint16_t id;
     Type data_type;
+};
+
+struct Messages {
+    char message[1024];
+    uint16_t size;
 };
 
 struct Header_server {
@@ -84,11 +91,6 @@ struct Hit {
 struct ennemy_dead {
     uint16_t x;
     uint16_t y;
-};
-
-struct Messages {
-    char message[1024];
-    uint16_t size;
 };
 
 struct Position {
