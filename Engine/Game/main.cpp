@@ -46,10 +46,9 @@ void game(registry &reg, data &db)
 
     load_system(reg);
     load_component(reg);
-    std::vector<std::string> config = {"./Config/spaceship.json"};
-    std::vector<std::string> interaction_config = {"./Interaction/up_deplacement.so"};
+    std::vector<std::string> config = {"./Config/other.json", "./Config/spaceship.json"};
+    std::vector<std::string> interaction_config = {"./Interaction/up_deplacement.so", "./Interaction/down_deplacement.so", "./Interaction/left_deplacement.so", "./Interaction/right_deplacement.so"};
     handling_interaction interaction(interaction_config);
-    // create_spaceShip(reg, db);
     handle_config_files(config, reg, db, interaction);
     while (window.isOpen())
     {
