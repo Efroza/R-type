@@ -21,18 +21,27 @@
  * @details Depending of the data type it will print the data.
 */
 void receive_tcp_client(Header header, tcp::socket &socket) {
-        if (header.data_type == POSITION) {
-            Position position;
-            socket.receive(asio::buffer(&position, sizeof(Position)));
-            std::cout << "Received from server " << header.id << ": " << position.x << " " << position.y << std::endl;
-        } else {
-            Messages message;
-            socket.receive(asio::buffer(&message, sizeof(Messages)));
-            std::cout << "Received from server " << header.id << ": " << message.size << " ";
-            std::cout.write(message.message, message.size) << std::endl;
-        }            
+    if (header.data_type == POSITION) {
+        Position position;
+        socket.receive(asio::buffer(&position, sizeof(Position)));
+        std::cout << "Received from server " << header.id << ": " << position.x << " " << position.y << std::endl;
+    } else if (header.data_type == MESSAGE) {
+        Messages message;
+        socket.receive(asio::buffer(&message, sizeof(Messages)));
+        std::cout << "Received from server " << header.id << ": " << message.size << " ";
+        std::cout.write(message.message, message.size) << std::endl;
+    }            
 }
 
+// void receive_tcp_client_server(Header_server header, tcp::socket &socket) {
+//     if (header.data_type == NEW_CLIENT) {
+//         New_client new_client;
+//         socket.receive(asio::buffer(&new_client, sizeof(New_client)));
+//         std::cout << "Received from server " << header.id << ": " << new_client.id << std::endl;
+//     } else {
+//         std::cout << "Wrong data type" << std::endl;
+//     }
+// }
 /**
  * @brief This function will send data to the server.
  * @return void
@@ -96,15 +105,19 @@ void async_tcp_client(const std::string& host, const std::string& port)
                     std::string message;
                     std::getline(std::cin, message);
                     Header header;
+                    Header_server header_server;
+                    header_server.id = 1;
                     header.id = 1;
                     // Send the message to the server
                     // send_tcp_client(header, socket, message);
                     send_tcp_client(header, std::ref(socket), message);
                     
                     std::memset(&header, 0, sizeof(header));
+                    // size_t bytes_received = socket.receive(asio::buffer(&header_server, sizeof(header_server)));
                     size_t bytes_received = socket.receive(asio::buffer(&header, sizeof(header)));
                     // If the server has sent a message, receive it
                     if (!ec)
+                        // receive_tcp_client_server(header_server, std::ref(socket));
                         receive_tcp_client(header, std::ref(socket));
                 }
             }

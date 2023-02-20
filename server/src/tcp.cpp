@@ -76,9 +76,18 @@ void send_tcp_server(Header header, tcp::socket &socket, std::string message) {
  * @see void send_tcp_server(Header header, tcp::socket &socket, std::string message)
  * @details This function will handle the client, it will receive data from the client and send data to the client.
 */
-void handle_client(tcp::socket socket)
-{
+void handle_client(tcp::socket socket, std::vector<tcp::socket> &sockets_client) {
+  uint16_t new_id = sockets_client.size() + 1;
   std::cout << "Accepted connection from " << socket.remote_endpoint().address() << std::endl;
+  for (auto &socket_client : sockets_client) {
+    Header_server header;
+    header.id = new_id;
+    header.data_type = NEW_CLIENT;
+    socket_client.send(asio::buffer(&header, sizeof(header)));
+  }
+  // sockets.push_back(std::make_pair(socket, new_id));
+  sockets_client.push_back(socket);
+  // sockets.push_back(socket);
   while (true) {
     Header header;
     size_t len = socket.read_some(asio::buffer(&header, sizeof(Header)));
@@ -105,11 +114,13 @@ void handle_client(tcp::socket socket)
 void launch_tcp_server()
 {
   io_context io_context;
+  // std::vector<tcp::socket> sockets;
+  std::vector<tcp::socket> sockets;
   tcp::acceptor acceptor(io_context, tcp::endpoint(tcp::v4(), 12346));
   while (true) {
     tcp::socket socket(io_context);
     acceptor.accept(socket);
-    std::thread t(handle_client, std::move(socket));
+    std::thread t(handle_client, std::move(socket), std::ref(sockets));
     t.detach();
   }
 }

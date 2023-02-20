@@ -42,6 +42,16 @@ struct Header {
     Type data_type;
 };
 
+struct Header_server {
+    uint16_t id;
+    Server_data data_type;
+};
+
+struct Header_client {
+    uint16_t id;
+    Client_data data_type;
+};
+
 enum Direction_enum {
     UP = 0,
     DOWN = 1,
@@ -84,6 +94,10 @@ struct Messages {
 struct Position {
     uint16_t x;
     uint16_t y;
+};
+
+struct New_client {
+    uint16_t id;
 };
 
 #endif /* !HEADERS_HPP_ */
