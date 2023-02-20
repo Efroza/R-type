@@ -78,8 +78,8 @@ start (your_web_browser).exe html/index.html
 **Engine-focused/Network-focused documentation :**  
 With both Readmes you'll be able to understand the engine or network and use them.
 
-* **[Engine](https://github.com/EpitechPromo2025/B-CPP-500-PAR-5-2-rtype-luc1.schmitt/tree/main/Engine/README.md)**
-* **[Network](https://github.com/EpitechPromo2025/B-CPP-500-PAR-5-2-rtype-luc1.schmitt/tree/main/include/README.md)**
+* **[Engine](https://github.com/EpitechPromo2025/B-CPP-500-PAR-5-2-rtype-luc1.schmitt/tree/main/Engine)**
+* **[Network](https://github.com/EpitechPromo2025/B-CPP-500-PAR-5-2-rtype-luc1.schmitt/tree/main/include)**
 
 
 ## Authors
