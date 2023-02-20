@@ -25,7 +25,7 @@ Other similar and well known games are the Gradius series and Blazing Star on Ne
 
 **Linux :**
 ```
-cmake . -DCMAKE_BUILD_TYPE=Release && cmake --build . --config Release
+cmake . -DCMAKE_BUILD_TYPE=Release && cmake --build . --config Release && cpack -C Release
 ```
 **Windows :**
 ```
