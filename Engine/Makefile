@@ -40,7 +40,7 @@ OBJS	= 	$(SRCS:.cpp=.o)
 NAME	= 	rtype
 
 CXXFLAGS	=	-I ./Include -I ./BaseComponent -I ./ParseComponent -I ./Parsing -std=c++20 \
--I ./Interaction -I ./Interaction/Include #  -Wall -Wextra -Werror -ljsoncp
+-I ./Interaction -I ./Interaction/Include -I ./Graphic#  -Wall -Wextra -Werror -ljsoncp
 
 RM	= 	rm -f
 

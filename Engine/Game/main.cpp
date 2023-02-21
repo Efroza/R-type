@@ -7,6 +7,11 @@
 
 #include <unistd.h>
 #include <SFML/Window.hpp>
+#include <functional>
+#include <dlfcn.h>
+#include <memory>
+#include "IGraphic.hpp"
+#include "systems.hpp"
 #include "draw.hpp"
 #include "handle_entity.hpp"
 #include "rect.hpp"
@@ -74,3 +79,23 @@ int main(void)
     game(reg, db);
     return 0;
 }
+    // void *handle = dlopen("../lib/libSFML.so", RTLD_LAZY);
+    // if (!handle) {
+    //     std::cout << "Error dl open " << dlerror() << std::endl;
+    //     return 84;
+    // }
+    // IGraphic *(*funcPtr)() = (IGraphic *(*)())dlsym(handle, "createGraphLib");
+    // if (!funcPtr) {
+    //     throw std::invalid_argument(std::string("Invalid lib: ") + dlerror());
+    // }
+    // auto a = std::function<IGraphic * ()>(funcPtr);
+    // std::unique_ptr<IGraphic> libgraph(std::move(a()));
+    // libgraph->initialize(800, 600, "Rtype");
+    // while (true) {
+    //     if (libgraph->pollEvent() == CLOSE) {
+    //         break;
+    //     }
+    // }
+    // libgraph->destroy();
+    // // registry reg(sf::VideoMode(800, 600), "Rtype");
+    // // game(reg);

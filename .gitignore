@@ -31,3 +31,13 @@ conanbuildinfo*
 *.dir
 conan.cmake
 conanfile.txt
+_CPack_Packages
+install_manifest.txt
+r-type-0.1.1-Linux.sh
+r-type-0.1.1-Linux.tar.gz
+r-type-0.1.1-Linux.tar.xz
+r-type-0.1.1-Linux.tar.bz2
+r-type-0.1.1-Linux.tar
+r-type-0.1.1-Linux.zip
+r-type-0.1.1-Linux.tar.Z
+*.exe

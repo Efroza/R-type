@@ -4,22 +4,40 @@ Every message send by the server will be accompanied with the id of the client i
 
 The server use both TCP and UDP, when in wait for game to start, it is TCP, when in game it is UDP
 
+-------------------------------------------------------
+
 Client to server with server response:
     CONNECTED (0) : When user connect to server
      -> (Int32, [(Int32)]) : Client id + list of client already connected
-    POSITION (1, Int32, Int32) : When user move (poistion)
+    DISCONNECTED (3) : When user crash or disconnect
+     -> OK (Depends if in lobby or not)
+    LOBBY (4, Int16) : Waiting for a certain number to start the game
+     -> START : if Int16 = 1 (not waiting for player)
+     -> Waiting for players : If Int16 > 1 (waiting for Int16 player(s))
+
+Client to server with no server response :
+    DIRECTION (1, ENUM (DIRECTION)) : When user move (poistion)
      -> X
-    SPEED (2, Int32) : When user change speed (speed +-)
+    SPEED (2, Int16) : When user change speed (speed +-)
      -> X
     DISCONNECTED (3) : When user crash or disconnect
-     -> X
+     -> X (Depends if in lobby or not)
 
-Server to client (no client response) :
-    START (0) : When the game start
-    ENNEMY (1, Int32, Int32, Int32) : When an ennemy spawn (Position + Speed)
-    DEAD (2, Int32) : When an user die
+-------------------------------------------------------
+
+Server to client with no client response :
+    ENNEMY (1, Int16, Int16, Int16) : When an ennemy spawn (Position + Speed)
+    DEAD (2, Int16) : When an user die
     LOSE (3) : No user left, game lost
     WIN (4) : No ennemy left, game win
-    HIT (5, Int32) : Player hit (hp lost)
-    ENNEMY DEAD (6, Int32, Int32) : Ennemy dead (Position)
+    HIT (5, Int16) : Player hit (hp lost)
+    ENNEMY_DEAD (6, Int16, Int16) : Ennemy dead (Position)
     BONUS (7) : Gain bonus when ennemy dead
+
+Server to client with client response :
+    START (0) : When the game start
+     ->  OK
+    NEW_CLIENT (8, Int16) : New client connected
+     -> OK
+    ALREADY_IN_GAME (9) : When client try to connect to game already started
+     -> OK
