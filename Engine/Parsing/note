@@ -2,6 +2,8 @@ command line :
  - sudo dnf install libyaml-devel-0.2.2-3.fc32.x86_64
  - sudo dnf install yaml-cpp
  - sudo dnf install yaml-cpp-devel
+ - sudo dnf install jsoncpp-devel
 
 flag to add to the compiler :
  - -lyaml-cpp
+ - -ljsoncpp

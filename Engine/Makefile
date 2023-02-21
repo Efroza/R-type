@@ -17,6 +17,7 @@ SRCS	=	Game/main.cpp	\
 	BaseSystems/animation_system.cpp	\
 	BaseSystems/rect_system.cpp	\
 	BaseSystems/interaction_system.cpp	\
+	BaseSystems/collusion_system.cpp	\
 	Interaction/src/up_deplacement.cpp	\
 	Interaction/left_deplacement.cpp	\
 	Interaction/right_deplacement.cpp	\
@@ -31,6 +32,7 @@ SRCS	=	Game/main.cpp	\
 	ParseComponent/parse_interaction.cpp	\
 	Parsing/parsing.cpp	\
 	Parsing/handling_interaction.cpp	\
+	Parsing/Yaml.cpp
 
 
 CC	= 	g++ -o
@@ -40,17 +42,17 @@ OBJS	= 	$(SRCS:.cpp=.o)
 NAME	= 	rtype
 
 CXXFLAGS	=	-I ./Include -I ./BaseComponent -I ./ParseComponent -I ./Parsing -std=c++20 \
--I ./Interaction -I ./Interaction/Include -I ./Graphic#  -Wall -Wextra -Werror -ljsoncp
+-I ./Interaction -I ./Interaction/Include -I ./Graphic -I ./ComponentSystem #  -Wall -Wextra -Werror -ljsoncp
 
 RM	= 	rm -f
 
 all: 		$(NAME)
 
 $(NAME): 	$(OBJS)
-	 	$(CC) $(NAME) $(OBJS) -lsfml-graphics -lsfml-window -lsfml-system -ljsoncpp -ldl
+	 	$(CC) $(NAME) $(OBJS) -lsfml-graphics -lsfml-window -lsfml-system -ljsoncpp -ldl -lyaml-cpp
 
 debug:	$(OBJS)
-		$(CC) $(NAME) $(OBJS) -lsfml-graphics -lsfml-window -lsfml-system -ljsoncpp -ldl -g3
+		$(CC) $(NAME) $(OBJS) -lsfml-graphics -lsfml-window -lsfml-system -ljsoncpp -lyaml-cpp -ldl -g3
 
 clean:
 		$(RM) $(OBJS)
