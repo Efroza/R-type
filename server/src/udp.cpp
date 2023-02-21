@@ -135,7 +135,7 @@ void send_thread(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vector
         if (message_client.find(',') != std::string::npos)
             send_position(socket, endpoints, message_client); // Send struct position to client
         else
-            send_message(socket, endpoints, message_client); // Send struct message to client
+            send_message(socket, endpoints, message_client); // Send  struct message to client
     }
 }
 

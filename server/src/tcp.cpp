@@ -24,17 +24,15 @@ using asio::buffer;
  * @details It creates two struct one if it is a position and another one if it is a message.
  * @details Depending of the data type it will print the data.
 */
-void receive_tcp_server(Header header, tcp::socket &socket) {
-  if (header.data_type == POSITION) {
-    Position position;
-    socket.receive(asio::buffer(&position, sizeof(Position)));
-    std::cout << "Received from client " << header.id << ": " << position.x << " " << position.y << std::endl;
-  } else {
+void receive_tcp_server(Header_client header, tcp::socket &socket) {
+  if (header.data_type == MESSAGES) {
     Messages message;
     socket.receive(asio::buffer(&message, sizeof(Messages)));
     std::cout << "Received from client " << header.id << ": " << message.size << " ";
     std::cout.write(message.message, message.size) << std::endl;
-  }            
+  } else {
+    std::cout << "Wrong data type" << std::endl;
+  }
 }
 
 /**
@@ -49,47 +47,48 @@ void receive_tcp_server(Header header, tcp::socket &socket) {
  * @details It will send the header and the struct to the client.
  * @details If the message contains a comma it will be a position and if not, it will be a message.
 */
-void send_tcp_server(Header header, tcp::socket &socket, std::string message) {
+void send_tcp_server(Header_server header, tcp::socket &socket, std::string message) {
   header.id = 1;
-  if (std::find(message.begin(), message.end(), ',') != message.end()) { //  If the input contains a comma, it's a position
-      header.data_type = POSITION;
-      Position position_to_send;
-      position_to_send.x = std::stoi(message.substr(0, message.find(',')));
-      position_to_send.y = std::stoi(message.substr(message.find(',') + 1, message.size()));
-      socket.send(asio::buffer(&header, sizeof(header)));
-      socket.send(asio::buffer(&position_to_send, sizeof(position_to_send)));
-  } else { // If the input doesn't contain a comma, it's a message
-      header.data_type = MESSAGE;
-      Messages message_to_send;
-      message_to_send.size = message.size();
-      std::memcpy(&message_to_send.message, message.c_str(), message.size());
-      socket.send(asio::buffer(&header, sizeof(header)));
-      socket.send(asio::buffer(&message_to_send, sizeof(message_to_send)));
-  }
+  header.data_type = MESSAGESS;
+  Messages message_to_send;
+  message_to_send.size = message.size();
+  std::memcpy(&message_to_send.message, message.c_str(), message.size());
+  socket.send(asio::buffer(&header, sizeof(header)));
+  socket.send(asio::buffer(&message_to_send, sizeof(message_to_send)));
 }
 
 /**
  * @brief This function will handle the client.
  * @return void
  * @param socket The socket that will be used to send and receive data from the client.
- * @see void receive_tcp_server(Header header, tcp::socket &socket)
- * @see void send_tcp_server(Header header, tcp::socket &socket, std::string message)
+ * @see void receive_tcp_server(Header_client header, tcp::socket &socket)
+ * @see void send_tcp_server(Header_server header, tcp::socket &socket, std::string message)
  * @details This function will handle the client, it will receive data from the client and send data to the client.
 */
-void handle_client(tcp::socket socket)
-{
+void handle_client(tcp::socket socket) {
+  // uint16_t new_id = sockets_client.size() + 1;
   std::cout << "Accepted connection from " << socket.remote_endpoint().address() << std::endl;
+  // for (auto &socket_client : sockets_client) {
+  //   Header_server header;
+  //   header.id = new_id;
+  //   header.data_type = NEW_CLIENT;
+  //   socket_client.send(asio::buffer(&header, sizeof(header)));
+  // }
+  // // sockets.push_back(std::make_pair(socket, new_id));
+  // sockets_client.push_back(socket);
+  // sockets.push_back(socket);
   while (true) {
-    Header header;
-    size_t len = socket.read_some(asio::buffer(&header, sizeof(Header)));
-    receive_tcp_server(header, socket);
+    Header_client header;
+    size_t len = socket.read_some(asio::buffer(&header, sizeof(Header_client)));
+    receive_tcp_server(header, std::ref(socket));
 
     std::cout << "Enter message to send: ";
     std::string message;
     std::getline(std::cin, message);
     std::memset(&header, 0, sizeof(header));
-    header.id = 1;
-    send_tcp_server(header, socket, message);
+    Header_server header_server;
+    header_server.id = 1;
+    send_tcp_server(header_server, std::ref(socket), message);
   }
 }
 
