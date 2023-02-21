@@ -16,4 +16,5 @@ void load_component(registry &reg)
     reg.register_component<component::rect>();
     reg.register_component<component::interaction>();
     reg.register_component<component::animation>();
+    reg.register_component<component::collusion>();
 }
