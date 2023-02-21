@@ -10,7 +10,8 @@
 #include <functional>
 #include <dlfcn.h>
 #include <memory>
-#include "IGraphic.hpp"
+// #include "IGraphic.hpp"
+#include "parsing.hpp"
 #include "systems.hpp"
 #include "draw.hpp"
 #include "handle_entity.hpp"
@@ -19,6 +20,7 @@
 #include "interaction.hpp"
 #include "interactive.hpp"
 #include "handling_interaction.hpp"
+#include "Yaml.hpp"
 
 void handle_config_files(std::vector<std::string> const &files, registry &reg, data &db, handling_interaction &interaction);
 
@@ -43,7 +45,7 @@ void create_spaceShip(registry &reg, data &db)
     }
 }
 
-void game(registry &reg, data &db)
+void game(registry &reg, data &db, Yaml &yaml)
 {
     sf::RenderWindow &window = reg.get_window();
     sf::Event event;
@@ -51,10 +53,11 @@ void game(registry &reg, data &db)
 
     load_system(reg);
     load_component(reg);
-    std::vector<std::string> config = {"./Config/other.json", "./Config/spaceship.json"};
-    std::vector<std::string> interaction_config = {"./Interaction/up_deplacement.so", "./Interaction/down_deplacement.so", "./Interaction/left_deplacement.so", "./Interaction/right_deplacement.so"};
+    std::vector<std::string> config = yaml.get("config_json");
+    std::vector<std::string> interaction_config = yaml.get("config_interaction");
     handling_interaction interaction(interaction_config);
-    handle_config_files(config, reg, db, interaction);
+    parsing handling_parse(reg, db, config);
+    handling_parse.handle_config_files(interaction);
     while (window.isOpen())
     {
         window.clear(sf::Color::Black);
@@ -70,14 +73,22 @@ void init_databases(data &db)
     db.add_list_data<sf::Texture>();
 }
 
-int main(void)
+int main(int ac, char **av)
 {
-    registry reg(sf::VideoMode(800, 600), "Rtype");
-    data db;
-
-    init_databases(db);
-    game(reg, db);
-    return 0;
+    if (ac != 2)
+        return 84;
+    try {
+        data db;
+        Yaml yaml(av[1]);
+        if (yaml.data_exist("config_json") == false || yaml.data_exist("config_interaction") == false)
+            throw std::runtime_error("config_json or config_interaction not set in yaml");
+        registry reg(sf::VideoMode(800, 600), "Rtype");
+        init_databases(db);
+        game(reg, db, yaml);
+    } catch(std::exception const &e) {
+        std::cout << e.what() << std::endl;
+        return 84;
+    }
 }
     // void *handle = dlopen("../lib/libSFML.so", RTLD_LAZY);
     // if (!handle) {

@@ -17,9 +17,10 @@
 
 class Yaml {
     public:
-        Yaml(std::string);
+        Yaml(std::string const &);
         ~Yaml();
-        std::vector<std::string> get(std::string) const;
+        std::vector<std::string> get(std::string const &) const;
+        bool data_exist(std::string const &tab) const;
 
     protected:
     private:

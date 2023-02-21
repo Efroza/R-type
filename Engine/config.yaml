@@ -4,5 +4,8 @@ config_json:
 
 config_interaction:
   - ./Interaction/up_deplacement.so
+  - ./Interaction/down_deplacement.so
+  - ./Interaction/left_deplacement.so
+  - ./Interaction/right_deplacement.so
 
 # get_yaml("config_json") -> std::vector<std::string>
