@@ -6,11 +6,13 @@
 */
 
 #include "../include/server.hpp"
+#include <mutex>
 
 using asio::io_context;
 using asio::ip::tcp;
 using asio::buffer;
 
+std::mutex mutex;
 /**
  * @file tcp.cpp
 */
@@ -34,7 +36,7 @@ void receive_tcp_server(Header header, tcp::socket &socket) {
     socket.receive(asio::buffer(&message, sizeof(Messages)));
     std::cout << "Received from client " << header.id << ": " << message.size << " ";
     std::cout.write(message.message, message.size) << std::endl;
-  }            
+  }
 }
 
 /**
@@ -72,24 +74,34 @@ void send_tcp_server(Header header, tcp::socket &socket, std::string message) {
  * @brief This function will handle the client.
  * @return void
  * @param socket The socket that will be used to send and receive data from the client.
+ * @param server_data The server data that will be used to add the client to the server's list.
  * @see void receive_tcp_server(Header header, tcp::socket &socket)
  * @see void send_tcp_server(Header header, tcp::socket &socket, std::string message)
  * @details This function will handle the client, it will receive data from the client and send data to the client.
 */
-void handle_client(tcp::socket socket)
+
+void handle_client(std::shared_ptr<tcp::socket> socket, Server& server_data)
 {
-  std::cout << "Accepted connection from " << socket.remote_endpoint().address() << std::endl;
+  std::cout << "Accepted connection from " << socket->remote_endpoint().address() << std::endl;
+
+  // Add the client to the server's list
+  uint16_t client_id = server_data.get_nb_clients() + 1;
+  server_data.add_client(server_data.get_nb_clients() + 1, socket);
+  server_data.print_all_clients();
+
+  // Loop to receive and send data
   while (true) {
     Header header;
-    size_t len = socket.read_some(asio::buffer(&header, sizeof(Header)));
-    receive_tcp_server(header, socket);
+    std::memset(&header, 0, sizeof(header));
+    size_t len = socket->read_some(asio::buffer(&header, sizeof(Header)));
+    receive_tcp_server(header, *socket);
 
     std::cout << "Enter message to send: ";
     std::string message;
     std::getline(std::cin, message);
     std::memset(&header, 0, sizeof(header));
     header.id = 1;
-    send_tcp_server(header, socket, message);
+    send_tcp_server(header, *socket, message);
   }
 }
 
@@ -105,11 +117,12 @@ void handle_client(tcp::socket socket)
 void launch_tcp_server()
 {
   io_context io_context;
+  Server server_data;
   tcp::acceptor acceptor(io_context, tcp::endpoint(tcp::v4(), 12346));
   while (true) {
-    tcp::socket socket(io_context);
-    acceptor.accept(socket);
-    std::thread t(handle_client, std::move(socket));
+    std::shared_ptr<tcp::socket> socket = std::make_shared<tcp::socket>(io_context);
+    acceptor.accept(*socket);
+    std::thread t(handle_client, socket, std::ref(server_data));
     t.detach();
   }
 }

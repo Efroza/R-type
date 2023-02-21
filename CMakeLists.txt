@@ -49,22 +49,26 @@ set(SRCS1
     ./server/src/main.cpp
     ./server/src/tcp.cpp
     ./server/src/udp.cpp
+    ./shared/src/ClientInfo.cpp
     )
 
 set(HEADERS1
     ./server/include/server.hpp
-    ./include/headers.hpp
+    ./shared/include/headers.hpp
+    ./shared/include/ClientInfo.hpp
     )
 
 set(SRCS2
     ./client/src/main.cpp
     ./client/src/tcp.cpp
     ./client/src/udp.cpp
+    ./shared/src/ClientInfo.cpp
     )
     
 set(HEADERS2
     ./client/include/client.hpp
-    ./include/headers.hpp
+    ./shared/include/headers.hpp
+    ./shared/include/ClientInfo.hpp
     )
 # set(SRCS3
 #     #Game
