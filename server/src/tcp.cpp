@@ -26,16 +26,14 @@ std::mutex mutex;
  * @details It creates two struct one if it is a position and another one if it is a message.
  * @details Depending of the data type it will print the data.
 */
-void receive_tcp_server(Header header, tcp::socket &socket) {
-  if (header.data_type == POSITION) {
-    Position position;
-    socket.receive(asio::buffer(&position, sizeof(Position)));
-    std::cout << "Received from client " << header.id << ": " << position.x << " " << position.y << std::endl;
-  } else {
+void receive_tcp_server(Header_client header, tcp::socket &socket) {
+  if (header.data_type == MESSAGES) {
     Messages message;
     socket.receive(asio::buffer(&message, sizeof(Messages)));
     std::cout << "Received from client " << header.id << ": " << message.size << " ";
     std::cout.write(message.message, message.size) << std::endl;
+  } else {
+    std::cout << "Wrong data type" << std::endl;
   }
 }
 
@@ -51,23 +49,14 @@ void receive_tcp_server(Header header, tcp::socket &socket) {
  * @details It will send the header and the struct to the client.
  * @details If the message contains a comma it will be a position and if not, it will be a message.
 */
-void send_tcp_server(Header header, tcp::socket &socket, std::string message) {
+void send_tcp_server(Header_server header, tcp::socket &socket, std::string message) {
   header.id = 1;
-  if (std::find(message.begin(), message.end(), ',') != message.end()) { //  If the input contains a comma, it's a position
-      header.data_type = POSITION;
-      Position position_to_send;
-      position_to_send.x = std::stoi(message.substr(0, message.find(',')));
-      position_to_send.y = std::stoi(message.substr(message.find(',') + 1, message.size()));
-      socket.send(asio::buffer(&header, sizeof(header)));
-      socket.send(asio::buffer(&position_to_send, sizeof(position_to_send)));
-  } else { // If the input doesn't contain a comma, it's a message
-      header.data_type = MESSAGE;
-      Messages message_to_send;
-      message_to_send.size = message.size();
-      std::memcpy(&message_to_send.message, message.c_str(), message.size());
-      socket.send(asio::buffer(&header, sizeof(header)));
-      socket.send(asio::buffer(&message_to_send, sizeof(message_to_send)));
-  }
+  header.data_type = MESSAGESS;
+  Messages message_to_send;
+  message_to_send.size = message.size();
+  std::memcpy(&message_to_send.message, message.c_str(), message.size());
+  socket.send(asio::buffer(&header, sizeof(header)));
+  socket.send(asio::buffer(&message_to_send, sizeof(message_to_send)));
 }
 
 /**
@@ -91,17 +80,17 @@ void handle_client(std::shared_ptr<tcp::socket> socket, Server& server_data)
 
   // Loop to receive and send data
   while (true) {
-    Header header;
+    Header_client header;
     std::memset(&header, 0, sizeof(header));
-    size_t len = socket->read_some(asio::buffer(&header, sizeof(Header)));
+    size_t len = socket->read_some(asio::buffer(&header, sizeof(Header_client)));
     receive_tcp_server(header, *socket);
-
     std::cout << "Enter message to send: ";
     std::string message;
     std::getline(std::cin, message);
     std::memset(&header, 0, sizeof(header));
-    header.id = 1;
-    send_tcp_server(header, *socket, message);
+    Header_server header_server;
+    header_server.id = 1;
+    send_tcp_server(header_server, *socket, message);
   }
 }
 
