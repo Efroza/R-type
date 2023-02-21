@@ -14,7 +14,9 @@
 #include "position.hpp"
 #include "rect.hpp"
 #include "interaction.hpp"
+#include "interactive.hpp"
 #include "animation.hpp"
+#include "collusion.hpp"
 
 //system
 void draw_system(registry &reg, sparse_array<component::draw> &draw, sparse_array<component::image> &image);
@@ -23,7 +25,7 @@ void animation_system(registry &reg
 ,sparse_array<component::image> &images, sparse_array<component::rect> &rects, sparse_array<component::animation> &animations);
 void interaction_system(registry &reg, sparse_array<component::interaction> &interactions);
 void set_rect_system(registry &reg, sparse_array<component::image> &images, sparse_array<component::rect> &rect);
-
+void collusion_system(registry &reg, sparse_array<component::collusion> &collusion, sparse_array<component::image> &image);
 //
 
 // load ECS
