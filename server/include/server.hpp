@@ -52,8 +52,19 @@ class Server {
             }
         }
 
-private:
-    std::map<uint16_t, ClientInfo*> client_info_map;
+        void new_client(uint16_t client_id) {
+            Header_server header;
+            header.data_type = NEW_CLIENT;
+            header.id = client_id;
+            for (const auto& iter : client_info_map) {
+                if (iter.first != client_id) {
+                    asio::write(*(iter.second->get_socket()), asio::buffer(&header, sizeof(Header_server)));
+                }
+            }
+        }
+
+    private:
+        std::map<uint16_t, ClientInfo*> client_info_map;
 };
 
 #endif /* !SERVER_HPP_ */

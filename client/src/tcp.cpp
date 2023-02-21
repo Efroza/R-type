@@ -26,6 +26,8 @@ void receive_tcp_client(Header_server header, tcp::socket &socket) {
         socket.receive(asio::buffer(&message, sizeof(Messages)));
         std::cout << "Received from server " << header.id << ": " << message.size << " ";
         std::cout.write(message.message, message.size) << std::endl;
+    } else if (header.data_type == NEW_CLIENT) {
+        std::cout << "New client connected with id : " << header.id << std::endl;
     } else {
         std::cout << "Wrong data type" << std::endl;
     }

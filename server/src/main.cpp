@@ -5,7 +5,7 @@
 ** main
 */
 
-#include "../include/server.hpp"
+#include "../include/Server.hpp"
 
 /**
  * @file main.cpp

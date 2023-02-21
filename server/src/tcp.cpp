@@ -5,7 +5,7 @@
 ** tcp
 */
 
-#include "../include/server.hpp"
+#include "../include/Server.hpp"
 #include <mutex>
 
 using asio::io_context;
@@ -77,6 +77,7 @@ void handle_client(std::shared_ptr<tcp::socket> socket, Server& server_data)
   uint16_t client_id = server_data.get_nb_clients() + 1;
   server_data.add_client(server_data.get_nb_clients() + 1, socket);
   server_data.print_all_clients();
+  server_data.new_client(client_id);
 
   // Loop to receive and send data
   while (true) {
