@@ -5,15 +5,16 @@
 ** sparse_array
 */
 
-#include <vector>
+
+#ifndef SPARSE_ARRAY_HPP_
+#define SPARSE_ARRAY_HPP_
+
 #include <optional>
 #include <cinttypes>
 #include <iterator>
 #include <algorithm>
 #include <memory>
-
-#ifndef SPARSE_ARRAY_HPP_
-#define SPARSE_ARRAY_HPP_
+#include <vector>
 
 template <typename Component> // You can also mirror the definition of std :: vector ,
 // that takes an additional allocator.
@@ -83,6 +84,12 @@ public:
     size_type size() const
     {
         return _data.size();
+    }
+    bool exist(size_type pos) const
+    {
+        if (_data.at(pos))
+            return true;
+        return false;
     }
     // a coder
     reference_type insert_at(size_type pos, Component const &entity)

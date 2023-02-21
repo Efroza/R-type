@@ -1,7 +1,7 @@
 #include "registry.hpp"
 #include "position.hpp"
 
-void right_deplacement(entity_t e, registry &reg)
+void right_deplacement(entity_t &e, registry &reg)
 {
     sparse_array<component::position> &all_pos = reg.get_components<component::position>();
     auto &maybe_pos = all_pos[e];

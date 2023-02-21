@@ -1,0 +1,8 @@
+config_json:
+  - ./Config/other.json
+  - ./Config/spaceship.json
+
+config_interaction:
+  - ./Interaction/up_deplacement.so
+
+# get_yaml("config_json") -> std::vector<std::string>
