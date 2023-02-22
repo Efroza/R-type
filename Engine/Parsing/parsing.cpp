@@ -33,6 +33,8 @@ parsing::parsing(registry &registre, data &daatabase, std::vector<std::string> c
 : reg(&registre)
 , db(&daatabase)
 , json_files(config_files)
+, data_interaction(nullptr)
+, cs_data(nullptr)
 {
 }
 
@@ -63,9 +65,13 @@ void parsing::config_file(Parsor &pars)
     }
 }
 
-void parsing::handle_config_files(handling_interaction &data_interactions)
+void parsing::handle_config_files(handling_interaction &data_interactions, handling_component_system &cs_library)
 {
     data_interaction = &data_interactions;
+    cs_data = &cs_library;
+
+    cs_library.load_all_component(*reg);
+    cs_library.load_all_system(*reg);
     if (reg == nullptr || db == nullptr)
         return;
     for (auto &file : json_files) {
@@ -79,6 +85,38 @@ void parsing::handle_config_files(handling_interaction &data_interactions)
 
 }
 
+void parsing::handle_component_system_json(std::string const &name, Json::Value &entitie, entity_t &e, IComponentSystem *cs_value)
+{
+    if (cs_value == nullptr)
+        return;
+    IParseComponent *parse_component = dynamic_cast<IParseComponent *>(cs_value);
+    if (parse_component == nullptr)
+        return;
+    if (parse_component->number_arguments_needed() != 0 && arguments_is_set(parse_component, entitie[name], *reg, *db)) {
+        parse_component->load_component(e, *reg, *db, entitie[name]);
+        std::cerr << name << std::endl;
+        return;
+    }
+    if (entitie[name].isBool() && entitie[name].asBool() == false)
+        return;
+    parse_component->load_component(e, *reg, *db, entitie[name]);
+}
+
+void parsing::handle_component_system(std::string const &name, Json::Value &entitie, entity_t &e)
+{
+    if (cs_data == nullptr)
+        return;
+    if (cs_data->name_in_lib(name) == false)
+        return;
+    IComponentSystem *cs_value = cs_data->get_component_system(name);
+    if (cs_value == nullptr)
+        return;
+    cs_value->add_entity_component(*reg, e);
+    IParseComponent *parse_component = dynamic_cast<IParseComponent *>(cs_value);
+    handle_component_system_json(name, entitie, e, cs_value);
+    return;
+}
+
 void parsing::handle_entites(Json::Value &entitie)
 {
     if (reg == nullptr || db == nullptr || data_interaction == nullptr)
@@ -87,8 +125,10 @@ void parsing::handle_entites(Json::Value &entitie)
 
     for (auto &name : entitie.getMemberNames())
     {
-        if (map.find(name) == map.end())
+        if (map.find(name) == map.end()) {
+            handle_component_system(name, entitie, entity);
             continue;
+        }
         std::unique_ptr<IParseComponent> component(map.at(name)());
         AParseInteraction *interaction = dynamic_cast<AParseInteraction *>(component.get());
         if (interaction)

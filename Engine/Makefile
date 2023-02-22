@@ -32,7 +32,8 @@ SRCS	=	Game/main.cpp	\
 	ParseComponent/parse_interaction.cpp	\
 	Parsing/parsing.cpp	\
 	Parsing/handling_interaction.cpp	\
-	Parsing/Yaml.cpp
+	Parsing/Yaml.cpp	\
+	Parsing/handling_component_system.cpp	\
 
 
 CC	= 	g++ -o

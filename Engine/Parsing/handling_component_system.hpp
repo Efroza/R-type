@@ -18,7 +18,7 @@ class handling_component_system
         handling_component_system(std::vector<std::string> const &libs_name);
         ~handling_component_system();
         void add_lib_component_system(std::string const &pathlib);
-        IComponentSystem const *get_component_system(std::string const &key) const noexcept;
+        IComponentSystem *get_component_system(std::string const &key) noexcept;
         bool name_in_lib(std::string const &name) const noexcept;
         void load_all_system(registry &reg) const noexcept;
         void load_all_component(registry &reg) const noexcept;

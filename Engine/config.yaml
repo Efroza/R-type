@@ -8,4 +8,6 @@ config_interaction:
   - ./Interaction/left_deplacement.so
   - ./Interaction/right_deplacement.so
 
+config_component_system:
+  - ./ComponentSystem/print.so
 # get_yaml("config_json") -> std::vector<std::string>

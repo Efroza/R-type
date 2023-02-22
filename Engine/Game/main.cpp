@@ -22,8 +22,6 @@
 #include "handling_interaction.hpp"
 #include "Yaml.hpp"
 
-void handle_config_files(std::vector<std::string> const &files, registry &reg, data &db, handling_interaction &interaction);
-
 void create_spaceShip(registry &reg, data &db)
 {
     entity_t spaceship = reg.spawn_entity();
@@ -55,9 +53,10 @@ void game(registry &reg, data &db, Yaml &yaml)
     load_component(reg);
     std::vector<std::string> config = yaml.get("config_json");
     std::vector<std::string> interaction_config = yaml.get("config_interaction");
+    handling_component_system cs_lib = yaml.get("config_component_system");
     handling_interaction interaction(interaction_config);
     parsing handling_parse(reg, db, config);
-    handling_parse.handle_config_files(interaction);
+    handling_parse.handle_config_files(interaction, cs_lib);
     while (window.isOpen())
     {
         window.clear(sf::Color::Black);
