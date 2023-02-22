@@ -8,10 +8,13 @@
 #include "handling_component_system.hpp"
 #include <dlfcn.h>
 
-using Component_System = Component_System *(*)();
+using Component_System = IComponentSystem *(*)();
 
 handling_component_system::handling_component_system(std::vector<std::string> const &libs_name)
 {
+    for (auto &lib_path : libs_name) {
+        add_lib_component_system(lib_path);
+    }
 }
 
 handling_component_system::~handling_component_system()
@@ -27,7 +30,7 @@ void handling_component_system::add_lib_component_system(std::string const &lib_
     Component_System create = (Component_System)dlsym(handle, "createComponentSystem");
     if (create == nullptr)
         throw std::runtime_error("no function createComponentSystem \n");
-    Component_System *cs_data = create();
+    IComponentSystem *cs_data = create();
     if (cs_data == nullptr)
         throw std::runtime_error("invalid createComponentSystem return invalid pointer\n");
     cs_array.emplace_back(cs_data);
@@ -55,11 +58,11 @@ void handling_component_system::load_all_component(registry &reg) const noexcept
             cs_data->laod_component(reg);
 }
 
-IComponentSystem const *handling_component_system::get_component_system(std::string const &key) const noexcept
+IComponentSystem *handling_component_system::get_component_system(std::string const &key) noexcept
 {
     for (auto &cs_data : cs_array) {
         if (cs_data && cs_data->get_name() == key)
-            cs_data.get();
+            return cs_data.get();
     }
     return nullptr;
 }
