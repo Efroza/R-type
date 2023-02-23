@@ -57,13 +57,16 @@ void game(registry &reg, data &db, Yaml &yaml)
     handling_interaction interaction(interaction_config);
     parsing handling_parse(reg, db, config);
     handling_parse.handle_config_files(interaction, cs_lib);
-    while (window.isOpen())
-    {
-        window.clear(sf::Color::Black);
-        usleep(2000);
+    window.close();
+    while (true)
         reg.run_systems();
-        window.display();
-    }
+    // while (window.isOpen())
+    // {
+    //     window.clear(sf::Color::Black);
+    //     usleep(2000);
+    //     reg.run_systems();
+    //     window.display();
+    // }
 }
 
 void init_databases(data &db)

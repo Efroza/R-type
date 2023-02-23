@@ -23,6 +23,6 @@ void animation_system(registry &reg
         rects[i].value().animation();
         sf::IntRect &rect = rects[i].value().getRect();
         animations[i].value().time = animations[i].value().origin_time;
-        images[i].value().get_sprite().setTextureRect(rect);
+        // images[i].value().get_sprite().setTextureRect(rect);
     }
 }

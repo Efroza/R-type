@@ -15,6 +15,7 @@ void draw_system(registry &reg, sparse_array<component::draw> &draw, sparse_arra
 
     for (size_t i = 0; i < draw.size() && i < image.size(); ++i) {
         if (draw[i] && image[i])
-            window.draw(image[i].value().get_sprite());
+            continue;
+            // window.draw(image[i].value().get_sprite());
     }
 }

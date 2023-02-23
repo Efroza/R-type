@@ -7,44 +7,55 @@
 
 #include "image.hpp"
 
-component::image::image(const std::string &file, data &db, entity_t const &e) : db(&db), id(e._id)
+component::image::image(const std::string &file, data &db, entity_t const &e)
+: name_file(file)
+, db(&db)
+, id(e._id)
 {
-    load_texture(file);
-    sf::Texture &texture = db.get_data<sf::Texture>(id);
-    sprite.setTexture(texture);
+    // load_texture(file);
+    // sf::Texture &texture = db.get_data<sf::Texture>(id);
+    // sprite.setTexture(texture);
 }
 
-component::image::image(const std::string &file, data &db) : db(&db), id(db.new_id<sf::Texture>())
+component::image::image(const std::string &file, data &db)
+: name_file(file)
+, db(&db)
+, id(db.new_id<sf::Texture>())
 {
-    load_texture(file);
-    sf::Texture &texture = db.get_data<sf::Texture>(id);
-    sprite.setTexture(texture);
-}
-
-component::image::image(component::image const &copy)
-: db(copy.db), id(copy.id), sprite(copy.sprite)
-{
+    // load_texture(file);
+    // sf::Texture &texture = db.get_data<sf::Texture>(id);
+    // sprite.setTexture(texture);
 }
 
 component::image::~image()
 {
 }
 
-void component::image::load_texture(const std::string &file)
+std::string const &component::image::get_name_file() const noexcept
 {
-    sf::Texture texture;
-    if (!texture.loadFromFile(file))
-        throw std::runtime_error("error load file " + file + " into texture");
-    texture.setSmooth(true);
-    db->insert_data<sf::Texture>(std::move(texture), id);
+    return name_file;
 }
 
-sf::Sprite &component::image::get_sprite()
+data *component::image::get_databases() noexcept
 {
-    return sprite;
+    return this->db;
 }
 
-sf::Texture &component::image::get_texture() const noexcept
-{
-    return db->get_data<sf::Texture>(id);
-}
+// void component::image::load_texture(const std::string &file)
+// {
+//     sf::Texture texture;
+//     if (!texture.loadFromFile(file))
+//         throw std::runtime_error("error load file " + file + " into texture");
+//     texture.setSmooth(true);
+//     db->insert_data<sf::Texture>(std::move(texture), id);
+// }
+
+// sf::Sprite &component::image::get_sprite()
+// {
+//     return sprite;
+// }
+
+// sf::Texture &component::image::get_texture() const noexcept
+// {
+//     return db->get_data<sf::Texture>(id);
+// }

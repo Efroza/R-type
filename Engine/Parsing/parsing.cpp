@@ -23,7 +23,7 @@
 static std::unordered_map<std::string, std::function<IParseComponent *()>> const map = {
     {"position", [](){return new parse_component::position();}},
     {"image", [](){return new parse_component::image();}},
-    {"draw", [](){return new parse_component::draw();}},
+    // {"draw", [](){return new parse_component::draw();}},
     {"rect", [](){return new parse_component::rect();}},
     {"animation", [](){return new parse_component::animation();}},
     {"interaction", [](){return new parse_component::interaction();}}

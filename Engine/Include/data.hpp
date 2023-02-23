@@ -87,6 +87,14 @@ public:
         std::advance(elem, id);
         data.insert(elem, std::forward<Type>(new_data));
     }
+    template <typename Type>
+    bool data_exist(size_t id)
+    {
+        if (type_exist<Type>() == false)
+            return false;
+        std::list<Type> &all_data = get_data<Type>();
+        return all_data.size() > id;
+    }
 
 private:
     std::unordered_map<std::type_index, std::any> db;

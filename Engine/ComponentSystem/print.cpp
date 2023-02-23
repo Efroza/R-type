@@ -7,6 +7,7 @@
 
 #include "print.hpp"
 #include "IComponentSystem.hpp"
+#include "rect.hpp"
 
 componentSystem::print::print()
 : name("print")
@@ -22,7 +23,7 @@ extern "C" IComponentSystem *createComponentSystem()
     return new componentSystem::print;
 }
 
-void system_print(registry &reg, sparse_array<component::print> &prints)
+void system_print(registry &reg, sparse_array<component::rect> &position, sparse_array<component::print> &prints)
 {
     for (size_t i = 0; i < prints.size(); ++i) {
         if (prints[i])
@@ -37,7 +38,7 @@ std::string componentSystem::print::get_name() const noexcept
 
 void componentSystem::print::load_system(registry &reg) const noexcept
 {
-    reg.add_system<component::print>(system_print);
+    reg.add_system<component::rect, component::print>(system_print);
 }
 
 void componentSystem::print::laod_component(registry &reg) const noexcept

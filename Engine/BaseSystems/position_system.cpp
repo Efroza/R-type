@@ -15,5 +15,6 @@ void position_system(registry &reg, sparse_array<component::position> &position,
 
     for (size_t i = 0; i < position.size() && i < image.size(); ++i)
         if (position[i] && image[i])
-            image[i].value().get_sprite().setPosition(position[i].value().pos);
+            continue;
+            // image[i].value().get_sprite().setPosition(position[i].value().pos);
 }

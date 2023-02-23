@@ -63,7 +63,7 @@ void handling_interaction::add_lib_interaction(std::string const &lib_path)
     void *handle = dlopen(lib_path.c_str(), RTLD_LAZY);
 
     if (handle == nullptr)
-        throw std::runtime_error("error cannot open file\n");
+        throw std::runtime_error("error cannot open file: " + lib_path + "\n");
     function_interaction create = (function_interaction)dlsym(handle, "createInteraction");
     if (create == nullptr)
         throw std::runtime_error("no function createInteraction \n");

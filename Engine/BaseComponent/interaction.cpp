@@ -39,3 +39,18 @@ void component::interaction::delete_interaction(std::uint8_t type)
         throw std::runtime_error("error type is not in the list of interaction");
     _handling.erase(type);
 }
+
+void component::interaction::set_typing(std::uint8_t type) noexcept
+{
+    typing.emplace_back(type);
+}
+
+std::vector<std::uint8_t> const &component::interaction::get_typing() const noexcept
+{
+    return typing;
+}
+
+void component::interaction::empty_typing() noexcept
+{
+    typing.resize(0);
+}
