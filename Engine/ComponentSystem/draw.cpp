@@ -8,6 +8,7 @@
 #include "draw.hpp"
 #include "image.hpp"
 #include "position.hpp"
+#include "interaction.hpp"
 #include <SFML/Graphics.hpp>
 
 componentSystem::draw::draw()
@@ -47,12 +48,17 @@ static void create_sprite(std::uint8_t id, data *db, component::image &image, co
     std::cout << "texture added: " << image.name_file << std::endl;
 }
 
-static void handle_event(sf::Event &event, sf::RenderWindow &window)
+static void handle_event(sf::Event &event, sf::RenderWindow &window, sparse_array<component::interaction> &interactions)
 {
     while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed) {
             window.close();
             return;
+        }
+        if (event.type == sf::Event::KeyPressed) {
+            for (std::uint8_t i = 0; i < interactions.size(); ++i)
+                if (interactions[i])
+                    interactions[i].value().typing.push_back(event.key.code);
         }
     }
 }
@@ -60,7 +66,8 @@ static void handle_event(sf::Event &event, sf::RenderWindow &window)
 void draw_system(registry &reg
 , sparse_array<component::image> &images
 , sparse_array<component::position> &positions
-, sparse_array<component::draw> &draw)
+, sparse_array<component::draw> &draw
+, sparse_array<component::interaction> &interactions)
 {
     if (draw.size() == 0)
         return;
@@ -73,7 +80,7 @@ void draw_system(registry &reg
         return;
     }
     window.clear(sf::Color::Black);
-    handle_event(event, window);
+    handle_event(event, window, interactions);
     for (std::uint32_t i = 0; i < images.size() && i < positions.size() && i < draw.size(); ++i) {
         if (!images[i] || !positions[i] || !draw[i])
             continue;
@@ -106,7 +113,7 @@ void componentSystem::draw::laod_component(registry &reg) const noexcept
 
 void componentSystem::draw::load_system(registry &reg) const noexcept
 {
-    reg.add_system<component::image, component::position, component::draw>(draw_system);
+    reg.add_system<component::image, component::position, component::draw, component::interaction>(draw_system);
 }
 
 void componentSystem::draw::add_entity_component(registry &reg, entity_t &e) const noexcept

@@ -32,6 +32,7 @@ namespace component {
 
         private:
             std::unordered_map<std::uint8_t, interaction_function> _handling;
+        public:
             std::vector<std::uint8_t> typing;
     };
 }
