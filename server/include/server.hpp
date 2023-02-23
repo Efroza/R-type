@@ -20,48 +20,17 @@ void launch_udp_server();
 
 class Server {
     public:
-        Server() {}
-        ~Server() {}
+        Server();
+        ~Server();
 
-        void add_client(uint16_t id, std::shared_ptr<asio::ip::tcp::socket> socket) {
-            client_info_map.insert(std::make_pair(id, new ClientInfo(id, socket)));
-            // client_info_map[client_id] = ClientInfo(client_id);
-        }
 
-        ClientInfo* get_client_info(uint16_t client_id) const {
-            auto iter = client_info_map.find(client_id);
-            if (iter != client_info_map.end()) {
-                return iter->second;
-            } else {
-                // Handle the case when the client ID is not found
-                return NULL;
-            }
-        }
-
-        void remove_client(uint16_t client_id) {
-            client_info_map.erase(client_id);
-        }
-
-        uint16_t get_nb_clients() const {
-            return client_info_map.size();
-        }
-    
-        void print_all_clients() const {
-            for (const auto& iter : client_info_map) {
-                iter.second->print_info_clients();
-            }
-        }
-
-        void new_client(uint16_t client_id) {
-            Header_server header;
-            header.data_type = NEW_CLIENT;
-            header.id = client_id;
-            for (const auto& iter : client_info_map) {
-                if (iter.first != client_id) {
-                    asio::write(*(iter.second->get_socket()), asio::buffer(&header, sizeof(Header_server)));
-                }
-            }
-        }
+        // Handle list of clients
+        void add_client(uint16_t id, std::shared_ptr<asio::ip::tcp::socket> socket);
+        ClientInfo* get_client_info(uint16_t client_id) const;
+        void remove_client(uint16_t client_id);
+        uint16_t get_nb_clients() const;
+        void print_all_clients() const;
+        void new_client(uint16_t client_id);
 
     private:
         std::map<uint16_t, ClientInfo*> client_info_map;

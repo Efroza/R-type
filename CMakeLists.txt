@@ -50,6 +50,7 @@ set(SRCS1
     ./server/src/tcp.cpp
     ./server/src/udp.cpp
     ./shared/src/ClientInfo.cpp
+    ./server/src/Server.cpp
     )
 
 set(HEADERS1
