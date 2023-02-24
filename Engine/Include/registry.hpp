@@ -15,12 +15,11 @@
 
 #include "sparse_array.hpp"
 #include "entity.hpp"
-#include <SFML/Graphics.hpp>
 
 class registry
 {
     public:
-        registry(sf::VideoMode videomode, const sf::String &title) : window(videomode, title)
+        registry()
         {
         }
         template <class Component>
@@ -133,13 +132,7 @@ class registry
             }
         }
 
-        sf::RenderWindow &get_window()
-        {
-            return window;
-        }
-
     private:
-        sf::RenderWindow window;
         std::unordered_map<std::type_index, std::any> _components_arrays;
         std::vector<entity_t> _entity_container;
         std::vector<std::uint32_t> _kill;

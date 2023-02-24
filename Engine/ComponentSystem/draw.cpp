@@ -9,6 +9,7 @@
 #include "image.hpp"
 #include "position.hpp"
 #include "interaction.hpp"
+#include "rect.hpp"
 #include <SFML/Graphics.hpp>
 
 componentSystem::draw::draw()
@@ -56,9 +57,9 @@ static void handle_event(sf::Event &event, sf::RenderWindow &window, sparse_arra
             return;
         }
         if (event.type == sf::Event::KeyPressed) {
-            for (std::uint8_t i = 0; i < interactions.size(); ++i)
+            for (size_t i = 0; i < interactions.size(); ++i)
                 if (interactions[i])
-                    interactions[i].value().typing.push_back(event.key.code);
+                    interactions[i].value().typing.emplace_back(event.key.code);
         }
     }
 }
@@ -66,12 +67,12 @@ static void handle_event(sf::Event &event, sf::RenderWindow &window, sparse_arra
 void draw_system(registry &reg
 , sparse_array<component::image> &images
 , sparse_array<component::position> &positions
-, sparse_array<component::draw> &draw
-, sparse_array<component::interaction> &interactions)
+, sparse_array<component::draw> &draw)
 {
     if (draw.size() == 0)
         return;
     static sf::RenderWindow window(sf::VideoMode(800, 600), "Rtype");
+    sparse_array<component::interaction> &interactions = reg.get_components<component::interaction>();
     data *db = nullptr;
     sf::Event event;
 
@@ -101,6 +102,65 @@ void draw_system(registry &reg
     }
 }
 
+static void create_rect(std::uint32_t id, data *db, component::rect &rect)
+{
+    if (db == nullptr || db->data_exist<sf::Texture>(id) == false)
+        return;
+    sf::Texture &texture = db->get_data<sf::Texture>(id);
+    sf::IntRect rect_sfml;
+    rect.set_size(texture.getSize().x, texture.getSize().y);
+    rect.update();
+    rect_sfml.top = rect.top;
+    rect_sfml.left = rect.left;
+    rect_sfml.width = rect.width;
+    rect_sfml.height = rect.height;
+    if (db->type_exist<sf::IntRect>() == false)
+        db->add_list_data<sf::IntRect>();
+    db->insert_data<sf::IntRect>(std::move(rect_sfml), id);
+}
+
+static void update_rect(std::uint32_t id, data *db, component::rect &rect)
+{
+    if (db == nullptr || db->data_exist<sf::IntRect>(id) == false)
+        return;
+    sf::IntRect &rect_sfml = db->get_data<sf::IntRect>(id);
+    rect_sfml.top = rect.top;
+    rect_sfml.left = rect.left;
+    rect_sfml.width = rect.width;
+    rect_sfml.height = rect.height;
+}
+
+static void load_rect(std::uint32_t id, data *db, component::rect &rect)
+{
+    if (db == nullptr || db->data_exist<sf::Sprite>(id) == false || db->data_exist<sf::IntRect>(id) == false)
+        return;
+    sf::Sprite &sprite = db->get_data<sf::Sprite>(id);
+    sf::IntRect &rect_sfml = db->get_data<sf::IntRect>(id);
+    sprite.setTextureRect(rect_sfml);
+}
+
+void draw_rect_system(registry &reg
+, sparse_array<component::rect> &rects
+, sparse_array<component::image> &images
+, sparse_array<component::draw> &draw)
+{
+    data *db = nullptr;
+
+    for (std::uint32_t i = 0; i < images.size() && i < rects.size() && i < draw.size(); ++i) {
+        if (!images[i] || !rects[i] || !draw[i])
+            continue;
+        db = images[i].value().db;
+        try {
+            if (db->data_exist<sf::IntRect>(i) == false)
+                create_rect(i, db, rects[i].value());
+            update_rect(i, db, rects[i].value());
+            load_rect(i, db, rects[i].value());
+        } catch (std::exception const &e) {
+            std::cout << e.what() << std::endl;
+        }
+    }
+}
+
 std::string componentSystem::draw::get_name() const noexcept
 {
     return "draw";
@@ -113,7 +173,8 @@ void componentSystem::draw::laod_component(registry &reg) const noexcept
 
 void componentSystem::draw::load_system(registry &reg) const noexcept
 {
-    reg.add_system<component::image, component::position, component::draw, component::interaction>(draw_system);
+    reg.add_system<component::image, component::position, component::draw>(draw_system);
+    reg.add_system<component::rect, component::image, component::draw>(draw_rect_system);
 }
 
 void componentSystem::draw::add_entity_component(registry &reg, entity_t &e) const noexcept

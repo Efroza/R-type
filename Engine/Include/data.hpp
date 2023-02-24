@@ -73,7 +73,9 @@ public:
 
         if (data.size() <= id)
             data.resize(id + 1);
-        data[id] = std::forward<Type>(new_data);
+        auto elem = data.begin();
+        std::advance(elem, id);
+        data.insert(elem, std::forward<Type>(new_data));
     }
     template <typename Type>
     void insert_data(Type &&new_data, size_t id)

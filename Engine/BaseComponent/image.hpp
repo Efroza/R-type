@@ -25,9 +25,7 @@ namespace component
             data *get_databases() noexcept;
 
         private:
-            // void load_texture(const std::string &file);
         public:
-            // sf::Sprite sprite;
             std::string name_file;
             data *db;
             size_t id;
