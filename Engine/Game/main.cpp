@@ -66,6 +66,7 @@ int main(int ac, char **av)
 {
     if (ac != 2)
         return 84;
+
     try {
         data db;
         Yaml yaml(av[1]);
