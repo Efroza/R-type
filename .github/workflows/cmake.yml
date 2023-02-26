@@ -24,11 +24,7 @@ jobs:
 
     - name: Remove grub-efi-amd64-signed error
       run: |
-        sudo apt-get purge grub\*
-        sudo apt-get install -y grub-efi
-        sudo apt-get autoremove
-        sudo apt-get upgrade -y
-        sudo update-grub
+        sudo apt --only-upgrade install -y grub-efi-amd64-signed
 
     - name: Dependencies
       run: |
