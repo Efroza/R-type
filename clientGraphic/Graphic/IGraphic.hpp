@@ -1,8 +1,15 @@
+/*
+** EPITECH PROJECT, 2023
+** B-CPP-500-PAR-5-2-rtype-luc1.schmitt
+** File description:
+** IGraphic
+*/
+
 #ifndef IGRAPHIC_HPP
 #define IGRAPHIC_HPP
 
 #include <memory>
-#include "../BaseComponent/Drawable/Drawable.hpp"
+#include "../Drawable/Drawable.hpp"
 #include "events.hpp"
 
 class IGraphic

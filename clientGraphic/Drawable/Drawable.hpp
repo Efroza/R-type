@@ -1,3 +1,13 @@
+/*
+** EPITECH PROJECT, 2023
+** B-CPP-500-PAR-5-2-rtype-luc1.schmitt
+** File description:
+** Drawable
+*/
+
+
+
+
 #ifndef DRAWABLE_HPP
 #define DRAWABLE_HPP
 
@@ -7,7 +17,7 @@
 class Drawable
 {
 public:
-    Drawable(const std::string &str, const std::pair<int, int> &rect, bool isText);
+    Drawable(const std::string &str, const std::pair<int, int> &rect, bool isText = false);
     ~Drawable();
 
     const std::string &getStr() const;

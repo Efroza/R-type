@@ -1,3 +1,11 @@
+/*
+** EPITECH PROJECT, 2023
+** B-CPP-500-PAR-5-2-rtype-luc1.schmitt
+** File description:
+** SFML
+*/
+
+
 #include <iostream>
 #include <stdexcept>
 #include "SFML.hpp"
@@ -61,7 +69,9 @@ void SFML::draw(std::shared_ptr<Drawable> image, const std::pair<int, int> &posi
 {
     if (_db.find(image->getStr()) == _db.end()) {
         try {
+            std::cout << "try to load: " << image->getStr() << std::endl;
             this->load(image);
+            std::cout << "load succed: " << image->getStr() << std::endl;
         } catch(const std::exception& e) {
             std::cerr << e.what() << '\n';
         }
@@ -89,10 +99,12 @@ void SFML::load(std::shared_ptr<Drawable> image)
         newObject.text->setCharacterSize(image->getRect().first);
         newObject.sprite = nullptr;
     } else {
+        newObject.sprite = std::make_unique<sf::Sprite>();
         if (newObject.texture.loadFromFile(image->getStr())) {
             newObject.sprite->setTexture(newObject.texture, true);
             newObject.rect = {0, 0, image->getRect().first, image->getRect().second};
             newObject.sprite->setTextureRect(newObject.rect);
+            newObject.sprite->setScale(0.2, 0.2);
         } else {
             throw std::runtime_error("failed to load texture from: " + image->getStr());
         }

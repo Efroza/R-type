@@ -1,3 +1,11 @@
+/*
+** EPITECH PROJECT, 2023
+** B-CPP-500-PAR-5-2-rtype-luc1.schmitt
+** File description:
+** SFML
+*/
+
+
 #ifndef SFML_HPP
 #define SFML_HPP
 
@@ -29,7 +37,7 @@ public:
     void refreshWindow() final;
     void draw(std::shared_ptr<Drawable> image, const std::pair<int, int> &position) final;
     events_e pollEvent() final;
-    
+
 private:
     void load(std::shared_ptr<Drawable> image);
 
