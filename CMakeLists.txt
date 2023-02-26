@@ -66,6 +66,16 @@ set(HEADERS2
     ./client/include/client.hpp
     ./include/headers.hpp
     )
+
+set(GRAPHC_FILES
+    ./clientGraphic/main.cpp
+    ./clientGraphic/Core.cpp
+    ./clientGraphic/Core.hpp
+    ./clientGraphic/Graphic/IGraphic.hpp
+    ./clientGraphic/Drawable/Drawable.hpp
+    ./clientGraphic/Drawable/Drawable.cpp
+)
+  
 # set(SRCS3
 #     #Game
 #     ./Engine/Game/main.cpp
@@ -99,6 +109,10 @@ set(HEADERS2
 #     )
 
 message("${Green} Building ${PROJECT_NAME}${ColorReset}")
+include(clientGraphic/Graphic/SFML/SFML_lib.cmake)
+add_executable(${PROJECT_NAME}_client_graphic ${GRAPHC_FILES})
+target_include_directories(${PROJECT_NAME}_client_graphic PRIVATE clientGraphic/Graphic)
+target_link_libraries(${PROJECT_NAME}_client_graphic ${CMAKE_DL_LIBS})
 add_executable(${PROJECT_NAME}_server ${SRCS1} ${HEADERS1})
 add_executable(${PROJECT_NAME}_client ${SRCS2} ${HEADERS2})
 target_link_libraries(${PROJECT_NAME}_server ${CONAN_LIBS})

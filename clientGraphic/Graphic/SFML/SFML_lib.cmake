@@ -1,8 +1,11 @@
 add_library(SFML SHARED
-Engine/Graphic/SFML/SFML.hpp
-Engine/Graphic/SFML/SFML.cpp
-Engine/Graphic/IGraphic.hpp
-Engine/Graphic/AGraphic.hpp
-Engine/Graphic/AGraphic.cpp
+clientGraphic/Graphic/SFML/SFML.hpp
+clientGraphic/Graphic/SFML/SFML.cpp
+clientGraphic/Graphic/IGraphic.hpp
+clientGraphic/Graphic/AGraphic.hpp
+clientGraphic/Graphic/AGraphic.cpp
+
+clientGraphic/Drawable/Drawable.hpp
+clientGraphic/Drawable/Drawable.cpp
 )
-# conan_target_link_libraries(SFML_lib ${CONAN_LIBS})
+conan_target_link_libraries(SFML ${CONAN_LIBS})
