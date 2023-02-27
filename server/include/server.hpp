@@ -14,9 +14,7 @@
 
 #include "../../shared/include/headers.hpp"
 #include "../../shared/include/ClientInfo.hpp"
-
-void launch_tcp_server();
-void launch_udp_server();
+#include <fstream>
 
 class Server {
     public:
@@ -34,6 +32,37 @@ class Server {
 
     private:
         std::map<uint16_t, ClientInfo*> client_info_map;
+};
+
+class TCP_Server {
+    public:
+        TCP_Server();
+        ~TCP_Server();
+
+        void launch_tcp_server();
+        void handle_client(std::shared_ptr<asio::ip::tcp::socket> socket, Server& server_data);
+        void send_tcp_server(Header_server header, asio::ip::tcp::socket &socket, std::string message);
+        void receive_tcp_server(Header_client header, asio::ip::tcp::socket &socket);
+
+    private:
+        Server server_data;
+        std::thread start;
+};
+
+class UDP_Server {
+    public:
+        UDP_Server();
+        ~UDP_Server();
+
+        void launch_udp_server();
+        void send_thread(asio::ip::udp::socket& socket, asio::ip::udp::endpoint& remote, std::vector<asio::ip::udp::endpoint>& endpoints);
+        void send_message(asio::ip::udp::socket& socket, std::vector<asio::ip::udp::endpoint>& endpoints, std::string message_client);
+        void send_position(asio::ip::udp::socket& socket, std::vector<asio::ip::udp::endpoint>& endpoints, std::string message_client);
+        void receive_thread(asio::ip::udp::socket& socket, asio::ip::udp::endpoint& remote, std::vector<asio::ip::udp::endpoint>& endpoints);
+        void receive_data(asio::ip::udp::socket& socket, asio::ip::udp::endpoint& remote, std::vector<asio::ip::udp::endpoint>& endpoint, Header header);
+
+    private:
+        std::thread start;
 };
 
 #endif /* !SERVER_HPP_ */
