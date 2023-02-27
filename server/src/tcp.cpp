@@ -32,6 +32,8 @@ void receive_tcp_server(Header_client header, tcp::socket &socket) {
     socket.receive(asio::buffer(&message, sizeof(Messages)));
     std::cout << "Received from client " << header.id << ": " << message.size << " ";
     std::cout.write(message.message, message.size) << std::endl;
+  } else if (header.data_type == LOBBY) {
+    std::cout << "Waiting for " << header.id << " players" << std::endl;
   } else {
     std::cout << "Wrong data type" << std::endl;
   }

@@ -46,7 +46,10 @@ void receive_tcp_client(Header_server header, tcp::socket &socket) {
  * @details If the message contains a comma it will be a position and if not, it will be a message.
  */
 void send_tcp_client(Header_client header, tcp::socket &socket, std::string message) {
-    header.data_type = MESSAGES;
+    if (header.data_type == LOBBY) {
+        socket.send(asio::buffer(&header, sizeof(header)));
+        return;
+    }
     Messages message_to_send;
     message_to_send.size = message.size();
     std::memcpy(&message_to_send.message, message.c_str(), message.size());
@@ -65,10 +68,34 @@ void send_tcp_client(Header_client header, tcp::socket &socket, std::string mess
  * @details The client can either send a message or a position.
  * 
  */
+
+void inGame(tcp::socket &socket) {
+    std::cout << "Enter number players lobby" << std::endl;
+    std::string number_players;
+    std::getline(std::cin, number_players);
+    // Check if number_players is an int
+    for (char const &tmp : number_players) {
+        if (std::isdigit(tmp) == 0) {
+            std::cout << "Wrong number of players" << std::endl;
+            inGame(socket);
+            return;
+        }
+    }
+    if (std::stoi(number_players) == 0 || std::stoi(number_players) > 2) {
+        std::cout << "Wrong number of players" << std::endl;
+        inGame(socket);
+        return;
+    }
+    Header_client header_client;
+    header_client.id = std::stoi(number_players);
+    header_client.data_type = LOBBY;
+    send_tcp_client(header_client, socket, number_players);
+}
+
 void async_tcp_client(const std::string& host, const std::string& port)
 {
     asio::io_context io_context;
-
+    bool in_game = false;
     tcp::resolver resolver(io_context);
     auto endpoints = resolver.resolve(host, port);
 
@@ -83,14 +110,20 @@ void async_tcp_client(const std::string& host, const std::string& port)
 
                 while (true)
                 {
-                    std::cout << "Enter message to send: ";
-                    std::string message;
-                    std::getline(std::cin, message);
-                    Header_client header_client;
-                    header_client.id = 1;
+                    if (!in_game) {
+                        inGame(socket);
+                        in_game = true;
+                    } else {
+                        std::cout << "Enter message to send: ";
+                        std::string message;
+                        std::getline(std::cin, message);
+                        Header_client header_client;
+                        header_client.id = 1;
+                        header_client.data_type = MESSAGES;
 
-                    // Send the message to the server
-                    send_tcp_client(header_client, socket, message);
+                        // Send the message to the server
+                        send_tcp_client(header_client, socket, message);
+                    }
                     Header_server header_server;
                     std::memset(&header_server, 0, sizeof(header_server));
                     size_t bytes_received = socket.receive(asio::buffer(&header_server, sizeof(header_server)));
