@@ -22,8 +22,6 @@
 using asio::ip::tcp;
 using asio::ip::udp;
 
-void async_udp_client(const std::string& host, const std::string& port);
-
 class Client {
     public :
         Client(const std::string& host, const std::string& port);
@@ -37,6 +35,12 @@ class Client {
         void receive_tcp_client(Header_server header);
         void start_game(Header_server header);
         void launch_game();
+
+        void async_udp_client(const std::string& host, const std::string& port);
+        void receive_thread_client_udp(udp::socket& socket, asio::io_context& io_context);
+        void receive_data_client_udp(Header header, udp::socket& socket, udp::endpoint& sender_endpoint, asio::error_code& ec);
+        void send_data_client_udp(udp::socket& socket, udp::endpoint& server_endpoint);
+        void send_struct_client_udp(udp::socket& socket, udp::endpoint& server_endpoint, std::string input);
 
     private :
         ClientInfo _client_info;
