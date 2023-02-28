@@ -27,7 +27,8 @@ void system_print(registry &reg, sparse_array<component::rect> &position, sparse
 {
     for (size_t i = 0; i < prints.size(); ++i) {
         if (prints[i])
-            std::cout << i << std::endl;
+            ;
+        // std::cout << "print" << std::endl;
     }
 }
 

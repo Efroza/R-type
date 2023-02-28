@@ -24,15 +24,7 @@ class registry
         }
         template <class Component>
         sparse_array<Component> &register_component()
-        {
-            std::any new_components = sparse_array<Component>();
-            _components_arrays[std::type_index(typeid(Component))] = std::move(new_components);
-            _erase_component.push_back([&](entity_t e)
-            {
-                auto &array = get_components<Component>();
-                array.erase(e._id);
-            });
-            return std::any_cast<sparse_array<Component> &>(_components_arrays.at(std::type_index(typeid(Component))));
+        {std::any new_components = sparse_array<Component>();_components_arrays[std::type_index(typeid(Component))] = std::move(new_components);_erase_component.push_back([&](entity_t e){    auto &array = get_components<Component>();    array.erase(e._id);});return std::any_cast<sparse_array<Component> &>(_components_arrays.at(std::type_index(typeid(Component))));
         }
         template <class Component>
         sparse_array<Component> &get_components()
