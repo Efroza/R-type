@@ -45,6 +45,8 @@ class TCP_Server {
         void send_tcp_server(Header_server header, asio::ip::tcp::socket &socket, std::string message);
         void receive_tcp_server(Header_client header, asio::ip::tcp::socket &socket, Server &server_data);
 
+        void new_client_create_lobby(std::shared_ptr<asio::ip::tcp::socket> socket, Server& server_data, uint16_t client_id);
+
     private:
         Server server_data;
         std::thread start;
