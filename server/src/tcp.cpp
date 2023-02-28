@@ -175,6 +175,7 @@ void TCP_Server::receive_tcp_server(Header_client header, tcp::socket &socket, S
         _nb_clients = server_data.get_nb_clients();
         if (_nb_clients == _nb_lobby) {
           std::cout << "All players have joined the lobby" << std::endl;
+          // 
           server_data.send_to_all_clients(START, 0);
           return;
         }

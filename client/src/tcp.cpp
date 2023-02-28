@@ -12,6 +12,33 @@
  */
 
 /**
+ * @brief Create the main class of the client side
+ * @param host represents the host of the server
+ * @param port represents the port of the server
+ * @return void
+ * @see Client::async_tcp_client(const asio::error_code& ec)
+ * @details Create the main class of the client side
+*/
+Client::Client(const std::string& host, const std::string& port)
+{
+    asio::io_context io_context;
+    tcp::resolver resolver(io_context);
+    auto endpoints = resolver.resolve(host, port);
+
+    _socket = std::make_unique<tcp::socket>(io_context);
+    _client_info.set_socket(_socket);
+    asio::async_connect(*_socket, endpoints,
+        [&](const asio::error_code& ec, tcp::endpoint) {
+            async_tcp_client(ec);
+        });
+    io_context.run();
+}
+
+Client::~Client()
+{
+}
+
+/**
  * @brief This function will translate the data received from the server.
  * @return void
  * @param header the header of the data to know the type of data
@@ -186,31 +213,4 @@ void Client::async_tcp_client(const asio::error_code& ec)
                 receive_tcp_client(header_server);
         }
     }
-}
-
-/**
- * @brief Create the main class of the client side
- * @param host represents the host of the server
- * @param port represents the port of the server
- * @return void
- * @see Client::async_tcp_client(const asio::error_code& ec)
- * @details Create the main class of the client side
-*/
-Client::Client(const std::string& host, const std::string& port)
-{
-    asio::io_context io_context;
-    tcp::resolver resolver(io_context);
-    auto endpoints = resolver.resolve(host, port);
-
-    _socket = std::make_unique<tcp::socket>(io_context);
-    _client_info.set_socket(_socket);
-    asio::async_connect(*_socket, endpoints,
-        [&](const asio::error_code& ec, tcp::endpoint) {
-            async_tcp_client(ec);
-        });
-    io_context.run();
-}
-
-Client::~Client()
-{
 }
