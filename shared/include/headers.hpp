@@ -23,7 +23,7 @@ enum Client_data {
     SPEED = 2, // UDP
     DISCONNECTED = 3, // TCP and UDP
     LOBBY = 4, // TCP
-    UDP = 5, // TCP
+    PREPARE_UDP = 5, // TCP
     MESSAGES = 6,
 };
 

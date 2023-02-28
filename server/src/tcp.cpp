@@ -118,6 +118,13 @@ void TCP_Server::handle_client(std::shared_ptr<tcp::socket> socket, Server& serv
       std::cout << "Waiting for all players to join the lobby" << std::endl;
       while (_nb_clients != _nb_lobby)
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
+      Header_client header_client_tmp;
+      size_t len = socket->read_some(asio::buffer(&header_client_tmp, sizeof(Header_client)));
+      if (len != sizeof(Header_client)) {
+        std::cout << "Error: Header not received" << std::endl;
+        return;
+      }
+      receive_tcp_server(header_client_tmp, *socket, server_data);
     }
     std::cout << "Enter message to send: ";
     std::string message;
@@ -172,17 +179,21 @@ void TCP_Server::receive_tcp_server(Header_client header, tcp::socket &socket, S
     case LOBBY: {
       if (_lobby)
         std::cout << "Player " << header.id << " joined the lobby" << std::endl;
-      else
+      else {
         _lobby = true;
+        _nb_lobby = header.id;
+      }
       _nb_clients = server_data.get_nb_clients();
-      _nb_lobby = header.id;
       std::cout << "Waiting for " << _nb_lobby - _nb_clients << " players" << std::endl;
       if (_nb_clients == _nb_lobby) {
         std::cout << "All players have joined the lobby" << std::endl;
         server_data.print_all_clients();
         server_data.send_to_all_clients(START, server_data.get_nb_clients());
+        // Faire une function pour set up les positions des clients => pour ce faire y'a besoin de la taille de la window
         server_data.send_vector_clients();
-        receive_tcp_server(header, socket, server_data);
+        Header_client header_client;
+        socket.receive(asio::buffer(&header_client, sizeof(Header_client)));
+        receive_tcp_server(header_client, socket, server_data);
       }
       break;
     }
@@ -193,7 +204,7 @@ void TCP_Server::receive_tcp_server(Header_client header, tcp::socket &socket, S
       server_data.print_all_clients();
       break;
     }
-    case UDP : {
+    case PREPARE_UDP : {
       std::cout << "Client has received data " << header.id << std::endl;
       Header_server header_server;
       header_server.id = 12345;

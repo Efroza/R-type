@@ -19,7 +19,7 @@
  * @see Client::async_tcp_client(const asio::error_code& ec)
  * @details Create the main class of the client side
 */
-Client::Client(const std::string& host, const std::string& port)
+Client::Client(const std::string& host, const std::string& port) : _host(host), _port(port)
 {
     asio::io_context io_context;
     tcp::resolver resolver(io_context);
@@ -39,10 +39,27 @@ Client::~Client()
 }
 
 /**
- * @brief This function will connect the client to the server
+ * @brief This function will make the transition between tcp and udp (lobby and game)
+ * @return void
+ * @details This function will make the transition between tcp and udp (lobby and game)
 */
 void Client::launch_game() {
-    
+    Header_client header_client;
+    header_client.data_type = PREPARE_UDP;
+    header_client.id = _client_info.get_id();
+    _socket->send(asio::buffer(&header_client, sizeof(header_client)));
+
+    Header_server header_server;
+    std::memset(&header_server, 0, sizeof(Header_server));
+    std::size_t bytes_received = _socket->receive(asio::buffer(&header_server, sizeof(Header_server)));
+    if (bytes_received != sizeof(Header_server)) {
+        std::cout << "Error while receiving data" << std::endl;
+        return;
+    }
+    if (header_server.data_type == UDP) {
+        std::cout << "Launching game on port : "<< header_server.id << std::endl;
+        async_udp_client(_host, std::to_string(header_server.id));
+    }
 }
 
 /**
@@ -75,10 +92,8 @@ void Client::start_game(Header_server header) {
     for (auto &client : _other_clients) {
         std::cout << "Client : " << client->get_id() << " position is : " << client->get_x() << " " << client->get_y() << std::endl;
     }
-    Header_client header_client;
-    header_client.data_type = UDP;
-    header_client.id = _client_info.get_id();
-    _socket->send(asio::buffer(&header_client, sizeof(header_client)));
+    // Envoyer les infos au graphique => Position de chaque joueur avec id => client = client_info, les autres clients = _other_clients
+    launch_game();
 }
 
 /**
@@ -98,7 +113,7 @@ void Client::receive_tcp_client(Header_server header) {
             std::cout.write(message.message, message.size) << std::endl;
             break;
         }
-        case START : {
+        case START : { // Start game graphique
             start_game(header);
             break;
         }
@@ -138,6 +153,7 @@ void Client::send_tcp_client(Header_client header, std::string message) {
  * @details This function will ask the user to enter the number of players he wants in the lobby before the game starts and will then send that number to the server.
 */
 void Client::inGame() {
+    // Ask the user to enter the number of players he wants in the lobby before the game starts
     std::cout << "Enter number players lobby" << std::endl;
     std::string number_players;
     std::getline(std::cin, number_players);
@@ -174,6 +190,7 @@ void Client::connect_to_server(const asio::error_code& ec)
     tmp_header.id = 0;
     tmp_header.data_type = CONNECTED;
     _socket->send(asio::buffer(&tmp_header, sizeof(tmp_header)));
+    // Lancer le graphique connecter au serveur
 
     if (!ec) {
         Header_server tmp_header_server;
@@ -201,6 +218,7 @@ void Client::connect_to_server(const asio::error_code& ec)
 */
 void Client::inLobby()
 {
+    // Bouton oui et bouton non
     std::cout << "Lobby already exist do you want to join ?" << std::endl;
     std::string answer;
     std::getline(std::cin, answer);
@@ -213,6 +231,7 @@ void Client::inLobby()
     } else {
         header_client.data_type = LOBBY;
         _socket->send(asio::buffer(&header_client, sizeof(header_client)));
+        // Display the lobby "Waiting for players..." and wait for the game to start
     }
     _lobby_created = false;
 }

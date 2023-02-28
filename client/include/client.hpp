@@ -49,5 +49,7 @@ class Client {
         std::shared_ptr<tcp::socket> _socket;
         uint16_t _id = 0;
         std::vector<ClientInfo*> _other_clients;
+        const std::string& _host;
+        const std::string& _port;
 };
 #endif /* !CLIENT_HPP_ */
