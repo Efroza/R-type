@@ -26,7 +26,7 @@ void handling_component_system::add_lib_component_system(std::string const &lib_
     void *handle = dlopen(lib_path.c_str(), RTLD_LAZY);
 
     if (handle == nullptr)
-        throw std::runtime_error("error cannot open file\n");
+        throw std::runtime_error("error cannot open file: " + lib_path + "\n");
     Component_System create = (Component_System)dlsym(handle, "createComponentSystem");
     if (create == nullptr)
         throw std::runtime_error("no function createComponentSystem \n");

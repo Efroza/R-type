@@ -14,7 +14,6 @@
 
 #include "registry.hpp"
 #include "parse_position.hpp"
-#include "parse_draw.hpp"
 #include "parse_image.hpp"
 #include "parse_rect.hpp"
 #include "parse_animation.hpp"
@@ -23,7 +22,6 @@
 static std::unordered_map<std::string, std::function<IParseComponent *()>> const map = {
     {"position", [](){return new parse_component::position();}},
     {"image", [](){return new parse_component::image();}},
-    {"draw", [](){return new parse_component::draw();}},
     {"rect", [](){return new parse_component::rect();}},
     {"animation", [](){return new parse_component::animation();}},
     {"interaction", [](){return new parse_component::interaction();}}

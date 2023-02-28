@@ -20,15 +20,13 @@ namespace component
         public:
             image(const std::string &file, data &db, entity_t const &e);
             image(const std::string &file, data &db);
-            image(image const &move);
             ~image();
-            sf::Sprite &get_sprite();
-            sf::Texture &get_texture() const noexcept;
+            std::string const &get_name_file() const noexcept;
+            data *get_databases() noexcept;
 
         private:
-            void load_texture(const std::string &file);
-        private:
-            sf::Sprite sprite;
+        public:
+            std::string name_file;
             data *db;
             size_t id;
     };

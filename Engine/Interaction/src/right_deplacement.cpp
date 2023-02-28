@@ -21,7 +21,7 @@ void right_deplacement_function(entity_t &e, registry &reg)
     if (!maybe_pos)
         return;
     component::position &pos = maybe_pos.value();
-    pos.pos.x += 20;
+    pos.x += 20;
 }
 
 right_deplacement::right_deplacement()

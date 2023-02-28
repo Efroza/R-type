@@ -21,7 +21,7 @@ void up_deplacement_function(entity_t &e, registry &reg)
     if (!maybe_pos)
         return;
     component::position &pos = maybe_pos.value();
-    pos.pos.y -= 20;
+    pos.y -= 20;
 }
 
 up_deplacement::up_deplacement()
