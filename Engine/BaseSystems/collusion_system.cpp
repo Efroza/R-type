@@ -14,11 +14,11 @@ void collusion_system(registry &reg, sparse_array<component::collusion> &collusi
     for (int i = 0; i < image.size(); i++) {
         for (int j = 0; j < image.size(); j++) {
             if (image[i] && image[j]) {
-                if (i != j && image[i].value().get_sprite().getGlobalBounds().intersects(image[j].value().get_sprite().getGlobalBounds())) {
-                    // image[j].value().get_sprite().setColor(sf::Color::Red);
-                    reg.kill_entity(j);
-                    return;
-                }
+                // if (i != j && image[i].value().get_sprite().getGlobalBounds().intersects(image[j].value().get_sprite().getGlobalBounds())) {
+                //     // image[j].value().get_sprite().setColor(sf::Color::Red);
+                //     reg.kill_entity(j);
+                //     return;
+                // }
             }
         }
     }

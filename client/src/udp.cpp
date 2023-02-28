@@ -22,7 +22,8 @@
  * @details If the message contains a comma, it will send a position. If not, it will send a message.
  * @details It will send the header and the struct to the server.
 */
-void send_struct_client_udp(udp::socket& socket, udp::endpoint& server_endpoint, std::string input) {
+void Client::send_struct_client_udp(udp::socket& socket, udp::endpoint& server_endpoint, std::string input)
+{
     Messages message_to_send;
     Position position_to_send;
     Header header_to_send;
@@ -53,7 +54,8 @@ void send_struct_client_udp(udp::socket& socket, udp::endpoint& server_endpoint,
  * @details It will call send_struct_client_udp to send data to the server.
  * @details It will send data to the server until the server is closed.
 */
-void send_data_client_udp(udp::socket& socket, udp::endpoint& server_endpoint) {
+void Client::send_data_client_udp(udp::socket& socket, udp::endpoint& server_endpoint)
+{
     while (true) // Infinite loop to send data to server
     {
         std::cout << "Enter message to send: ";
@@ -75,7 +77,8 @@ void send_data_client_udp(udp::socket& socket, udp::endpoint& server_endpoint) {
  * @details Depending of the data type it will print the data.
  * 
 */
-void receive_data_client_udp(Header header, udp::socket& socket, udp::endpoint& sender_endpoint, asio::error_code& ec) {
+void Client::receive_data_client_udp(Header header, udp::socket& socket, udp::endpoint& sender_endpoint, asio::error_code& ec)
+{
     Messages response;
     Position position;
 
@@ -101,7 +104,7 @@ void receive_data_client_udp(Header header, udp::socket& socket, udp::endpoint& 
  * @details It will call receive_data_client_udp to receive data from the server.
  * @details It will receive data from the server until the server is closed.
 */
-void receive_thread_client_udp(udp::socket& socket, asio::io_context& io_context)
+void Client::receive_thread_client_udp(udp::socket& socket, asio::io_context& io_context)
 {
     while (true) { // Infinite loop to receive data from server
         Header header;
@@ -124,7 +127,7 @@ void receive_thread_client_udp(udp::socket& socket, asio::io_context& io_context
  * @details This function will launch a UDP client.
  * @details It will create a thread to receive data from the server and a there is a call to send_data_client_udp to send data to the server.
 */
-void async_udp_client(const std::string& host, const std::string& port)
+void Client::async_udp_client(const std::string& host, const std::string& port)
 {
     asio::io_context io_context;
 
@@ -140,7 +143,7 @@ void async_udp_client(const std::string& host, const std::string& port)
     socket.send_to(asio::buffer(&connect_server, sizeof(connect_server)), server_endpoint); // Connect to server
     std::cout << "Connected to server" << std::endl; // TODO: remove
 
-    std::thread receive_thread(receive_thread_client_udp, std::ref(socket), std::ref(io_context)); // Receive from server thread
+    std::thread receive_thread(&Client::receive_thread_client_udp, this, std::ref(socket), std::ref(io_context)); // Receive from server thread
     send_data_client_udp(socket, server_endpoint); // Send to server
     receive_thread.join();
 }

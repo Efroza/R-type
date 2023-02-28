@@ -10,10 +10,8 @@
 
 void load_system(registry &reg)
 {
-    reg.add_system<component::position, component::image>(position_system);
-    reg.add_system<component::draw, component::image>(draw_system);
-    reg.add_system<component::image, component::rect>(set_rect_system);
     reg.add_system<component::interaction>(interaction_system);
     reg.add_system<component::image, component::rect, component::animation>(animation_system);
     reg.add_system<component::collusion, component::image>(collusion_system);
+    reg.add_system<component::position, component::network>(network_position_system);
 }

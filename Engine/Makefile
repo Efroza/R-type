@@ -8,28 +8,21 @@
 SRCS	=	Game/main.cpp	\
 	Game/load_component.cpp	\
 	Game/load_systems.cpp	\
-	Game/handle_entity.cpp	\
 	BaseComponent/image.cpp	\
 	BaseComponent/interaction.cpp	\
 	BaseComponent/rect.cpp	\
-	BaseSystems/draw_system.cpp	\
-	BaseSystems/position_system.cpp	\
 	BaseSystems/animation_system.cpp	\
-	BaseSystems/rect_system.cpp	\
 	BaseSystems/interaction_system.cpp	\
+	BaseSystems/network_sytem.cpp	\
 	BaseSystems/collusion_system.cpp	\
-	Interaction/src/up_deplacement.cpp	\
-	Interaction/left_deplacement.cpp	\
-	Interaction/right_deplacement.cpp	\
-	Interaction/down_deplacement.cpp	\
 	ParseComponent/AParseComponent.cpp	\
 	ParseComponent/AParseInteraction.cpp	\
-	ParseComponent/parse_draw.cpp	\
 	ParseComponent/parse_position.cpp	\
 	ParseComponent/parse_image.cpp	\
 	ParseComponent/parse_rect.cpp	\
 	ParseComponent/parse_animation.cpp	\
 	ParseComponent/parse_interaction.cpp	\
+	ParseComponent/parse_network.cpp	\
 	Parsing/parsing.cpp	\
 	Parsing/handling_interaction.cpp	\
 	Parsing/Yaml.cpp	\
