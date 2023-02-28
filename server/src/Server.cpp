@@ -53,3 +53,12 @@ void Server::new_client(uint16_t client_id) {
         }
     }
 }
+
+void Server::send_to_all_clients(Server_data type, uint16_t id) {
+    Header_server header;
+    header.data_type = type;
+    header.id = id;
+    for (const auto& iter : client_info_map) {
+        asio::write(*(iter.second->get_socket()), asio::buffer(&header, sizeof(Header_server)));
+    }
+}

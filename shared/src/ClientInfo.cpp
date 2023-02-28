@@ -71,3 +71,13 @@ void ClientInfo::print_info_clients() const {
     std::cout << "x: " << x << std::endl;
     std::cout << "y: " << y << std::endl;
 }
+
+void ClientInfo::set_socket(std::shared_ptr<asio::ip::tcp::socket> new_socket)
+{
+    socket = new_socket;
+}
+
+void ClientInfo::set_id(uint16_t new_id)
+{
+    id = new_id;
+}

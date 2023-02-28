@@ -28,7 +28,8 @@ int main(int ac, char **av)
     }
     std::string host = av[1];
     // Uncomment the line for the desired client
-    async_tcp_client(host, tcp_port);
+    Client client(host, tcp_port);
+    // async_tcp_client(host, tcp_port);
     // async_udp_client(host, port);
 
     return 0;
