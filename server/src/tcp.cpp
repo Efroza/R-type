@@ -116,9 +116,8 @@ void TCP_Server::handle_client(std::shared_ptr<tcp::socket> socket, Server& serv
     receive_tcp_server(header, *socket, server_data);
     if (_lobby) {
       std::cout << "Waiting for all players to join the lobby" << std::endl;
-      while (_nb_clients != _nb_lobby) {
+      while (_nb_clients != _nb_lobby)
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
-      }
     }
     std::cout << "Enter message to send: ";
     std::string message;
@@ -171,22 +170,19 @@ void TCP_Server::receive_tcp_server(Header_client header, tcp::socket &socket, S
       break;
     }
     case LOBBY: {
-      if (_lobby) {
+      if (_lobby)
         std::cout << "Player " << header.id << " joined the lobby" << std::endl;
-        _nb_clients = server_data.get_nb_clients();
-        if (_nb_clients == _nb_lobby) {
-          std::cout << "All players have joined the lobby" << std::endl;
-          server_data.print_all_clients();
-          server_data.send_to_all_clients(START, server_data.get_nb_clients());
-          server_data.send_vector_clients();
-          return;
-        }
-        std::cout << "Waiting for " << _nb_lobby - _nb_clients << " players" << std::endl;
-        return;
-      }
-      std::cout << "Waiting for " << header.id << " players" << std::endl;
-      _lobby = true;
+      else
+        _lobby = true;
+      _nb_clients = server_data.get_nb_clients();
       _nb_lobby = header.id;
+      std::cout << "Waiting for " << _nb_lobby - _nb_clients << " players" << std::endl;
+      if (_nb_clients == _nb_lobby) {
+        std::cout << "All players have joined the lobby" << std::endl;
+        server_data.print_all_clients();
+        server_data.send_to_all_clients(START, server_data.get_nb_clients());
+        server_data.send_vector_clients();
+      }
       break;
     }
     case DISCONNECTED :{

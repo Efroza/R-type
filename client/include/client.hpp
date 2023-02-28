@@ -35,6 +35,7 @@ class Client {
         void inLobby();
         void send_tcp_client(Header_client header, std::string message);
         void receive_tcp_client(Header_server header);
+        void start_game(Header_server header);
 
     private :
         ClientInfo _client_info;
