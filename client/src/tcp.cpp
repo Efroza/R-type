@@ -28,6 +28,8 @@ void receive_tcp_client(Header_server header, tcp::socket &socket) {
         std::cout.write(message.message, message.size) << std::endl;
     } else if (header.data_type == NEW_CLIENT) {
         std::cout << "New client connected with id : " << header.id << std::endl;
+    } else if (header.data_type == START) {
+        std::cout << "Game will start shortly" << std::endl;
     } else {
         std::cout << "Wrong data type" << std::endl;
     }
@@ -81,7 +83,7 @@ void inGame(tcp::socket &socket) {
             return;
         }
     }
-    if (std::stoi(number_players) == 0 || std::stoi(number_players) > 2) {
+    if (std::stoi(number_players) == 0 || std::stoi(number_players) > 4) {
         std::cout << "Wrong number of players" << std::endl;
         inGame(socket);
         return;
@@ -96,8 +98,10 @@ void async_tcp_client(const std::string& host, const std::string& port)
 {
     asio::io_context io_context;
     bool in_game = false;
+    bool lobby_created = false;
     tcp::resolver resolver(io_context);
     auto endpoints = resolver.resolve(host, port);
+    uint16_t id = 0;
 
     tcp::socket socket(io_context);
     asio::async_connect(socket, endpoints,
@@ -107,12 +111,46 @@ void async_tcp_client(const std::string& host, const std::string& port)
             {
                 // Connected to the server successfully
                 std::cout << "Connected to the server via TCP." << std::endl;
-
+                Header_client tmp_header;
+                tmp_header.id = id;
+                tmp_header.data_type = CONNECTED;
+                socket.send(asio::buffer(&tmp_header, sizeof(tmp_header)));
+                Header_server tmp_header_server;
+                socket.receive(asio::buffer(&tmp_header_server, sizeof(tmp_header_server)));
+                if (tmp_header_server.data_type == LOBBYS) {
+                    Connection connection;
+                    socket.receive(asio::buffer(&connection, sizeof(connection)));
+                    id = tmp_header_server.id;
+                    if (connection.id_lobby != 0) {
+                        in_game = true;
+                        lobby_created = true;
+                        std::cout << "You are in the lobby " << connection.id_lobby << std::endl;
+                    } else {
+                        std::cout << "You are not in a lobby" << std::endl;
+                    }
+                }
                 while (true)
                 {
                     if (!in_game) {
                         inGame(socket);
                         in_game = true;
+                    } else if (lobby_created) {
+                        std::cout << "Lobby already exist do you want to join ?" << std::endl;
+                        std::string answer;
+                        std::getline(std::cin, answer);
+                        if (answer != "yes" && answer != "y") {
+                            Header_client header_client;
+                            header_client.id = id;
+                            header_client.data_type = DISCONNECTED;
+                            socket.send(asio::buffer(&header_client, sizeof(header_client)));
+                            exit(0);
+                        } else {
+                            Header_client header_client;
+                            header_client.id = id;
+                            header_client.data_type = LOBBY;
+                            socket.send(asio::buffer(&header_client, sizeof(header_client)));
+                        }
+                        lobby_created = false;
                     } else {
                         std::cout << "Enter message to send: ";
                         std::string message;

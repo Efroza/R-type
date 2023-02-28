@@ -71,14 +71,46 @@ void TCP_Server::handle_client(std::shared_ptr<tcp::socket> socket, Server& serv
   uint16_t client_id = server_data.get_nb_clients() + 1;
   server_data.add_client(server_data.get_nb_clients() + 1, socket);
   server_data.print_all_clients();
-  server_data.new_client(client_id);
+  // server_data.new_client(client_id);
+  _nb_clients = server_data.get_nb_clients();
 
+  Header_client tmp_header_client;
+  std::memset(&tmp_header_client, 0, sizeof(tmp_header_client));
+  socket->receive(buffer(&tmp_header_client, sizeof(tmp_header_client)));
+  std::cout << "New client" << std::endl;
+  Connection connection;
+  if (_lobby) {
+    // Send messages to say that a lobby is already created
+    Header_server header_server;
+    header_server.id = client_id;
+    header_server.data_type = LOBBYS;
+    socket->send(asio::buffer(&header_server, sizeof(Header_server)));
+    connection.id_lobby = _nb_lobby;
+    socket->send(asio::buffer(&connection, sizeof(Connection)));
+    std::cout << "Lobby already created" << std::endl;
+  } else {
+    // Send messages to say that a lobby is not created
+    Header_server header_server;
+    header_server.id = client_id;
+    header_server.data_type = LOBBYS;
+    socket->send(asio::buffer(&header_server, sizeof(Header_server)));
+    connection.id_lobby = 0;
+    socket->send(asio::buffer(&connection, sizeof(Connection)));
+    std::cout << "Lobby not created" << std::endl;
+  }
   // Loop to receive and send data
   while (true) {
     Header_client header;
     std::memset(&header, 0, sizeof(header));
     size_t len = socket->read_some(asio::buffer(&header, sizeof(Header_client)));
-    receive_tcp_server(header, *socket);
+    receive_tcp_server(header, *socket, server_data);
+    if (_lobby) {
+      std::cout << "Waiting for all players to join the lobby" << std::endl;
+      while (_nb_clients != _nb_lobby) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+      }
+      // std::cout << "All players have joined the lobby" << std::endl;
+    }
     std::cout << "Enter message to send: ";
     std::string message;
     std::getline(std::cin, message);
@@ -120,14 +152,32 @@ void TCP_Server::send_tcp_server(Header_server header, tcp::socket &socket, std:
  * @details It creates two struct one if it is a position and another one if it is a message.
  * @details Depending of the data type it will print the data.
 */
-void TCP_Server::receive_tcp_server(Header_client header, tcp::socket &socket) {
+void TCP_Server::receive_tcp_server(Header_client header, tcp::socket &socket, Server& server_data) {
   if (header.data_type == MESSAGES) {
     Messages message;
     socket.receive(asio::buffer(&message, sizeof(Messages)));
     std::cout << "Received from client " << header.id << ": " << message.size << " ";
     std::cout.write(message.message, message.size) << std::endl;
   } else if (header.data_type == LOBBY) {
+    if (_lobby) {
+      std::cout << "Player " << header.id << " joined the lobby" << std::endl;
+      _nb_clients = server_data.get_nb_clients();
+      if (_nb_clients == _nb_lobby) {
+        std::cout << "All players have joined the lobby" << std::endl;
+        server_data.send_to_all_clients(START, 0);
+        return;
+      }
+      std::cout << "Waiting for " << _nb_lobby - _nb_clients << " players" << std::endl;
+      return;
+    }
     std::cout << "Waiting for " << header.id << " players" << std::endl;
+    _lobby = true;
+    _nb_lobby = header.id;
+  } else if (header.data_type == DISCONNECTED) {
+    std::cout << "Client " << header.id << " disconnected" << std::endl;
+    server_data.remove_client(header.id);
+    _nb_clients = server_data.get_nb_clients();
+    server_data.print_all_clients();
   } else {
     std::cout << "Wrong data type" << std::endl;
   }

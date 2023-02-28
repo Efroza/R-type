@@ -37,6 +37,7 @@ enum Server_data {
     NEW_CLIENT = 8, // TCP
     ALREADY_IN_GAME = 9, // TCP
     MESSAGESS = 10, // TCP
+    LOBBYS = 11, // TCP
 };
 
 struct Header {
@@ -70,6 +71,9 @@ struct Direction {
     Direction_enum direction;
 };
 
+struct Connection {
+    uint16_t id_lobby;
+};
 struct Connected {
     std::vector<uint16_t> clients_id;
 };

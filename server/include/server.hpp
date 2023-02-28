@@ -29,6 +29,7 @@ class Server {
         uint16_t get_nb_clients() const;
         void print_all_clients() const;
         void new_client(uint16_t client_id);
+        void send_to_all_clients(Server_data data, uint16_t id);
 
     private:
         std::map<uint16_t, ClientInfo*> client_info_map;
@@ -42,11 +43,14 @@ class TCP_Server {
         void launch_tcp_server();
         void handle_client(std::shared_ptr<asio::ip::tcp::socket> socket, Server& server_data);
         void send_tcp_server(Header_server header, asio::ip::tcp::socket &socket, std::string message);
-        void receive_tcp_server(Header_client header, asio::ip::tcp::socket &socket);
+        void receive_tcp_server(Header_client header, asio::ip::tcp::socket &socket, Server &server_data);
 
     private:
         Server server_data;
         std::thread start;
+        bool _lobby = false;
+        uint16_t _nb_clients = 0;
+        uint16_t _nb_lobby = 0;
 };
 
 class UDP_Server {
