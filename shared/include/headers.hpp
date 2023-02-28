@@ -23,7 +23,8 @@ enum Client_data {
     SPEED = 2, // UDP
     DISCONNECTED = 3, // TCP and UDP
     LOBBY = 4, // TCP
-    MESSAGES = 5,
+    UDP = 5, // TCP
+    MESSAGES = 6,
 };
 
 enum Server_data {
@@ -38,6 +39,7 @@ enum Server_data {
     ALREADY_IN_GAME = 8, // TCP
     MESSAGESS = 9, // TCP
     LOBBYS = 10, // TCP
+    UDP = 11, // TCP
 };
 
 struct Header {

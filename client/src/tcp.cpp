@@ -39,6 +39,13 @@ Client::~Client()
 }
 
 /**
+ * @brief This function will connect the client to the server
+*/
+void Client::launch_game() {
+    
+}
+
+/**
  * @brief This function will get every clients that are connected to the lobby
  * @return void
  * @param header the header of the data to know the type of data
@@ -68,6 +75,10 @@ void Client::start_game(Header_server header) {
     for (auto &client : _other_clients) {
         std::cout << "Client : " << client->get_id() << " position is : " << client->get_x() << " " << client->get_y() << std::endl;
     }
+    Header_client header_client;
+    header_client.data_type = UDP;
+    header_client.id = _client_info.get_id();
+    _socket->send(asio::buffer(&header_client, sizeof(header_client)));
 }
 
 /**

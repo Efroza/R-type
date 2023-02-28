@@ -182,6 +182,7 @@ void TCP_Server::receive_tcp_server(Header_client header, tcp::socket &socket, S
         server_data.print_all_clients();
         server_data.send_to_all_clients(START, server_data.get_nb_clients());
         server_data.send_vector_clients();
+        receive_tcp_server(header, socket, server_data);
       }
       break;
     }
@@ -191,6 +192,13 @@ void TCP_Server::receive_tcp_server(Header_client header, tcp::socket &socket, S
       _nb_clients = server_data.get_nb_clients();
       server_data.print_all_clients();
       break;
+    }
+    case UDP : {
+      std::cout << "Client has received data " << header.id << std::endl;
+      Header_server header_server;
+      header_server.id = 12345;
+      header_server.data_type = UDP;
+      socket.send(asio::buffer(&header_server, sizeof(header_server)));
     }
     default:
       std::cout << "Unknown data type" << std::endl;
