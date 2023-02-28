@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <vector>
+#include "./ClientInfo.hpp"
 
 enum Type {
     POSITION = 0,
@@ -34,10 +35,9 @@ enum Server_data {
     HIT = 5, // UDP
     ENNEMY_DEAD = 6, // UDP
     BONUS = 7, // UDP
-    NEW_CLIENT = 8, // TCP
-    ALREADY_IN_GAME = 9, // TCP
-    MESSAGESS = 10, // TCP
-    LOBBYS = 11, // TCP
+    ALREADY_IN_GAME = 8, // TCP
+    MESSAGESS = 9, // TCP
+    LOBBYS = 10, // TCP
 };
 
 struct Header {
@@ -58,6 +58,10 @@ struct Header_server {
 struct Header_client {
     uint16_t id;
     Client_data data_type;
+};
+
+struct Start {
+    ClientInfo client_info;
 };
 
 enum Direction_enum {

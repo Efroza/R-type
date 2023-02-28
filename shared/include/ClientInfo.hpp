@@ -24,8 +24,8 @@
 
 class ClientInfo {
     public:
-        ClientInfo() : id(0), hp(0), x(0), y(0) {};
-        ClientInfo(uint16_t id, std::shared_ptr<asio::ip::tcp::socket> socket);
+        ClientInfo() : _id(0), _hp(0), _x(0), _y(0) {};
+        ClientInfo(uint16_t id, std::shared_ptr<asio::ip::tcp::socket> socket, uint16_t x, uint16_t y);
         ~ClientInfo();
         // ClientInfo(const ClientInfo& other);
         ClientInfo& operator=(const ClientInfo& other);
@@ -42,11 +42,11 @@ class ClientInfo {
         void set_socket(std::shared_ptr<asio::ip::tcp::socket> new_socket);
         void set_id(uint16_t new_id);
     private:
-        uint16_t id;
-        uint16_t hp;
-        uint16_t x;
-        uint16_t y;
-        std::shared_ptr<asio::ip::tcp::socket> socket;
+        uint16_t _id;
+        uint16_t _hp;
+        uint16_t _x;
+        uint16_t _y;
+        std::shared_ptr<asio::ip::tcp::socket> _socket;
 };
 
 #endif /* !CLIENTINFO_HPP_ */

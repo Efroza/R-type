@@ -37,7 +37,5 @@ Server to client with no client response :
 Server to client with client response :
     START (0) : When the game start
      ->  OK
-    NEW_CLIENT (8, Int16) : New client connected
-     -> OK
-    ALREADY_IN_GAME (9) : When client try to connect to game already started
+    ALREADY_IN_GAME (8) : When client try to connect to game already started
      -> OK

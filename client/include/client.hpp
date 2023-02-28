@@ -42,6 +42,6 @@ class Client {
         bool _in_game = false;
         std::shared_ptr<tcp::socket> _socket;
         uint16_t _id = 0;
-        std::map<uint16_t, ClientInfo*> _other_clients;
+        std::vector<ClientInfo*> _other_clients;
 };
 #endif /* !CLIENT_HPP_ */

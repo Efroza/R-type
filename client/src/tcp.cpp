@@ -47,17 +47,44 @@ Client::~Client()
  * @details Depending of the data type it will print the data.
 */
 void Client::receive_tcp_client(Header_server header) {
-    if (header.data_type == MESSAGESS) {
-        Messages message;
-        _socket->receive(asio::buffer(&message, sizeof(Messages)));
-        std::cout << "Received from server " << header.id << ": " << message.size << " ";
-        std::cout.write(message.message, message.size) << std::endl;
-    } else if (header.data_type == NEW_CLIENT) {
-        std::cout << "New client connected with id : " << header.id << std::endl;
-    } else if (header.data_type == START) {
-        std::cout << "Game will start shortly" << std::endl;
-    } else {
-        std::cout << "Wrong data type" << std::endl;
+    switch (header.data_type) {
+        case MESSAGESS : {
+            Messages message;
+            _socket->receive(asio::buffer(&message, sizeof(Messages)));
+            std::cout << "Received from server " << header.id << ": " << message.size << " ";
+            std::cout.write(message.message, message.size) << std::endl;
+            break;
+        }
+        case START : {
+            std::cout << "Game will start shortly" << std::endl;
+            for (std::size_t i = 0; i < header.id; i++) {
+                Start start;
+                std::memset(&start, 0, sizeof(Start));
+                std::size_t bytes_received = _socket->receive(asio::buffer(&start, sizeof(Start)));
+                if (bytes_received != sizeof(Start)) {
+                    std::cout << "Error while receiving data" << std::endl;
+                    return;
+                }
+                ClientInfo* client_info = new ClientInfo;
+                std::memcpy(client_info, &start.client_info, sizeof(ClientInfo));
+                if (client_info->get_id() == _client_info.get_id()) {
+                    _client_info.set_x(client_info->get_x());
+                    _client_info.set_y(client_info->get_y());
+                } else {
+                    _other_clients.push_back(client_info);
+                }
+                std::memset(&start, 0, sizeof(Start));
+            }
+            std::cout << "I am client : " << _client_info.get_id() << " and my position is : " << _client_info.get_x() << " " << _client_info.get_y() << std::endl;
+            for (auto &client : _other_clients) {
+                std::cout << "Client : " << client->get_id() << " position is : " << client->get_x() << " " << client->get_y() << std::endl;
+            }
+            break;
+        }
+        default : {
+            std::cout << "Wrong data type" << std::endl;
+            break;
+        }
     }
 }
 
@@ -156,15 +183,13 @@ void Client::inLobby()
     std::cout << "Lobby already exist do you want to join ?" << std::endl;
     std::string answer;
     std::getline(std::cin, answer);
+    Header_client header_client;
+    header_client.id = _client_info.get_id();
     if (answer != "yes" && answer != "y") {
-        Header_client header_client;
-        header_client.id = _id;
         header_client.data_type = DISCONNECTED;
         _socket->send(asio::buffer(&header_client, sizeof(header_client)));
-            exit(0);
+        exit(0);
     } else {
-        Header_client header_client;
-        header_client.id = _id;
         header_client.data_type = LOBBY;
         _socket->send(asio::buffer(&header_client, sizeof(header_client)));
     }

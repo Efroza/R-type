@@ -100,7 +100,8 @@ void TCP_Server::handle_client(std::shared_ptr<tcp::socket> socket, Server& serv
 
   // Add the client to the server's list
   uint16_t client_id = server_data.get_nb_clients() + 1;
-  server_data.add_client(server_data.get_nb_clients() + 1, socket);
+  server_data.add_client(server_data.get_nb_clients() + 1, socket, last_x, 10);
+  last_x += 10;
   server_data.print_all_clients();
   _nb_clients = server_data.get_nb_clients();
 
@@ -175,8 +176,9 @@ void TCP_Server::receive_tcp_server(Header_client header, tcp::socket &socket, S
         _nb_clients = server_data.get_nb_clients();
         if (_nb_clients == _nb_lobby) {
           std::cout << "All players have joined the lobby" << std::endl;
-          // 
-          server_data.send_to_all_clients(START, 0);
+          server_data.print_all_clients();
+          server_data.send_to_all_clients(START, server_data.get_nb_clients());
+          server_data.send_vector_clients();
           return;
         }
         std::cout << "Waiting for " << _nb_lobby - _nb_clients << " players" << std::endl;
