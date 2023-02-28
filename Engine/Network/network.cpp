@@ -5,16 +5,7 @@
 ** network
 */
 
-#include "network.hpp"
-
-network::network(const std::string &ip_address, size_t port)
+void main_network()
 {
-}
-
-network::~network()
-{
-}
-
-void network::connexion_network()
-{
+    
 }

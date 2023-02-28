@@ -13,6 +13,7 @@ SRCS	=	Game/main.cpp	\
 	BaseComponent/rect.cpp	\
 	BaseSystems/animation_system.cpp	\
 	BaseSystems/interaction_system.cpp	\
+	BaseSystems/network_sytem.cpp	\
 	BaseSystems/collusion_system.cpp	\
 	ParseComponent/AParseComponent.cpp	\
 	ParseComponent/AParseInteraction.cpp	\
@@ -21,6 +22,7 @@ SRCS	=	Game/main.cpp	\
 	ParseComponent/parse_rect.cpp	\
 	ParseComponent/parse_animation.cpp	\
 	ParseComponent/parse_interaction.cpp	\
+	ParseComponent/parse_network.cpp	\
 	Parsing/parsing.cpp	\
 	Parsing/handling_interaction.cpp	\
 	Parsing/Yaml.cpp	\

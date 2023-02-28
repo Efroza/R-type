@@ -17,12 +17,14 @@
 #include "interactive.hpp"
 #include "animation.hpp"
 #include "collusion.hpp"
+#include "network.hpp"
 
 //system
 void animation_system(registry &reg
 ,sparse_array<component::image> &images, sparse_array<component::rect> &rects, sparse_array<component::animation> &animations);
 void interaction_system(registry &reg, sparse_array<component::interaction> &interactions);
 void collusion_system(registry &reg, sparse_array<component::collusion> &collusion, sparse_array<component::image> &image);
+void network_position_system(registry &reg, sparse_array<component::position> &positions, sparse_array<component::network> &network);
 //
 
 // load ECS

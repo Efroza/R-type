@@ -21,27 +21,6 @@
 #include "handling_interaction.hpp"
 #include "Yaml.hpp"
 
-// void create_spaceShip(registry &reg, data &db)
-// {
-//     entity_t spaceship = reg.spawn_entity();
-//     component::interaction inter;
-
-//     inter.new_interaction(sf::Keyboard::Space, up_deplacement_function);
-
-//     try {
-//         reg.add_component<component::position>(spaceship, std::move(component::position(100, 100)));
-//         reg.add_component<component::image>(spaceship, std::move(component::image("Image/spaceship.png", db, spaceship)));
-//         reg.add_component<component::interaction>(spaceship, std::move(inter));
-//         reg.add_component<component::rect>(spaceship, std::move(component::rect(1, 6)));
-//         reg.add_component<component::animation>(spaceship, std::move(component::animation(50)));
-//         reg.add_component<component::draw>(spaceship, std::move(component::draw()));
-//     }
-//     catch (const std::exception &e)
-//     {
-//         std::cout << e.what() << std::endl;
-//     }
-// }
-
 void game(registry &reg, data &db, Yaml &yaml)
 {
     load_system(reg);
@@ -60,13 +39,15 @@ void init_databases(data &db)
 {
 
     db.add_list_data<sf::Texture>();
+
+    //network.set_protocol(POSITION)
+    //network.send<component::position>()
 }
 
 int main(int ac, char **av)
 {
     if (ac != 2)
         return 84;
-
     try {
         data db;
         Yaml yaml(av[1]);

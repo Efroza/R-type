@@ -18,13 +18,15 @@
 #include "parse_rect.hpp"
 #include "parse_animation.hpp"
 #include "parse_interaction.hpp"
+#include "parse_network.hpp"
 
 static std::unordered_map<std::string, std::function<IParseComponent *()>> const map = {
     {"position", [](){return new parse_component::position();}},
     {"image", [](){return new parse_component::image();}},
     {"rect", [](){return new parse_component::rect();}},
     {"animation", [](){return new parse_component::animation();}},
-    {"interaction", [](){return new parse_component::interaction();}}
+    {"interaction", [](){return new parse_component::interaction();}},
+    {"network", [](){return new parse_component::network();}},
 };
 
 parsing::parsing(registry &registre, data &daatabase, std::vector<std::string> const &config_files)
