@@ -13,6 +13,7 @@
 #endif
 
 #include "../../shared/include/headers.hpp"
+#include "../../shared/include/ClientInfo.hpp"
 #include <asio.hpp>
 #include <thread>
 #include <cstdint>
@@ -24,4 +25,24 @@ using asio::ip::udp;
 void async_tcp_client(const std::string& host, const std::string& port);
 void async_udp_client(const std::string& host, const std::string& port);
 
+class Client {
+    public :
+        Client(const std::string& host, const std::string& port);
+        ~Client();
+
+        void async_tcp_client(const asio::error_code& ec);
+        void connect_to_server(const asio::error_code& ec);
+        void inGame();
+        void inLobby();
+        void send_tcp_client(Header_client header, std::string message);
+        void receive_tcp_client(Header_server header);
+
+    private :
+        ClientInfo _client_info;
+        bool _lobby_created = false;
+        bool _in_game = false;
+        std::shared_ptr<tcp::socket> _socket;
+        uint16_t _id = 0;
+        std::map<uint16_t, ClientInfo*> _other_clients;
+};
 #endif /* !CLIENT_HPP_ */
