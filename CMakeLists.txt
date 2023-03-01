@@ -120,7 +120,7 @@ target_compile_options(${PROJECT_NAME}_graphic PRIVATE
     -I./Engine/Graphic 
     -I./Engine/ComponentSystem
 )
-target_link_libraries(${PROJECT_NAME}_graphic ${CONAN_LIBS} jsoncpp dl yaml-cpp)
+target_link_libraries(${PROJECT_NAME}_graphic ${CONAN_LIBS} dl)
 include(clientGraphic/Graphic/SFML/SFML_lib.cmake)
 add_executable(${PROJECT_NAME}_client_graphic ${GRAPHC_FILES})
 target_include_directories(${PROJECT_NAME}_client_graphic PRIVATE clientGraphic/Graphic)
