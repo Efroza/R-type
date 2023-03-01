@@ -18,7 +18,7 @@
  */
 int main() {
     TCP_Server tcp_server;
-    // UDP_Server udp_server;
+    UDP_Server udp_server;
 
     return 0;
 }

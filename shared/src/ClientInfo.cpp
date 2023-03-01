@@ -7,77 +7,69 @@
 
 #include "../include/ClientInfo.hpp"
 
-ClientInfo::ClientInfo(uint16_t id, std::shared_ptr<asio::ip::tcp::socket> socket) : id(id), hp(100), x(0), y(0), socket(socket)
+ClientInfo::ClientInfo(uint16_t id, std::shared_ptr<asio::ip::tcp::socket> socket, uint16_t x, uint16_t y) : _id(id), _hp(100), _x(x), _y(y), _socket(socket)
 {
 }
-
-// ClientInfo::ClientInfo(uint16_t id) : id(id), hp(0), x(0), y(0)
-// {
-// }
 
 ClientInfo::~ClientInfo()
 {
 }
 
-// ClientInfo::ClientInfo(const ClientInfo& other) : id(other.id), hp(other.hp), x(other.x), y(other.y), socket(other.socket)
-// {
-// }
-
 ClientInfo& ClientInfo::operator=(const ClientInfo& other)
 {
-    id = other.id;
-    hp = other.hp;
-    x = other.x;
-    y = other.y;
-    socket = other.socket;
+    _id = other._id;
+    _hp = other._hp;
+    _x = other._x;
+    _y = other._y;
+    _socket = other._socket;
     return *this;
 }
 
 uint16_t ClientInfo::get_id() const { 
-    return id;
+    return _id;
 }
 
 uint16_t ClientInfo::get_hp() const {
-    return hp;
+    return _hp;
 }
 
 void ClientInfo::set_hp(uint16_t new_hp) {
-    hp = new_hp;
+    _hp = new_hp;
 }
 
 uint16_t ClientInfo::get_x() const {
-    return x;
+    return _x;
 }
 
 void ClientInfo::set_x(uint16_t new_x) {
-    x = new_x;
+    _x = new_x;
 }
 
 uint16_t ClientInfo::get_y() const {
-    return y;
+    return _y;
 }
 
 void ClientInfo::set_y(uint16_t new_y) {
-    y = new_y;
+    _y = new_y;
 }
 
 std::shared_ptr<asio::ip::tcp::socket> ClientInfo::get_socket() const {
-    return socket;
+    return _socket;
 }
 
 void ClientInfo::print_info_clients() const {
-    std::cout << "id: " << id << std::endl;
-    std::cout << "hp: " << hp << std::endl;
-    std::cout << "x: " << x << std::endl;
-    std::cout << "y: " << y << std::endl;
+    std::cout << "id: " << _id << std::endl;
+    std::cout << "hp: " << _hp << std::endl;
+    std::cout << "x: " << _x << std::endl;
+    std::cout << "y: " << _y << std::endl;
 }
 
 void ClientInfo::set_socket(std::shared_ptr<asio::ip::tcp::socket> new_socket)
 {
-    socket = new_socket;
+    _socket = new_socket;
 }
 
 void ClientInfo::set_id(uint16_t new_id)
 {
-    id = new_id;
+    _id = new_id;
 }

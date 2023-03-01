@@ -22,6 +22,7 @@ int main(int ac, char **av)
     std::string port = "12345";
     std::string tcp_port = "12346";
 
+    // Lancer la window ici avec un get input pour le port
     if (ac != 2) {
         std::cerr << "Usage: ./r-type_client.exe <host>" << std::endl;
         return 84;

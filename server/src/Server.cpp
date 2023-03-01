@@ -15,8 +15,8 @@ Server::~Server()
 {
 }
 
-void Server::add_client(uint16_t id, std::shared_ptr<asio::ip::tcp::socket> socket) {
-    client_info_map.insert(std::make_pair(id, new ClientInfo(id, socket)));
+void Server::add_client(uint16_t id, std::shared_ptr<asio::ip::tcp::socket> socket, uint16_t x, uint16_t y) {
+    client_info_map.insert(std::make_pair(id, new ClientInfo(id, socket, x, y)));
 }
 
 ClientInfo* Server::get_client_info(uint16_t client_id) const {
@@ -43,22 +43,22 @@ void Server::print_all_clients() const {
     }
 }
 
-void Server::new_client(uint16_t client_id) {
-    Header_server header;
-    header.data_type = NEW_CLIENT;
-    header.id = client_id;
-    for (const auto& iter : client_info_map) {
-        if (iter.first != client_id) {
-            asio::write(*(iter.second->get_socket()), asio::buffer(&header, sizeof(Header_server)));
-        }
-    }
-}
-
 void Server::send_to_all_clients(Server_data type, uint16_t id) {
     Header_server header;
     header.data_type = type;
     header.id = id;
     for (const auto& iter : client_info_map) {
         asio::write(*(iter.second->get_socket()), asio::buffer(&header, sizeof(Header_server)));
+    }
+}
+
+void Server::send_vector_clients() {
+    Start start;
+
+    for (const auto& [client_id, client_info] : client_info_map) {
+        start.client_info = *client_info;
+        for (const auto& iter : client_info_map) {
+            asio::write(*(iter.second->get_socket()), asio::buffer(&start, sizeof(Start)));
+        }
     }
 }
