@@ -7,6 +7,18 @@
 
 #include "systems.hpp"
 
+/**
+ * @file collusion_system.cpp
+ */
+
+/**
+ * @brief Check if two entities are colliding.
+ *
+ * @param reg Registry of the engine, used to contain all the component system.
+ * @param collusion Component system of the collision.
+ * @param image To get the sprite of the entity which is colliding.
+ */
+
 void collusion_system(registry &reg, sparse_array<component::collusion> &collusion, sparse_array<component::image> &image)
 {
     if (image.size() == 0)
