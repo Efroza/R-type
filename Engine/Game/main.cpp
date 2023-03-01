@@ -21,6 +21,18 @@
 #include "handling_interaction.hpp"
 #include "Yaml.hpp"
 
+/**
+ * @file main.cpp
+ */
+
+/**
+ * @brief Create the gameplay.
+ *
+ * @param reg Container of all the systems and components.
+ * @param db Container of all the data (textures, sounds, etc...)
+ * @param yaml File containing the configuration of the game.
+ */
+
 void game(registry &reg, data &db, Yaml &yaml)
 {
     load_system(reg);
@@ -35,6 +47,12 @@ void game(registry &reg, data &db, Yaml &yaml)
         reg.run_systems();
 }
 
+/**
+ * @brief Initialize the databases.
+ *
+ * @param db Container of all the data (textures, sounds, etc...)
+ */
+
 void init_databases(data &db)
 {
 
@@ -43,6 +61,16 @@ void init_databases(data &db)
     //network.set_protocol(POSITION)
     //network.send<component::position>()
 }
+
+/**
+ * @brief Main function.
+ *
+ * @param ac Number of arguments.
+ * @param av Arguments.
+ * @return int
+ * @details The main function is used to manage all the errors possible, set all the preparations (init_databases, parse the config files, etc...)
+ * @details and finally launch the game.
+ */
 
 int main(int ac, char **av)
 {

@@ -7,6 +7,16 @@
 
 #include "Yaml.hpp"
 
+/**
+ * @file Yaml.cpp
+ */
+
+/**
+ * @brief Construct a new Yaml:: Yaml object
+ *
+ * @param _fileConf Name of the YAML file to parse.
+ */
+
 Yaml::Yaml(std::string const &_fileConf)
 {
     if (_fileConf.empty() || !std::ifstream(_fileConf))
@@ -20,6 +30,13 @@ Yaml::~Yaml()
 {
 }
 
+/**
+ * @brief Get the data from the YAML file.
+ *
+ * @param info Name of the data to get.
+ * @return std::string Data.
+ */
+
 std::vector<std::string> Yaml::get(std::string const &info) const
 {
     try {
@@ -28,6 +45,14 @@ std::vector<std::string> Yaml::get(std::string const &info) const
         throw std::runtime_error("Can't get this info from that config file");
     }
 }
+
+/**
+ * @brief Check if the data exist in the YAML file.
+ *
+ * @param key Name of the data to check.
+ * @return true If the data exist.
+ * @return false If the data doesn't exist.
+ */
 
 bool Yaml::data_exist(std::string const &key) const
 {

@@ -8,6 +8,16 @@
 #include "registry.hpp"
 #include "systems.hpp"
 
+/**
+ * @file load_component.cpp
+ */
+
+/**
+ * @brief Load all the components in the registry.
+ *
+ * @param reg Container of all the components.
+ */
+
 void load_component(registry &reg)
 {
     reg.register_component<component::image>();
