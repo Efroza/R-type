@@ -31,7 +31,7 @@ endif(DOXYGEN_FOUND)
 
 
 message("${Green} Installing dependencies${ColorReset}")
-conan_cmake_configure(REQUIRES sfml/2.5.1 asio/1.24.0
+conan_cmake_configure(REQUIRES sfml/2.5.1 asio/1.24.0 jsoncpp/1.9.5 yaml-cpp/0.7.0
   GENERATORS cmake)
 
 conan_cmake_autodetect(settings)
@@ -80,40 +80,47 @@ set(GRAPHC_FILES
     ./clientGraphic/Drawable/Drawable.hpp
     ./clientGraphic/Drawable/Drawable.cpp
 )
-  
-# set(SRCS3
-#     #Game
-#     ./Engine/Game/main.cpp
-#     ./Engine/Game/load_component.cpp
-#     ./Engine/Game/load_systems.cpp
-#     #BaseComponent
-#     ./Engine/BaseComponent/image.cpp
-#     #BaseSystems
-#     ./Engine/BaseSystems/draw_system.cpp
-#     ./Engine/BaseSystems/position_system.cpp
-#     )
-# set(HEADERS3
-#     #Include
-#     ./Engine/Include/entity.hpp
-#     ./Engine/Include/registry.hpp
-#     ./Engine/Include/sparse_array.hpp
-#     ./Engine/Includ/systems.hpp
-#     #BaseComponent
-#     ./Engine/BaseComponent/draw.hpp
-#     ./Engine/BaseComponent/image.hpp
-#     ./Engine/BaseComponent/position.hpp
-# )
 
-# add_executable(r-type_server ${SRCS1} ${HEADERS1})
-# add_executable(r-type_client ${SRCS2} ${HEADERS2})
-# add_executable(r-type ${SRCS3} ${HEADERS3})
-# target_link_libraries(r-type_client ${CONAN_LIBS})
-# target_link_libraries(r-type_server ${CONAN_LIBS})
-# target_link_libraries(r-type ${CONAN_LIBS})
-#     ./client/include/client.hpp
-#     )
+set(SRCS3
+    ./Engine/Game/main.cpp
+	  ./Engine/Game/load_component.cpp
+	  ./Engine/Game/load_systems.cpp
+	  ./Engine/BaseComponent/image.cpp
+	  ./Engine/BaseComponent/interaction.cpp
+	  ./Engine/BaseComponent/rect.cpp
+	  ./Engine/BaseSystems/animation_system.cpp
+	  ./Engine/BaseSystems/interaction_system.cpp
+	  ./Engine/BaseSystems/network_sytem.cpp
+	  ./Engine/BaseSystems/collusion_system.cpp
+	  ./Engine/ParseComponent/AParseComponent.cpp
+	  ./Engine/ParseComponent/AParseInteraction.cpp
+	  ./Engine/ParseComponent/parse_position.cpp
+	  ./Engine/ParseComponent/parse_image.cpp
+	  ./Engine/ParseComponent/parse_rect.cpp
+	  ./Engine/ParseComponent/parse_animation.cpp
+	  ./Engine/ParseComponent/parse_interaction.cpp
+	  ./Engine/ParseComponent/parse_network.cpp
+	  ./Engine/Parsing/parsing.cpp
+	  ./Engine/Parsing/handling_interaction.cpp
+	  ./Engine/Parsing/Yaml.cpp
+	  ./Engine/Parsing/handling_component_system.cpp
+    )
+
 
 message("${Green} Building ${PROJECT_NAME}${ColorReset}")
+add_executable(${PROJECT_NAME}_graphic ${SRCS3})
+target_compile_options(${PROJECT_NAME}_graphic PRIVATE 
+    -std=c++20 
+    -I./Engine/Include 
+    -I./Engine/BaseComponent 
+    -I./Engine/ParseComponent 
+    -I./Engine/Parsing 
+    -I./Engine/Interaction 
+    -I./Engine/Interaction/Include 
+    -I./Engine/Graphic 
+    -I./Engine/ComponentSystem
+)
+target_link_libraries(${PROJECT_NAME}_graphic ${CONAN_LIBS} jsoncpp dl yaml-cpp)
 include(clientGraphic/Graphic/SFML/SFML_lib.cmake)
 add_executable(${PROJECT_NAME}_client_graphic ${GRAPHC_FILES})
 target_include_directories(${PROJECT_NAME}_client_graphic PRIVATE clientGraphic/Graphic)

@@ -8,6 +8,16 @@
 #include "registry.hpp"
 #include "systems.hpp"
 
+/**
+ * @file load_systems.cpp
+ */
+
+/**
+ * @brief Load all the systems in the registry.
+ *
+ * @param reg Container of all the systems.
+ */
+
 void load_system(registry &reg)
 {
     reg.add_system<component::interaction>(interaction_system);

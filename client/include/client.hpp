@@ -33,6 +33,8 @@ class Client {
         void inLobby();
         void send_tcp_client(Header_client header, std::string message);
         void receive_tcp_client(Header_server header);
+        void start_game(Header_server header);
+        void launch_game();
 
         void async_udp_client(const std::string& host, const std::string& port);
         void receive_thread_client_udp(udp::socket& socket, asio::io_context& io_context);
@@ -46,6 +48,8 @@ class Client {
         bool _in_game = false;
         std::shared_ptr<tcp::socket> _socket;
         uint16_t _id = 0;
-        std::map<uint16_t, ClientInfo*> _other_clients;
+        std::vector<ClientInfo*> _other_clients;
+        const std::string& _host;
+        const std::string& _port;
 };
 #endif /* !CLIENT_HPP_ */

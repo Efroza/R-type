@@ -8,12 +8,14 @@ The server use both TCP and UDP, when in wait for game to start, it is TCP, when
 
 Client to server with server response:
     CONNECTED (0) : When user connect to server
-     -> (Int32, [(Int32)]) : Client id + list of client already connected
+     -> (Int32) : Client id
     DISCONNECTED (3) : When user crash or disconnect
      -> OK (Depends if in lobby or not)
     LOBBY (4, Int16) : Waiting for a certain number to start the game
      -> START : if Int16 = 1 (not waiting for player)
-     -> Waiting for players : If Int16 > 1 (waiting for Int16 player(s))
+     -> X (Wait for player) -> START : When every player connected
+    PREPARE_UDP(5) : Waiting for port of UDP
+     -> UDP : 
 
 Client to server with no server response :
     DIRECTION (1, ENUM (DIRECTION)) : When user move (poistion)
@@ -33,11 +35,12 @@ Server to client with no client response :
     HIT (5, Int16) : Player hit (hp lost)
     ENNEMY_DEAD (6, Int16, Int16) : Ennemy dead (Position)
     BONUS (7) : Gain bonus when ennemy dead
+    UDP (10) : Transition between tcp and udp when lobby is ready to start
 
 Server to client with client response :
     START (0) : When the game start
      ->  OK
-    NEW_CLIENT (8, Int16) : New client connected
+    ALREADY_IN_GAME (8) : When client try to connect to game already started
      -> OK
-    ALREADY_IN_GAME (9) : When client try to connect to game already started
-     -> OK
+    LOBBYS (9) : When client connect to server check if lobby exist or not
+    -> join lobby or create one

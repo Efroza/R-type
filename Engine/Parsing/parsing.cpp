@@ -20,6 +20,14 @@
 #include "parse_interaction.hpp"
 #include "parse_network.hpp"
 
+/**
+ * @file parsing.cpp
+ */
+
+/**
+ * @brief Map of all the component system that can be parsed.
+ */
+
 static std::unordered_map<std::string, std::function<IParseComponent *()>> const map = {
     {"position", [](){return new parse_component::position();}},
     {"image", [](){return new parse_component::image();}},
@@ -29,6 +37,13 @@ static std::unordered_map<std::string, std::function<IParseComponent *()>> const
     {"network", [](){return new parse_component::network();}},
 };
 
+/**
+ * @brief Construct a new parsing::parsing object
+ *
+ * @param registre Registry of the engine, used to contain all the component system.
+ * @param daatabase To store all the data.
+ * @param config_files Name of the JSON files to parse.
+ */
 parsing::parsing(registry &registre, data &daatabase, std::vector<std::string> const &config_files)
 : reg(&registre)
 , db(&daatabase)
@@ -42,6 +57,17 @@ parsing::~parsing()
 {
 }
 
+/**
+ * @brief Check if all the arguments needed by the component system are set.
+ *
+ * @param component Component system to check.
+ * @param json JSON file to check.
+ * @param reg Registry of the engine.
+ * @param db Database of the engine.
+ * @return true All the arguments are set.
+ * @return false One or more arguments are not set.
+ */
+
 static bool arguments_is_set(IParseComponent *component, Json::Value &json,registry &reg, data &db)
 {
     IParseComponent::parse_map const &parser = component->argument_needed();
@@ -54,6 +80,12 @@ static bool arguments_is_set(IParseComponent *component, Json::Value &json,regis
     return true;
 }
 
+/**
+ * @brief Parse the JSON file.
+ *
+ * @param pars Parsor object to parse the JSON file.
+ */
+
 void parsing::config_file(Parsor &pars)
 {
     Json::Value &json = pars.getJson();
@@ -64,6 +96,14 @@ void parsing::config_file(Parsor &pars)
         }
     }
 }
+
+/**
+ * @brief Parse all the JSON files.
+ *
+ * @param data_interactions Interaction of the engine.
+ * @param cs_library Component system library of the engine.
+ * @details Manage the parsing of all the JSON files and check errors.
+ */
 
 void parsing::handle_config_files(handling_interaction &data_interactions, handling_component_system &cs_library)
 {
@@ -85,6 +125,15 @@ void parsing::handle_config_files(handling_interaction &data_interactions, handl
 
 }
 
+/**
+ * @brief Parse a component system.
+ *
+ * @param name Name of the component system.
+ * @param entitie JSON file to parse.
+ * @param e Entity to add the component system.
+ * @param cs_value Component system to parse.
+ */
+
 void parsing::handle_component_system_json(std::string const &name, Json::Value &entitie, entity_t &e, IComponentSystem *cs_value)
 {
     if (cs_value == nullptr)
@@ -102,6 +151,14 @@ void parsing::handle_component_system_json(std::string const &name, Json::Value 
     parse_component->load_component(e, *reg, *db, entitie[name]);
 }
 
+/**
+ * @brief Parse all the component system of an entity.
+ *
+ * @param name Name of the component system.
+ * @param entitie JSON file to parse.
+ * @param e Entity to add the component system.
+ */
+
 void parsing::handle_component_system(std::string const &name, Json::Value &entitie, entity_t &e)
 {
     if (cs_data == nullptr)
@@ -116,6 +173,12 @@ void parsing::handle_component_system(std::string const &name, Json::Value &enti
     handle_component_system_json(name, entitie, e, cs_value);
     return;
 }
+
+/**
+ * @brief Parse an entity.
+ *
+ * @param entitie JSON file to parse.
+ */
 
 void parsing::handle_entites(Json::Value &entitie)
 {
