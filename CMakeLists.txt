@@ -59,26 +59,34 @@ set(HEADERS1
     ./shared/include/ClientInfo.hpp
     )
 
-set(SRCS2
-    ./client/src/main.cpp
-    ./client/src/tcp.cpp
-    ./client/src/udp.cpp
-    ./shared/src/ClientInfo.cpp
-    )
+# set(SRCS2
+#     ./client/src/main.cpp
+#     ./client/src/tcp.cpp
+#     ./client/src/udp.cpp
+#     ./shared/src/ClientInfo.cpp
+#     )
     
-set(HEADERS2
-    ./client/include/client.hpp
-    ./shared/include/headers.hpp
-    ./shared/include/ClientInfo.hpp
-    )
+# set(HEADERS2
+#     ./client/include/client.hpp
+#     ./shared/include/headers.hpp
+#     ./shared/include/ClientInfo.hpp
+#     )
 
-set(GRAPHC_FILES
-    ./clientGraphic/main.cpp
-    ./clientGraphic/Core.cpp
+set(GRAPHIC_HEADERS,
     ./clientGraphic/Core.hpp
     ./clientGraphic/Graphic/IGraphic.hpp
     ./clientGraphic/Drawable/Drawable.hpp
+    ./clientGraphic/include/client.hpp
+    ./shared/include/ClientInfo.hpp
+)
+
+set(GRAPHIC_FILES
+    ./clientGraphic/main.cpp
+    ./clientGraphic/Core.cpp
     ./clientGraphic/Drawable/Drawable.cpp
+    ./clientGraphic/src/tcp.cpp
+    ./clientGraphic/src/udp.cpp
+    ./shared/src/ClientInfo.cpp
 )
 
 set(SRCS3
@@ -122,15 +130,16 @@ target_compile_options(${PROJECT_NAME}_graphic PRIVATE
 )
 target_link_libraries(${PROJECT_NAME}_graphic ${CONAN_LIBS} jsoncpp dl yaml-cpp)
 include(clientGraphic/Graphic/SFML/SFML_lib.cmake)
-add_executable(${PROJECT_NAME}_client_graphic ${GRAPHC_FILES})
+add_executable(${PROJECT_NAME}_client_graphic ${GRAPHIC_FILES} ${GRAPHIC_HEADERS})
+target_link_libraries(${PROJECT_NAME}_client_graphic ${CONAN_LIBS})
 target_include_directories(${PROJECT_NAME}_client_graphic PRIVATE clientGraphic/Graphic)
 target_link_libraries(${PROJECT_NAME}_client_graphic ${CMAKE_DL_LIBS})
 add_executable(${PROJECT_NAME}_server ${SRCS1} ${HEADERS1})
-add_executable(${PROJECT_NAME}_client ${SRCS2} ${HEADERS2})
+# add_executable(${PROJECT_NAME}_client ${SRCS2} ${HEADERS2})
 target_link_libraries(${PROJECT_NAME}_server ${CONAN_LIBS})
-target_link_libraries(${PROJECT_NAME}_client ${CONAN_LIBS})
+# target_link_libraries(${PROJECT_NAME}_client ${CONAN_LIBS})
 message("${Green} Done${ColorReset}")
 include(InstallRequiredSystemLibraries)
 install(TARGETS ${PROJECT_NAME}_server RUNTIME DESTINATION bin)
-install(TARGETS ${PROJECT_NAME}_client RUNTIME DESTINATION bin)
+# install(TARGETS ${PROJECT_NAME}_client RUNTIME DESTINATION bin)
 include(CPack)

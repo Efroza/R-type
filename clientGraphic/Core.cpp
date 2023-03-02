@@ -11,7 +11,7 @@
 #include <iostream>
 #include "Core.hpp"
 
-Core::Core()
+Core::Core(Client &init_client) : client(&init_client)
 {
     this->loadLib("lib/libSFML.so");//faut mettre le path de la lib graphique
     this->_drawables.push_back(std::make_shared<Drawable>("./Engine/Image/spaceship_jet.png", std::pair<int, int>(400, 400)));

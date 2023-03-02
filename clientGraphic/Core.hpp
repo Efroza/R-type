@@ -9,11 +9,12 @@
 #include <string>
 #include <list>
 #include "IGraphic.hpp"
+#include "./include/client.hpp"
 
 class Core
 {
 public:
-    Core();
+    Core(Client &init_client);
     ~Core();
 
     void loop();
@@ -22,4 +23,5 @@ private:
     
     std::unique_ptr<IGraphic> _libGraphic;
     std::list<std::shared_ptr<Drawable>> _drawables;
+    Client *client;
 };
