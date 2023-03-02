@@ -5,7 +5,12 @@
 ** Core
 */
 
+#ifdef _unix_
 #include <dlfcn.h>
+#else
+#include <windows.h>
+#endif
+
 #include <stdexcept>
 #include <functional>
 #include <iostream>
@@ -52,17 +57,30 @@ void Core::loop()
 
 void Core::loadLib(const std::string &filepath)
 {
+    #ifdef _WIN32 // Windows
+    HINSTANCE handle = LoadLibrary(filepath.c_str());
+    if (!handle) {
+        throw std::runtime_error("Error LoadLibrary: " + std::to_string(GetLastError()));
+    }
+    IGraphic *(*funcPtr)() = reinterpret_cast<IGraphic *(*)()>(GetProcAddress(handle, "createGraphLib"));
+    if (!funcPtr) {
+        throw std::invalid_argument(std::string("Invalid lib: ") + std::to_string(GetLastError()));
+    }
+    #else // Linux
     void *handle = dlopen(filepath.c_str(), RTLD_LAZY);
     if (!handle) {
         throw std::runtime_error("Error dlopen: " + std::string(dlerror()));
     }
-    IGraphic *(*funcPtr)() = (IGraphic *(*)())dlsym(handle, "createGraphLib");
+    IGraphic *(*funcPtr)() = reinterpret_cast<IGraphic *(*)()>(dlsym(handle, "createGraphLib"));
     if (!funcPtr) {
         throw std::invalid_argument(std::string("Invalid lib: ") + dlerror());
     }
+    #endif
+
     auto a = std::function<IGraphic * ()>(funcPtr);
     _libGraphic.reset(std::move(a()));
     if (_libGraphic.get() == nullptr) {
         throw std::runtime_error("Error during lib loading");
     }
+
 }
