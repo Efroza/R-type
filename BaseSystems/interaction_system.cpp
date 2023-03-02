@@ -5,8 +5,8 @@
 ** interaction_system
 */
 
-#include "registry.hpp"
-#include "interaction.hpp"
+#include "../Include/registry.hpp"
+#include "../BaseComponent/interaction.hpp"
 
 static void handling_type(sf::Event::EventType type, std::uint8_t id, registry &reg, component::interaction const &interaction)
 {

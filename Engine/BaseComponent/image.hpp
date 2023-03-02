@@ -10,8 +10,8 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "data.hpp"
-#include "entity.hpp"
+#include "../Include/data.hpp"
+#include "../Include/entity.hpp"
 
 namespace component
 {

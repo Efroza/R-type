@@ -10,7 +10,7 @@
 
 #include <iostream>
 #include <functional>
-#include "registry.hpp"
+#include "../Include/registry.hpp"
 
 class ILoad_Interaction {
     public:

@@ -5,10 +5,10 @@
 ** animation_system
 */
 
-#include "registry.hpp"
-#include "rect.hpp"
-#include "animation.hpp"
-#include "image.hpp"
+#include "../Include/registry.hpp"
+#include "../BaseComponent/rect.hpp"
+#include "../BaseComponent/animation.hpp"
+#include "../BaseComponent/image.hpp"
 
 /**
  * @file animation_system.cpp

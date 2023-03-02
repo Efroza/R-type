@@ -6,7 +6,7 @@
 */
 
 #include "parse_rect.hpp"
-#include "rect.hpp"
+#include "../BaseComponent/rect.hpp"
 
 parse_component::rect::rect()
 {

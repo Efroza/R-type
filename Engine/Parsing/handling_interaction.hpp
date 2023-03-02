@@ -11,7 +11,7 @@
 #include <iostream>
 #include <vector>
 #include <memory>
-#include "ILoad_Interaction.hpp"
+#include "../Interaction/ILoad_Interaction.hpp"
 
 class handling_interaction
 {

@@ -10,10 +10,10 @@
 
 #include <exception>
 #include "Parsor.hpp"
-#include "IParseComponent.hpp"
+#include "../ParseComponent/IParseComponent.hpp"
 #include "handling_interaction.hpp"
 #include "handling_component_system.hpp"
-#include "registry.hpp"
+#include "../Include/registry.hpp"
 
 class parsing
 {

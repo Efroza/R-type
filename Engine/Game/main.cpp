@@ -5,21 +5,23 @@
 ** main
 */
 
+#ifdef _unix_
 #include <unistd.h>
+#include <dlfcn.h>
+#endif
+
 #include <SFML/Window.hpp>
 #include <functional>
-#include <dlfcn.h>
 #include <memory>
 // #include "IGraphic.hpp"
-#include "parsing.hpp"
-#include "systems.hpp"
-#include "draw.hpp"
-#include "rect.hpp"
-#include "systems.hpp"
-#include "interaction.hpp"
-#include "interactive.hpp"
-#include "handling_interaction.hpp"
-#include "Yaml.hpp"
+#include "../Parsing/parsing.hpp"
+#include "../Include/systems.hpp"
+#include "../ComponentSystem/draw.hpp"
+#include "../BaseComponent/rect.hpp"
+#include "../BaseComponent/interaction.hpp"
+#include "../Include/interactive.hpp"
+#include "../Parsing/handling_interaction.hpp"  
+#include "../Parsing/Yaml.hpp"
 
 /**
  * @file main.cpp

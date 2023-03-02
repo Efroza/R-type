@@ -9,15 +9,15 @@
 #define SYSTEMES_HPP_
 
 #include "registry.hpp"
-#include "draw.hpp"
-#include "image.hpp"
-#include "position.hpp"
-#include "rect.hpp"
-#include "interaction.hpp"
+#include "../ComponentSystem/draw.hpp"
+#include "../BaseComponent/image.hpp"
+#include "../BaseComponent/position.hpp"
+#include "../BaseComponent/rect.hpp"
+#include "../BaseComponent/interaction.hpp"
 #include "interactive.hpp"
-#include "animation.hpp"
-#include "collusion.hpp"
-#include "network.hpp"
+#include "../BaseComponent/animation.hpp"
+#include "../BaseComponent/collusion.hpp"
+#include "../BaseComponent/network.hpp"
 
 //system
 void animation_system(registry &reg
