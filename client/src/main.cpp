@@ -19,19 +19,14 @@
 
 int main(int ac, char **av)
 {
-    std::string port = "12345";
-    std::string tcp_port = "12346";
-
     // Lancer la window ici avec un get input pour le port
-    if (ac != 2) {
-        std::cerr << "Usage: ./r-type_client.exe <host>" << std::endl;
+    if (ac != 3) {
+        std::cerr << "Usage: ./r-type_client.exe <host> <port>" << std::endl;
         return 84;
     }
     std::string host = av[1];
-    // Uncomment the line for the desired client
+    std::string tcp_port = av[2];
     Client client(host, tcp_port);
-    // async_tcp_client(host, tcp_port);
-    // async_udp_client(host, port);
 
     return 0;
 }

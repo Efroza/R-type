@@ -38,7 +38,7 @@ class Server {
 
 class TCP_Server {
     public:
-        TCP_Server();
+        TCP_Server(uint16_t port);
         ~TCP_Server();
 
         void launch_tcp_server();
@@ -52,6 +52,7 @@ class TCP_Server {
         Server server_data;
         std::thread start;
         bool _lobby = false;
+        uint16_t _port;
         uint16_t _nb_clients = 0;
         uint16_t _nb_lobby = 0;
         uint16_t last_x = 50;
