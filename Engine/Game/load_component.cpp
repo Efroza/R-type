@@ -5,8 +5,8 @@
 ** load_component
 */
 
-#include "registry.hpp"
-#include "systems.hpp"
+#include "../Include/registry.hpp"
+#include "../Include/systems.hpp"
 
 /**
  * @file load_component.cpp

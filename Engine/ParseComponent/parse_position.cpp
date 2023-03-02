@@ -6,7 +6,7 @@
 */
 
 #include "parse_position.hpp"
-#include "position.hpp"
+#include "../BaseComponent/position.hpp"
 
 parse_component::position::position()
 {

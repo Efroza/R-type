@@ -5,8 +5,8 @@
 ** interaction_system
 */
 
-#include "registry.hpp"
-#include "interaction.hpp"
+#include "../Include/registry.hpp"
+#include "../BaseComponent/interaction.hpp"
 
 /**
  * @file interaction_system.cpp

@@ -5,8 +5,12 @@
 ** handling_component_system
 */
 
-#include "handling_component_system.hpp"
+#ifdef WIN32
+#include <windows.h>
+#else
 #include <dlfcn.h>
+#endif
+#include "handling_component_system.hpp"
 
 using Component_System = IComponentSystem *(*)();
 
@@ -23,16 +27,30 @@ handling_component_system::~handling_component_system()
 
 void handling_component_system::add_lib_component_system(std::string const &lib_path)
 {
-    void *handle = dlopen(lib_path.c_str(), RTLD_LAZY);
-
-    if (handle == nullptr)
+    #ifdef _WIN32 // Windows
+    HINSTANCE handle = LoadLibrary(lib_path.c_str());
+    if (!handle) {
         throw std::runtime_error("error cannot open file: " + lib_path + "\n");
-    Component_System create = (Component_System)dlsym(handle, "createComponentSystem");
-    if (create == nullptr)
+    }
+    Component_System create = (Component_System)GetProcAddress(handle, "createComponentSystem");
+    if (!create) {
         throw std::runtime_error("no function createComponentSystem \n");
+    }
+    #else // Linux
+    void *handle = dlopen(lib_path.c_str(), RTLD_LAZY);
+    if (!handle) {
+        throw std::runtime_error("error cannot open file: " + lib_path + "\n");
+    }
+    Component_System create = (Component_System)dlsym(handle, "createComponentSystem");
+    if (!create) {
+        throw std::runtime_error("no function createComponentSystem \n");
+    }
+    #endif
+
     IComponentSystem *cs_data = create();
-    if (cs_data == nullptr)
+    if (cs_data == nullptr) {
         throw std::runtime_error("invalid createComponentSystem return invalid pointer\n");
+    }
     cs_array.emplace_back(cs_data);
 }
 

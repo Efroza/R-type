@@ -6,7 +6,7 @@
 */
 
 #include "parse_image.hpp"
-#include "image.hpp"
+#include "../BaseComponent/image.hpp"
 
 parse_component::image::image()
 {

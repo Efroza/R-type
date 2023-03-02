@@ -6,7 +6,11 @@
 */
 
 #include "handling_interaction.hpp"
+#ifdef _unix_
 #include <dlfcn.h>
+#else
+#include <windows.h>
+#endif
 
 using function_interaction = ILoad_Interaction *(*)();
 
@@ -60,16 +64,30 @@ bool handling_interaction::name_is_interaction(std::string const &name) const no
 
 void handling_interaction::add_lib_interaction(std::string const &lib_path)
 {
-    void *handle = dlopen(lib_path.c_str(), RTLD_LAZY);
-
-    if (handle == nullptr)
+    #ifdef _WIN32 // Windows
+    HINSTANCE handle = LoadLibrary(lib_path.c_str());
+    if (!handle) {
         throw std::runtime_error("error cannot open file: " + lib_path + "\n");
-    function_interaction create = (function_interaction)dlsym(handle, "createInteraction");
-    if (create == nullptr)
+    }
+    function_interaction create = (function_interaction)GetProcAddress(handle, "createInteraction");
+    if (!create) {
         throw std::runtime_error("no function createInteraction \n");
+    }
+    #else // Linux
+    void *handle = dlopen(lib_path.c_str(), RTLD_LAZY);
+    if (!handle) {
+        throw std::runtime_error("error cannot open file: " + lib_path + "\n");
+    }
+    function_interaction create = (function_interaction)dlsym(handle, "createInteraction");
+    if (!create) {
+        throw std::runtime_error("no function createInteraction \n");
+    }
+    #endif
+
     ILoad_Interaction *interaction = create();
-    if (interaction == nullptr)
+    if (interaction == nullptr) {
         throw std::runtime_error("invalid createInteraction return invalid pointer\n");
+    }
     lib_interactions.emplace_back(std::unique_ptr<ILoad_Interaction>(interaction));
 }
 

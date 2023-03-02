@@ -10,7 +10,7 @@
 
 #include <iostream>
 #include <cctype>
-#include "registry.hpp"
+#include "../Include/registry.hpp"
 
 class IComponentSystem {
     public:

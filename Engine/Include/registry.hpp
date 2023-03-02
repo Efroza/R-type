@@ -12,6 +12,7 @@
 #include <typeinfo>
 #include <typeindex>
 #include <any>
+#include <functional>
 
 #include "sparse_array.hpp"
 #include "entity.hpp"

@@ -8,7 +8,7 @@
 #ifndef APARSEINTERACTION_HPP_
 #define APARSEINTERACTION_HPP_
 
-#include "handling_interaction.hpp"
+#include "../Parsing/handling_interaction.hpp"
 
 class AParseInteraction {
     public:
