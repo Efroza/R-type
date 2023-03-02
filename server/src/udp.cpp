@@ -28,6 +28,15 @@ UDP_Server::~UDP_Server()
 }
 
 /**
+ * @brief This function will retrieve the current port of the udp server
+ * @return uint16_t
+*/
+uint16_t UDP_Server::get_port() const
+{
+    return _port;
+}
+
+/**
  * @brief This function will launch the udp server.
  * @return void
  * @param void
@@ -38,8 +47,10 @@ UDP_Server::~UDP_Server()
 void UDP_Server::launch_udp_server()
 {
     io_service io_service;
-    ip::udp::socket socket(io_service, ip::udp::endpoint(ip::udp::v4(), PORT)); // Bind to port
-    ip::udp::endpoint remote(ip::address::from_string(HOST), PORT); // Remote endpoint
+    ip::udp::socket socket(io_service, ip::udp::endpoint(ip::udp::v4(), 0)); // Bind to port
+    // ip::udp::endpoint local_endpoint = socket.local_endpoint(); // Get local endpoint
+    _port = socket.local_endpoint().port(); // Get port
+    ip::udp::endpoint remote(ip::address::from_string(HOST), _port); // Remote endpoint
     std::vector<ip::udp::endpoint> endpoints;
 
     std::thread receive(&UDP_Server::receive_thread, this, std::ref(socket), std::ref(remote), std::ref(endpoints)); // Create thread to receive data from clients

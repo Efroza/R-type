@@ -38,7 +38,7 @@ class Server {
 
 class TCP_Server {
     public:
-        TCP_Server(uint16_t port);
+        TCP_Server(uint16_t port, uint16_t port_udp);
         ~TCP_Server();
 
         void launch_tcp_server();
@@ -53,6 +53,7 @@ class TCP_Server {
         std::thread start;
         bool _lobby = false;
         uint16_t _port;
+        uint16_t _port_udp;
         uint16_t _nb_clients = 0;
         uint16_t _nb_lobby = 0;
         uint16_t last_x = 50;
@@ -70,8 +71,11 @@ class UDP_Server {
         void receive_thread(asio::ip::udp::socket& socket, asio::ip::udp::endpoint& remote, std::vector<asio::ip::udp::endpoint>& endpoints);
         void receive_data(asio::ip::udp::socket& socket, asio::ip::udp::endpoint& remote, std::vector<asio::ip::udp::endpoint>& endpoint, Header header);
 
+        uint16_t get_port() const;
+
     private:
         std::thread start;
+        uint16_t _port;
 };
 
 #endif /* !SERVER_HPP_ */

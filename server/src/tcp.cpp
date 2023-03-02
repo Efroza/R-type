@@ -24,7 +24,7 @@ using asio::buffer;
  * @details It creates two struct one if it is a position and another one if it is a message.
  * @details Depending of the data type it will print the data.
 */
-TCP_Server::TCP_Server(uint16_t port) : _port(port)
+TCP_Server::TCP_Server(uint16_t port, uint16_t port_udp) : _port(port), _port_udp(port_udp)
 {
   start = std::thread(&TCP_Server::launch_tcp_server, this);
 }
@@ -207,12 +207,14 @@ void TCP_Server::receive_tcp_server(Header_client header, tcp::socket &socket, S
     case PREPARE_UDP : {
       std::cout << "Client has received data " << header.id << std::endl;
       Header_server header_server;
-      header_server.id = 12345;
+      header_server.id = _port_udp;
       header_server.data_type = UDP;
       socket.send(asio::buffer(&header_server, sizeof(header_server)));
     }
     default:
       std::cout << "Unknown data type" << std::endl;
+      std::cout << "Data type: " << header.data_type << std::endl;
+      std::cout << "ID: " << header.id << std::endl;
       break;
   }
 }
