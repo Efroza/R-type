@@ -6,7 +6,7 @@
 */
 
 #include "parse_interaction.hpp"
-#include "interaction.hpp"
+#include "../BaseComponent/interaction.hpp"
 
 // right 72
 // left 71

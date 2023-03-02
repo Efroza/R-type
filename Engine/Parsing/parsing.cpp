@@ -7,18 +7,18 @@
 
 #include <exception>
 #include "Parsor.hpp"
-#include "IParseComponent.hpp"
-#include "handling_interaction.hpp"
+#include "../ParseComponent/IParseComponent.hpp"
+#include "../Parsing/handling_interaction.hpp"
 
 #include "parsing.hpp"
 
-#include "registry.hpp"
-#include "parse_position.hpp"
-#include "parse_image.hpp"
-#include "parse_rect.hpp"
-#include "parse_animation.hpp"
-#include "parse_interaction.hpp"
-#include "parse_network.hpp"
+#include "../Include/registry.hpp"
+#include "../ParseComponent/parse_position.hpp"
+#include "../ParseComponent/parse_image.hpp"
+#include "../ParseComponent/parse_rect.hpp"
+#include "../ParseComponent/parse_animation.hpp"
+#include "../ParseComponent/parse_interaction.hpp"
+#include "../ParseComponent/parse_network.hpp"
 
 /**
  * @file parsing.cpp

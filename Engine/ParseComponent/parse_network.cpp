@@ -6,7 +6,7 @@
 */
 
 #include "parse_network.hpp"
-#include "network.hpp"
+#include "../BaseComponent/network.hpp"
 
 parse_component::network::network()
 {

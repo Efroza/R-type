@@ -5,8 +5,8 @@
 ** parse_animation
 */
 
-#include "parse_animation.hpp"
-#include "animation.hpp"
+#include "./parse_animation.hpp"
+#include "../BaseComponent/animation.hpp"
 
 parse_component::animation::animation()
 {
