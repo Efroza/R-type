@@ -5,7 +5,7 @@
 ** handling_component_system
 */
 
-#ifdef WIN32
+#ifdef _WIN32
 #include <windows.h>
 #else
 #include <dlfcn.h>

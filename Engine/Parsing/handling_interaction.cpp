@@ -6,10 +6,10 @@
 */
 
 #include "handling_interaction.hpp"
-#ifdef _unix_
-#include <dlfcn.h>
-#else
+#ifdef _WIN32
 #include <windows.h>
+#else
+#include <dlfcn.h>
 #endif
 
 using function_interaction = ILoad_Interaction *(*)();
