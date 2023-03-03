@@ -21,8 +21,8 @@ int main(int ac, char **av) {
         std::cerr << "Usage: ./r-type_server.exe <port>" << std::endl;
         return 84;
     }
-    TCP_Server tcp_server(std::stoi(av[1]), 2);
-    UDP_Server udp_server = UDP_Server();
+    TCP_Server main_server(std::stoi(av[1]));
+    UDP_Server udp_server(std::stoi(av[1]) + 1);
 
     return 0;
 }

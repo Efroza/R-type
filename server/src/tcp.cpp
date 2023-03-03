@@ -24,7 +24,7 @@ using asio::buffer;
  * @details It creates two struct one if it is a position and another one if it is a message.
  * @details Depending of the data type it will print the data.
 */
-TCP_Server::TCP_Server(uint16_t port, uint16_t port_udp) : _port(port), _port_udp(port_udp)
+TCP_Server::TCP_Server(uint16_t port) : _port(port)
 {
   start = std::thread(&TCP_Server::launch_tcp_server, this);
 }
@@ -47,6 +47,9 @@ void TCP_Server::launch_tcp_server()
 {
   io_context io_context;
   tcp::acceptor acceptor(io_context, tcp::endpoint(tcp::v4(), _port));
+
+  _port_udp = acceptor.local_endpoint().port() + 1;
+
   while (true) {
     std::shared_ptr<tcp::socket> socket = std::make_shared<tcp::socket>(io_context);
     acceptor.accept(*socket);

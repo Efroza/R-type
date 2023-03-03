@@ -36,11 +36,32 @@ class Server {
         std::map<uint16_t, ClientInfo*> client_info_map;
 };
 
+class UDP_Server {
+    public:
+        UDP_Server(uint16_t port);
+        ~UDP_Server();
+
+        void launch_udp_server();
+        void launch_thread_server();
+        void send_thread(asio::ip::udp::socket& socket, asio::ip::udp::endpoint& remote, std::vector<asio::ip::udp::endpoint>& endpoints);
+        void send_message(asio::ip::udp::socket& socket, std::vector<asio::ip::udp::endpoint>& endpoints, std::string message_client);
+        void send_position(asio::ip::udp::socket& socket, std::vector<asio::ip::udp::endpoint>& endpoints, std::string message_client);
+        void receive_thread(asio::ip::udp::socket& socket, asio::ip::udp::endpoint& remote, std::vector<asio::ip::udp::endpoint>& endpoints);
+        void receive_data(asio::ip::udp::socket& socket, asio::ip::udp::endpoint& remote, std::vector<asio::ip::udp::endpoint>& endpoint, Header header);
+
+        uint16_t get_port() const;
+
+    private:
+        std::thread start;
+        uint16_t _port;
+        std::shared_ptr<asio::ip::udp::socket> _socket;
+};
+
 class TCP_Server {
     public:
-        TCP_Server(uint16_t port, uint16_t port_udp);
+        TCP_Server(uint16_t port);
         ~TCP_Server();
-
+    
         void launch_tcp_server();
         void handle_client(std::shared_ptr<asio::ip::tcp::socket> socket, Server& server_data);
         void send_tcp_server(Header_server header, asio::ip::tcp::socket &socket, std::string message);
@@ -53,29 +74,10 @@ class TCP_Server {
         std::thread start;
         bool _lobby = false;
         uint16_t _port;
-        uint16_t _port_udp;
+        uint16_t _port_udp = 0;
         uint16_t _nb_clients = 0;
         uint16_t _nb_lobby = 0;
         uint16_t last_x = 50;
-};
-
-class UDP_Server {
-    public:
-        UDP_Server();
-        ~UDP_Server();
-
-        void launch_udp_server();
-        void send_thread(asio::ip::udp::socket& socket, asio::ip::udp::endpoint& remote, std::vector<asio::ip::udp::endpoint>& endpoints);
-        void send_message(asio::ip::udp::socket& socket, std::vector<asio::ip::udp::endpoint>& endpoints, std::string message_client);
-        void send_position(asio::ip::udp::socket& socket, std::vector<asio::ip::udp::endpoint>& endpoints, std::string message_client);
-        void receive_thread(asio::ip::udp::socket& socket, asio::ip::udp::endpoint& remote, std::vector<asio::ip::udp::endpoint>& endpoints);
-        void receive_data(asio::ip::udp::socket& socket, asio::ip::udp::endpoint& remote, std::vector<asio::ip::udp::endpoint>& endpoint, Header header);
-
-        uint16_t get_port() const;
-
-    private:
-        std::thread start;
-        uint16_t _port;
 };
 
 #endif /* !SERVER_HPP_ */
