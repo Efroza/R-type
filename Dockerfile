@@ -63,6 +63,7 @@ RUN apt-get install -y cmake
 
 # Install Conan
 RUN pip install conan
+RUN pip install conan_package_tools
 
 # Add the Conan remote repository
 RUN conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
@@ -77,4 +78,5 @@ WORKDIR /app
 RUN rm CMakeCache.txt
 
 # Build the game
-RUN cmake . -DCMAKE_BUILD_TYPE=Release && cmake --build . --config Release
+RUN conan install .
+RUN cmake . -DCMAKE_BUILD_TYPE=Release && cmake --build . --config Release && cpack -C Release

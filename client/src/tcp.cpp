@@ -136,10 +136,6 @@ void Client::receive_tcp_client(Header_server header) {
  * @details If the message contains a comma it will be a position and if not, it will be a message.
  */
 void Client::send_tcp_client(Header_client header, std::string message) {
-    if (header.data_type == LOBBY) {
-        _socket->send(asio::buffer(&header, sizeof(header)));
-        return;
-    }
     Messages message_to_send;
     message_to_send.size = message.size();
     std::memcpy(&message_to_send.message, message.c_str(), message.size());
@@ -173,7 +169,7 @@ void Client::inGame() {
     Header_client header_client;
     header_client.id = std::stoi(number_players);
     header_client.data_type = LOBBY;
-    send_tcp_client(header_client, number_players);
+    _socket->send(asio::buffer(&header_client, sizeof(Header_client)));
     _in_game = true;
 }
 
