@@ -141,7 +141,7 @@ void Client::async_udp_client(const std::string& host, const std::string& port)
     connect_server.id = 0;
     connect_server.data_type = MESSAGE;
     socket.send_to(asio::buffer(&connect_server, sizeof(connect_server)), server_endpoint); // Connect to server
-    std::cout << "Connected to server" << std::endl; // TODO: remove
+    std::cout << "Connected to server UDP" << std::endl; // TODO: remove
 
     std::thread receive_thread(&Client::receive_thread_client_udp, this, std::ref(socket), std::ref(io_context)); // Receive from server thread
     send_data_client_udp(socket, server_endpoint); // Send to server
