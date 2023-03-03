@@ -1,0 +1,167 @@
+RFC: 999
+                                    
+                                                                                                                                                                             
+                                    
+                     USER DATAGRAM PROTOCOL
+                                    
+                                    
+                         R-TYPE PROJECT
+                                    
+                     PROTOCOL SPECIFICATION
+                                    
+                                    
+                                    
+                         February 2023
+
+
+
+
+
+
+
+
+
+                         prepared for
+                                    
+                Epitech - Advanced C++ module
+
+
+
+
+
+
+                             by
+
+                       Brice Boualavong
+                         Luc Schmitt
+                        Royale Badiabo
+                         Yohan Henri
+                        Yosra Hassan
+
+
+
+February 2023
+                                                  User Datagram Protocol
+
+
+
+
+
+
+                           TABLE OF CONTENTS
+
+1.  INTRODUCTION ................................................... 1
+
+2.  HEADER ......................................................... 1
+
+  2.a  Header Format ............................................... 1
+  2.b  Functionality ............................................... 1
+
+3.  CLIENT'S ACTIONS ............................................... 2
+
+4.  SERVER'S ACTIONS ............................................... 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                [Page i]
+
+February 2023
+                                                  User Datagram Protocol
+
+
+
+                              INTRODUCTION
+
+
+
+   The User Datagram Protocol (UDP) is one of the protocols 
+   made for the R-Type project, the other one being the Transmission 
+   Control Protocol (TCP).
+   We use this protocol during all the communications in-game.
+   This protocol is used in-game because unlike the TCP where we want 
+   to be sure that all the informations are sent, here the UDP doesn't 
+   need any confirmation from the receiver making it much faster than
+   TCP. And in a game where connection can be slow we can't lose time 
+   because of communication.
+
+
+ 2. HEADER
+
+  2.a. Header Format
+
+    Header is a struct composed of two things :
+        Id : uint16_t
+        Data_type : One element from the client's action enum
+                    or server's one
+
+  2.b. Functionality
+
+    The server / client will first send the struct header so receivers 
+    will have the general meaning of the message. If the message is 
+    sent by the server the id in the header will be the id of the 
+    client it is talking to but if the message is sent by a client 
+    the id in the header will be the id of the player it is 
+    talking to.
+    Then after the struct header, it will send a second struct who has 
+    all the informations needed for the action to be understood.
+
+                                                                [Page 1]
+
+February 2023
+                                                  User Datagram Protocol
+
+
+
+ 3. CLIENT'S ACTIONS
+
+    DIRECTION (1, ENUM (DIRECTION)) : When user move (position)
+     -> X
+
+    SPEED (2, Int16) : When user change speed (speed +-)
+     -> X
+
+    DISCONNECTED (3) : When user crash or disconnect
+     -> X (Depends if in lobby or not)
+
+
+ 4. SERVER'S ACTIONS
+
+    ENNEMY (1, Int16, Int16, Int16) : When an ennemy spawn
+     (Position + Speed)
+
+    DEAD (2, Int16) : When an user die
+
+    LOSE (3) : No user left, game lost
+
+    WIN (4) : No ennemy left, game win
+
+    HIT (5, Int16) : Player hit (hp lost)
+
+    ENNEMY_DEAD (6, Int16, Int16) : Ennemy dead (Position)
+
+    BONUS (7) : Gain bonus when ennemy dead
+
+    UDP (10) : Transition between tcp and udp when lobby is ready
+     to start
+
+
+
+
+                                                                [Page 2]

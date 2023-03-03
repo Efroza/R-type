@@ -1,0 +1,167 @@
+RFC: 888
+                                    
+                                                                                                                                                                             
+                                    
+                  TRANSMISSION CONTROL PROTOCOL
+                                    
+                                    
+                         R-TYPE PROJECT
+                                    
+                     PROTOCOL SPECIFICATION
+                                    
+                                    
+                                    
+                         February 2023
+
+
+
+
+
+
+
+
+
+                         prepared for
+                                    
+                Epitech - Advanced C++ module
+
+
+
+
+
+
+                             by
+
+                       Brice Boualavong
+                         Luc Schmitt
+                        Royale Badiabo
+                         Yohan Henri
+                        Yosra Hassan
+
+
+
+February 2023
+                                           Transmission Control Protocol
+
+
+
+
+
+
+                           TABLE OF CONTENTS
+
+1.  INTRODUCTION ................................................... 1
+
+2.  HEADER ......................................................... 1
+
+  2.a  Header Format ............................................... 1
+  2.b  Functionality ............................................... 1
+
+3.  CLIENT'S ACTIONS ............................................... 2
+
+4.  SERVER'S ACTIONS ............................................... 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                [Page i]
+
+February 2023
+                                           Transmission Control Protocol
+
+
+
+                              INTRODUCTION
+
+
+
+   The Transmission Control Protocol (TCP) is one of the protocols 
+   made for the R-Type project, the other one being the User Dat-
+   -agram Protocol (UDP).
+   We use this protocol during all the communications outside of 
+   the game. This one is used outside of the game because this 
+   TCP protocol is considered as reliable, meaning that it will 
+   always check if all the data that was meant to be sent has been 
+   transmited. It checks via waiting an answer that is true to the
+   type of the message.
+
+
+ 2. HEADER
+
+  2.a. Header Format
+
+    Header is a struct composed of two things :
+        Id : uint16_t
+        Data_type : One element from the client's action enum
+                    or server's one
+
+  2.b. Functionality
+
+    The server / client will first send the struct header so receivers 
+    will have the general meaning of the message. If the message is 
+    sent by the server the id in the header will be the id of the 
+    client it is talking to but if the message is sent by a client 
+    the id in the header will be the id of the player it is 
+    talking to.
+    Then after the struct header, it will send a second struct who has 
+    all the informations needed for the action to be understood.
+
+                                                                [Page 1]
+
+February 2023
+                                           Transmission Control Protocol
+
+
+
+ 3. CLIENT'S ACTIONS
+
+    CONNECTED (0) : When user connect to server
+     -> (Int32) : Client id
+
+    DISCONNECTED (3) : When user crash or disconnect
+     -> OK (Depends if in lobby or not)
+
+    LOBBY (4, Int16) : Waiting for a certain number to start the game
+     -> START : if Int16 = 1 (not waiting for player)
+     -> X (Wait for player) -> START : When every player connected
+
+    PREPARE_UDP(5) : Waiting for port of UDP
+     -> UDP
+
+
+ 4. SERVER'S ACTIONS
+
+    START (0) : When the game start
+     -> OK
+
+    ALREADY_IN_GAME (8) : When client try to connect to game already
+      started -> OK
+
+    LOBBYS (9) : When client connect to server check if lobby exist or 
+     not
+    -> join lobby or create one
+
+
+
+
+
+
+
+
+                                                                [Page 2]
