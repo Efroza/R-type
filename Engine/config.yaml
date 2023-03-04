@@ -10,5 +10,4 @@ config_interaction:
 
 config_component_system:
   - ./ComponentSystem/print.so
-  - ./ComponentSystem/draw.so
 # get_yaml("config_json") -> std::vector<std::string>

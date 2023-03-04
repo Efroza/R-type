@@ -22,10 +22,41 @@
 #include "../Include/interactive.hpp"
 #include "../Parsing/handling_interaction.hpp"  
 #include "../Parsing/Yaml.hpp"
+#include "server.hpp"
 
 /**
  * @file main.cpp
  */
+
+/**
+ * @brief Create the gameplay.
+ *
+ * @param reg Container of all the systems and components.
+ * @param db Container of all the data (textures, sounds, etc...)
+ * @param yaml File containing the configuration of the game.
+ */
+
+void when_new_client(std::uint16_t client_id, registry *reg, UDP_Server &server)
+{
+    if (reg == nullptr)
+        return;
+    auto &network_entite = reg->get_components<component::network>();
+
+    for (size_t i = 0; i < network_entite.size(); ++i)
+    {
+        if (network_entite[i])
+        {
+            component::network_player player;
+            entity_t new_entite = reg->spawn_entity();
+
+            player.client_id = client_id;
+            player.server = &server;
+            reg->copy_component(i, new_entite);
+            reg->add_component<component::network_player>(new_entite, std::move(player));
+            reg->remove_component<component::network>(new_entite);
+        }
+    }
+}
 
 /**
  * @brief Create the gameplay.
@@ -45,6 +76,11 @@ void game(registry &reg, data &db, Yaml &yaml)
     handling_interaction interaction(interaction_config);
     parsing handling_parse(reg, db, config);
     handling_parse.handle_config_files(interaction, cs_lib);
+    //server
+    TCP_Server tcp(12345);
+    UDP_Server udp(12346);
+    udp.set_registry(reg);
+    udp.add_new_client_function(when_new_client);
     while (true)
         reg.run_systems();
 }
