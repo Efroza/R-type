@@ -90,8 +90,9 @@ set(SRCS3
 	  ./Engine/BaseComponent/rect.cpp
 	  ./Engine/BaseSystems/animation_system.cpp
 	  ./Engine/BaseSystems/interaction_system.cpp
-	#   ./Engine/BaseSystems/network_sytem.cpp
+	  ./Engine/BaseSystems/network_sytem.cpp
 	  ./Engine/BaseSystems/collusion_system.cpp
+	  ./Engine/BaseSystems/network_player_system.cpp
 	  ./Engine/ParseComponent/AParseComponent.cpp
 	  ./Engine/ParseComponent/AParseInteraction.cpp
 	  ./Engine/ParseComponent/parse_position.cpp
@@ -104,6 +105,10 @@ set(SRCS3
 	  ./Engine/Parsing/handling_interaction.cpp
 	  ./Engine/Parsing/Yaml.cpp
 	  ./Engine/Parsing/handling_component_system.cpp
+	  ./Engine/server/src/tcp.cpp
+	  ./Engine/server/src/udp.cpp
+	  ./Engine/server/src/Server.cpp
+	  ./shared/src/ClientInfo.cpp
     )
 
 set(HEADERS3
@@ -114,13 +119,13 @@ set(HEADERS3
     ./Engine/BaseComponent/position.hpp
     ./Engine/BaseComponent/rect.hpp
     ./Engine/BaseComponent/network.hpp
+    ./Engine/BaseComponent/network_player.hpp
     ./Engine/ComponentSystem/draw.hpp
     ./Engine/ComponentSystem/IComponentSystem.hpp
     ./Engine/ComponentSystem/print.hpp
     ./Engine/Include/data.hpp
     ./Engine/Include/entity.hpp
     ./Engine/Include/interactive.hpp
-    ./Engine/Include/networks.hpp
     ./Engine/Include/registry.hpp
     ./Engine/Include/sparse_array.hpp
     ./Engine/Include/systems.hpp
@@ -148,14 +153,15 @@ set(HEADERS3
 message("${Green} Building ${PROJECT_NAME}${ColorReset}")
 add_executable(${PROJECT_NAME}_graphic ${SRCS3} ${HEADERS3})
 target_compile_options(${PROJECT_NAME}_graphic PRIVATE 
-    -I./Engine/Include 
-    -I./Engine/BaseComponent 
-    -I./Engine/ParseComponent 
-    -I./Engine/Parsing 
-    -I./Engine/Interaction 
-    -I./Engine/Interaction/Include 
-    -I./Engine/Graphic 
+    -I./Engine/Include
+    -I./Engine/BaseComponent
+    -I./Engine/ParseComponent
+    -I./Engine/Parsing
+    -I./Engine/Interaction
+    -I./Engine/Interaction/Include
+    -I./Engine/Graphic
     -I./Engine/ComponentSystem
+    -I./Engine/server/include
 )
 target_link_libraries(${PROJECT_NAME}_graphic ${CONAN_LIBS})
 include(clientGraphic/Graphic/SFML/SFML_lib.cmake)

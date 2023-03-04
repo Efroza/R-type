@@ -44,7 +44,8 @@ void interaction_system(registry &reg, sparse_array<component::interaction> &int
     {
         if (!interactions[i])
             continue;
-        for (auto &typing : interactions[i].value().get_typing()) {
+        for (auto &typing : interactions[i].value().get_typing())
+        {
             handling_typing(typing, i, reg, interactions[i].value());
         }
         interactions[i].value().empty_typing();
