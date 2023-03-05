@@ -12,9 +12,11 @@
 #include <vector>
 #include "./ClientInfo.hpp"
 
-enum Type {
+enum Type
+{
     POSITION = 0,
     MESSAGE = 1,
+    INTERACTION = 2 // UDP
 };
 
 enum Client_data {
@@ -106,6 +108,10 @@ struct ennemy_dead {
 struct Position {
     uint16_t x;
     uint16_t y;
+};
+
+struct Interaction {
+    uint16_t value;
 };
 
 struct New_client {

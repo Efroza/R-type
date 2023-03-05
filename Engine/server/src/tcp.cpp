@@ -68,12 +68,11 @@ void TCP_Server::launch_tcp_server()
 */
 void TCP_Server::new_client_create_lobby(std::shared_ptr<tcp::socket> socket, Server& server_data, uint16_t client_id)
 {
-  Header_client tmp_header_client;
-  std::memset(&tmp_header_client, 0, sizeof(tmp_header_client));
+  Header_client tmp_header_client = {0};
   socket->receive(buffer(&tmp_header_client, sizeof(tmp_header_client)));
   std::cout << "New client with id " << client_id << std::endl;
-  Connection connection;
-  Header_server header_server;
+  Connection connection = {0};
+  Header_server header_server = {0};
   header_server.id = client_id;
   header_server.data_type = LOBBYS;
   socket->send(asio::buffer(&header_server, sizeof(Header_server)));
@@ -173,7 +172,7 @@ void TCP_Server::send_tcp_server(Header_server header, tcp::socket &socket, std:
 void TCP_Server::receive_tcp_server(Header_client header, tcp::socket &socket, Server& server_data) {
   switch (header.data_type) {
     case MESSAGES: {
-      Messages message;
+      Messages message = {0};
       socket.receive(asio::buffer(&message, sizeof(Messages)));
       std::cout << "Received from client " << header.id << ": " << message.size << " ";
       std::cout.write(message.message, message.size) << std::endl;
@@ -194,7 +193,7 @@ void TCP_Server::receive_tcp_server(Header_client header, tcp::socket &socket, S
         server_data.send_to_all_clients(START, server_data.get_nb_clients());
         // Faire une function pour set up les positions des clients => pour ce faire y'a besoin de la taille de la window
         server_data.send_vector_clients();
-        Header_client header_client;
+        Header_client header_client = {0};
         socket.receive(asio::buffer(&header_client, sizeof(Header_client)));
         receive_tcp_server(header_client, socket, server_data);
       }
@@ -209,7 +208,7 @@ void TCP_Server::receive_tcp_server(Header_client header, tcp::socket &socket, S
     }
     case PREPARE_UDP : {
       std::cout << "Client has received data " << header.id << std::endl;
-      Header_server header_server;
+      Header_server header_server = {0};
       header_server.id = _port_udp;
       header_server.data_type = UDP;
       socket.send(asio::buffer(&header_server, sizeof(header_server)));

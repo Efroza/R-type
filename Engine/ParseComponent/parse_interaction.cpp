@@ -13,6 +13,10 @@
 // up 73
 // down 74
 
+/**
+ * @file parse_interaction.cpp
+ */
+
 parse_component::interaction::interaction()
 {
 }
@@ -20,6 +24,13 @@ parse_component::interaction::interaction()
 parse_component::interaction::~interaction()
 {
 }
+
+/**
+ * @brief Check if the json object has a time key
+ *
+ * @param json Reference to the json object
+ * @return true if the json object has a time key and false otherwise
+ */
 
 static bool got_key(Json::Value const &json, std::string const &key)
 {
