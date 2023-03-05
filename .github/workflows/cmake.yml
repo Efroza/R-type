@@ -49,23 +49,23 @@ jobs:
         conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
         conan remote add conan-center https://conan.bintray.com
 
-    - name: Set up Conan profile
-      run: |
-        export CONAN_USER_HOME=$HOME/.conan
-        export CONAN_USERNAME=<username>
-        export CONAN_CHANNEL=<channel>
-        export CONAN_REFERENCE=<reference>
-        conan profile new default --detect
-        conan profile update settings.compiler.libcxx=libstdc++11 default
+    # - name: Set up Conan profile
+    #   run: |
+    #     export CONAN_USER_HOME=$HOME/.conan
+    #     export CONAN_USERNAME=<username>
+    #     export CONAN_CHANNEL=<channel>
+    #     export CONAN_REFERENCE=<reference>
+    #     conan profile new default --detect
+    #     conan profile update settings.compiler.libcxx=libstdc++11 default
 
     - name: Install dependencies
       run: conan install .
 
-    # - name: Create default profile
-    #   run: conan profile new default --detect
+    - name: Create default profile
+      run: conan profile new default --detect
       
-    # - name: Update profile
-    #   run: conan profile update settings.compiler.libcxx=libstdc++11 default
+    - name: Update profile
+      run: conan profile update settings.compiler.libcxx=libstdc++11 default
 
     - name: Install CMake
       run: |
