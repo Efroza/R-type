@@ -79,7 +79,7 @@ start (your_web_browser).exe html/index.html
 With both Readmes you'll be able to understand the engine or network and use them.
 
 * **[Engine](https://github.com/EpitechPromo2025/B-CPP-500-PAR-5-2-rtype-luc1.schmitt/tree/main/Engine#ecs-engine)**
-* **[Network](https://github.com/EpitechPromo2025/B-CPP-500-PAR-5-2-rtype-luc1.schmitt/tree/main/include#network)**
+* **[Network](https://github.com/EpitechPromo2025/B-CPP-500-PAR-5-2-rtype-luc1.schmitt/tree/main/shared#readme)**
 
 
 ## Authors
