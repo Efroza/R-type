@@ -10,7 +10,7 @@
 
 #include <vector>
 #include <iostream>
-#include "IComponentSystem.hpp"
+#include "../ComponentSystem/IComponentSystem.hpp"
 
 class handling_component_system
 {

@@ -9,15 +9,20 @@
 #define SYSTEMES_HPP_
 
 #include "registry.hpp"
-#include "draw.hpp"
-#include "image.hpp"
-#include "position.hpp"
-#include "rect.hpp"
-#include "interaction.hpp"
+#include "../ComponentSystem/draw.hpp"
+#include "../BaseComponent/image.hpp"
+#include "../BaseComponent/position.hpp"
+#include "../BaseComponent/rect.hpp"
+#include "../BaseComponent/interaction.hpp"
 #include "interactive.hpp"
-#include "animation.hpp"
-#include "collusion.hpp"
-#include "network.hpp"
+#include "../BaseComponent/animation.hpp"
+#include "../BaseComponent/collusion.hpp"
+#include "../BaseComponent/network.hpp"
+#include "../BaseComponent/network_player.hpp"
+
+/**
+ * @file systems.hpp
+*/
 
 //system
 void animation_system(registry &reg
@@ -25,6 +30,8 @@ void animation_system(registry &reg
 void interaction_system(registry &reg, sparse_array<component::interaction> &interactions);
 void collusion_system(registry &reg, sparse_array<component::collusion> &collusion, sparse_array<component::image> &image);
 void network_position_system(registry &reg, sparse_array<component::position> &positions, sparse_array<component::network> &network);
+void network_player_system(registry &reg, sparse_array<component::position> &positions, sparse_array<component::network_player> &network);
+
 //
 
 // load ECS

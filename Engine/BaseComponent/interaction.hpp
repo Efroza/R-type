@@ -10,10 +10,17 @@
 #include <functional>
 #include <unordered_map>
 #include <cinttypes>
-#include "entity.hpp"
-#include "registry.hpp"
+#include "../Include/entity.hpp"
+#include "../Include/registry.hpp"
+
+/**
+ * @file interaction.hpp
+*/
 
 namespace component {
+    /**
+     * @brief This class is used to create a interaction.
+     */
     class interaction
     {
         public:

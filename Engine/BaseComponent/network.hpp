@@ -8,6 +8,10 @@
 #ifndef NETWORK_HPP_
 #define NETWORK_HPP_
 
+/**
+ * @file network.hpp
+*/
+
 namespace component {
     class network
     {

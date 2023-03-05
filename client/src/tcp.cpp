@@ -19,8 +19,58 @@
  * @see Client::async_tcp_client(const asio::error_code& ec)
  * @details Create the main class of the client side
 */
-Client::Client(const std::string& host, const std::string& port) : _host(host), _port(port)
+Client::Client(const std::string& host, const std::string& port) : _host(host), _port(port), _scene(scene_e::HOME), _playing(true)
 {
+    this->loadLib("lib/libSFML.so");//faut mettre le path de la lib graphique
+
+    auto background = std::make_shared<Drawable>("background", "./Engine/Image/background.jpg", std::pair<int, int>(1920, 1080), std::pair<int, int>(0, 0));
+    this->_homeMenuDrawables.push_back(background);
+    // this->_networkMenuDrawables.push_back(background);
+    this->_drawables.push_back(background);
+    _background = background;
+
+    auto rtypeText = std::make_shared<Drawable>("text-rtype", "RTYPE", std::pair<int, int>(200, 200), std::pair<int, int>(650, 100), true, WHITE);
+    this->_homeMenuDrawables.push_back(rtypeText);
+    // this->_networkMenuDrawables.push_back(rtypeText);
+
+    auto firstBtn = std::make_shared<Drawable>("button-first", "./Engine/Image/bouton.png", std::pair<int, int>(300, 104), std::pair<int, int>(810, 500));
+    this->_homeMenuDrawables.push_back(firstBtn);
+    // this->_networkMenuDrawables.push_back(firstBtn);
+    auto posFirstBtn = firstBtn->getPosition();
+
+    this->_homeMenuDrawables.push_back(std::make_shared<Drawable>("text-play", "PLAY", std::pair<int, int>(36, 36), std::pair<int, int>(posFirstBtn.first + 100, posFirstBtn.second + 27), true, RED));
+    _playBtn = _homeMenuDrawables.back();
+
+    auto secondBtn = std::make_shared<Drawable>("button-second", "./Engine/Image/bouton.png", std::pair<int, int>(300, 104), std::pair<int, int>(810, 700));
+    this->_homeMenuDrawables.push_back(secondBtn);
+    // this->_networkMenuDrawables.push_back(secondBtn);
+    auto posSecondBtn = secondBtn->getPosition();
+
+    this->_homeMenuDrawables.push_back(std::make_shared<Drawable>("text-exit", "EXIT", std::pair<int, int>(36, 36), std::pair<int, int>(posSecondBtn.first + 100, posSecondBtn.second + 27), true));
+    _exitBtn = _homeMenuDrawables.back();
+
+    // un truc pour tester la scene game
+    this->_drawables.push_back(std::make_shared<Drawable>("player", "./Engine/Image/spaceship_jet.png", std::pair<int, int>(200, 176), std::pair<int, int>(200, 200)));
+
+    // this->_networkMenuDrawables.push_back(std::make_shared<Drawable>("text-host", "HOST :", std::pair<int, int>(36, 36), std::pair<int, int>(posFirstBtn.first - 140, posFirstBtn.second + 27), true, RED));
+    // _hostBtn = _networkMenuDrawables.back();
+
+    // this->_networkMenuDrawables.push_back(std::make_shared<Drawable>("text-selected-host", "", std::pair<int, int>(36, 36), std::pair<int, int>(posFirstBtn.first + 50, posFirstBtn.second + 27), true));
+
+    // this->_networkMenuDrawables.push_back(std::make_shared<Drawable>("text-ip", "IP :", std::pair<int, int>(36, 36), std::pair<int, int>(posSecondBtn.first - 100, posSecondBtn.second + 27), true));
+    // _ipBtn = _networkMenuDrawables.back();
+
+    // this->_networkMenuDrawables.push_back(std::make_shared<Drawable>("text-selected-ip", "", std::pair<int, int>(36, 36), std::pair<int, int>(posSecondBtn.first + 50, posSecondBtn.second + 27), true));
+
+    // auto thirdBtn = std::make_shared<Drawable>("button-third", "./Engine/Image/bouton.png", std::pair<int, int>(300, 104), std::pair<int, int>(810, 900));
+    // this->_networkMenuDrawables.push_back(thirdBtn);
+    // auto posThirdBtn = thirdBtn->getPosition();
+
+    // this->_networkMenuDrawables.push_back(std::make_shared<Drawable>("text-lunch", "PLAY", std::pair<int, int>(36, 36), std::pair<int, int>(posThirdBtn.first + 100, posThirdBtn.second + 27), true));
+    // _lunchBtn = _networkMenuDrawables.back();
+
+
+
     asio::io_context io_context;
     tcp::resolver resolver(io_context);
     auto endpoints = resolver.resolve(host, port);
@@ -136,10 +186,6 @@ void Client::receive_tcp_client(Header_server header) {
  * @details If the message contains a comma it will be a position and if not, it will be a message.
  */
 void Client::send_tcp_client(Header_client header, std::string message) {
-    if (header.data_type == LOBBY) {
-        _socket->send(asio::buffer(&header, sizeof(header)));
-        return;
-    }
     Messages message_to_send;
     message_to_send.size = message.size();
     std::memcpy(&message_to_send.message, message.c_str(), message.size());
@@ -173,7 +219,7 @@ void Client::inGame() {
     Header_client header_client;
     header_client.id = std::stoi(number_players);
     header_client.data_type = LOBBY;
-    send_tcp_client(header_client, number_players);
+    _socket->send(asio::buffer(&header_client, sizeof(Header_client)));
     _in_game = true;
 }
 
@@ -200,6 +246,15 @@ void Client::connect_to_server(const asio::error_code& ec)
             if (tmp_header_server.data_type == LOBBYS) {
                 Connection connection;
                 _socket->receive(asio::buffer(&connection, sizeof(connection)));
+                std::cout << "Lobby id : " << connection.id_lobby << std::endl;
+                if (connection.id_lobby == -1) {
+                    std::cout << "Lobby is full" << std::endl;
+                    Header_client header_client;
+                    header_client.id = _client_info.get_id();
+                    header_client.data_type = DISCONNECTED;
+                    _socket->send(asio::buffer(&header_client, sizeof(Header_client)));
+                    exit(0);
+                }
                 if (connection.id_lobby != 0) {
                     _in_game = true;
                     _lobby_created = true;

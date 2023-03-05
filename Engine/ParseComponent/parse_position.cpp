@@ -6,7 +6,17 @@
 */
 
 #include "parse_position.hpp"
-#include "position.hpp"
+#include "../BaseComponent/position.hpp"
+
+/**
+ * @file parse_position.cpp
+ */
+
+/**
+ * @brief Construct a new parse component::position::position object
+ *
+ * @details Set the argument needed to load the component
+ */
 
 parse_component::position::position()
 {
@@ -17,6 +27,15 @@ parse_component::position::position()
 parse_component::position::~position()
 {
 }
+
+/**
+ * @brief Load the position component
+ *
+ * @param e Entity to load the component
+ * @param reg Reference to the registry
+ * @param db Reference to the data
+ * @param json Reference to the json object
+ */
 
 void parse_component::position::load_component(entity_t const &e, registry &reg, data &db, Json::Value const &json) const
 {

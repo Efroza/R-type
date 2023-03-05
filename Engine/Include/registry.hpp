@@ -12,9 +12,14 @@
 #include <typeinfo>
 #include <typeindex>
 #include <any>
+#include <functional>
 
 #include "sparse_array.hpp"
 #include "entity.hpp"
+
+/**
+ * @file registry.hpp
+ */
 
 class registry
 {
@@ -24,7 +29,21 @@ class registry
         }
         template <class Component>
         sparse_array<Component> &register_component()
-        {std::any new_components = sparse_array<Component>();_components_arrays[std::type_index(typeid(Component))] = std::move(new_components);_erase_component.push_back([&](entity_t e){    auto &array = get_components<Component>();    array.erase(e._id);});return std::any_cast<sparse_array<Component> &>(_components_arrays.at(std::type_index(typeid(Component))));
+        {
+            std::any new_components = sparse_array<Component>();
+            _components_arrays[std::type_index(typeid(Component))] = std::move(new_components);
+            _erase_component.push_back([&](entity_t e)
+            {    auto &array = get_components<Component>();    array.erase(e._id);});
+            _copy_component.emplace_back([&](entity_t src, entity_t dest) {
+                auto &array = get_components<Component>();
+                if (src._id >= array.size())
+                    return;
+                if (array[src]) {
+                    Component value = array[src].value();
+                    add_component<Component>(dest, std::move(value));
+                }
+            });
+            return std::any_cast<sparse_array<Component> &>(_components_arrays.at(std::type_index(typeid(Component))));
         }
         template <class Component>
         sparse_array<Component> &get_components()
@@ -71,6 +90,14 @@ class registry
             _kill.push_back(e._id);
             for (auto &erase_fun : _erase_component) {
                 erase_fun(e);
+            }
+        }
+
+        void copy_component(entity_t src, entity_t dest)
+        {
+            for (auto &copy_function : _copy_component)
+            {
+                copy_function(src, dest);
             }
         }
 
@@ -130,6 +157,7 @@ class registry
         std::vector<std::uint32_t> _kill;
         std::vector<std::function<void(entity_t)>> _erase_component;
         std::vector<std::function<void (registry &)>> _systemes;
+        std::vector<std::function<void(entity_t, entity_t)>> _copy_component;
 };
 
 #endif /* !REGISTRY_HPP_ */

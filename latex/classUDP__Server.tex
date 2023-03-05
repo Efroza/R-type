@@ -1,0 +1,236 @@
+\hypertarget{classUDP__Server}{}\doxysection{UDP\+\_\+\+Server Class Reference}
+\label{classUDP__Server}\index{UDP\_Server@{UDP\_Server}}
+
+
+This class will create a udp server.  
+
+
+
+
+{\ttfamily \#include $<$server.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classUDP__Server_aeda0b42fef62173fd01ce67c5eb6e3c8}{UDP\+\_\+\+Server}} (uint16\+\_\+t port)
+\begin{DoxyCompactList}\small\item\em This is the constructor of the class \mbox{\hyperlink{classUDP__Server}{UDP\+\_\+\+Server}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classUDP__Server_a1de43750eeef189c31edfd071c39a048}{$\sim$\+UDP\+\_\+\+Server}} ()
+\begin{DoxyCompactList}\small\item\em This is the destructor of the class \mbox{\hyperlink{classUDP__Server}{UDP\+\_\+\+Server}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classUDP__Server_a286f7e284eafebb1e214d433b2032289}{launch\+\_\+udp\+\_\+server}} ()
+\begin{DoxyCompactList}\small\item\em This function will launch the udp server. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classUDP__Server_a2219d3187416bbecc97fd143533fc172}{launch\+\_\+thread\+\_\+server}} ()
+\begin{DoxyCompactList}\small\item\em This function will launch the thread of the udp server. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classUDP__Server_ac366a08f5174d11f99ebbe4f8ea723e9}\label{classUDP__Server_ac366a08f5174d11f99ebbe4f8ea723e9}} 
+void {\bfseries send\+\_\+thread} (asio\+::ip\+::udp\+::socket \&socket, asio\+::ip\+::udp\+::endpoint \&remote, std\+::vector$<$ asio\+::ip\+::udp\+::endpoint $>$ \&endpoints)
+\item 
+\mbox{\Hypertarget{classUDP__Server_a708b436f85772851fb89ac818f372394}\label{classUDP__Server_a708b436f85772851fb89ac818f372394}} 
+void {\bfseries send\+\_\+message} (asio\+::ip\+::udp\+::socket \&socket, std\+::vector$<$ asio\+::ip\+::udp\+::endpoint $>$ \&endpoints, std\+::string message\+\_\+client)
+\item 
+\mbox{\Hypertarget{classUDP__Server_a55e3cbeb9f9eb4f15441525763e7ce92}\label{classUDP__Server_a55e3cbeb9f9eb4f15441525763e7ce92}} 
+void {\bfseries send\+\_\+position} (asio\+::ip\+::udp\+::socket \&socket, std\+::vector$<$ asio\+::ip\+::udp\+::endpoint $>$ \&endpoints, std\+::string message\+\_\+client)
+\item 
+void \mbox{\hyperlink{classUDP__Server_a7cdd90ebb618df249a7025bee887cec7}{send\+\_\+position}} (std\+::uint16\+\_\+t client\+\_\+id, \mbox{\hyperlink{structPosition}{Position}} position\+\_\+to\+\_\+send)
+\begin{DoxyCompactList}\small\item\em This function will send the struct position to the clients. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classUDP__Server_aa1dcd97da3d8af05e696e1aaba1c2ced}\label{classUDP__Server_aa1dcd97da3d8af05e696e1aaba1c2ced}} 
+void {\bfseries receive\+\_\+thread} (asio\+::ip\+::udp\+::socket \&socket, asio\+::ip\+::udp\+::endpoint \&remote, std\+::vector$<$ asio\+::ip\+::udp\+::endpoint $>$ \&endpoints)
+\item 
+\mbox{\Hypertarget{classUDP__Server_aae563a1aeb6eac6947bad400d09afd41}\label{classUDP__Server_aae563a1aeb6eac6947bad400d09afd41}} 
+void {\bfseries receive\+\_\+data} (asio\+::ip\+::udp\+::socket \&socket, asio\+::ip\+::udp\+::endpoint \&remote, std\+::vector$<$ asio\+::ip\+::udp\+::endpoint $>$ \&endpoint, \mbox{\hyperlink{structHeader}{Header}} header)
+\item 
+void \mbox{\hyperlink{classUDP__Server_abe7e719f9283fe43ac3abea4c21ea36c}{add\+\_\+new\+\_\+client\+\_\+function}} (std\+::function$<$ void(std\+::uint16\+\_\+t, \mbox{\hyperlink{classregistry}{registry}} $\ast$, \mbox{\hyperlink{classUDP__Server}{UDP\+\_\+\+Server}} \&)$>$ new\+\_\+function) noexcept
+\begin{DoxyCompactList}\small\item\em This function will add a function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classUDP__Server_a8e509036c9bcf5530a14521476d542e8}{set\+\_\+registry}} (\mbox{\hyperlink{classregistry}{registry}} \&my\+\_\+reg) noexcept
+\begin{DoxyCompactList}\small\item\em This function will set the registry of the game design. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{classUDP__Server_a77df9f3a5a9374d0a717bb0ed541608c}{get\+\_\+port}} () const
+\begin{DoxyCompactList}\small\item\em This function will retrieve the current port of the udp server. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classUDP__Server_aeda0b42fef62173fd01ce67c5eb6e3c8}\label{classUDP__Server_aeda0b42fef62173fd01ce67c5eb6e3c8}} 
+{\bfseries UDP\+\_\+\+Server} (uint16\+\_\+t port)
+\item 
+\mbox{\Hypertarget{classUDP__Server_a286f7e284eafebb1e214d433b2032289}\label{classUDP__Server_a286f7e284eafebb1e214d433b2032289}} 
+void {\bfseries launch\+\_\+udp\+\_\+server} ()
+\item 
+\mbox{\Hypertarget{classUDP__Server_a2219d3187416bbecc97fd143533fc172}\label{classUDP__Server_a2219d3187416bbecc97fd143533fc172}} 
+void {\bfseries launch\+\_\+thread\+\_\+server} ()
+\item 
+\mbox{\Hypertarget{classUDP__Server_ac366a08f5174d11f99ebbe4f8ea723e9}\label{classUDP__Server_ac366a08f5174d11f99ebbe4f8ea723e9}} 
+void {\bfseries send\+\_\+thread} (asio\+::ip\+::udp\+::socket \&socket, asio\+::ip\+::udp\+::endpoint \&remote, std\+::vector$<$ asio\+::ip\+::udp\+::endpoint $>$ \&endpoints)
+\item 
+\mbox{\Hypertarget{classUDP__Server_a708b436f85772851fb89ac818f372394}\label{classUDP__Server_a708b436f85772851fb89ac818f372394}} 
+void {\bfseries send\+\_\+message} (asio\+::ip\+::udp\+::socket \&socket, std\+::vector$<$ asio\+::ip\+::udp\+::endpoint $>$ \&endpoints, std\+::string message\+\_\+client)
+\item 
+\mbox{\Hypertarget{classUDP__Server_a55e3cbeb9f9eb4f15441525763e7ce92}\label{classUDP__Server_a55e3cbeb9f9eb4f15441525763e7ce92}} 
+void {\bfseries send\+\_\+position} (asio\+::ip\+::udp\+::socket \&socket, std\+::vector$<$ asio\+::ip\+::udp\+::endpoint $>$ \&endpoints, std\+::string message\+\_\+client)
+\item 
+\mbox{\Hypertarget{classUDP__Server_aa1dcd97da3d8af05e696e1aaba1c2ced}\label{classUDP__Server_aa1dcd97da3d8af05e696e1aaba1c2ced}} 
+void {\bfseries receive\+\_\+thread} (asio\+::ip\+::udp\+::socket \&socket, asio\+::ip\+::udp\+::endpoint \&remote, std\+::vector$<$ asio\+::ip\+::udp\+::endpoint $>$ \&endpoints)
+\item 
+\mbox{\Hypertarget{classUDP__Server_aae563a1aeb6eac6947bad400d09afd41}\label{classUDP__Server_aae563a1aeb6eac6947bad400d09afd41}} 
+void {\bfseries receive\+\_\+data} (asio\+::ip\+::udp\+::socket \&socket, asio\+::ip\+::udp\+::endpoint \&remote, std\+::vector$<$ asio\+::ip\+::udp\+::endpoint $>$ \&endpoint, \mbox{\hyperlink{structHeader}{Header}} header)
+\item 
+\mbox{\Hypertarget{classUDP__Server_a77df9f3a5a9374d0a717bb0ed541608c}\label{classUDP__Server_a77df9f3a5a9374d0a717bb0ed541608c}} 
+uint16\+\_\+t {\bfseries get\+\_\+port} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class will create a udp server. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classUDP__Server_aeda0b42fef62173fd01ce67c5eb6e3c8}\label{classUDP__Server_aeda0b42fef62173fd01ce67c5eb6e3c8}} 
+\index{UDP\_Server@{UDP\_Server}!UDP\_Server@{UDP\_Server}}
+\index{UDP\_Server@{UDP\_Server}!UDP\_Server@{UDP\_Server}}
+\doxysubsubsection{\texorpdfstring{UDP\_Server()}{UDP\_Server()}}
+{\footnotesize\ttfamily UDP\+\_\+\+Server\+::\+UDP\+\_\+\+Server (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{port }\end{DoxyParamCaption})}
+
+
+
+This is the constructor of the class \mbox{\hyperlink{classUDP__Server}{UDP\+\_\+\+Server}}. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classUDP__Server}{UDP\+\_\+\+Server}} 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em port} & the port of the server\\
+\hline
+\end{DoxyParams}
+This constructor will create a udp server, it will create a socket and a thread. \mbox{\Hypertarget{classUDP__Server_a1de43750eeef189c31edfd071c39a048}\label{classUDP__Server_a1de43750eeef189c31edfd071c39a048}} 
+\index{UDP\_Server@{UDP\_Server}!````~UDP\_Server@{$\sim$UDP\_Server}}
+\index{````~UDP\_Server@{$\sim$UDP\_Server}!UDP\_Server@{UDP\_Server}}
+\doxysubsubsection{\texorpdfstring{$\sim$UDP\_Server()}{~UDP\_Server()}}
+{\footnotesize\ttfamily UDP\+\_\+\+Server\+::$\sim$\+UDP\+\_\+\+Server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This is the destructor of the class \mbox{\hyperlink{classUDP__Server}{UDP\+\_\+\+Server}}. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em void} & \\
+\hline
+\end{DoxyParams}
+This destructor will join the thread of the udp server. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classUDP__Server_abe7e719f9283fe43ac3abea4c21ea36c}\label{classUDP__Server_abe7e719f9283fe43ac3abea4c21ea36c}} 
+\index{UDP\_Server@{UDP\_Server}!add\_new\_client\_function@{add\_new\_client\_function}}
+\index{add\_new\_client\_function@{add\_new\_client\_function}!UDP\_Server@{UDP\_Server}}
+\doxysubsubsection{\texorpdfstring{add\_new\_client\_function()}{add\_new\_client\_function()}}
+{\footnotesize\ttfamily void UDP\+\_\+\+Server\+::add\+\_\+new\+\_\+client\+\_\+function (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(std\+::uint16\+\_\+t, \mbox{\hyperlink{classregistry}{registry}} $\ast$, \mbox{\hyperlink{classUDP__Server}{UDP\+\_\+\+Server}} \&)$>$}]{new\+\_\+function }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+This function will add a function. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+function} & function who will declanche with a new connection udp\\
+\hline
+\end{DoxyParams}
+This function will add a function who will declanche it with a new udp connection \mbox{\Hypertarget{classUDP__Server_a77df9f3a5a9374d0a717bb0ed541608c}\label{classUDP__Server_a77df9f3a5a9374d0a717bb0ed541608c}} 
+\index{UDP\_Server@{UDP\_Server}!get\_port@{get\_port}}
+\index{get\_port@{get\_port}!UDP\_Server@{UDP\_Server}}
+\doxysubsubsection{\texorpdfstring{get\_port()}{get\_port()}}
+{\footnotesize\ttfamily uint16\+\_\+t UDP\+\_\+\+Server\+::get\+\_\+port (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+This function will retrieve the current port of the udp server. 
+
+\begin{DoxyReturn}{Returns}
+uint16\+\_\+t 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classUDP__Server_a2219d3187416bbecc97fd143533fc172}\label{classUDP__Server_a2219d3187416bbecc97fd143533fc172}} 
+\index{UDP\_Server@{UDP\_Server}!launch\_thread\_server@{launch\_thread\_server}}
+\index{launch\_thread\_server@{launch\_thread\_server}!UDP\_Server@{UDP\_Server}}
+\doxysubsubsection{\texorpdfstring{launch\_thread\_server()}{launch\_thread\_server()}}
+{\footnotesize\ttfamily void UDP\+\_\+\+Server\+::launch\+\_\+thread\+\_\+server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This function will launch the thread of the udp server. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em void} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classUDP__Server_a286f7e284eafebb1e214d433b2032289}{launch\+\_\+udp\+\_\+server()}}
+\end{DoxySeeAlso}
+This function will launch the thread of the udp server. \mbox{\Hypertarget{classUDP__Server_a286f7e284eafebb1e214d433b2032289}\label{classUDP__Server_a286f7e284eafebb1e214d433b2032289}} 
+\index{UDP\_Server@{UDP\_Server}!launch\_udp\_server@{launch\_udp\_server}}
+\index{launch\_udp\_server@{launch\_udp\_server}!UDP\_Server@{UDP\_Server}}
+\doxysubsubsection{\texorpdfstring{launch\_udp\_server()}{launch\_udp\_server()}}
+{\footnotesize\ttfamily void UDP\+\_\+\+Server\+::launch\+\_\+udp\+\_\+server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This function will launch the udp server. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em void} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+receive\+\_\+thread(ip\+::udp\+::socket\& socket, ip\+::udp\+::endpoint\& remote, std\+::vector$<$ip\+::udp\+::endpoint$>$\& endpoints) 
+
+send\+\_\+thread(ip\+::udp\+::socket\& socket, ip\+::udp\+::endpoint\& remote, std\+::vector$<$ip\+::udp\+::endpoint$>$\& endpoints)
+\end{DoxySeeAlso}
+This function will launch the udp server, it will create two threads, one to receive data from clients and one to send data to clients. After the threads are created it will wait for them to finish with join(). \mbox{\Hypertarget{classUDP__Server_a7cdd90ebb618df249a7025bee887cec7}\label{classUDP__Server_a7cdd90ebb618df249a7025bee887cec7}} 
+\index{UDP\_Server@{UDP\_Server}!send\_position@{send\_position}}
+\index{send\_position@{send\_position}!UDP\_Server@{UDP\_Server}}
+\doxysubsubsection{\texorpdfstring{send\_position()}{send\_position()}}
+{\footnotesize\ttfamily void UDP\+\_\+\+Server\+::send\+\_\+position (\begin{DoxyParamCaption}\item[{std\+::uint16\+\_\+t}]{client\+\_\+id,  }\item[{\mbox{\hyperlink{structPosition}{Position}}}]{position\+\_\+to\+\_\+send }\end{DoxyParamCaption})}
+
+
+
+This function will send the struct position to the clients. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em position\+\_\+to\+\_\+send} & structure who contain a x and y\\
+\hline
+\end{DoxyParams}
+This function will send a certain position to the clients.
+
+It will first send the struct position to the clients, then the struct header to know that it is a position. \mbox{\Hypertarget{classUDP__Server_a8e509036c9bcf5530a14521476d542e8}\label{classUDP__Server_a8e509036c9bcf5530a14521476d542e8}} 
+\index{UDP\_Server@{UDP\_Server}!set\_registry@{set\_registry}}
+\index{set\_registry@{set\_registry}!UDP\_Server@{UDP\_Server}}
+\doxysubsubsection{\texorpdfstring{set\_registry()}{set\_registry()}}
+{\footnotesize\ttfamily void UDP\+\_\+\+Server\+::set\+\_\+registry (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classregistry}{registry}} \&}]{my\+\_\+reg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+This function will set the registry of the game design. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em my\+\_\+reg} & registry of the game server\\
+\hline
+\end{DoxyParams}
+This function will set the pointer registry of the UDP class 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Engine/server/include/server.\+hpp\item 
+Engine/server/src/\mbox{\hyperlink{Engine_2server_2src_2udp_8cpp}{udp.\+cpp}}\end{DoxyCompactItemize}

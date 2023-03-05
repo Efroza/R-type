@@ -1,6 +1,5 @@
 config_json:
-  - ./Config/other.json
-  - ./Config/spaceship.json
+  - ./Config/test.json
 
 config_interaction:
   - ./Interaction/up_deplacement.so
@@ -10,5 +9,4 @@ config_interaction:
 
 config_component_system:
   - ./ComponentSystem/print.so
-  - ./ComponentSystem/draw.so
 # get_yaml("config_json") -> std::vector<std::string>

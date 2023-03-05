@@ -1,0 +1,107 @@
+\hypertarget{Engine_2Game_2main_8cpp}{}\doxysection{Engine/\+Game/main.cpp File Reference}
+\label{Engine_2Game_2main_8cpp}\index{Engine/Game/main.cpp@{Engine/Game/main.cpp}}
+{\ttfamily \#include $<$SFML/\+Window.\+hpp$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include \char`\"{}../\+Parsing/parsing.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Include/systems.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Component\+System/draw.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Base\+Component/rect.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Base\+Component/interaction.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Include/interactive.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Parsing/handling\+\_\+interaction.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Parsing/\+Yaml.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}server.\+hpp\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{Engine_2Game_2main_8cpp_a4402b9cf2e5be5b78b552fb4c4c50e29}{when\+\_\+new\+\_\+client}} (std\+::uint16\+\_\+t client\+\_\+id, \mbox{\hyperlink{classregistry}{registry}} $\ast$reg, \mbox{\hyperlink{classUDP__Server}{UDP\+\_\+\+Server}} \&server)
+\begin{DoxyCompactList}\small\item\em Create a new entity for the new client. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{Engine_2Game_2main_8cpp_a097c1214ba07307adee6f03e00e8fd6d}{game}} (\mbox{\hyperlink{classregistry}{registry}} \&reg, \mbox{\hyperlink{classdata}{data}} \&db, \mbox{\hyperlink{classYaml}{Yaml}} \&yaml)
+\begin{DoxyCompactList}\small\item\em Create the gameplay. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{Engine_2Game_2main_8cpp_acd1e56723157e1d9fcac34a80f02aef5}{init\+\_\+databases}} (\mbox{\hyperlink{classdata}{data}} \&db)
+\begin{DoxyCompactList}\small\item\em Initialize the databases. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{Engine_2Game_2main_8cpp_a0c99d968a34e803d378692bde2e3f18f}{main}} (int ac, char $\ast$$\ast$av)
+\begin{DoxyCompactList}\small\item\em Main function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{Engine_2Game_2main_8cpp_a097c1214ba07307adee6f03e00e8fd6d}\label{Engine_2Game_2main_8cpp_a097c1214ba07307adee6f03e00e8fd6d}} 
+\index{main.cpp@{main.cpp}!game@{game}}
+\index{game@{game}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{game()}{game()}}
+{\footnotesize\ttfamily void game (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classregistry}{registry}} \&}]{reg,  }\item[{\mbox{\hyperlink{classdata}{data}} \&}]{db,  }\item[{\mbox{\hyperlink{classYaml}{Yaml}} \&}]{yaml }\end{DoxyParamCaption})}
+
+
+
+Create the gameplay. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reg} & Container of all the systems and components. \\
+\hline
+{\em db} & Container of all the data (textures, sounds, etc...) \\
+\hline
+{\em yaml} & File containing the configuration of the game. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{Engine_2Game_2main_8cpp_acd1e56723157e1d9fcac34a80f02aef5}\label{Engine_2Game_2main_8cpp_acd1e56723157e1d9fcac34a80f02aef5}} 
+\index{main.cpp@{main.cpp}!init\_databases@{init\_databases}}
+\index{init\_databases@{init\_databases}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{init\_databases()}{init\_databases()}}
+{\footnotesize\ttfamily void init\+\_\+databases (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classdata}{data}} \&}]{db }\end{DoxyParamCaption})}
+
+
+
+Initialize the databases. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em db} & Container of all the data (textures, sounds, etc...) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{Engine_2Game_2main_8cpp_a0c99d968a34e803d378692bde2e3f18f}\label{Engine_2Game_2main_8cpp_a0c99d968a34e803d378692bde2e3f18f}} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{ac,  }\item[{char $\ast$$\ast$}]{av }\end{DoxyParamCaption})}
+
+
+
+Main function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ac} & Number of arguments. \\
+\hline
+{\em av} & Arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int
+\end{DoxyReturn}
+The main function is used to manage all the errors possible, set all the preparations (init\+\_\+databases, parse the config files, etc...)
+
+and finally launch the game. \mbox{\Hypertarget{Engine_2Game_2main_8cpp_a4402b9cf2e5be5b78b552fb4c4c50e29}\label{Engine_2Game_2main_8cpp_a4402b9cf2e5be5b78b552fb4c4c50e29}} 
+\index{main.cpp@{main.cpp}!when\_new\_client@{when\_new\_client}}
+\index{when\_new\_client@{when\_new\_client}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{when\_new\_client()}{when\_new\_client()}}
+{\footnotesize\ttfamily void when\+\_\+new\+\_\+client (\begin{DoxyParamCaption}\item[{std\+::uint16\+\_\+t}]{client\+\_\+id,  }\item[{\mbox{\hyperlink{classregistry}{registry}} $\ast$}]{reg,  }\item[{\mbox{\hyperlink{classUDP__Server}{UDP\+\_\+\+Server}} \&}]{server }\end{DoxyParamCaption})}
+
+
+
+Create a new entity for the new client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em client\+\_\+id} & Id of the new client. \\
+\hline
+{\em reg} & Container of all the systems and components. \\
+\hline
+{\em server} & \mbox{\hyperlink{classServer}{Server}} of the game. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}

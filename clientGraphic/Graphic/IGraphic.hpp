@@ -12,6 +12,13 @@
 #include "../Drawable/Drawable.hpp"
 #include "events.hpp"
 
+/**
+ * @file IGraphic.hpp
+ */
+
+/**
+ * @brief Interface for graphic library.
+ */
 class IGraphic
 {
 public:
@@ -24,6 +31,7 @@ public:
     virtual void refreshWindow() = 0;
     virtual void draw(std::shared_ptr<Drawable> image, const std::pair<int, int> &position) = 0;
     virtual events_e pollEvent() = 0;
+    virtual std::string getText(std::string str) = 0;
 };
 
 extern "C" IGraphic* createGraphLib();

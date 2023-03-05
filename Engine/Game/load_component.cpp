@@ -5,8 +5,8 @@
 ** load_component
 */
 
-#include "registry.hpp"
-#include "systems.hpp"
+#include "../Include/registry.hpp"
+#include "../Include/systems.hpp"
 
 /**
  * @file load_component.cpp
@@ -17,7 +17,6 @@
  *
  * @param reg Container of all the components.
  */
-
 void load_component(registry &reg)
 {
     reg.register_component<component::image>();
@@ -28,4 +27,5 @@ void load_component(registry &reg)
     reg.register_component<component::animation>();
     reg.register_component<component::collusion>();
     reg.register_component<component::network>();
+    reg.register_component<component::network_player>();
 }

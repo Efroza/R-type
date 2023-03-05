@@ -10,6 +10,10 @@
 
 #include <cinttypes>
 
+/**
+ * @file animation.hpp
+*/
+
 namespace component {
     struct animation {
         animation(std::uint32_t new_time = 0) : time(new_time), origin_time(new_time) {}

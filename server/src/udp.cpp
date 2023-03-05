@@ -11,22 +11,54 @@ using namespace asio;
 
 const int BUFSIZE = 1024;
 const std::string HOST = "127.0.0.1"; // Localhost : 127.0.0.1
-const int PORT = 12345; // Port to listen on
 
 /**
  *@file udp.cpp
  */
 
-UDP_Server::UDP_Server()
+/**
+ * @brief This is the constructor of the class UDP_Server.
+ * @return UDP_Server
+ * @param port the port of the server
+ * @details This constructor will create a udp server, it will create a socket and a thread.
+ */
+UDP_Server::UDP_Server(uint16_t port) : _port(port)
 {
     start = std::thread(&UDP_Server::launch_udp_server, this);
 }
 
+/**
+ * @brief This is the destructor of the class UDP_Server.
+ * @return void
+ * @param void
+ * @details This destructor will join the thread of the udp server.
+*/
 UDP_Server::~UDP_Server()
 {
     start.join();
 }
 
+/**
+ * @brief This function will retrieve the current port of the udp server
+ * @return uint16_t
+*/
+uint16_t UDP_Server::get_port() const
+{
+    return _port;
+}
+
+/**
+ * @brief This function will launch the thread of the udp server.
+ * @return void
+ * @param void
+ * @see launch_udp_server()
+ * @details This function will launch the thread of the udp server.
+ */
+void UDP_Server::launch_thread_server() 
+{
+    start = std::thread(&UDP_Server::launch_udp_server, this);
+    start.detach();
+}
 /**
  * @brief This function will launch the udp server.
  * @return void
@@ -34,12 +66,13 @@ UDP_Server::~UDP_Server()
  * @see receive_thread(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vector<ip::udp::endpoint>& endpoints)
  * @see send_thread(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vector<ip::udp::endpoint>& endpoints)
  * @details This function will launch the udp server, it will create two threads, one to receive data from clients and one to send data to clients. After the threads are created it will wait for them to finish with join().
-*/
+ */
 void UDP_Server::launch_udp_server()
 {
     io_service io_service;
-    ip::udp::socket socket(io_service, ip::udp::endpoint(ip::udp::v4(), PORT)); // Bind to port
-    ip::udp::endpoint remote(ip::address::from_string(HOST), PORT); // Remote endpoint
+    ip::udp::socket socket(io_service, ip::udp::endpoint(ip::udp::v4(), _port)); // Bind to por
+    std::cout << "UDP Server started on port " << _port << std::endl;
+    ip::udp::endpoint remote(ip::address::from_string(HOST), _port); // Remote endpoint
     std::vector<ip::udp::endpoint> endpoints;
 
     std::thread receive(&UDP_Server::receive_thread, this, std::ref(socket), std::ref(remote), std::ref(endpoints)); // Create thread to receive data from clients
@@ -131,6 +164,7 @@ void UDP_Server::send_position(ip::udp::socket& socket, std::vector<ip::udp::end
 */
 void UDP_Server::receive_thread(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vector<ip::udp::endpoint>& endpoints) // Receive data from clients
 {
+    std::cout << "Waiting for clients to connect..." << std::endl;
     while (true) { // Loop forever thread will receive data from clients
         Header header;
 

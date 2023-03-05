@@ -12,9 +12,15 @@
 #include <vector>
 #include "./ClientInfo.hpp"
 
-enum Type {
+/**
+ * @file headers.hpp
+*/
+
+enum Type
+{
     POSITION = 0,
     MESSAGE = 1,
+    INTERACTION = 2 // UDP
 };
 
 enum Client_data {
@@ -78,7 +84,7 @@ struct Direction {
 };
 
 struct Connection {
-    uint16_t id_lobby;
+    int16_t id_lobby;
 };
 struct Connected {
     std::vector<uint16_t> clients_id;
@@ -106,6 +112,10 @@ struct ennemy_dead {
 struct Position {
     uint16_t x;
     uint16_t y;
+};
+
+struct Interaction {
+    uint16_t value;
 };
 
 struct New_client {

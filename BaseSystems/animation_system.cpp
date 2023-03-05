@@ -5,10 +5,10 @@
 ** animation_system
 */
 
-#include "registry.hpp"
-#include "rect.hpp"
-#include "animation.hpp"
-#include "image.hpp"
+#include "../Include/registry.hpp"
+#include "../BaseComponent/rect.hpp"
+#include "../BaseComponent/animation.hpp"
+#include "../BaseComponent/image.hpp"
 
 void animation_system(registry &reg
 ,sparse_array<component::image> &images, sparse_array<component::rect> &rects, sparse_array<component::animation> &animations)

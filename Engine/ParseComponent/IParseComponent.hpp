@@ -16,9 +16,9 @@
 #include <json/json.h>
 #include <json/value.h>
 #include <unordered_map>
-#include <data.hpp>
-#include "entity.hpp"
-#include "registry.hpp"
+#include "../Include/data.hpp"
+#include "../Include/entity.hpp"
+#include "../Include/registry.hpp"
 
 class IParseComponent {
     public:

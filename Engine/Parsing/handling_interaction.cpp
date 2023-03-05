@@ -6,7 +6,15 @@
 */
 
 #include "handling_interaction.hpp"
+#ifdef _WIN32
+#include <windows.h>
+#else
 #include <dlfcn.h>
+#endif
+
+/**
+ * @file handling_interaction.cpp
+ */
 
 using function_interaction = ILoad_Interaction *(*)();
 
@@ -25,6 +33,12 @@ using function_interaction = ILoad_Interaction *(*)();
 //     std::cout << interaction->get_name() << std::endl;
 // }
 
+/**
+ * @brief Construct a new handling interaction::handling interaction object
+ *
+ * @param libs_name List of the path of the library
+ */
+
 handling_interaction::handling_interaction(std::vector<std::string> const &libs_name)
 {
     for (auto &lib_name : libs_name)
@@ -35,6 +49,12 @@ handling_interaction::handling_interaction(std::vector<std::string> const &libs_
             std::cerr << e.what() << std::endl;
         }
 }
+
+/**
+ * @brief Construct a new handling interaction::handling interaction object
+ *
+ * @param handling Object to copy
+ */
 
 handling_interaction::handling_interaction(handling_interaction &&handling) : lib_interactions(std::move(handling.lib_interactions))
 {
@@ -49,6 +69,14 @@ handling_interaction::~handling_interaction()
 {
 }
 
+/**
+ * @brief Check if the name is an interaction
+ *
+ * @param name Name of the interaction
+ * @return true The name is an interaction
+ * @return false The name is not an interaction
+ */
+
 bool handling_interaction::name_is_interaction(std::string const &name) const noexcept
 {
     for (auto &lib : lib_interactions) {
@@ -58,20 +86,48 @@ bool handling_interaction::name_is_interaction(std::string const &name) const no
     return false;
 }
 
+/**
+ * @brief Get the interaction object
+ *
+ * @param name Name of the interaction
+ * @return ILoad_Interaction const* Pointer to the interaction
+ */
+
 void handling_interaction::add_lib_interaction(std::string const &lib_path)
 {
-    void *handle = dlopen(lib_path.c_str(), RTLD_LAZY);
-
-    if (handle == nullptr)
+    #ifdef _WIN32 // Windows
+    HINSTANCE handle = LoadLibrary(lib_path.c_str());
+    if (!handle) {
         throw std::runtime_error("error cannot open file: " + lib_path + "\n");
-    function_interaction create = (function_interaction)dlsym(handle, "createInteraction");
-    if (create == nullptr)
+    }
+    function_interaction create = (function_interaction)GetProcAddress(handle, "createInteraction");
+    if (!create) {
         throw std::runtime_error("no function createInteraction \n");
+    }
+    #else // Linux
+    void *handle = dlopen(lib_path.c_str(), RTLD_LAZY);
+    if (!handle) {
+        throw std::runtime_error("error cannot open file: " + lib_path + "\n");
+    }
+    function_interaction create = (function_interaction)dlsym(handle, "createInteraction");
+    if (!create) {
+        throw std::runtime_error("no function createInteraction \n");
+    }
+    #endif
+
     ILoad_Interaction *interaction = create();
-    if (interaction == nullptr)
+    if (interaction == nullptr) {
         throw std::runtime_error("invalid createInteraction return invalid pointer\n");
+    }
     lib_interactions.emplace_back(std::unique_ptr<ILoad_Interaction>(interaction));
 }
+
+/**
+ * @brief Get the interaction object
+ *
+ * @param name Name of the interaction
+ * @return ILoad_Interaction const* Pointer to the interaction
+ */
 
 ILoad_Interaction const *handling_interaction::get_interaction(std::string const &name) const noexcept
 {

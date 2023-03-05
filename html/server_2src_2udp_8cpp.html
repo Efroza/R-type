@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>R-TYPE: server/src/udp.cpp File Reference</title>
+<title>R-Type: server/src/udp.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">R-TYPE
+   <div id="projectname">R-Type
    </div>
   </td>
  </tr>
@@ -66,36 +66,13 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">udp.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;../include/server.hpp&quot;</code><br />
-<code>#include &lt;fstream&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="server_2include_2server_8hpp_source.html">../include/server.hpp</a>&quot;</code><br />
 </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:abc10516419cd6af838a8c6d87884d32d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_2src_2udp_8cpp.html#abc10516419cd6af838a8c6d87884d32d">receive_data</a> (ip::udp::socket &amp;socket, ip::udp::endpoint &amp;remote, std::vector&lt; ip::udp::endpoint &gt; &amp;endpoint, Header header)</td></tr>
-<tr class="memdesc:abc10516419cd6af838a8c6d87884d32d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function will translate the message received from a client.  <a href="server_2src_2udp_8cpp.html#abc10516419cd6af838a8c6d87884d32d">More...</a><br /></td></tr>
-<tr class="separator:abc10516419cd6af838a8c6d87884d32d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a799251ccb5ddc996bfe1e3d4e084d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_2src_2udp_8cpp.html#a0a799251ccb5ddc996bfe1e3d4e084d6">receive_thread</a> (ip::udp::socket &amp;socket, ip::udp::endpoint &amp;remote, std::vector&lt; ip::udp::endpoint &gt; &amp;endpoints)</td></tr>
-<tr class="memdesc:a0a799251ccb5ddc996bfe1e3d4e084d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function will receive data from the clients.  <a href="server_2src_2udp_8cpp.html#a0a799251ccb5ddc996bfe1e3d4e084d6">More...</a><br /></td></tr>
-<tr class="separator:a0a799251ccb5ddc996bfe1e3d4e084d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07f9da6e69b5f3b18322daebb4eece5f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_2src_2udp_8cpp.html#a07f9da6e69b5f3b18322daebb4eece5f">send_position</a> (ip::udp::socket &amp;socket, std::vector&lt; ip::udp::endpoint &gt; &amp;endpoints, std::string message_client)</td></tr>
-<tr class="memdesc:a07f9da6e69b5f3b18322daebb4eece5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function will send the struct position to the clients.  <a href="server_2src_2udp_8cpp.html#a07f9da6e69b5f3b18322daebb4eece5f">More...</a><br /></td></tr>
-<tr class="separator:a07f9da6e69b5f3b18322daebb4eece5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5df84b9ea4bea72f4f4ac5ba5b4d18bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_2src_2udp_8cpp.html#a5df84b9ea4bea72f4f4ac5ba5b4d18bc">send_message</a> (ip::udp::socket &amp;socket, std::vector&lt; ip::udp::endpoint &gt; &amp;endpoints, std::string message_client)</td></tr>
-<tr class="memdesc:a5df84b9ea4bea72f4f4ac5ba5b4d18bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">this function will send the struct message to the clients.  <a href="server_2src_2udp_8cpp.html#a5df84b9ea4bea72f4f4ac5ba5b4d18bc">More...</a><br /></td></tr>
-<tr class="separator:a5df84b9ea4bea72f4f4ac5ba5b4d18bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3722f3c29807aa29856c209d8a128c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_2src_2udp_8cpp.html#aa3722f3c29807aa29856c209d8a128c9">send_thread</a> (ip::udp::socket &amp;socket, ip::udp::endpoint &amp;remote, std::vector&lt; ip::udp::endpoint &gt; &amp;endpoints)</td></tr>
-<tr class="memdesc:aa3722f3c29807aa29856c209d8a128c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function will send data to the clients.  <a href="server_2src_2udp_8cpp.html#aa3722f3c29807aa29856c209d8a128c9">More...</a><br /></td></tr>
-<tr class="separator:aa3722f3c29807aa29856c209d8a128c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3fb73de016fec1b0a989b6bac61aa380"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_2src_2udp_8cpp.html#a3fb73de016fec1b0a989b6bac61aa380">launch_udp_server</a> ()</td></tr>
-<tr class="memdesc:a3fb73de016fec1b0a989b6bac61aa380"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function will launch the udp server.  <a href="server_2src_2udp_8cpp.html#a3fb73de016fec1b0a989b6bac61aa380">More...</a><br /></td></tr>
-<tr class="separator:a3fb73de016fec1b0a989b6bac61aa380"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:ad69f678058ac1e2c6d82212fd735b7a4"><td class="memItemLeft" align="right" valign="top"><a id="ad69f678058ac1e2c6d82212fd735b7a4"></a>
@@ -104,288 +81,7 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>BUFSIZE</b> = 10
 <tr class="memitem:a31286b5babe41e1c44365f96f223780b"><td class="memItemLeft" align="right" valign="top"><a id="a31286b5babe41e1c44365f96f223780b"></a>
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>HOST</b> = &quot;127.0.0.1&quot;</td></tr>
 <tr class="separator:a31286b5babe41e1c44365f96f223780b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a11717c934f77ad5167dac5d28562d85a"><td class="memItemLeft" align="right" valign="top"><a id="a11717c934f77ad5167dac5d28562d85a"></a>
-const int&#160;</td><td class="memItemRight" valign="bottom"><b>PORT</b> = 12345</td></tr>
-<tr class="separator:a11717c934f77ad5167dac5d28562d85a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a3fb73de016fec1b0a989b6bac61aa380"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3fb73de016fec1b0a989b6bac61aa380">&#9670;&nbsp;</a></span>launch_udp_server()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void launch_udp_server </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This function will launch the udp server. </p>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">void</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section see"><dt>See also</dt><dd>void <a class="el" href="server_2src_2udp_8cpp.html#a0a799251ccb5ddc996bfe1e3d4e084d6" title="This function will receive data from the clients.">receive_thread(ip::udp::socket&amp; socket, ip::udp::endpoint&amp; remote, std::vector&lt;ip::udp::endpoint&gt;&amp; endpoints)</a> </dd>
-<dd>
-void <a class="el" href="server_2src_2udp_8cpp.html#aa3722f3c29807aa29856c209d8a128c9" title="This function will send data to the clients.">send_thread(ip::udp::socket&amp; socket, ip::udp::endpoint&amp; remote, std::vector&lt;ip::udp::endpoint&gt;&amp; endpoints)</a></dd></dl>
-<p>This function will launch the udp server, it will create two threads, one to receive data from clients and one to send data to clients. After the threads are created it will wait for them to finish with join(). </p>
-
-</div>
-</div>
-<a id="abc10516419cd6af838a8c6d87884d32d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abc10516419cd6af838a8c6d87884d32d">&#9670;&nbsp;</a></span>receive_data()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void receive_data </td>
-          <td>(</td>
-          <td class="paramtype">ip::udp::socket &amp;&#160;</td>
-          <td class="paramname"><em>socket</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ip::udp::endpoint &amp;&#160;</td>
-          <td class="paramname"><em>remote</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; ip::udp::endpoint &gt; &amp;&#160;</td>
-          <td class="paramname"><em>endpoint</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Header&#160;</td>
-          <td class="paramname"><em>header</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This function will translate the message received from a client. </p>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">socket</td><td>the socket of the server to send data to client </td></tr>
-    <tr><td class="paramname">remote</td><td>the remote endpoint of the client </td></tr>
-    <tr><td class="paramname">endpoints</td><td>the vector of all the endpoints of the clients </td></tr>
-    <tr><td class="paramname">header</td><td>the header of the data to know the type of data</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>This function will read the message that was sent from the client and will print it.</p>
-<p>It creates two struct one if it is a position and another one if it is a message.</p>
-<p>Depending of the data type it will print the data. </p>
-
-</div>
-</div>
-<a id="a0a799251ccb5ddc996bfe1e3d4e084d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a799251ccb5ddc996bfe1e3d4e084d6">&#9670;&nbsp;</a></span>receive_thread()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void receive_thread </td>
-          <td>(</td>
-          <td class="paramtype">ip::udp::socket &amp;&#160;</td>
-          <td class="paramname"><em>socket</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ip::udp::endpoint &amp;&#160;</td>
-          <td class="paramname"><em>remote</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; ip::udp::endpoint &gt; &amp;&#160;</td>
-          <td class="paramname"><em>endpoints</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This function will receive data from the clients. </p>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">socket</td><td>the socket of the server to send data to client </td></tr>
-    <tr><td class="paramname">remote</td><td>the remote endpoint of the client </td></tr>
-    <tr><td class="paramname">endpoints</td><td>the vector of all the endpoints of the clients </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section see"><dt>See also</dt><dd>void <a class="el" href="server_2src_2udp_8cpp.html#abc10516419cd6af838a8c6d87884d32d" title="This function will translate the message received from a client.">receive_data(ip::udp::socket&amp; socket, ip::udp::endpoint&amp; remote, std::vector&lt;ip::udp::endpoint&gt;&amp; endpoint, Header header)</a></dd></dl>
-<p>This function will receive data from the clients and will call receive_data to get the data.</p>
-<p>It will also check if the client is already connected and if not it will add it to the vector of endpoints. </p>
-
-</div>
-</div>
-<a id="a5df84b9ea4bea72f4f4ac5ba5b4d18bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5df84b9ea4bea72f4f4ac5ba5b4d18bc">&#9670;&nbsp;</a></span>send_message()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void send_message </td>
-          <td>(</td>
-          <td class="paramtype">ip::udp::socket &amp;&#160;</td>
-          <td class="paramname"><em>socket</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; ip::udp::endpoint &gt; &amp;&#160;</td>
-          <td class="paramname"><em>endpoints</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>message_client</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>this function will send the struct message to the clients. </p>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">socket</td><td>the socket of the server to send data to client </td></tr>
-    <tr><td class="paramname">endpoints</td><td>the vector of all the endpoints of the clients </td></tr>
-    <tr><td class="paramname">message_client</td><td>the message to send to the clients</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>This function will send a certain message to the clients.</p>
-<p>It will first send the struct message to the clients, then the struct header to know that it is a message. </p>
-
-</div>
-</div>
-<a id="a07f9da6e69b5f3b18322daebb4eece5f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a07f9da6e69b5f3b18322daebb4eece5f">&#9670;&nbsp;</a></span>send_position()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void send_position </td>
-          <td>(</td>
-          <td class="paramtype">ip::udp::socket &amp;&#160;</td>
-          <td class="paramname"><em>socket</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; ip::udp::endpoint &gt; &amp;&#160;</td>
-          <td class="paramname"><em>endpoints</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>message_client</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This function will send the struct position to the clients. </p>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">socket</td><td>the socket of the server to send data to client </td></tr>
-    <tr><td class="paramname">endpoints</td><td>the vector of all the endpoints of the clients </td></tr>
-    <tr><td class="paramname">message_client</td><td>the message to send to the clients</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>This function will send a certain position to the clients.</p>
-<p>It will first send the struct position to the clients, then the struct header to know that it is a position. </p>
-
-</div>
-</div>
-<a id="aa3722f3c29807aa29856c209d8a128c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3722f3c29807aa29856c209d8a128c9">&#9670;&nbsp;</a></span>send_thread()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void send_thread </td>
-          <td>(</td>
-          <td class="paramtype">ip::udp::socket &amp;&#160;</td>
-          <td class="paramname"><em>socket</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ip::udp::endpoint &amp;&#160;</td>
-          <td class="paramname"><em>remote</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; ip::udp::endpoint &gt; &amp;&#160;</td>
-          <td class="paramname"><em>endpoints</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This function will send data to the clients. </p>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">socket</td><td>the socket of the server to send data to client </td></tr>
-    <tr><td class="paramname">remote</td><td>the remote endpoint of the client </td></tr>
-    <tr><td class="paramname">endpoints</td><td>the vector of all the endpoints of the clients </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section see"><dt>See also</dt><dd>void <a class="el" href="server_2src_2udp_8cpp.html#a07f9da6e69b5f3b18322daebb4eece5f" title="This function will send the struct position to the clients.">send_position(ip::udp::socket&amp; socket, std::vector&lt;ip::udp::endpoint&gt;&amp; endpoints, std::string message_client)</a> </dd>
-<dd>
-void <a class="el" href="server_2src_2udp_8cpp.html#a5df84b9ea4bea72f4f4ac5ba5b4d18bc" title="this function will send the struct message to the clients.">send_message(ip::udp::socket&amp; socket, std::vector&lt;ip::udp::endpoint&gt;&amp; endpoints, std::string message_client)</a></dd></dl>
-<p>This function will send data to the clients. It will send a struct position or a struct message to the clients depending if in the message there is a comma or no.</p>
-<p>If there is a comma, it will send a struct position, if not it will send a struct message. </p>
-
-</div>
-</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
