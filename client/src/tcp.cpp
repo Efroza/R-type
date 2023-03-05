@@ -202,7 +202,7 @@ void Client::connect_to_server(const asio::error_code& ec)
                     Header_client header_client;
                     header_client.id = _client_info.get_id();
                     header_client.data_type = DISCONNECTED;
-                    _socket->send(asio::buffer(&header_client, sizeof(header_client)));
+                    _socket->send(asio::buffer(&header_client, sizeof(Header_client)));
                     exit(0);
                 }
                 if (connection.id_lobby != 0) {
