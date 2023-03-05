@@ -64,6 +64,7 @@ jobs:
 
     - name: Install CMake
       run: |
+        echo "export TERM=xterm" | sudo tee /etc/profile.d/set_term.sh && source /etc/profile
         sudo apt-get update -y
         sudo apt-get install -y software-properties-common lsb-release
         sudo apt-get clean all
