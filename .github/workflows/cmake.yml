@@ -81,4 +81,4 @@ jobs:
 
     - name: Build with CMake
       run: |
-        ccmake . -DCMAKE_BUILD_TYPE=Release && cmake --build . --config Release && cpack -C Release
+        cmake . -DCMAKE_BUILD_TYPE=Release && cmake --build . --config Release && cpack -C Release
