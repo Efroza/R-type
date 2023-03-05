@@ -12,7 +12,17 @@
 #endif
 #include "handling_component_system.hpp"
 
+/**
+ * @file handling_component_system.cpp
+ */
+
 using Component_System = IComponentSystem *(*)();
+
+/**
+ * @brief Construct a new handling component system::handling component system object
+ *
+ * @param libs_name List of the path of the library
+ */
 
 handling_component_system::handling_component_system(std::vector<std::string> const &libs_name)
 {
@@ -24,6 +34,12 @@ handling_component_system::handling_component_system(std::vector<std::string> co
 handling_component_system::~handling_component_system()
 {
 }
+
+/**
+ * @brief Add a library to the list of the library
+ *
+ * @param lib_path Path of the library
+ */
 
 void handling_component_system::add_lib_component_system(std::string const &lib_path)
 {
@@ -54,6 +70,14 @@ void handling_component_system::add_lib_component_system(std::string const &lib_
     cs_array.emplace_back(cs_data);
 }
 
+/**
+ * @brief Check if the name is in the list of the library
+ *
+ * @param name Name of the library
+ * @return true The name is in the list of the library
+ * @return false The name is not in the list of the library
+ */
+
 bool handling_component_system::name_in_lib(std::string const &name) const noexcept
 {
     for (auto &cs_data : cs_array)
@@ -62,6 +86,12 @@ bool handling_component_system::name_in_lib(std::string const &name) const noexc
     return false;
 }
 
+/**
+ * @brief Load all the system of the library
+ *
+ * @param reg Registry of the ECS
+ */
+
 void handling_component_system::load_all_system(registry &reg) const noexcept
 {
     for (auto &cs_data : cs_array)
@@ -69,12 +99,25 @@ void handling_component_system::load_all_system(registry &reg) const noexcept
             cs_data->load_system(reg);
 }
 
+/**
+ * @brief Load all the component of the library
+ *
+ * @param reg Registry of the ECS
+ */
+
 void handling_component_system::load_all_component(registry &reg) const noexcept
 {
     for (auto &cs_data : cs_array)
         if (cs_data)
             cs_data->laod_component(reg);
 }
+
+/**
+ * @brief Get the component system object
+ *
+ * @param key Name of the library
+ * @return IComponentSystem* Pointer to the library
+ */
 
 IComponentSystem *handling_component_system::get_component_system(std::string const &key) noexcept
 {
