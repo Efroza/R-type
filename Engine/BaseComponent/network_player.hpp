@@ -11,8 +11,15 @@
 #include <cinttypes>
 #include "server.hpp"
 
+/**
+ * @file network_player.hpp
+*/
+
 namespace component
 {
+    /**
+     * @brief This class is used to create a network_player.
+     */
     class network_player
     {
         public:

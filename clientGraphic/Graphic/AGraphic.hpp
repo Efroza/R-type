@@ -12,6 +12,13 @@
 
 #include "IGraphic.hpp"
 
+/**
+ * @file AGraphic.hpp
+*/
+
+/**
+ * @brief Abstract class for graphic library.
+*/
 class AGraphic : public IGraphic
 {
 public:

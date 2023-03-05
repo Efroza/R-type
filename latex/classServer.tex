@@ -1,0 +1,74 @@
+\hypertarget{classServer}{}\doxysection{Server Class Reference}
+\label{classServer}\index{Server@{Server}}
+
+
+This class will create a server.  
+
+
+
+
+{\ttfamily \#include $<$server.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classServer_a046863864ad66a9fb938b57ffd73bd87}\label{classServer_a046863864ad66a9fb938b57ffd73bd87}} 
+void {\bfseries add\+\_\+client} (uint16\+\_\+t id, std\+::shared\+\_\+ptr$<$ asio\+::ip\+::tcp\+::socket $>$ socket, uint16\+\_\+t x, uint16\+\_\+t y)
+\item 
+\mbox{\Hypertarget{classServer_a88b61b8398a9547b3e937c19914ae490}\label{classServer_a88b61b8398a9547b3e937c19914ae490}} 
+\mbox{\hyperlink{classClientInfo}{Client\+Info}} $\ast$ {\bfseries get\+\_\+client\+\_\+info} (uint16\+\_\+t client\+\_\+id) const
+\item 
+\mbox{\Hypertarget{classServer_a47363a2876b0aee46b5e2189214ee7f4}\label{classServer_a47363a2876b0aee46b5e2189214ee7f4}} 
+void {\bfseries remove\+\_\+client} (uint16\+\_\+t client\+\_\+id)
+\item 
+\mbox{\Hypertarget{classServer_a99a82981931ef34981742445414a010d}\label{classServer_a99a82981931ef34981742445414a010d}} 
+uint16\+\_\+t {\bfseries get\+\_\+nb\+\_\+clients} () const
+\item 
+\mbox{\Hypertarget{classServer_ad07e3f5240f93d089a1ff78ddb563500}\label{classServer_ad07e3f5240f93d089a1ff78ddb563500}} 
+void {\bfseries print\+\_\+all\+\_\+clients} () const
+\item 
+\mbox{\Hypertarget{classServer_ac58903b35c56b51c73fa919e0a1c4d93}\label{classServer_ac58903b35c56b51c73fa919e0a1c4d93}} 
+void {\bfseries new\+\_\+client} (uint16\+\_\+t client\+\_\+id)
+\item 
+\mbox{\Hypertarget{classServer_ab082bf50a93f2f121203955f7ab3c06f}\label{classServer_ab082bf50a93f2f121203955f7ab3c06f}} 
+void {\bfseries send\+\_\+to\+\_\+all\+\_\+clients} (Server\+\_\+data \mbox{\hyperlink{classdata}{data}}, uint16\+\_\+t id)
+\item 
+\mbox{\Hypertarget{classServer_aec4df68a5ea0267f9ad6eef1d1e0f94a}\label{classServer_aec4df68a5ea0267f9ad6eef1d1e0f94a}} 
+void {\bfseries send\+\_\+vector\+\_\+clients} ()
+\item 
+\mbox{\Hypertarget{classServer_a5cb69de65f47db5366b215c84c1e32c5}\label{classServer_a5cb69de65f47db5366b215c84c1e32c5}} 
+void {\bfseries add\+\_\+new\+\_\+client\+\_\+function} (std\+::function$<$ void(std\+::uint16\+\_\+t, \mbox{\hyperlink{classregistry}{registry}} $\ast$)$>$ new\+\_\+function) noexcept
+\item 
+\mbox{\Hypertarget{classServer_a046863864ad66a9fb938b57ffd73bd87}\label{classServer_a046863864ad66a9fb938b57ffd73bd87}} 
+void {\bfseries add\+\_\+client} (uint16\+\_\+t id, std\+::shared\+\_\+ptr$<$ asio\+::ip\+::tcp\+::socket $>$ socket, uint16\+\_\+t x, uint16\+\_\+t y)
+\item 
+\mbox{\Hypertarget{classServer_ae52a8feac677158cd5a0ebc00da9faac}\label{classServer_ae52a8feac677158cd5a0ebc00da9faac}} 
+\mbox{\hyperlink{classClientInfo}{Client\+Info}} $\ast$ {\bfseries get\+\_\+client\+\_\+info} (uint16\+\_\+t client\+\_\+id) const
+\item 
+\mbox{\Hypertarget{classServer_a47363a2876b0aee46b5e2189214ee7f4}\label{classServer_a47363a2876b0aee46b5e2189214ee7f4}} 
+void {\bfseries remove\+\_\+client} (uint16\+\_\+t client\+\_\+id)
+\item 
+\mbox{\Hypertarget{classServer_a99a82981931ef34981742445414a010d}\label{classServer_a99a82981931ef34981742445414a010d}} 
+uint16\+\_\+t {\bfseries get\+\_\+nb\+\_\+clients} () const
+\item 
+\mbox{\Hypertarget{classServer_ad07e3f5240f93d089a1ff78ddb563500}\label{classServer_ad07e3f5240f93d089a1ff78ddb563500}} 
+void {\bfseries print\+\_\+all\+\_\+clients} () const
+\item 
+\mbox{\Hypertarget{classServer_ac58903b35c56b51c73fa919e0a1c4d93}\label{classServer_ac58903b35c56b51c73fa919e0a1c4d93}} 
+void {\bfseries new\+\_\+client} (uint16\+\_\+t client\+\_\+id)
+\item 
+\mbox{\Hypertarget{classServer_ab082bf50a93f2f121203955f7ab3c06f}\label{classServer_ab082bf50a93f2f121203955f7ab3c06f}} 
+void {\bfseries send\+\_\+to\+\_\+all\+\_\+clients} (Server\+\_\+data \mbox{\hyperlink{classdata}{data}}, uint16\+\_\+t id)
+\item 
+\mbox{\Hypertarget{classServer_aec4df68a5ea0267f9ad6eef1d1e0f94a}\label{classServer_aec4df68a5ea0267f9ad6eef1d1e0f94a}} 
+void {\bfseries send\+\_\+vector\+\_\+clients} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class will create a server. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Engine/server/include/server.\+hpp\item 
+Engine/server/src/Server.\+cpp\end{DoxyCompactItemize}

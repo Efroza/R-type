@@ -12,6 +12,13 @@
 #include <functional>
 #include "../Include/registry.hpp"
 
+/**
+ * @file ILoad_Interaction.hpp
+ */
+
+/**
+ * @brief Interface for loading interaction
+ */
 class ILoad_Interaction {
     public:
         using interaction_function = std::function<void(entity_t &e, registry &reg)>;

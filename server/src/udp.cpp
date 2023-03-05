@@ -16,11 +16,23 @@ const std::string HOST = "127.0.0.1"; // Localhost : 127.0.0.1
  *@file udp.cpp
  */
 
+/**
+ * @brief This is the constructor of the class UDP_Server.
+ * @return UDP_Server
+ * @param port the port of the server
+ * @details This constructor will create a udp server, it will create a socket and a thread.
+ */
 UDP_Server::UDP_Server(uint16_t port) : _port(port)
 {
     start = std::thread(&UDP_Server::launch_udp_server, this);
 }
 
+/**
+ * @brief This is the destructor of the class UDP_Server.
+ * @return void
+ * @param void
+ * @details This destructor will join the thread of the udp server.
+*/
 UDP_Server::~UDP_Server()
 {
     start.join();
@@ -35,6 +47,13 @@ uint16_t UDP_Server::get_port() const
     return _port;
 }
 
+/**
+ * @brief This function will launch the thread of the udp server.
+ * @return void
+ * @param void
+ * @see launch_udp_server()
+ * @details This function will launch the thread of the udp server.
+ */
 void UDP_Server::launch_thread_server() 
 {
     start = std::thread(&UDP_Server::launch_udp_server, this);
@@ -47,7 +66,7 @@ void UDP_Server::launch_thread_server()
  * @see receive_thread(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vector<ip::udp::endpoint>& endpoints)
  * @see send_thread(ip::udp::socket& socket, ip::udp::endpoint& remote, std::vector<ip::udp::endpoint>& endpoints)
  * @details This function will launch the udp server, it will create two threads, one to receive data from clients and one to send data to clients. After the threads are created it will wait for them to finish with join().
-*/
+ */
 void UDP_Server::launch_udp_server()
 {
     io_service io_service;

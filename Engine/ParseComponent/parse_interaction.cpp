@@ -13,6 +13,10 @@
 // up 73
 // down 74
 
+/**
+ * @file parse_interaction.cpp
+ */
+
 parse_component::interaction::interaction()
 {
 }
@@ -20,6 +24,13 @@ parse_component::interaction::interaction()
 parse_component::interaction::~interaction()
 {
 }
+
+/**
+ * @brief Check if the json object has the key
+ *
+ * @param json Reference to the json object
+ * @return true if the json object has the key and false otherwise
+ */
 
 static bool got_key(Json::Value const &json, std::string const &key)
 {
@@ -33,6 +44,13 @@ static bool got_key(Json::Value const &json, std::string const &key)
     return false;
 }
 
+/**
+ * @brief Check if there is a digit in the string
+ *
+ * @param str String to check
+ * @return true if there is a digit in the string and false otherwise
+ */
+
 bool is_digit(std::string const &str)
 {
     for (auto &c : str) {
@@ -42,6 +60,16 @@ bool is_digit(std::string const &str)
     }
     return true;
 }
+
+/**
+ * @brief Handling the string interaction
+ *
+ * @param e The entity to load the component
+ * @param reg The registry of the game
+ * @param key The key of the interaction
+ * @param interaction_name The name of the interaction
+ * @details This function will load the interaction component of the entity
+ */
 
 void parse_component::interaction::handling_string_interaction(entity_t const &e, registry &reg, std::string const &key, std::string const &interaction_name) const noexcept
 {
@@ -64,6 +92,16 @@ void parse_component::interaction::handling_string_interaction(entity_t const &e
     interact.new_interaction(key_digit, load_interaction->get_function());
     reg.add_component<component::interaction>(e, std::move(interact));
 }
+
+/**
+ * @brief Load the interaction component
+ *
+ * @param e The entity to load the component
+ * @param reg The registry of the game
+ * @param db The database of the game
+ * @param json The json object to load the component
+ * @details This function will load the interaction component of the entity
+ */
 
 void parse_component::interaction::load_component(entity_t const &e, registry &reg, data &db, Json::Value const &json) const
 {

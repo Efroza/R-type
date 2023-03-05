@@ -14,6 +14,10 @@
 #include <string>
 #include <utility>
 
+/**
+ * @file Drawable.hpp
+ */
+
 enum colors_e {
     NO_COLOR,
     WHITE,
@@ -26,6 +30,9 @@ enum colors_e {
     YELLOW
 };
 
+/**
+ * @brief Class that represent a drawable object.
+ */
 class Drawable
 {
 public:

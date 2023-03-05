@@ -1,0 +1,76 @@
+\hypertarget{classYaml}{}\doxysection{Yaml Class Reference}
+\label{classYaml}\index{Yaml@{Yaml}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classYaml_a3571f1a7c7df9f2f5762f62d071239a5}{Yaml}} (std\+::string const \&)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{classYaml}{Yaml}}\+:\+: \mbox{\hyperlink{classYaml}{Yaml}} object. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classYaml_a4a79ecde5b7a13a6c3b30bea9057140d}{get}} (std\+::string const \&) const
+\begin{DoxyCompactList}\small\item\em Get the data from the YAML file. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classYaml_ad060f5b8086e7ae3a8fd77fc80833d0c}{data\+\_\+exist}} (std\+::string const \&tab) const
+\begin{DoxyCompactList}\small\item\em Check if the data exist in the YAML file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classYaml_a3571f1a7c7df9f2f5762f62d071239a5}\label{classYaml_a3571f1a7c7df9f2f5762f62d071239a5}} 
+\index{Yaml@{Yaml}!Yaml@{Yaml}}
+\index{Yaml@{Yaml}!Yaml@{Yaml}}
+\doxysubsubsection{\texorpdfstring{Yaml()}{Yaml()}}
+{\footnotesize\ttfamily Yaml\+::\+Yaml (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{\+\_\+file\+Conf }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{classYaml}{Yaml}}\+:\+: \mbox{\hyperlink{classYaml}{Yaml}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+file\+Conf} & Name of the YAML file to parse. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classYaml_ad060f5b8086e7ae3a8fd77fc80833d0c}\label{classYaml_ad060f5b8086e7ae3a8fd77fc80833d0c}} 
+\index{Yaml@{Yaml}!data\_exist@{data\_exist}}
+\index{data\_exist@{data\_exist}!Yaml@{Yaml}}
+\doxysubsubsection{\texorpdfstring{data\_exist()}{data\_exist()}}
+{\footnotesize\ttfamily bool Yaml\+::data\+\_\+exist (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{key }\end{DoxyParamCaption}) const}
+
+
+
+Check if the data exist in the YAML file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & Name of the data to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If the data exist. 
+
+false If the data doesn\textquotesingle{}t exist. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classYaml_a4a79ecde5b7a13a6c3b30bea9057140d}\label{classYaml_a4a79ecde5b7a13a6c3b30bea9057140d}} 
+\index{Yaml@{Yaml}!get@{get}}
+\index{get@{get}!Yaml@{Yaml}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ Yaml\+::get (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{info }\end{DoxyParamCaption}) const}
+
+
+
+Get the data from the YAML file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em info} & Name of the data to get. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::string Data. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Engine/\+Parsing/Yaml.\+hpp\item 
+Engine/\+Parsing/\mbox{\hyperlink{Yaml_8cpp}{Yaml.\+cpp}}\end{DoxyCompactItemize}

@@ -12,6 +12,13 @@
 #include <cctype>
 #include "../Include/registry.hpp"
 
+/**
+ * @file IComponentSystem.hpp
+*/
+
+/**
+ * @brief This class is an interface for all the component system.
+ */
 class IComponentSystem {
     public:
         ~IComponentSystem() = default;

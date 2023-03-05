@@ -12,6 +12,10 @@
 #include <dlfcn.h>
 #endif
 
+/**
+ * @file handling_interaction.cpp
+ */
+
 using function_interaction = ILoad_Interaction *(*)();
 
 // int main(void)
@@ -29,6 +33,12 @@ using function_interaction = ILoad_Interaction *(*)();
 //     std::cout << interaction->get_name() << std::endl;
 // }
 
+/**
+ * @brief Construct a new handling interaction::handling interaction object
+ *
+ * @param libs_name List of the path of the library
+ */
+
 handling_interaction::handling_interaction(std::vector<std::string> const &libs_name)
 {
     for (auto &lib_name : libs_name)
@@ -39,6 +49,12 @@ handling_interaction::handling_interaction(std::vector<std::string> const &libs_
             std::cerr << e.what() << std::endl;
         }
 }
+
+/**
+ * @brief Construct a new handling interaction::handling interaction object
+ *
+ * @param handling Object to copy
+ */
 
 handling_interaction::handling_interaction(handling_interaction &&handling) : lib_interactions(std::move(handling.lib_interactions))
 {
@@ -53,6 +69,14 @@ handling_interaction::~handling_interaction()
 {
 }
 
+/**
+ * @brief Check if the name is an interaction
+ *
+ * @param name Name of the interaction
+ * @return true The name is an interaction
+ * @return false The name is not an interaction
+ */
+
 bool handling_interaction::name_is_interaction(std::string const &name) const noexcept
 {
     for (auto &lib : lib_interactions) {
@@ -61,6 +85,13 @@ bool handling_interaction::name_is_interaction(std::string const &name) const no
     }
     return false;
 }
+
+/**
+ * @brief Get the interaction object
+ *
+ * @param name Name of the interaction
+ * @return ILoad_Interaction const* Pointer to the interaction
+ */
 
 void handling_interaction::add_lib_interaction(std::string const &lib_path)
 {
@@ -90,6 +121,13 @@ void handling_interaction::add_lib_interaction(std::string const &lib_path)
     }
     lib_interactions.emplace_back(std::unique_ptr<ILoad_Interaction>(interaction));
 }
+
+/**
+ * @brief Get the interaction object
+ *
+ * @param name Name of the interaction
+ * @return ILoad_Interaction const* Pointer to the interaction
+ */
 
 ILoad_Interaction const *handling_interaction::get_interaction(std::string const &name) const noexcept
 {

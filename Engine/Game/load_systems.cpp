@@ -17,7 +17,6 @@
  *
  * @param reg Container of all the systems.
  */
-
 void load_system(registry &reg)
 {
     reg.add_system<component::interaction>(interaction_system);

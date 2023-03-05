@@ -1,0 +1,40 @@
+\hypertarget{classIParseComponent}{}\doxysection{IParse\+Component Class Reference}
+\label{classIParseComponent}\index{IParseComponent@{IParseComponent}}
+Inheritance diagram for IParse\+Component\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.513514cm]{classIParseComponent}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classIParseComponent_a5acbb964d7043d0e4dbc4cdf042e6a82}\label{classIParseComponent_a5acbb964d7043d0e4dbc4cdf042e6a82}} 
+using {\bfseries parse\+\_\+map} = std\+::unordered\+\_\+map$<$ std\+::string, std\+::uint64\+\_\+t $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classIParseComponent_ac3ca80751ce9accc704368f15e82ea76}\label{classIParseComponent_ac3ca80751ce9accc704368f15e82ea76}} 
+virtual std\+::string \& {\bfseries get\+\_\+name} () noexcept=0
+\item 
+\mbox{\Hypertarget{classIParseComponent_af5be0a4449f5411efd886fb345f4cf38}\label{classIParseComponent_af5be0a4449f5411efd886fb345f4cf38}} 
+virtual std\+::uint8\+\_\+t {\bfseries number\+\_\+arguments\+\_\+needed} () const noexcept=0
+\item 
+\mbox{\Hypertarget{classIParseComponent_a29294055bedb8c682383a7412055e179}\label{classIParseComponent_a29294055bedb8c682383a7412055e179}} 
+virtual parse\+\_\+map {\bfseries get\+\_\+arguments} () noexcept=0
+\item 
+\mbox{\Hypertarget{classIParseComponent_a425633b68ec7c322171e8a083060fd4d}\label{classIParseComponent_a425633b68ec7c322171e8a083060fd4d}} 
+virtual parse\+\_\+map const  \& {\bfseries argument\+\_\+needed} () noexcept=0
+\item 
+\mbox{\Hypertarget{classIParseComponent_a0947b742fef0558efb151dab94780802}\label{classIParseComponent_a0947b742fef0558efb151dab94780802}} 
+virtual bool {\bfseries good\+\_\+arg} (Json\+::\+Value const \&json, std\+::string const \&key) const noexcept=0
+\item 
+\mbox{\Hypertarget{classIParseComponent_a68928ef3815f6b4af22c6c901bc99ae7}\label{classIParseComponent_a68928ef3815f6b4af22c6c901bc99ae7}} 
+virtual void {\bfseries load\+\_\+component} (\mbox{\hyperlink{structentity__t}{entity\+\_\+t}} const \&e, \mbox{\hyperlink{classregistry}{registry}} \&reg, \mbox{\hyperlink{classdata}{data}} \&db, Json\+::\+Value const \&json) const =0
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Engine/\+Parse\+Component/IParse\+Component.\+hpp\end{DoxyCompactItemize}

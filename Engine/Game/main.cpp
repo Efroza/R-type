@@ -31,13 +31,12 @@
 
 
 /**
- * @brief Create the gameplay.
- *
+ * @brief Create a new entity for the new client.
+ * @param client_id Id of the new client.
  * @param reg Container of all the systems and components.
- * @param db Container of all the data (textures, sounds, etc...)
- * @param yaml File containing the configuration of the game.
- */
-
+ * @param server Server of the game.
+ * @return void
+*/
 void when_new_client(std::uint16_t client_id, registry *reg, UDP_Server &server)
 {
     if (reg == nullptr)
@@ -67,7 +66,6 @@ void when_new_client(std::uint16_t client_id, registry *reg, UDP_Server &server)
  * @param db Container of all the data (textures, sounds, etc...)
  * @param yaml File containing the configuration of the game.
  */
-
 void game(registry &reg, data &db, Yaml &yaml)
 {
     load_system(reg);
@@ -92,7 +90,6 @@ void game(registry &reg, data &db, Yaml &yaml)
  *
  * @param db Container of all the data (textures, sounds, etc...)
  */
-
 void init_databases(data &db)
 {
 
@@ -111,7 +108,6 @@ void init_databases(data &db)
  * @details The main function is used to manage all the errors possible, set all the preparations (init_databases, parse the config files, etc...)
  * @details and finally launch the game.
  */
-
 int main(int ac, char **av)
 {
     if (ac != 2)

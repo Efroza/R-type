@@ -1,0 +1,101 @@
+\hypertarget{classparsing}{}\doxysection{parsing Class Reference}
+\label{classparsing}\index{parsing@{parsing}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classparsing_aa64019e338fec8c9f3e1f5ef4a9c6c67}{parsing}} (\mbox{\hyperlink{classregistry}{registry}} \&registre, \mbox{\hyperlink{classdata}{data}} \&daatabase, std\+::vector$<$ std\+::string $>$ const \&config\+\_\+files)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{classparsing_aa64019e338fec8c9f3e1f5ef4a9c6c67}{parsing\+::parsing}} object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classparsing_a506d117694dfdecf053ea2a03e184e66}{handle\+\_\+config\+\_\+files}} (\mbox{\hyperlink{classhandling__interaction}{handling\+\_\+interaction}} \&data\+\_\+interactions, \mbox{\hyperlink{classhandling__component__system}{handling\+\_\+component\+\_\+system}} \&cs\+\_\+library)
+\begin{DoxyCompactList}\small\item\em Parse all the JSON files. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classparsing_ae2382276d5e6393dcbcbb3dabe60fa0c}{handle\+\_\+component\+\_\+system}} (std\+::string const \&name, Json\+::\+Value \&entitie, \mbox{\hyperlink{structentity__t}{entity\+\_\+t}} \&e)
+\begin{DoxyCompactList}\small\item\em Parse all the component system of an entity. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classparsing_a119c3c360f3b33fecbeee31365766242}{handle\+\_\+component\+\_\+system\+\_\+json}} (std\+::string const \&name, Json\+::\+Value \&entitie, \mbox{\hyperlink{structentity__t}{entity\+\_\+t}} \&e, \mbox{\hyperlink{classIComponentSystem}{IComponent\+System}} $\ast$cs\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Parse a component system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classparsing_aa64019e338fec8c9f3e1f5ef4a9c6c67}\label{classparsing_aa64019e338fec8c9f3e1f5ef4a9c6c67}} 
+\index{parsing@{parsing}!parsing@{parsing}}
+\index{parsing@{parsing}!parsing@{parsing}}
+\doxysubsubsection{\texorpdfstring{parsing()}{parsing()}}
+{\footnotesize\ttfamily parsing\+::parsing (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classregistry}{registry}} \&}]{registre,  }\item[{\mbox{\hyperlink{classdata}{data}} \&}]{daatabase,  }\item[{std\+::vector$<$ std\+::string $>$ const \&}]{config\+\_\+files }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{classparsing_aa64019e338fec8c9f3e1f5ef4a9c6c67}{parsing\+::parsing}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em registre} & Registry of the engine, used to contain all the component system. \\
+\hline
+{\em daatabase} & To store all the data. \\
+\hline
+{\em config\+\_\+files} & Name of the JSON files to parse. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classparsing_ae2382276d5e6393dcbcbb3dabe60fa0c}\label{classparsing_ae2382276d5e6393dcbcbb3dabe60fa0c}} 
+\index{parsing@{parsing}!handle\_component\_system@{handle\_component\_system}}
+\index{handle\_component\_system@{handle\_component\_system}!parsing@{parsing}}
+\doxysubsubsection{\texorpdfstring{handle\_component\_system()}{handle\_component\_system()}}
+{\footnotesize\ttfamily void parsing\+::handle\+\_\+component\+\_\+system (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name,  }\item[{Json\+::\+Value \&}]{entitie,  }\item[{\mbox{\hyperlink{structentity__t}{entity\+\_\+t}} \&}]{e }\end{DoxyParamCaption})}
+
+
+
+Parse all the component system of an entity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the component system. \\
+\hline
+{\em entitie} & JSON file to parse. \\
+\hline
+{\em e} & Entity to add the component system. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classparsing_a119c3c360f3b33fecbeee31365766242}\label{classparsing_a119c3c360f3b33fecbeee31365766242}} 
+\index{parsing@{parsing}!handle\_component\_system\_json@{handle\_component\_system\_json}}
+\index{handle\_component\_system\_json@{handle\_component\_system\_json}!parsing@{parsing}}
+\doxysubsubsection{\texorpdfstring{handle\_component\_system\_json()}{handle\_component\_system\_json()}}
+{\footnotesize\ttfamily void parsing\+::handle\+\_\+component\+\_\+system\+\_\+json (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name,  }\item[{Json\+::\+Value \&}]{entitie,  }\item[{\mbox{\hyperlink{structentity__t}{entity\+\_\+t}} \&}]{e,  }\item[{\mbox{\hyperlink{classIComponentSystem}{IComponent\+System}} $\ast$}]{cs\+\_\+value }\end{DoxyParamCaption})}
+
+
+
+Parse a component system. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the component system. \\
+\hline
+{\em entitie} & JSON file to parse. \\
+\hline
+{\em e} & Entity to add the component system. \\
+\hline
+{\em cs\+\_\+value} & Component system to parse. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classparsing_a506d117694dfdecf053ea2a03e184e66}\label{classparsing_a506d117694dfdecf053ea2a03e184e66}} 
+\index{parsing@{parsing}!handle\_config\_files@{handle\_config\_files}}
+\index{handle\_config\_files@{handle\_config\_files}!parsing@{parsing}}
+\doxysubsubsection{\texorpdfstring{handle\_config\_files()}{handle\_config\_files()}}
+{\footnotesize\ttfamily void parsing\+::handle\+\_\+config\+\_\+files (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhandling__interaction}{handling\+\_\+interaction}} \&}]{data\+\_\+interactions,  }\item[{\mbox{\hyperlink{classhandling__component__system}{handling\+\_\+component\+\_\+system}} \&}]{cs\+\_\+library }\end{DoxyParamCaption})}
+
+
+
+Parse all the JSON files. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data\+\_\+interactions} & \mbox{\hyperlink{structInteraction}{Interaction}} of the engine. \\
+\hline
+{\em cs\+\_\+library} & Component system library of the engine.\\
+\hline
+\end{DoxyParams}
+Manage the parsing of all the JSON files and check errors. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Engine/\+Parsing/parsing.\+hpp\item 
+Engine/\+Parsing/\mbox{\hyperlink{parsing_8cpp}{parsing.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,83 @@
+\hypertarget{draw_8cpp}{}\doxysection{Engine/\+Component\+System/draw.cpp File Reference}
+\label{draw_8cpp}\index{Engine/ComponentSystem/draw.cpp@{Engine/ComponentSystem/draw.cpp}}
+{\ttfamily \#include \char`\"{}draw.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}image.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}position.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}interaction.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}rect.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$SFML/\+Graphics.\+hpp$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classIComponentSystem}{IComponent\+System}} $\ast$ \mbox{\hyperlink{draw_8cpp_a56b993782825b0e6bb98d8c57c3fe93b}{create\+Component\+System}} ()
+\begin{DoxyCompactList}\small\item\em Factory function for creating an instance of the draw component system. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{draw_8cpp_a8009f4498dc394be819abf5eb8049af9}{draw\+\_\+system}} (\mbox{\hyperlink{classregistry}{registry}} \&reg, \mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1image}{component\+::image}} $>$ \&images, \mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{structcomponent_1_1position}{component\+::position}} $>$ \&positions, \mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1draw}{component\+::draw}} $>$ \&draw)
+\begin{DoxyCompactList}\small\item\em Draws images on the screen according to their positions and draw properties. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{draw_8cpp_ade405996f4dbf6e44c55196f5466f900}{draw\+\_\+rect\+\_\+system}} (\mbox{\hyperlink{classregistry}{registry}} \&reg, \mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1rect}{component\+::rect}} $>$ \&rects, \mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1image}{component\+::image}} $>$ \&images, \mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1draw}{component\+::draw}} $>$ \&draw)
+\begin{DoxyCompactList}\small\item\em System responsible for updating and drawing rectangular shapes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{draw_8cpp_a56b993782825b0e6bb98d8c57c3fe93b}\label{draw_8cpp_a56b993782825b0e6bb98d8c57c3fe93b}} 
+\index{draw.cpp@{draw.cpp}!createComponentSystem@{createComponentSystem}}
+\index{createComponentSystem@{createComponentSystem}!draw.cpp@{draw.cpp}}
+\doxysubsubsection{\texorpdfstring{createComponentSystem()}{createComponentSystem()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classIComponentSystem}{IComponent\+System}}$\ast$ create\+Component\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Factory function for creating an instance of the draw component system. 
+
+\begin{DoxyReturn}{Returns}
+A pointer to a new instance of the draw component system.
+\end{DoxyReturn}
+The function is declared as extern \char`\"{}\+C\char`\"{}, which specifies that it has C linkage (i.\+e., it can be called from C code).
+
+This is necessary because the component system is loaded as a shared library. \mbox{\Hypertarget{draw_8cpp_ade405996f4dbf6e44c55196f5466f900}\label{draw_8cpp_ade405996f4dbf6e44c55196f5466f900}} 
+\index{draw.cpp@{draw.cpp}!draw\_rect\_system@{draw\_rect\_system}}
+\index{draw\_rect\_system@{draw\_rect\_system}!draw.cpp@{draw.cpp}}
+\doxysubsubsection{\texorpdfstring{draw\_rect\_system()}{draw\_rect\_system()}}
+{\footnotesize\ttfamily void draw\+\_\+rect\+\_\+system (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classregistry}{registry}} \&}]{reg,  }\item[{\mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1rect}{component\+::rect}} $>$ \&}]{rects,  }\item[{\mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1image}{component\+::image}} $>$ \&}]{images,  }\item[{\mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1draw}{component\+::draw}} $>$ \&}]{draw }\end{DoxyParamCaption})}
+
+
+
+System responsible for updating and drawing rectangular shapes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reg} & A reference to the entity-\/component system registry. \\
+\hline
+{\em rects} & A sparse array of components that contain the rectangular shape properties for each entity. \\
+\hline
+{\em images} & A sparse array of components that contain the image properties for each entity. \\
+\hline
+{\em draw} & A sparse array of components that determine whether an entity should be drawn.\\
+\hline
+\end{DoxyParams}
+This system iterates through the sparse arrays of components (images, rects, and draw)
+
+and for each entity with all three components, it checks if the image has a valid
+
+database pointer. If so, it checks if the entity has a valid sf\+::\+Int\+Rect object in
+
+the database. If not, it creates one, otherwise it updates and loads the existing one. \mbox{\Hypertarget{draw_8cpp_a8009f4498dc394be819abf5eb8049af9}\label{draw_8cpp_a8009f4498dc394be819abf5eb8049af9}} 
+\index{draw.cpp@{draw.cpp}!draw\_system@{draw\_system}}
+\index{draw\_system@{draw\_system}!draw.cpp@{draw.cpp}}
+\doxysubsubsection{\texorpdfstring{draw\_system()}{draw\_system()}}
+{\footnotesize\ttfamily void draw\+\_\+system (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classregistry}{registry}} \&}]{reg,  }\item[{\mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1image}{component\+::image}} $>$ \&}]{images,  }\item[{\mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{structcomponent_1_1position}{component\+::position}} $>$ \&}]{positions,  }\item[{\mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1draw}{component\+::draw}} $>$ \&}]{draw }\end{DoxyParamCaption})}
+
+
+
+Draws images on the screen according to their positions and draw properties. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reg} & The registry containing all entities and their associated components. \\
+\hline
+{\em images} & The sparse array of image components to draw. \\
+\hline
+{\em positions} & The sparse array of position components associated with the images. \\
+\hline
+{\em draw} & The sparse array of draw components associated with the images. \\
+\hline
+\end{DoxyParams}

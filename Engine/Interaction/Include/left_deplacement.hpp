@@ -10,6 +10,10 @@
 
 #include "ILoad_Interaction.hpp"
 
+/**
+ * @file left_deplacement.hpp
+*/
+
 class left_deplacement : public ILoad_Interaction
 {
     public:

@@ -77,7 +77,10 @@ void TCP_Server::new_client_create_lobby(std::shared_ptr<tcp::socket> socket, Se
   header_server.id = client_id;
   header_server.data_type = LOBBYS;
   socket->send(asio::buffer(&header_server, sizeof(Header_server)));
-  if (_lobby) {
+  if (_nb_clients - 1 == _nb_lobby && _nb_lobby > 0) {
+    connection.id_lobby = -1;
+    std::cout << "Lobby full" << std::endl;
+  } else if (_lobby) {
     // Send messages to say that a lobby is already created
     connection.id_lobby = _nb_lobby;
     std::cout << "Lobby already created" << std::endl;
@@ -117,6 +120,8 @@ void TCP_Server::handle_client(std::shared_ptr<tcp::socket> socket, Server& serv
     std::memset(&header, 0, sizeof(header));
     size_t len = socket->read_some(asio::buffer(&header, sizeof(Header_client)));
     receive_tcp_server(header, *socket, server_data);
+    if (server_data.get_client_info(client_id) == NULL)
+      return;
     if (_lobby) {
       std::cout << "Waiting for all players to join the lobby" << std::endl;
       while (_nb_clients != _nb_lobby)
@@ -129,13 +134,6 @@ void TCP_Server::handle_client(std::shared_ptr<tcp::socket> socket, Server& serv
       }
       receive_tcp_server(header_client_tmp, *socket, server_data);
     }
-    std::cout << "Enter message to send: ";
-    std::string message;
-    std::getline(std::cin, message);
-    std::memset(&header, 0, sizeof(header));
-    Header_server header_server;
-    header_server.id = 1;
-    send_tcp_server(header_server, *socket, message);
   }
 }
 

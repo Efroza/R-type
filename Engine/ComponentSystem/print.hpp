@@ -10,6 +10,10 @@
 
 #include "IComponentSystem.hpp"
 
+/**
+ * @file print.hpp
+*/
+
 namespace component
 {
     class print
@@ -19,6 +23,9 @@ namespace component
 
 namespace componentSystem
 {
+    /**
+     * @brief This class is used to print.
+    */
     class print : public IComponentSystem
     {
         public:

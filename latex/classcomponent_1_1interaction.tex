@@ -1,0 +1,164 @@
+\hypertarget{classcomponent_1_1interaction}{}\doxysection{component\+::interaction Class Reference}
+\label{classcomponent_1_1interaction}\index{component::interaction@{component::interaction}}
+
+
+This class is used to create a interaction.  
+
+
+
+
+{\ttfamily \#include $<$interaction.\+hpp$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcomponent_1_1interaction_ad643fc6733a08be20ca6c9aff87e1b17}\label{classcomponent_1_1interaction_ad643fc6733a08be20ca6c9aff87e1b17}} 
+using {\bfseries interaction\+\_\+function} = std\+::function$<$ void(\mbox{\hyperlink{structentity__t}{entity\+\_\+t}} \&e, \mbox{\hyperlink{classregistry}{registry}} \&reg)$>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classcomponent_1_1interaction_ae9cb005b07402e2bd1944393df891ce2}{new\+\_\+interaction}} (std\+::uint8\+\_\+t type, const interaction\+\_\+function \&fun) noexcept
+\begin{DoxyCompactList}\small\item\em Register a new interaction. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcomponent_1_1interaction_a82e138b8a65faf9760ac54e715229c4e}{delete\+\_\+interaction}} (std\+::uint8\+\_\+t type)
+\begin{DoxyCompactList}\small\item\em Delete the interaction. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcomponent_1_1interaction_a56d336d2075294bc2cc479b8fb55838f}{trigger\+\_\+interaction}} (std\+::uint8\+\_\+t type, \mbox{\hyperlink{structentity__t}{entity\+\_\+t}} \&e, \mbox{\hyperlink{classregistry}{registry}} \&reg) const
+\begin{DoxyCompactList}\small\item\em Trigger the interaction. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classcomponent_1_1interaction_a7b34cb8f7f56de14a7766c6ecbe310c2}{type\+\_\+is\+\_\+register}} (std\+::uint8\+\_\+t type) const noexcept
+\begin{DoxyCompactList}\small\item\em Check if the type is register. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcomponent_1_1interaction_a5e92d50ea1ad9eb7ba3ec2edbe792728}{set\+\_\+typing}} (std\+::uint8\+\_\+t type) noexcept
+\begin{DoxyCompactList}\small\item\em Get the interaction object. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::uint8\+\_\+t $>$ const  \& \mbox{\hyperlink{classcomponent_1_1interaction_a1c92862b3b10d3f786a7b3d00f569aed}{get\+\_\+typing}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Get the typing object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcomponent_1_1interaction_ad14e90906abcbff0b8be2e29c3181b8a}{empty\+\_\+typing}} () noexcept
+\begin{DoxyCompactList}\small\item\em Empty the typing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcomponent_1_1interaction_a551c577d6531a078a2fcffc636360fba}\label{classcomponent_1_1interaction_a551c577d6531a078a2fcffc636360fba}} 
+std\+::vector$<$ std\+::uint8\+\_\+t $>$ {\bfseries typing}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class is used to create a interaction. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcomponent_1_1interaction_a82e138b8a65faf9760ac54e715229c4e}\label{classcomponent_1_1interaction_a82e138b8a65faf9760ac54e715229c4e}} 
+\index{component::interaction@{component::interaction}!delete\_interaction@{delete\_interaction}}
+\index{delete\_interaction@{delete\_interaction}!component::interaction@{component::interaction}}
+\doxysubsubsection{\texorpdfstring{delete\_interaction()}{delete\_interaction()}}
+{\footnotesize\ttfamily void component\+::interaction\+::delete\+\_\+interaction (\begin{DoxyParamCaption}\item[{std\+::uint8\+\_\+t}]{type }\end{DoxyParamCaption})}
+
+
+
+Delete the interaction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The type of the interaction.\\
+\hline
+\end{DoxyParams}
+The interaction will be deleted. \mbox{\Hypertarget{classcomponent_1_1interaction_ad14e90906abcbff0b8be2e29c3181b8a}\label{classcomponent_1_1interaction_ad14e90906abcbff0b8be2e29c3181b8a}} 
+\index{component::interaction@{component::interaction}!empty\_typing@{empty\_typing}}
+\index{empty\_typing@{empty\_typing}!component::interaction@{component::interaction}}
+\doxysubsubsection{\texorpdfstring{empty\_typing()}{empty\_typing()}}
+{\footnotesize\ttfamily void component\+::interaction\+::empty\+\_\+typing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Empty the typing. 
+
+The typing will be set to 0. \mbox{\Hypertarget{classcomponent_1_1interaction_a1c92862b3b10d3f786a7b3d00f569aed}\label{classcomponent_1_1interaction_a1c92862b3b10d3f786a7b3d00f569aed}} 
+\index{component::interaction@{component::interaction}!get\_typing@{get\_typing}}
+\index{get\_typing@{get\_typing}!component::interaction@{component::interaction}}
+\doxysubsubsection{\texorpdfstring{get\_typing()}{get\_typing()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::uint8\+\_\+t $>$ const  \& component\+::interaction\+::get\+\_\+typing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Get the typing object. 
+
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$std\+::uint8\+\_\+t$>$ const\& The typing.
+\end{DoxyReturn}
+The typing will be returned. \mbox{\Hypertarget{classcomponent_1_1interaction_ae9cb005b07402e2bd1944393df891ce2}\label{classcomponent_1_1interaction_ae9cb005b07402e2bd1944393df891ce2}} 
+\index{component::interaction@{component::interaction}!new\_interaction@{new\_interaction}}
+\index{new\_interaction@{new\_interaction}!component::interaction@{component::interaction}}
+\doxysubsubsection{\texorpdfstring{new\_interaction()}{new\_interaction()}}
+{\footnotesize\ttfamily void component\+::interaction\+::new\+\_\+interaction (\begin{DoxyParamCaption}\item[{std\+::uint8\+\_\+t}]{type,  }\item[{const interaction\+\_\+function \&}]{fun }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Register a new interaction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The type of the interaction. \\
+\hline
+{\em fun} & The function that will be called when the interaction is triggered.\\
+\hline
+\end{DoxyParams}
+The type will be register and the function will be called when the interaction is triggered. \mbox{\Hypertarget{classcomponent_1_1interaction_a5e92d50ea1ad9eb7ba3ec2edbe792728}\label{classcomponent_1_1interaction_a5e92d50ea1ad9eb7ba3ec2edbe792728}} 
+\index{component::interaction@{component::interaction}!set\_typing@{set\_typing}}
+\index{set\_typing@{set\_typing}!component::interaction@{component::interaction}}
+\doxysubsubsection{\texorpdfstring{set\_typing()}{set\_typing()}}
+{\footnotesize\ttfamily void component\+::interaction\+::set\+\_\+typing (\begin{DoxyParamCaption}\item[{std\+::uint8\+\_\+t}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Get the interaction object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The type of the interaction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+component\+::interaction\+::interaction\+\_\+function const\& The function that will be called when the interaction is triggered.
+\end{DoxyReturn}
+The function will be returned. \mbox{\Hypertarget{classcomponent_1_1interaction_a56d336d2075294bc2cc479b8fb55838f}\label{classcomponent_1_1interaction_a56d336d2075294bc2cc479b8fb55838f}} 
+\index{component::interaction@{component::interaction}!trigger\_interaction@{trigger\_interaction}}
+\index{trigger\_interaction@{trigger\_interaction}!component::interaction@{component::interaction}}
+\doxysubsubsection{\texorpdfstring{trigger\_interaction()}{trigger\_interaction()}}
+{\footnotesize\ttfamily void component\+::interaction\+::trigger\+\_\+interaction (\begin{DoxyParamCaption}\item[{std\+::uint8\+\_\+t}]{type,  }\item[{\mbox{\hyperlink{structentity__t}{entity\+\_\+t}} \&}]{e,  }\item[{\mbox{\hyperlink{classregistry}{registry}} \&}]{reg }\end{DoxyParamCaption}) const}
+
+
+
+Trigger the interaction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The type of the interaction. \\
+\hline
+{\em e} & The entity that will be associated with the interaction. \\
+\hline
+{\em reg} & The registry that will be associated with the interaction.\\
+\hline
+\end{DoxyParams}
+The interaction will be triggered and the function will be called. \mbox{\Hypertarget{classcomponent_1_1interaction_a7b34cb8f7f56de14a7766c6ecbe310c2}\label{classcomponent_1_1interaction_a7b34cb8f7f56de14a7766c6ecbe310c2}} 
+\index{component::interaction@{component::interaction}!type\_is\_register@{type\_is\_register}}
+\index{type\_is\_register@{type\_is\_register}!component::interaction@{component::interaction}}
+\doxysubsubsection{\texorpdfstring{type\_is\_register()}{type\_is\_register()}}
+{\footnotesize\ttfamily bool component\+::interaction\+::type\+\_\+is\+\_\+register (\begin{DoxyParamCaption}\item[{std\+::uint8\+\_\+t}]{type }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Check if the type is register. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The type of the interaction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true The type is register. 
+
+false The type is not register.
+\end{DoxyReturn}
+The type will be checked if it is in the list of interaction. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Engine/\+Base\+Component/\mbox{\hyperlink{interaction_8hpp}{interaction.\+hpp}}\item 
+Engine/\+Base\+Component/\mbox{\hyperlink{interaction_8cpp}{interaction.\+cpp}}\end{DoxyCompactItemize}

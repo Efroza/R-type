@@ -1,0 +1,132 @@
+\hypertarget{classTCP__Server}{}\doxysection{TCP\+\_\+\+Server Class Reference}
+\label{classTCP__Server}\index{TCP\_Server@{TCP\_Server}}
+
+
+This class will create a tcp server.  
+
+
+
+
+{\ttfamily \#include $<$server.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTCP__Server_a4341093b016c8625549fbccead71d659}{TCP\+\_\+\+Server}} (uint16\+\_\+t port)
+\begin{DoxyCompactList}\small\item\em This function will translate the data received from the client. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classTCP__Server_a902cf84add7217c11cbcac7dcbd84a92}{launch\+\_\+tcp\+\_\+server}} ()
+\begin{DoxyCompactList}\small\item\em This function will launch the tcp server. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classTCP__Server_a3f53270988ee13d992e5f357c427af23}\label{classTCP__Server_a3f53270988ee13d992e5f357c427af23}} 
+void {\bfseries handle\+\_\+client} (std\+::shared\+\_\+ptr$<$ asio\+::ip\+::tcp\+::socket $>$ socket, \mbox{\hyperlink{classServer}{Server}} \&server\+\_\+data)
+\item 
+\mbox{\Hypertarget{classTCP__Server_a3929a114ee07c7417fbcf511f9782818}\label{classTCP__Server_a3929a114ee07c7417fbcf511f9782818}} 
+void {\bfseries send\+\_\+tcp\+\_\+server} (\mbox{\hyperlink{structHeader__server}{Header\+\_\+server}} header, asio\+::ip\+::tcp\+::socket \&socket, std\+::string message)
+\item 
+\mbox{\Hypertarget{classTCP__Server_ad83bc71efe1e5cf70f036487f1cb844c}\label{classTCP__Server_ad83bc71efe1e5cf70f036487f1cb844c}} 
+void {\bfseries receive\+\_\+tcp\+\_\+server} (\mbox{\hyperlink{structHeader__client}{Header\+\_\+client}} header, asio\+::ip\+::tcp\+::socket \&socket, \mbox{\hyperlink{classServer}{Server}} \&server\+\_\+data)
+\item 
+void \mbox{\hyperlink{classTCP__Server_a121f9ab46e9c78aa5b108ca4ce47abd8}{add\+\_\+new\+\_\+client\+\_\+function}} (std\+::function$<$ void(std\+::uint16\+\_\+t, \mbox{\hyperlink{classregistry}{registry}} $\ast$)$>$ new\+\_\+function) noexcept
+\begin{DoxyCompactList}\small\item\em This function will add a function. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classTCP__Server_a03d419d45563011303df4bf38242703c}\label{classTCP__Server_a03d419d45563011303df4bf38242703c}} 
+void {\bfseries new\+\_\+client\+\_\+create\+\_\+lobby} (std\+::shared\+\_\+ptr$<$ asio\+::ip\+::tcp\+::socket $>$ socket, \mbox{\hyperlink{classServer}{Server}} \&server\+\_\+data, uint16\+\_\+t client\+\_\+id)
+\item 
+\mbox{\Hypertarget{classTCP__Server_a4341093b016c8625549fbccead71d659}\label{classTCP__Server_a4341093b016c8625549fbccead71d659}} 
+{\bfseries TCP\+\_\+\+Server} (uint16\+\_\+t port)
+\item 
+\mbox{\Hypertarget{classTCP__Server_a902cf84add7217c11cbcac7dcbd84a92}\label{classTCP__Server_a902cf84add7217c11cbcac7dcbd84a92}} 
+void {\bfseries launch\+\_\+tcp\+\_\+server} ()
+\item 
+\mbox{\Hypertarget{classTCP__Server_a3f53270988ee13d992e5f357c427af23}\label{classTCP__Server_a3f53270988ee13d992e5f357c427af23}} 
+void {\bfseries handle\+\_\+client} (std\+::shared\+\_\+ptr$<$ asio\+::ip\+::tcp\+::socket $>$ socket, \mbox{\hyperlink{classServer}{Server}} \&server\+\_\+data)
+\item 
+\mbox{\Hypertarget{classTCP__Server_a3929a114ee07c7417fbcf511f9782818}\label{classTCP__Server_a3929a114ee07c7417fbcf511f9782818}} 
+void {\bfseries send\+\_\+tcp\+\_\+server} (\mbox{\hyperlink{structHeader__server}{Header\+\_\+server}} header, asio\+::ip\+::tcp\+::socket \&socket, std\+::string message)
+\item 
+\mbox{\Hypertarget{classTCP__Server_ad83bc71efe1e5cf70f036487f1cb844c}\label{classTCP__Server_ad83bc71efe1e5cf70f036487f1cb844c}} 
+void {\bfseries receive\+\_\+tcp\+\_\+server} (\mbox{\hyperlink{structHeader__client}{Header\+\_\+client}} header, asio\+::ip\+::tcp\+::socket \&socket, \mbox{\hyperlink{classServer}{Server}} \&server\+\_\+data)
+\item 
+\mbox{\Hypertarget{classTCP__Server_a03d419d45563011303df4bf38242703c}\label{classTCP__Server_a03d419d45563011303df4bf38242703c}} 
+void {\bfseries new\+\_\+client\+\_\+create\+\_\+lobby} (std\+::shared\+\_\+ptr$<$ asio\+::ip\+::tcp\+::socket $>$ socket, \mbox{\hyperlink{classServer}{Server}} \&server\+\_\+data, uint16\+\_\+t client\+\_\+id)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class will create a tcp server. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classTCP__Server_a4341093b016c8625549fbccead71d659}\label{classTCP__Server_a4341093b016c8625549fbccead71d659}} 
+\index{TCP\_Server@{TCP\_Server}!TCP\_Server@{TCP\_Server}}
+\index{TCP\_Server@{TCP\_Server}!TCP\_Server@{TCP\_Server}}
+\doxysubsubsection{\texorpdfstring{TCP\_Server()}{TCP\_Server()}}
+{\footnotesize\ttfamily TCP\+\_\+\+Server\+::\+TCP\+\_\+\+Server (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{port }\end{DoxyParamCaption})}
+
+
+
+This function will translate the data received from the client. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em header} & the header of the data to know the type of data \\
+\hline
+{\em socket} & the socket of the server to receive data from client\\
+\hline
+\end{DoxyParams}
+This function will read the data that was sent from the client and will print it.
+
+It creates two struct one if it is a position and another one if it is a message.
+
+Depending of the data type it will print the data. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classTCP__Server_a121f9ab46e9c78aa5b108ca4ce47abd8}\label{classTCP__Server_a121f9ab46e9c78aa5b108ca4ce47abd8}} 
+\index{TCP\_Server@{TCP\_Server}!add\_new\_client\_function@{add\_new\_client\_function}}
+\index{add\_new\_client\_function@{add\_new\_client\_function}!TCP\_Server@{TCP\_Server}}
+\doxysubsubsection{\texorpdfstring{add\_new\_client\_function()}{add\_new\_client\_function()}}
+{\footnotesize\ttfamily void TCP\+\_\+\+Server\+::add\+\_\+new\+\_\+client\+\_\+function (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(std\+::uint16\+\_\+t, \mbox{\hyperlink{classregistry}{registry}} $\ast$)$>$}]{new\+\_\+function }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+This function will add a function. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+function} & function who will declanche with a new connection udp\\
+\hline
+\end{DoxyParams}
+This function will add a function who will declanche it with a new udp connection \mbox{\Hypertarget{classTCP__Server_a902cf84add7217c11cbcac7dcbd84a92}\label{classTCP__Server_a902cf84add7217c11cbcac7dcbd84a92}} 
+\index{TCP\_Server@{TCP\_Server}!launch\_tcp\_server@{launch\_tcp\_server}}
+\index{launch\_tcp\_server@{launch\_tcp\_server}!TCP\_Server@{TCP\_Server}}
+\doxysubsubsection{\texorpdfstring{launch\_tcp\_server()}{launch\_tcp\_server()}}
+{\footnotesize\ttfamily void TCP\+\_\+\+Server\+::launch\+\_\+tcp\+\_\+server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This function will launch the tcp server. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em void} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+void handle\+\_\+client(tcp\+::socket socket)
+\end{DoxySeeAlso}
+This function will launch the tcp server, it will create one thread, a thread that has the function handling the clients.
+
+It will create a socket and an acceptor, the acceptor will accept the connection from the client and the socket will be used to send and receive data from the client
+
+The thread will be detached so it will be able to run in the background and the main thread will be able to continue. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Engine/server/include/server.\+hpp\item 
+Engine/server/src/\mbox{\hyperlink{Engine_2server_2src_2tcp_8cpp}{tcp.\+cpp}}\end{DoxyCompactItemize}

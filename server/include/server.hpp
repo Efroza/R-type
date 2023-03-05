@@ -16,11 +16,17 @@
 #include "../../shared/include/ClientInfo.hpp"
 #include <fstream>
 
+/**
+* @file server.hpp
+*/
+
+/**
+ * @brief This class will create a server.
+*/
 class Server {
     public:
         Server();
         ~Server();
-
 
         // Handle list of clients
         void add_client(uint16_t id, std::shared_ptr<asio::ip::tcp::socket> socket, uint16_t x, uint16_t y);
@@ -36,6 +42,9 @@ class Server {
         std::map<uint16_t, ClientInfo*> client_info_map;
 };
 
+/**
+ * @brief This class will create a udp server.
+*/
 class UDP_Server {
     public:
         UDP_Server(uint16_t port);
@@ -57,6 +66,9 @@ class UDP_Server {
         std::shared_ptr<asio::ip::udp::socket> _socket;
 };
 
+/**
+ * @brief This class will create a tcp server.
+*/
 class TCP_Server {
     public:
         TCP_Server(uint16_t port);

@@ -1,0 +1,369 @@
+\hypertarget{classClient}{}\doxysection{Client Class Reference}
+\label{classClient}\index{Client@{Client}}
+
+
+This class will create a client.  
+
+
+
+
+{\ttfamily \#include $<$client.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classClient_a3c9f279f910f5eb19010852639165831}{Client}} (const std\+::string \&host, const std\+::string \&port)
+\begin{DoxyCompactList}\small\item\em Create the main class of the client side. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classClient_ad78a9ecd6a1df6845c4577562bb861aa}{async\+\_\+tcp\+\_\+client}} (const asio\+::error\+\_\+code \&ec)
+\begin{DoxyCompactList}\small\item\em Launch a TCP client. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classClient_a60007b656d310e49d5b1bdeb58faec06}{connect\+\_\+to\+\_\+server}} (const asio\+::error\+\_\+code \&ec)
+\begin{DoxyCompactList}\small\item\em This function will connect the client to the server and check if a lobby exist on this port. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classClient_ae4e711e9b438659a12e3ca29e6d46991}{in\+Game}} ()
+\begin{DoxyCompactList}\small\item\em This function will ask the user to enter the number of players he wants in the lobby before the game starts. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classClient_af267ceb8990422fde154729664c00c45}{in\+Lobby}} ()
+\begin{DoxyCompactList}\small\item\em This function will be called if a lobby already exist on the port the client is trying to connect to. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classClient_a5dccf464f9fdddef84072068345f767d}{send\+\_\+tcp\+\_\+client}} (\mbox{\hyperlink{structHeader__client}{Header\+\_\+client}} header, std\+::string message)
+\begin{DoxyCompactList}\small\item\em This function will send data to the server. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classClient_a7d4c762fa9446bcb6fa1f3895c5d7e39}{receive\+\_\+tcp\+\_\+client}} (\mbox{\hyperlink{structHeader__server}{Header\+\_\+server}} header)
+\begin{DoxyCompactList}\small\item\em This function will translate the data received from the server. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classClient_a6d733afd7e0fc91b4116ef9a35fa57d6}{start\+\_\+game}} (\mbox{\hyperlink{structHeader__server}{Header\+\_\+server}} header)
+\begin{DoxyCompactList}\small\item\em This function will get every clients that are connected to the lobby. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classClient_a0b4e80d0a992dce04b129f16688a03fd}{launch\+\_\+game}} ()
+\begin{DoxyCompactList}\small\item\em This function will make the transition between tcp and udp (lobby and game) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classClient_a940e2f352c0a15107d6bd05bfc39851a}{async\+\_\+udp\+\_\+client}} (const std\+::string \&host, const std\+::string \&port)
+\begin{DoxyCompactList}\small\item\em Launch a UDP client. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classClient_afe8f5fda8d685f8a97d9282339e6e8c6}{receive\+\_\+thread\+\_\+client\+\_\+udp}} (udp\+::socket \&socket, asio\+::io\+\_\+context \&io\+\_\+context)
+\begin{DoxyCompactList}\small\item\em Loop to receive data from the server. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classClient_a2971b71c728ca3eb800a0460a156a229}{receive\+\_\+data\+\_\+client\+\_\+udp}} (\mbox{\hyperlink{structHeader}{Header}} header, udp\+::socket \&socket, udp\+::endpoint \&sender\+\_\+endpoint, asio\+::error\+\_\+code \&ec)
+\begin{DoxyCompactList}\small\item\em This function will translate the data received from the server into a struct. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classClient_a6c2b9cf4271450d5f7f91533427bb173}{send\+\_\+data\+\_\+client\+\_\+udp}} (udp\+::socket \&socket, udp\+::endpoint \&server\+\_\+endpoint)
+\begin{DoxyCompactList}\small\item\em Loop to send data to the server. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classClient_a79f246cca367ef0c63a11c4488c1e75a}{send\+\_\+struct\+\_\+client\+\_\+udp}} (udp\+::socket \&socket, udp\+::endpoint \&server\+\_\+endpoint, std\+::string input)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class will create a client. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classClient_a3c9f279f910f5eb19010852639165831}\label{classClient_a3c9f279f910f5eb19010852639165831}} 
+\index{Client@{Client}!Client@{Client}}
+\index{Client@{Client}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{Client()}{Client()}}
+{\footnotesize\ttfamily Client\+::\+Client (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{host,  }\item[{const std\+::string \&}]{port }\end{DoxyParamCaption})}
+
+
+
+Create the main class of the client side. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em host} & represents the host of the server \\
+\hline
+{\em port} & represents the port of the server \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classClient_ad78a9ecd6a1df6845c4577562bb861aa}{Client\+::async\+\_\+tcp\+\_\+client(const asio\+::error\+\_\+code\& ec)}}
+\end{DoxySeeAlso}
+Create the main class of the client side 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classClient_ad78a9ecd6a1df6845c4577562bb861aa}\label{classClient_ad78a9ecd6a1df6845c4577562bb861aa}} 
+\index{Client@{Client}!async\_tcp\_client@{async\_tcp\_client}}
+\index{async\_tcp\_client@{async\_tcp\_client}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{async\_tcp\_client()}{async\_tcp\_client()}}
+{\footnotesize\ttfamily void Client\+::async\+\_\+tcp\+\_\+client (\begin{DoxyParamCaption}\item[{const asio\+::error\+\_\+code \&}]{ec }\end{DoxyParamCaption})}
+
+
+
+Launch a TCP client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ec} & the error code \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+send\+\_\+tcp\+\_\+client(\+Header\+\_\+client header, tcp\+::socket \&socket, std\+::string message) 
+
+receive\+\_\+tcp\+\_\+client(\+Header\+\_\+server header, tcp\+::socket \&socket)
+\end{DoxySeeAlso}
+Launch an asynchronous TCP client.
+
+The client can either send a message or a position. \mbox{\Hypertarget{classClient_a940e2f352c0a15107d6bd05bfc39851a}\label{classClient_a940e2f352c0a15107d6bd05bfc39851a}} 
+\index{Client@{Client}!async\_udp\_client@{async\_udp\_client}}
+\index{async\_udp\_client@{async\_udp\_client}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{async\_udp\_client()}{async\_udp\_client()}}
+{\footnotesize\ttfamily void Client\+::async\+\_\+udp\+\_\+client (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{host,  }\item[{const std\+::string \&}]{port }\end{DoxyParamCaption})}
+
+
+
+Launch a UDP client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em host} & represents the host of the server. \\
+\hline
+{\em port} & represents the port of the server. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classClient_afe8f5fda8d685f8a97d9282339e6e8c6}{receive\+\_\+thread\+\_\+client\+\_\+udp(udp\+::socket\& socket, asio\+::io\+\_\+context\& io\+\_\+context)}} 
+
+\mbox{\hyperlink{classClient_a6c2b9cf4271450d5f7f91533427bb173}{send\+\_\+data\+\_\+client\+\_\+udp(udp\+::socket\& socket, udp\+::endpoint\& server\+\_\+endpoint)}}
+\end{DoxySeeAlso}
+This function will launch a UDP client.
+
+It will create a thread to receive data from the server and a there is a call to send\+\_\+data\+\_\+client\+\_\+udp to send data to the server. \mbox{\Hypertarget{classClient_a60007b656d310e49d5b1bdeb58faec06}\label{classClient_a60007b656d310e49d5b1bdeb58faec06}} 
+\index{Client@{Client}!connect\_to\_server@{connect\_to\_server}}
+\index{connect\_to\_server@{connect\_to\_server}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{connect\_to\_server()}{connect\_to\_server()}}
+{\footnotesize\ttfamily void Client\+::connect\+\_\+to\+\_\+server (\begin{DoxyParamCaption}\item[{const asio\+::error\+\_\+code \&}]{ec }\end{DoxyParamCaption})}
+
+
+
+This function will connect the client to the server and check if a lobby exist on this port. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em ec} & the error code\\
+\hline
+\end{DoxyParams}
+This function will connect the client to the server and check if a lobby exist on this port, if yes it will ask the user if he wants to join the lobby, if not it will create a new lobby. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classClient_ae4e711e9b438659a12e3ca29e6d46991}{in\+Game()}} and 
+
+\mbox{\hyperlink{classClient_af267ceb8990422fde154729664c00c45}{in\+Lobby()}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classClient_ae4e711e9b438659a12e3ca29e6d46991}\label{classClient_ae4e711e9b438659a12e3ca29e6d46991}} 
+\index{Client@{Client}!inGame@{inGame}}
+\index{inGame@{inGame}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{inGame()}{inGame()}}
+{\footnotesize\ttfamily void Client\+::in\+Game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This function will ask the user to enter the number of players he wants in the lobby before the game starts. 
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+This function will ask the user to enter the number of players he wants in the lobby before the game starts and will then send that number to the server. \mbox{\Hypertarget{classClient_af267ceb8990422fde154729664c00c45}\label{classClient_af267ceb8990422fde154729664c00c45}} 
+\index{Client@{Client}!inLobby@{inLobby}}
+\index{inLobby@{inLobby}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{inLobby()}{inLobby()}}
+{\footnotesize\ttfamily void Client\+::in\+Lobby (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This function will be called if a lobby already exist on the port the client is trying to connect to. 
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+This function will be called if a lobby already exist, and will ask the user if he wants to join the lobby, if not it will disconnect the client. \mbox{\Hypertarget{classClient_a0b4e80d0a992dce04b129f16688a03fd}\label{classClient_a0b4e80d0a992dce04b129f16688a03fd}} 
+\index{Client@{Client}!launch\_game@{launch\_game}}
+\index{launch\_game@{launch\_game}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{launch\_game()}{launch\_game()}}
+{\footnotesize\ttfamily void Client\+::launch\+\_\+game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This function will make the transition between tcp and udp (lobby and game) 
+
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+This function will make the transition between tcp and udp (lobby and game) \mbox{\Hypertarget{classClient_a2971b71c728ca3eb800a0460a156a229}\label{classClient_a2971b71c728ca3eb800a0460a156a229}} 
+\index{Client@{Client}!receive\_data\_client\_udp@{receive\_data\_client\_udp}}
+\index{receive\_data\_client\_udp@{receive\_data\_client\_udp}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{receive\_data\_client\_udp()}{receive\_data\_client\_udp()}}
+{\footnotesize\ttfamily void Client\+::receive\+\_\+data\+\_\+client\+\_\+udp (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structHeader}{Header}}}]{header,  }\item[{udp\+::socket \&}]{socket,  }\item[{udp\+::endpoint \&}]{sender\+\_\+endpoint,  }\item[{asio\+::error\+\_\+code \&}]{ec }\end{DoxyParamCaption})}
+
+
+
+This function will translate the data received from the server into a struct. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em header} & represents the header of the data received. \\
+\hline
+{\em socket} & represents the socket of the client. \\
+\hline
+{\em sender\+\_\+endpoint} & represents the endpoint of the server. \\
+\hline
+{\em ec} & represents the error code. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+This function will read the data received from the server.
+
+It creates two struct one if it is a position and another one if it is a message.
+
+Depending of the data type it will print the data. \mbox{\Hypertarget{classClient_a7d4c762fa9446bcb6fa1f3895c5d7e39}\label{classClient_a7d4c762fa9446bcb6fa1f3895c5d7e39}} 
+\index{Client@{Client}!receive\_tcp\_client@{receive\_tcp\_client}}
+\index{receive\_tcp\_client@{receive\_tcp\_client}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{receive\_tcp\_client()}{receive\_tcp\_client()}}
+{\footnotesize\ttfamily void Client\+::receive\+\_\+tcp\+\_\+client (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structHeader__server}{Header\+\_\+server}}}]{header }\end{DoxyParamCaption})}
+
+
+
+This function will translate the data received from the server. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em header} & the header of the data to know the type of data\\
+\hline
+\end{DoxyParams}
+This function will read the data that was sent from the server and will print it.
+
+It creates two struct one if it is a position and another one if it is a message.
+
+Depending of the data type it will print the data. \mbox{\Hypertarget{classClient_afe8f5fda8d685f8a97d9282339e6e8c6}\label{classClient_afe8f5fda8d685f8a97d9282339e6e8c6}} 
+\index{Client@{Client}!receive\_thread\_client\_udp@{receive\_thread\_client\_udp}}
+\index{receive\_thread\_client\_udp@{receive\_thread\_client\_udp}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{receive\_thread\_client\_udp()}{receive\_thread\_client\_udp()}}
+{\footnotesize\ttfamily void Client\+::receive\+\_\+thread\+\_\+client\+\_\+udp (\begin{DoxyParamCaption}\item[{udp\+::socket \&}]{socket,  }\item[{asio\+::io\+\_\+context \&}]{io\+\_\+context }\end{DoxyParamCaption})}
+
+
+
+Loop to receive data from the server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & represents the socket of the client. \\
+\hline
+{\em io\+\_\+context} & represents the io\+\_\+context of the client. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classClient_a2971b71c728ca3eb800a0460a156a229}{receive\+\_\+data\+\_\+client\+\_\+udp(\+Header header, udp\+::socket\& socket, udp\+::endpoint\& sender\+\_\+endpoint, asio\+::error\+\_\+code\& ec)}}
+\end{DoxySeeAlso}
+This function will loop to receive data from the server.
+
+It will call receive\+\_\+data\+\_\+client\+\_\+udp to receive data from the server.
+
+It will receive data from the server until the server is closed. \mbox{\Hypertarget{classClient_a6c2b9cf4271450d5f7f91533427bb173}\label{classClient_a6c2b9cf4271450d5f7f91533427bb173}} 
+\index{Client@{Client}!send\_data\_client\_udp@{send\_data\_client\_udp}}
+\index{send\_data\_client\_udp@{send\_data\_client\_udp}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{send\_data\_client\_udp()}{send\_data\_client\_udp()}}
+{\footnotesize\ttfamily void Client\+::send\+\_\+data\+\_\+client\+\_\+udp (\begin{DoxyParamCaption}\item[{udp\+::socket \&}]{socket,  }\item[{udp\+::endpoint \&}]{server\+\_\+endpoint }\end{DoxyParamCaption})}
+
+
+
+Loop to send data to the server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em socket} & represents the socket of the client. \\
+\hline
+{\em server\+\_\+endpoint} & represents the endpoint of the server. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classClient_a79f246cca367ef0c63a11c4488c1e75a}{send\+\_\+struct\+\_\+client\+\_\+udp(udp\+::socket\& socket, udp\+::endpoint\& server\+\_\+endpoint, std\+::string input)}}
+\end{DoxySeeAlso}
+This function will loop to send data to the server.
+
+It will call send\+\_\+struct\+\_\+client\+\_\+udp to send data to the server.
+
+It will send data to the server until the server is closed. \mbox{\Hypertarget{classClient_a79f246cca367ef0c63a11c4488c1e75a}\label{classClient_a79f246cca367ef0c63a11c4488c1e75a}} 
+\index{Client@{Client}!send\_struct\_client\_udp@{send\_struct\_client\_udp}}
+\index{send\_struct\_client\_udp@{send\_struct\_client\_udp}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{send\_struct\_client\_udp()}{send\_struct\_client\_udp()}}
+{\footnotesize\ttfamily void Client\+::send\+\_\+struct\+\_\+client\+\_\+udp (\begin{DoxyParamCaption}\item[{udp\+::socket \&}]{socket,  }\item[{udp\+::endpoint \&}]{server\+\_\+endpoint,  }\item[{std\+::string}]{input }\end{DoxyParamCaption})}
+
+This function will send data to the server. 
+\begin{DoxyParams}{Parameters}
+{\em socket} & represents the socket of the client. \\
+\hline
+{\em server\+\_\+endpoint} & represents the endpoint of the server. \\
+\hline
+{\em input} & represents the input of the user. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+This function will send a certain stuct to the server depending of the message.
+
+It will create a header with a data type depending of the message.
+
+If the message contains a comma, it will send a position. If not, it will send a message.
+
+It will send the header and the struct to the server. \mbox{\Hypertarget{classClient_a5dccf464f9fdddef84072068345f767d}\label{classClient_a5dccf464f9fdddef84072068345f767d}} 
+\index{Client@{Client}!send\_tcp\_client@{send\_tcp\_client}}
+\index{send\_tcp\_client@{send\_tcp\_client}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{send\_tcp\_client()}{send\_tcp\_client()}}
+{\footnotesize\ttfamily void Client\+::send\+\_\+tcp\+\_\+client (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structHeader__client}{Header\+\_\+client}}}]{header,  }\item[{std\+::string}]{message }\end{DoxyParamCaption})}
+
+
+
+This function will send data to the server. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em header} & the header of the data to know the type of data \\
+\hline
+{\em message} & the message to send to the server\\
+\hline
+\end{DoxyParams}
+This function will send data to the server.
+
+It will create a header with a data type depending of the message.
+
+It will also create a struct depending of the data type.
+
+It will send the header and the struct to the server.
+
+If the message contains a comma it will be a position and if not, it will be a message. \mbox{\Hypertarget{classClient_a6d733afd7e0fc91b4116ef9a35fa57d6}\label{classClient_a6d733afd7e0fc91b4116ef9a35fa57d6}} 
+\index{Client@{Client}!start\_game@{start\_game}}
+\index{start\_game@{start\_game}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{start\_game()}{start\_game()}}
+{\footnotesize\ttfamily void Client\+::start\+\_\+game (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structHeader__server}{Header\+\_\+server}}}]{header }\end{DoxyParamCaption})}
+
+
+
+This function will get every clients that are connected to the lobby. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em header} & the header of the data to know the type of data\\
+\hline
+\end{DoxyParams}
+This function will read the data that was sent from the server and will keep it in a vector of client\+Info. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+client/include/\mbox{\hyperlink{client_8hpp}{client.\+hpp}}\item 
+client/src/\mbox{\hyperlink{client_2src_2tcp_8cpp}{tcp.\+cpp}}\item 
+client/src/\mbox{\hyperlink{client_2src_2udp_8cpp}{udp.\+cpp}}\end{DoxyCompactItemize}
