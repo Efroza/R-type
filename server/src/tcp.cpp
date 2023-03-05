@@ -77,7 +77,10 @@ void TCP_Server::new_client_create_lobby(std::shared_ptr<tcp::socket> socket, Se
   header_server.id = client_id;
   header_server.data_type = LOBBYS;
   socket->send(asio::buffer(&header_server, sizeof(Header_server)));
-  if (_lobby) {
+  if (_nb_clients - 1 == _nb_lobby && _nb_lobby > 0) {
+    connection.id_lobby = -1;
+    std::cout << "Lobby full" << std::endl;
+  } else if (_lobby) {
     // Send messages to say that a lobby is already created
     connection.id_lobby = _nb_lobby;
     std::cout << "Lobby already created" << std::endl;

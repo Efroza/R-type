@@ -196,6 +196,15 @@ void Client::connect_to_server(const asio::error_code& ec)
             if (tmp_header_server.data_type == LOBBYS) {
                 Connection connection;
                 _socket->receive(asio::buffer(&connection, sizeof(connection)));
+                std::cout << "Lobby id : " << connection.id_lobby << std::endl;
+                if (connection.id_lobby == -1) {
+                    std::cout << "Lobby is full" << std::endl;
+                    Header_client header_client;
+                    header_client.id = _client_info.get_id();
+                    header_client.data_type = DISCONNECTED;
+                    _socket->send(asio::buffer(&header_client, sizeof(header_client)));
+                    exit(0);
+                }
                 if (connection.id_lobby != 0) {
                     _in_game = true;
                     _lobby_created = true;
