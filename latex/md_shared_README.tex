@@ -1,0 +1,10 @@
+The network has two types of communications. He communicates via TCP for everything that is outside of the game and during the game the communication will be in UDP. ~\newline
+ We made protocols for both communications that are available to read here. For the \href{https://github.com/EpitechPromo2025/B-CPP-500-PAR-5-2-rtype-luc1.schmitt/blob/main/rfc888_TCP.txt}{\texttt{ TCP protocol}} and the \href{https://github.com/EpitechPromo2025/B-CPP-500-PAR-5-2-rtype-luc1.schmitt/blob/main/rfc999_UDP.txt}{\texttt{ UDP protocol}}\hypertarget{md_shared_README_autotoc_md15}{}\doxysection{How does it work ?}\label{md_shared_README_autotoc_md15}
+The client/server communicates via binary communication. You serialize struct in binary form and deserialize it in his original form that is the different struct that we have in the \mbox{\hyperlink{headers_8hpp}{headers.\+hpp}} file. ~\newline
+ The first thing that is sent is the header struct, which has the id and the data type, followed by the struct data that was specified in the header.\hypertarget{md_shared_README_autotoc_md16}{}\doxysection{Add commands}\label{md_shared_README_autotoc_md16}
+To add a command you have to write two things in the Headers.\+hpp file\+: ~\newline
+
+\begin{DoxyItemize}
+\item {\bfseries{server/client enum \+:}} Add an element in the server/client enum with a Int16 linked to it for the new command that you want to add.
+\item {\bfseries{Struct for the new command \+:}} Add a new struct where you add the parameters that you need for the command that you add in the enum. 
+\end{DoxyItemize}

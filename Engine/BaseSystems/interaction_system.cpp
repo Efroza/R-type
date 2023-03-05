@@ -21,7 +21,6 @@
  * @param interaction The interaction component to handle.
  * @details This function is static and is only used by the interaction system since it is not meant to be used by other systems.
  */
-
 static void handling_typing(std::uint8_t code, std::uint8_t id, registry &reg, component::interaction const &interaction)
 {
     if (interaction.type_is_register(code) == false)
@@ -36,7 +35,6 @@ static void handling_typing(std::uint8_t code, std::uint8_t id, registry &reg, c
  * @param reg The registry containing all entities and their associated components.
  * @param interactions The sparse array of interaction components.
  */
-
 void interaction_system(registry &reg, sparse_array<component::interaction> &interactions)
 {
 

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>R-TYPE: server/src/tcp.cpp File Reference</title>
+<title>R-Type: server/src/tcp.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">R-TYPE
+   <div id="projectname">R-Type
    </div>
   </td>
  </tr>
@@ -65,183 +65,12 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">tcp.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;../include/server.hpp&quot;</code><br />
-</div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ad557691524522fa298bf615721f5d3c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_2src_2tcp_8cpp.html#ad557691524522fa298bf615721f5d3c5">receive_tcp_server</a> (Header header, tcp::socket &amp;socket)</td></tr>
-<tr class="memdesc:ad557691524522fa298bf615721f5d3c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function will translate the data received from the client.  <a href="server_2src_2tcp_8cpp.html#ad557691524522fa298bf615721f5d3c5">More...</a><br /></td></tr>
-<tr class="separator:ad557691524522fa298bf615721f5d3c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d624b19936306c378617721d70a750c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_2src_2tcp_8cpp.html#a7d624b19936306c378617721d70a750c">send_tcp_server</a> (Header header, tcp::socket &amp;socket, std::string message)</td></tr>
-<tr class="memdesc:a7d624b19936306c378617721d70a750c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function will send data to the client.  <a href="server_2src_2tcp_8cpp.html#a7d624b19936306c378617721d70a750c">More...</a><br /></td></tr>
-<tr class="separator:a7d624b19936306c378617721d70a750c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dcf11dc26b0c1d25c12bfa98837eb19"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_2src_2tcp_8cpp.html#a3dcf11dc26b0c1d25c12bfa98837eb19">handle_client</a> (tcp::socket socket)</td></tr>
-<tr class="memdesc:a3dcf11dc26b0c1d25c12bfa98837eb19"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function will handle the client.  <a href="server_2src_2tcp_8cpp.html#a3dcf11dc26b0c1d25c12bfa98837eb19">More...</a><br /></td></tr>
-<tr class="separator:a3dcf11dc26b0c1d25c12bfa98837eb19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adfd64d09546148e1df9babbb7bf6c7c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_2src_2tcp_8cpp.html#adfd64d09546148e1df9babbb7bf6c7c7">launch_tcp_server</a> ()</td></tr>
-<tr class="memdesc:adfd64d09546148e1df9babbb7bf6c7c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function will launch the tcp server.  <a href="server_2src_2tcp_8cpp.html#adfd64d09546148e1df9babbb7bf6c7c7">More...</a><br /></td></tr>
-<tr class="separator:adfd64d09546148e1df9babbb7bf6c7c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a3dcf11dc26b0c1d25c12bfa98837eb19"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3dcf11dc26b0c1d25c12bfa98837eb19">&#9670;&nbsp;</a></span>handle_client()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void handle_client </td>
-          <td>(</td>
-          <td class="paramtype">tcp::socket&#160;</td>
-          <td class="paramname"><em>socket</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This function will handle the client. </p>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">socket</td><td>The socket that will be used to send and receive data from the client. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section see"><dt>See also</dt><dd>void <a class="el" href="server_2src_2tcp_8cpp.html#ad557691524522fa298bf615721f5d3c5" title="This function will translate the data received from the client.">receive_tcp_server(Header header, tcp::socket &amp;socket)</a> </dd>
-<dd>
-void <a class="el" href="server_2src_2tcp_8cpp.html#a7d624b19936306c378617721d70a750c" title="This function will send data to the client.">send_tcp_server(Header header, tcp::socket &amp;socket, std::string message)</a></dd></dl>
-<p>This function will handle the client, it will receive data from the client and send data to the client. </p>
-
-</div>
-</div>
-<a id="adfd64d09546148e1df9babbb7bf6c7c7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adfd64d09546148e1df9babbb7bf6c7c7">&#9670;&nbsp;</a></span>launch_tcp_server()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void launch_tcp_server </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This function will launch the tcp server. </p>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">void</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section see"><dt>See also</dt><dd>void <a class="el" href="server_2src_2tcp_8cpp.html#a3dcf11dc26b0c1d25c12bfa98837eb19" title="This function will handle the client.">handle_client(tcp::socket socket)</a></dd></dl>
-<p>This function will launch the tcp server, it will create one thread, a thread that has the function handling the clients.</p>
-<p>It will create a socket and an acceptor, the acceptor will accept the connection from the client and the socket will be used to send and receive data from the client</p>
-<p>The thread will be detached so it will be able to run in the background and the main thread will be able to continue. </p>
-
-</div>
-</div>
-<a id="ad557691524522fa298bf615721f5d3c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad557691524522fa298bf615721f5d3c5">&#9670;&nbsp;</a></span>receive_tcp_server()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void receive_tcp_server </td>
-          <td>(</td>
-          <td class="paramtype">Header&#160;</td>
-          <td class="paramname"><em>header</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">tcp::socket &amp;&#160;</td>
-          <td class="paramname"><em>socket</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This function will translate the data received from the client. </p>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">header</td><td>the header of the data to know the type of data </td></tr>
-    <tr><td class="paramname">socket</td><td>the socket of the server to receive data from client</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>This function will read the data that was sent from the client and will print it.</p>
-<p>It creates two struct one if it is a position and another one if it is a message.</p>
-<p>Depending of the data type it will print the data. </p>
-
-</div>
-</div>
-<a id="a7d624b19936306c378617721d70a750c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7d624b19936306c378617721d70a750c">&#9670;&nbsp;</a></span>send_tcp_server()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void send_tcp_server </td>
-          <td>(</td>
-          <td class="paramtype">Header&#160;</td>
-          <td class="paramname"><em>header</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">tcp::socket &amp;&#160;</td>
-          <td class="paramname"><em>socket</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>message</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This function will send data to the client. </p>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">header</td><td>the header of the data to know the type of data </td></tr>
-    <tr><td class="paramname">socket</td><td>the socket of the server to send data to client </td></tr>
-    <tr><td class="paramname">message</td><td>the message to send to the client</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>This function will send data to the client.</p>
-<p>It will create a header with a data type depending of the message.</p>
-<p>It will also create a struct depending of the data type.</p>
-<p>It will send the header and the struct to the client.</p>
-<p>If the message contains a comma it will be a position and if not, it will be a message. </p>
-
-</div>
-</div>
-</div><!-- contents -->
+<div class="textblock"><code>#include &quot;<a class="el" href="server_2include_2server_8hpp_source.html">../include/server.hpp</a>&quot;</code><br />
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

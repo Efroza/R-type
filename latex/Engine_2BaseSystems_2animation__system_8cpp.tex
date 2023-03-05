@@ -1,0 +1,35 @@
+\hypertarget{Engine_2BaseSystems_2animation__system_8cpp}{}\doxysection{Engine/\+Base\+Systems/animation\+\_\+system.cpp File Reference}
+\label{Engine_2BaseSystems_2animation__system_8cpp}\index{Engine/BaseSystems/animation\_system.cpp@{Engine/BaseSystems/animation\_system.cpp}}
+{\ttfamily \#include \char`\"{}../\+Include/registry.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Base\+Component/rect.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Base\+Component/animation.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Base\+Component/image.\+hpp\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{Engine_2BaseSystems_2animation__system_8cpp_a62352628ea12928c082ecfe493e702ea}{animation\+\_\+system}} (\mbox{\hyperlink{classregistry}{registry}} \&reg, \mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1image}{component\+::image}} $>$ \&images, \mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1rect}{component\+::rect}} $>$ \&rects, \mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{structcomponent_1_1animation}{component\+::animation}} $>$ \&animations)
+\begin{DoxyCompactList}\small\item\em Updates the animation system by processing all relevant image, rectangle, and animation components. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{Engine_2BaseSystems_2animation__system_8cpp_a62352628ea12928c082ecfe493e702ea}\label{Engine_2BaseSystems_2animation__system_8cpp_a62352628ea12928c082ecfe493e702ea}} 
+\index{animation\_system.cpp@{animation\_system.cpp}!animation\_system@{animation\_system}}
+\index{animation\_system@{animation\_system}!animation\_system.cpp@{animation\_system.cpp}}
+\doxysubsubsection{\texorpdfstring{animation\_system()}{animation\_system()}}
+{\footnotesize\ttfamily void animation\+\_\+system (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classregistry}{registry}} \&}]{reg,  }\item[{\mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1image}{component\+::image}} $>$ \&}]{images,  }\item[{\mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1rect}{component\+::rect}} $>$ \&}]{rects,  }\item[{\mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{structcomponent_1_1animation}{component\+::animation}} $>$ \&}]{animations }\end{DoxyParamCaption})}
+
+
+
+Updates the animation system by processing all relevant image, rectangle, and animation components. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reg} & The registry containing all entities and their associated components. \\
+\hline
+{\em images} & The sparse array of image components. \\
+\hline
+{\em rects} & The sparse array of rectangle components. \\
+\hline
+{\em animations} & The sparse array of animation components. \\
+\hline
+\end{DoxyParams}

@@ -1,3 +1,7 @@
+/**
+ * @file events.hpp
+*/
+
 enum events_e {
     NONE,
     CLOSE,

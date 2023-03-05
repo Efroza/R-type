@@ -10,6 +10,10 @@
 
 #include "IComponentSystem.hpp"
 
+/**
+ * @file draw.hpp
+*/
+
 namespace component
 {
     class draw

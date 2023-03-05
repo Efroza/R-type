@@ -1,0 +1,81 @@
+ \href{https://img.shields.io/badge/MADE\%20WITH-CMAKE-red}{\texttt{ }} \href{https://img.shields.io/badge/MADE\%20WITH-CONAN-blueviolet}{\texttt{ }} \href{https://img.shields.io/badge/MADE\%20WITH-C\%2B\%2B-blue}{\texttt{ }} \href{https://img.shields.io/badge/MADE\%20WITH-SFML-brightgreen}{\texttt{ }}
+
+This project is from our advanced C++ knowledge unit. It introduced us to networked video game develop ment, while giving us opportunity to explore in-\/depth advanced development topics as well as to learn good software engineering practices. Our goal was to implement a multithreaded server and a graphical client for a game called R-\/\+Type, using an en gine of your own design.\hypertarget{md_README_autotoc_md7}{}\doxysection{R-\/\+TYPE -\/ The game}\label{md_README_autotoc_md7}
+R-\/type is informally called a Horizontal Shmup (e.\+g. \href{https://en.wikipedia.org/wiki/Shoot_\%27em_up\#Scrolling_shooters}{\texttt{ Shoot’em’up}}), and while R-\/\+Type is not the first one of its category, this one has been a huge success amongst gamers in the 90’s, and had several ports, spin-\/offs, and 3D remakes on modern systems. Other similar and well known games are the Gradius series and Blazing Star on Neo Geo.\hypertarget{md_README_autotoc_md8}{}\doxysection{Use Docker}\label{md_README_autotoc_md8}
+The project can be launched via a docker image if you don\textquotesingle{}t want to use Docker you can skip this part. {\bfseries{Install Docker \+:}}
+
+\href{https://docs.docker.com/engine/install/}{\texttt{ Official installation guide}}
+
+{\bfseries{Use Docker \+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{On a terminal : docker build -\/t <image\_name> .}
+\DoxyCodeLine{docker run -\/it <image\_name>}
+
+\end{DoxyCode}
+
+
+You are now in a Linux-\/like environment. Enjoy!\hypertarget{md_README_autotoc_md9}{}\doxysection{Installation}\label{md_README_autotoc_md9}
+{\bfseries{Linux \+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cmake . -\/DCMAKE\_BUILD\_TYPE=Release \&\& cmake -\/-\/build . -\/-\/config Release \&\& cpack -\/C Release}
+
+\end{DoxyCode}
+ {\bfseries{Windows \+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Launch Visual Studio}
+\DoxyCodeLine{(cmake . -\/DCMAKE\_BUILD\_TYPE=Release) -\/and (cmake -\/-\/build . -\/-\/config Release) -\/and (cpack -\/C Release)}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md10}{}\doxysection{Usage}\label{md_README_autotoc_md10}
+{\bfseries{For the server, in a terminal \+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./bin/r-\/type\_server}
+
+\end{DoxyCode}
+ {\bfseries{For a client, in another terminal \+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./bin/r-\/type\_client <host>}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md11}{}\doxysection{Requirements}\label{md_README_autotoc_md11}
+
+\begin{DoxyItemize}
+\item {\bfseries{Supported platforms \+: Linux and Windows}}
+\item {\bfseries{Buildsystem \+: Cmake}}
+\item {\bfseries{Package manager\+: Conan}}
+\item {\bfseries{Language \+: C++}}
+\item {\bfseries{Library \+: \mbox{\hyperlink{classSFML}{SFML}}}}
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md12}{}\doxysection{Documentation}\label{md_README_autotoc_md12}
+{\bfseries{Doxygen \+:}} ~\newline
+ Our documentation is made with doxygen. Here are the commands if you wanna check it.
+\begin{DoxyItemize}
+\item {\bfseries{Linux \+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{your\_web\_browser html/index.html}
+
+\end{DoxyCode}
+
+\item {\bfseries{Windows \+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{start (your\_web\_browser).exe html/index.html}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}
+
+{\bfseries{Engine-\/focused/\+Network-\/focused documentation \+:}} ~\newline
+ With both Readmes you\textquotesingle{}ll be able to understand the engine or network and use them.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{\href{https://github.com/EpitechPromo2025/B-CPP-500-PAR-5-2-rtype-luc1.schmitt/tree/main/Engine\#ecs-engine}{\texttt{ Engine}}}}
+\item {\bfseries{\href{https://github.com/EpitechPromo2025/B-CPP-500-PAR-5-2-rtype-luc1.schmitt/tree/main/shared\#readme}{\texttt{ Network}}}}
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md13}{}\doxysection{Authors}\label{md_README_autotoc_md13}
+
+\begin{DoxyItemize}
+\item {\bfseries{Yosra Hassan}} -\/ \href{https://github.com/yosracandy}{\texttt{ @yosracandy}}
+\item {\bfseries{Royale Badiabo}} -\/ \href{https://github.com/broyale}{\texttt{ @broyale}}
+\item {\bfseries{Yohan Henry}} -\/ \href{https://github.com/yoyokaseur}{\texttt{ @yoyokaseur}}
+\item {\bfseries{Brice Boualavong}} -\/ \href{https://github.com/Efroza}{\texttt{ @efroza}}
+\item {\bfseries{Luc Schmitt}} -\/ \href{https://github.com/Lucsc}{\texttt{ @lucsc}} 
+\end{DoxyItemize}

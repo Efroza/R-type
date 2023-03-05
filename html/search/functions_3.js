@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['main_30',['main',['../server_2src_2main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;main.cpp'],['../client_2src_2main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;main.cpp']]]
+  ['empty_5ftyping_305',['empty_typing',['../classcomponent_1_1interaction.html#ad14e90906abcbff0b8be2e29c3181b8a',1,'component::interaction']]]
 ];

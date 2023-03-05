@@ -17,6 +17,10 @@
 #include "sparse_array.hpp"
 #include "entity.hpp"
 
+/**
+ * @file registry.hpp
+ */
+
 class registry
 {
     public:

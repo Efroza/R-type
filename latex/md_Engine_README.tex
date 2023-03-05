@@ -1,0 +1,40 @@
+\hypertarget{md_Engine_README_autotoc_md1}{}\doxysection{Présentation}\label{md_Engine_README_autotoc_md1}
+Notre ECS est une bibliothèque C++ pour la gestion d\textquotesingle{}un système de composants de jeu. Elle est conçue pour être facilement intégrée dans un projet de jeu existant, en offrant une manière flexible et performante de gérer les différents aspects du gameplay en utilisant un modèle orienté objet.
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Entités}} \+: Les entités représentent des objets dans le jeu ou l\textquotesingle{}application, tels que des personnages, des ennemis, des objets, etc. Elles sont simplement des conteneurs vides qui ne contiennent pas de données directement.
+\item {\bfseries{Composants}} \+: Les composants sont des données qui sont attachées aux entités pour leur donner des propriétés et des comportements spécifiques. Par exemple, un composant \char`\"{}\+Position\char`\"{} peut contenir les coordonnées x et y d\textquotesingle{}une entité sur l\textquotesingle{}écran, tandis qu\textquotesingle{}un composant \char`\"{}\+Vitesse\char`\"{} peut contenir la vitesse à laquelle une entité se déplace.
+\item {\bfseries{Systèmes}} \+: Les systèmes sont des modules de traitement qui agissent sur les composants pour mettre à jour l\textquotesingle{}état des entités. Par exemple, un système \char`\"{}\+Mouvement\char`\"{} peut utiliser les composants \char`\"{}\+Position\char`\"{} et \char`\"{}\+Vitesse\char`\"{} pour mettre à jour la position d\textquotesingle{}une entité à chaque image.
+\end{DoxyItemize}\hypertarget{md_Engine_README_autotoc_md2}{}\doxysection{Comment ça marche ?}\label{md_Engine_README_autotoc_md2}
+
+
+Notre ECS fonctionne en utilisant un système de composants et de systèmes. Les composants sont les éléments de base du gameplay, tels que la position, la santé, la vitesse, l\textquotesingle{}entrée utilisateur, etc. Chaque composant est stocké dans le namespace Component, qui contient une identité unique pour chaque type de composant.
+
+
+\begin{DoxyItemize}
+\item Création et suppression d\textquotesingle{}entités.
+\item Ajout, modification et suppression de composants sur des entités existantes.
+\item Interrogation des composants et des entités en fonction de leur type.
+\item Définition et utilisation de systèmes pour mettre à jour l\textquotesingle{}état des entités.
+\end{DoxyItemize}
+
+Les systèmes sont des entités logiques qui opèrent sur des collections de composants. Ils peuvent être utilisés pour mettre à jour la position des objets, traiter les entrées utilisateur, ou appliquer des effets spéciaux, entre autres choses. Chaque système est représenté par une instance de la classe Component\+System, qui contient une signature qui définit quels types de composants il utilise.\hypertarget{md_Engine_README_autotoc_md3}{}\doxysection{Comment l\textquotesingle{}utiliser ?}\label{md_Engine_README_autotoc_md3}
+Pour utiliser notre ECS dans votre projet, vous devez d\textquotesingle{}abord créer une instance de la classe Registry, qui contiendra toutes les instances de composants et de systèmes. Ensuite, vous pouvez créer des instances de composants en utilisant les différentes sous-\/classes de Component que vous avez définies, et les ajouter au registre en utilisant la méthode Registry\+::add\+Component.
+
+Ensuite, vous pouvez créer des systèmes en utilisant les sous-\/classes de Component\+System que vous avez définies, et les ajouter au registre en utilisant la méthode Registry\+::add\+System. Les systèmes seront automatiquement associés aux composants pertinents en fonction de leur signature.
+
+Enfin, vous pouvez appeler la méthode Registry\+::update pour mettre à jour tous les systèmes et leurs composants associés.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{registry_8hpp}{Include/registry.hpp}}"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{entity_8hpp}{Include/entity.hpp}}"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "{}Include/system.hpp"{}}}
+
+\end{DoxyCode}
+\hypertarget{md_Engine_README_autotoc_md4}{}\doxysection{Comment personnaliser ?}\label{md_Engine_README_autotoc_md4}
+Notre ECS est conçu pour être facilement personnalisable en fonction des besoins de votre projet. Vous pouvez ajouter de nouveaux types de composants en créant des sous-\/classes de Component, et vous pouvez ajouter de nouveaux types de systèmes en créant des sous-\/classes de Component\+System.
+
+Vous pouvez également personnaliser la façon dont les composants sont initialisés en écrivant des parsers de composants personnalisés, qui prennent en entrée une chaîne de caractères et renvoient une instance du composant correspondant. Vous pouvez ajouter ces parsers au système de parsing en créant une sous-\/classe de Component\+Parser et en ajoutant une instance de cette sous-\/classe au système de parsing en utilisant la méthode Parse\+System\+::add\+Component\+Parser.\hypertarget{md_Engine_README_autotoc_md5}{}\doxysection{Conclusion}\label{md_Engine_README_autotoc_md5}
+Notre ECS est une bibliothèque C++ flexible et performante pour la gestion des composants de jeu. En utilisant ce système, vous pouvez facilement gérer les différents aspects du gameplay de votre jeu, en créant des composants personnalisés et en les associant à des systèmes de traitement logique. 

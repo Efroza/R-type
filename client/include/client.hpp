@@ -38,6 +38,13 @@ enum scene_e {
     GAME
 };
 
+/**
+ * @file client.hpp
+ */
+
+/**
+ * @brief This class will create a client.
+ */
 class Client {
     public :
         Client(const std::string& host, const std::string& port);

@@ -10,6 +10,10 @@
 
 #include <iostream>
 
+/**
+ * @file entity.hpp
+ */
+
 struct entity_t {
     size_t _id;
     entity_t(size_t id) : _id(id) {}

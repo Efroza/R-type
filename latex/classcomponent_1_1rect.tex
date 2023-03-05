@@ -1,0 +1,237 @@
+\hypertarget{classcomponent_1_1rect}{}\doxysection{component\+::rect Class Reference}
+\label{classcomponent_1_1rect}\index{component::rect@{component::rect}}
+
+
+This class is used to create a rectangle.  
+
+
+
+
+{\ttfamily \#include $<$rect.\+hpp$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcomponent_1_1rect_ace47d13659db975ee508e538aeb82f21}\label{classcomponent_1_1rect_ace47d13659db975ee508e538aeb82f21}} 
+using {\bfseries int\+\_\+size} = std\+::uint32\+\_\+t
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcomponent_1_1rect_a4676634644c0b3ff4fd8cc641ca466af}{rect}} (int\+\_\+size line, int\+\_\+size cols)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{classcomponent_1_1rect_a4676634644c0b3ff4fd8cc641ca466af}{component\+::rect\+::rect}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classcomponent_1_1rect_a37bd9aecb5b06992b047522d7ed5f4d1}{rect}} (int\+\_\+size line, int\+\_\+size cols, int\+\_\+size size\+\_\+width, int\+\_\+size size\+\_\+height)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{classcomponent_1_1rect_a4676634644c0b3ff4fd8cc641ca466af}{component\+::rect\+::rect}} object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcomponent_1_1rect_a5a132fc2fd06c8f5b2b848bf8b9427e5}{set\+\_\+cols}} (int\+\_\+size cols) noexcept
+\begin{DoxyCompactList}\small\item\em Set the cols object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcomponent_1_1rect_ab000edb441ce029a89615332263f6aec}{set\+\_\+lines}} (int\+\_\+size lines) noexcept
+\begin{DoxyCompactList}\small\item\em Set the lines object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcomponent_1_1rect_a92b0a6f9636ecc45b74b29df5a85fe26}\label{classcomponent_1_1rect_a92b0a6f9636ecc45b74b29df5a85fe26}} 
+void {\bfseries set\+\_\+size} (int\+\_\+size size\+\_\+widht, int\+\_\+size size\+\_\+height) noexcept
+\item 
+bool \mbox{\hyperlink{classcomponent_1_1rect_a28afc14e93bfd2da8b17067f65d7a747}{size\+\_\+is\+\_\+set}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Will tell if the size of the rect is set. \end{DoxyCompactList}\item 
+int\+\_\+size \mbox{\hyperlink{classcomponent_1_1rect_aea84298e670a459364a79654f3dbb3b2}{get\+\_\+cols}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Return the number of columns. \end{DoxyCompactList}\item 
+int\+\_\+size \mbox{\hyperlink{classcomponent_1_1rect_a2aa3c923c3190cf7b8b1b8d650f132e7}{get\+\_\+lines}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Return the number of lines. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcomponent_1_1rect_a8a408d107ecfb23d14400a64cf5a8114}{select\+\_\+row}} (int\+\_\+size row) noexcept
+\begin{DoxyCompactList}\small\item\em Return the width of the rect. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcomponent_1_1rect_a8e7bd3d89e6ad35459816d9d2bb4bc1d}{select\+\_\+col}} (int\+\_\+size col) noexcept
+\begin{DoxyCompactList}\small\item\em Return the height of the rect. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcomponent_1_1rect_a26a4e7dedd467e23605ef8f526c6701c}{animation}} () noexcept
+\begin{DoxyCompactList}\small\item\em This function will be used to do the animation of our image given to the entity. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcomponent_1_1rect_a58fefb6ccc7186721231553e37566e98}\label{classcomponent_1_1rect_a58fefb6ccc7186721231553e37566e98}} 
+void {\bfseries update} () noexcept
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcomponent_1_1rect_a4697c5cf8df167ca04d74042e59b62da}\label{classcomponent_1_1rect_a4697c5cf8df167ca04d74042e59b62da}} 
+int\+\_\+size {\bfseries marge\+\_\+x}
+\item 
+\mbox{\Hypertarget{classcomponent_1_1rect_a8c88c9ac6e6fae0c62dd3c0f7b585c60}\label{classcomponent_1_1rect_a8c88c9ac6e6fae0c62dd3c0f7b585c60}} 
+int\+\_\+size {\bfseries marge\+\_\+y}
+\item 
+\mbox{\Hypertarget{classcomponent_1_1rect_af7057517cdd32f189a74e52a7dd53665}\label{classcomponent_1_1rect_af7057517cdd32f189a74e52a7dd53665}} 
+int\+\_\+size {\bfseries width}
+\item 
+\mbox{\Hypertarget{classcomponent_1_1rect_a92c4fafeeef17dd07245a802273349ca}\label{classcomponent_1_1rect_a92c4fafeeef17dd07245a802273349ca}} 
+int\+\_\+size {\bfseries height}
+\item 
+\mbox{\Hypertarget{classcomponent_1_1rect_a2bfd5d962e6ebc051d4516f55cf838e3}\label{classcomponent_1_1rect_a2bfd5d962e6ebc051d4516f55cf838e3}} 
+int\+\_\+size {\bfseries top}
+\item 
+\mbox{\Hypertarget{classcomponent_1_1rect_a62417684453d9a6e95b66e904c1b82bf}\label{classcomponent_1_1rect_a62417684453d9a6e95b66e904c1b82bf}} 
+int\+\_\+size {\bfseries left}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class is used to create a rectangle. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcomponent_1_1rect_a4676634644c0b3ff4fd8cc641ca466af}\label{classcomponent_1_1rect_a4676634644c0b3ff4fd8cc641ca466af}} 
+\index{component::rect@{component::rect}!rect@{rect}}
+\index{rect@{rect}!component::rect@{component::rect}}
+\doxysubsubsection{\texorpdfstring{rect()}{rect()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily component\+::rect\+::rect (\begin{DoxyParamCaption}\item[{int\+\_\+size}]{line,  }\item[{int\+\_\+size}]{cols }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{classcomponent_1_1rect_a4676634644c0b3ff4fd8cc641ca466af}{component\+::rect\+::rect}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em line} & The number of lines. \\
+\hline
+{\em cols} & The number of columns.\\
+\hline
+\end{DoxyParams}
+The entity will be associated with a given rect or not depending on the number of lines and columns.
+
+If the number of lines and columns is 0, the entity will not be associated with a rect.
+
+If the number of lines and columns is not 0, the entity will be associated with a rect to be able to possibibly get an animation or other actions on it. \mbox{\Hypertarget{classcomponent_1_1rect_a37bd9aecb5b06992b047522d7ed5f4d1}\label{classcomponent_1_1rect_a37bd9aecb5b06992b047522d7ed5f4d1}} 
+\index{component::rect@{component::rect}!rect@{rect}}
+\index{rect@{rect}!component::rect@{component::rect}}
+\doxysubsubsection{\texorpdfstring{rect()}{rect()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily component\+::rect\+::rect (\begin{DoxyParamCaption}\item[{int\+\_\+size}]{line,  }\item[{int\+\_\+size}]{cols,  }\item[{int\+\_\+size}]{size\+\_\+width,  }\item[{int\+\_\+size}]{size\+\_\+height }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{classcomponent_1_1rect_a4676634644c0b3ff4fd8cc641ca466af}{component\+::rect\+::rect}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em line} & The number of lines. \\
+\hline
+{\em cols} & The number of columns. \\
+\hline
+{\em size\+\_\+width} & The width of the rect. \\
+\hline
+{\em size\+\_\+height} & The height of the rect.\\
+\hline
+\end{DoxyParams}
+The entity will be associated with a given rect or not depending on the number of lines and columns.
+
+If the number of lines and columns is 0, the entity will not be associated with a rect.
+
+If the number of lines and columns is not 0, the entity will be associated with a rect to be able to possibibly get an animation or other actions on it. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcomponent_1_1rect_a26a4e7dedd467e23605ef8f526c6701c}\label{classcomponent_1_1rect_a26a4e7dedd467e23605ef8f526c6701c}} 
+\index{component::rect@{component::rect}!animation@{animation}}
+\index{animation@{animation}!component::rect@{component::rect}}
+\doxysubsubsection{\texorpdfstring{animation()}{animation()}}
+{\footnotesize\ttfamily void component\+::rect\+::animation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+This function will be used to do the animation of our image given to the entity. 
+
+It will be used to do the animation of our image given to the entity.
+
+This function will be able to do it thanks to the number of lines and columns, aka the rect. \mbox{\Hypertarget{classcomponent_1_1rect_aea84298e670a459364a79654f3dbb3b2}\label{classcomponent_1_1rect_aea84298e670a459364a79654f3dbb3b2}} 
+\index{component::rect@{component::rect}!get\_cols@{get\_cols}}
+\index{get\_cols@{get\_cols}!component::rect@{component::rect}}
+\doxysubsubsection{\texorpdfstring{get\_cols()}{get\_cols()}}
+{\footnotesize\ttfamily component\+::rect\+::int\+\_\+size component\+::rect\+::get\+\_\+cols (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Return the number of columns. 
+
+\begin{DoxyReturn}{Returns}
+component\+::rect\+::int\+\_\+size
+\end{DoxyReturn}
+If the number of columns is not set, it will return 0. \mbox{\Hypertarget{classcomponent_1_1rect_a2aa3c923c3190cf7b8b1b8d650f132e7}\label{classcomponent_1_1rect_a2aa3c923c3190cf7b8b1b8d650f132e7}} 
+\index{component::rect@{component::rect}!get\_lines@{get\_lines}}
+\index{get\_lines@{get\_lines}!component::rect@{component::rect}}
+\doxysubsubsection{\texorpdfstring{get\_lines()}{get\_lines()}}
+{\footnotesize\ttfamily component\+::rect\+::int\+\_\+size component\+::rect\+::get\+\_\+lines (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Return the number of lines. 
+
+\begin{DoxyReturn}{Returns}
+component\+::rect\+::int\+\_\+size
+\end{DoxyReturn}
+If the number of lines is not set, it will return 0. \mbox{\Hypertarget{classcomponent_1_1rect_a8e7bd3d89e6ad35459816d9d2bb4bc1d}\label{classcomponent_1_1rect_a8e7bd3d89e6ad35459816d9d2bb4bc1d}} 
+\index{component::rect@{component::rect}!select\_col@{select\_col}}
+\index{select\_col@{select\_col}!component::rect@{component::rect}}
+\doxysubsubsection{\texorpdfstring{select\_col()}{select\_col()}}
+{\footnotesize\ttfamily void component\+::rect\+::select\+\_\+col (\begin{DoxyParamCaption}\item[{int\+\_\+size}]{col }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Return the height of the rect. 
+
+\begin{DoxyReturn}{Returns}
+component\+::rect\+::int\+\_\+size
+\end{DoxyReturn}
+It will return the height of the rect in relation of the entire size of the entity. \mbox{\Hypertarget{classcomponent_1_1rect_a8a408d107ecfb23d14400a64cf5a8114}\label{classcomponent_1_1rect_a8a408d107ecfb23d14400a64cf5a8114}} 
+\index{component::rect@{component::rect}!select\_row@{select\_row}}
+\index{select\_row@{select\_row}!component::rect@{component::rect}}
+\doxysubsubsection{\texorpdfstring{select\_row()}{select\_row()}}
+{\footnotesize\ttfamily void component\+::rect\+::select\+\_\+row (\begin{DoxyParamCaption}\item[{int\+\_\+size}]{row }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Return the width of the rect. 
+
+\begin{DoxyReturn}{Returns}
+component\+::rect\+::int\+\_\+size
+\end{DoxyReturn}
+It will return the width of the rect in relation of the entire size of the entity. \mbox{\Hypertarget{classcomponent_1_1rect_a5a132fc2fd06c8f5b2b848bf8b9427e5}\label{classcomponent_1_1rect_a5a132fc2fd06c8f5b2b848bf8b9427e5}} 
+\index{component::rect@{component::rect}!set\_cols@{set\_cols}}
+\index{set\_cols@{set\_cols}!component::rect@{component::rect}}
+\doxysubsubsection{\texorpdfstring{set\_cols()}{set\_cols()}}
+{\footnotesize\ttfamily void component\+::rect\+::set\+\_\+cols (\begin{DoxyParamCaption}\item[{int\+\_\+size}]{cols }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Set the cols object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cols} & The number of columns.\\
+\hline
+\end{DoxyParams}
+The number of columns will be reset if not already set in the constructor. \mbox{\Hypertarget{classcomponent_1_1rect_ab000edb441ce029a89615332263f6aec}\label{classcomponent_1_1rect_ab000edb441ce029a89615332263f6aec}} 
+\index{component::rect@{component::rect}!set\_lines@{set\_lines}}
+\index{set\_lines@{set\_lines}!component::rect@{component::rect}}
+\doxysubsubsection{\texorpdfstring{set\_lines()}{set\_lines()}}
+{\footnotesize\ttfamily void component\+::rect\+::set\+\_\+lines (\begin{DoxyParamCaption}\item[{int\+\_\+size}]{lines }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Set the lines object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em lines} & The number of lines.\\
+\hline
+\end{DoxyParams}
+The number of lines will be reset if not already set in the constructor. \mbox{\Hypertarget{classcomponent_1_1rect_a28afc14e93bfd2da8b17067f65d7a747}\label{classcomponent_1_1rect_a28afc14e93bfd2da8b17067f65d7a747}} 
+\index{component::rect@{component::rect}!size\_is\_set@{size\_is\_set}}
+\index{size\_is\_set@{size\_is\_set}!component::rect@{component::rect}}
+\doxysubsubsection{\texorpdfstring{size\_is\_set()}{size\_is\_set()}}
+{\footnotesize\ttfamily bool component\+::rect\+::size\+\_\+is\+\_\+set (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Will tell if the size of the rect is set. 
+
+\begin{DoxyReturn}{Returns}
+true 
+
+false 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Engine/\+Base\+Component/\mbox{\hyperlink{rect_8hpp}{rect.\+hpp}}\item 
+Engine/\+Base\+Component/\mbox{\hyperlink{rect_8cpp}{rect.\+cpp}}\end{DoxyCompactItemize}

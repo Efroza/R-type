@@ -10,12 +10,20 @@
 #include <list>
 #include "IGraphic.hpp"
 
+/**
+ * @file Core.hpp
+*/
+
 enum scene_e {
     HOME,
     NETWORK_MENU,
     GAME
 };
 
+
+/**
+ * @brief Class that manage the game.
+ */
 class Core
 {
 public:

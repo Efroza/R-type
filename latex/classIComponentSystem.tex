@@ -1,0 +1,40 @@
+\hypertarget{classIComponentSystem}{}\doxysection{IComponent\+System Class Reference}
+\label{classIComponentSystem}\index{IComponentSystem@{IComponentSystem}}
+
+
+This class is an interface for all the component system.  
+
+
+
+
+{\ttfamily \#include $<$IComponent\+System.\+hpp$>$}
+
+Inheritance diagram for IComponent\+System\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classIComponentSystem}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classIComponentSystem_a374bba7028982e3563590b4c32a716a2}\label{classIComponentSystem_a374bba7028982e3563590b4c32a716a2}} 
+virtual std\+::string {\bfseries get\+\_\+name} () const noexcept=0
+\item 
+\mbox{\Hypertarget{classIComponentSystem_a85fc1fefa8ac106e29c236671afd10dd}\label{classIComponentSystem_a85fc1fefa8ac106e29c236671afd10dd}} 
+virtual void {\bfseries load\+\_\+system} (\mbox{\hyperlink{classregistry}{registry}} \&reg) const noexcept=0
+\item 
+\mbox{\Hypertarget{classIComponentSystem_a59b7e92959011f28cac4c7482d4d38e3}\label{classIComponentSystem_a59b7e92959011f28cac4c7482d4d38e3}} 
+virtual void {\bfseries laod\+\_\+component} (\mbox{\hyperlink{classregistry}{registry}} \&reg) const noexcept=0
+\item 
+\mbox{\Hypertarget{classIComponentSystem_ac57a564319597efc56c0e9f6a6797673}\label{classIComponentSystem_ac57a564319597efc56c0e9f6a6797673}} 
+virtual void {\bfseries add\+\_\+entity\+\_\+component} (\mbox{\hyperlink{classregistry}{registry}} \&reg, \mbox{\hyperlink{structentity__t}{entity\+\_\+t}} \&e) const noexcept=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class is an interface for all the component system. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Engine/\+Component\+System/\mbox{\hyperlink{IComponentSystem_8hpp}{IComponent\+System.\+hpp}}\end{DoxyCompactItemize}

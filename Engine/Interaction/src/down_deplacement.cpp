@@ -19,7 +19,6 @@
  * @return ILoad_Interaction*
  * @details This function is called by the plugin loader to create a new instance of the plugin
  */
-
 extern "C" ILoad_Interaction *createInteraction()
 {
     return new down_deplacement;
@@ -32,7 +31,6 @@ extern "C" ILoad_Interaction *createInteraction()
  * @param reg The registry of the game
  * @details This function will make the entity move down by 20 pixels
  */
-
 void down_deplacement_function(entity_t &e, registry &reg)
 {
     sparse_array<component::position> &all_pos = reg.get_components<component::position>();
@@ -58,7 +56,6 @@ down_deplacement::~down_deplacement()
  * @return std::string
  * @details This function will return the name of the interaction
  */
-
 std::string down_deplacement::get_name() const noexcept
 {
     return name;
@@ -70,7 +67,6 @@ std::string down_deplacement::get_name() const noexcept
  * @return ILoad_Interaction::interaction_function const&
  * @details This function will return the function of the interaction
  */
-
 ILoad_Interaction::interaction_function const &down_deplacement::get_function() const noexcept
 {
     return function;
