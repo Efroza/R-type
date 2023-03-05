@@ -16,13 +16,15 @@
 #include <iostream>
 #include "Core.hpp"
 
-Core::Core() : _scene(scene_e::HOME), _playing(true), _homeMenuIndex(0)
+Core::Core() : _scene(scene_e::HOME), _playing(true)
 {
     this->loadLib("lib/libSFML.so");//faut mettre le path de la lib graphique
 
     auto background = std::make_shared<Drawable>("background", "./Engine/Image/background.jpg", std::pair<int, int>(1920, 1080), std::pair<int, int>(0, 0));
     this->_homeMenuDrawables.push_back(background);
     this->_networkMenuDrawables.push_back(background);
+    this->_drawables.push_back(background);
+    _background = background;
 
     auto rtypeText = std::make_shared<Drawable>("text-rtype", "RTYPE", std::pair<int, int>(200, 200), std::pair<int, int>(650, 100), true, WHITE);
     this->_homeMenuDrawables.push_back(rtypeText);
@@ -71,18 +73,20 @@ Core::~Core()
 
 void Core::_manageEventMenuHome(events_e event)
 {
-    if (event == events_e::KEY_DOWN && _homeMenuIndex < 1) {
-        _homeMenuIndex += 1;
+    static int homeMenuIndex = 0;
+
+    if (event == events_e::KEY_DOWN && homeMenuIndex < 1) {
+        homeMenuIndex += 1;
         _playBtn->setColor(WHITE);
         _exitBtn->setColor(RED);
-    } else if (event == events_e::KEY_UP && _homeMenuIndex > 0) {
-        _homeMenuIndex -= 1;
+    } else if (event == events_e::KEY_UP && homeMenuIndex > 0) {
+        homeMenuIndex -= 1;
         _playBtn->setColor(RED);
         _exitBtn->setColor(WHITE);
     } else if (event == events_e::ENTER) {
-        if (_homeMenuIndex == 0) {
+        if (homeMenuIndex == 0) {
             _scene = scene_e::NETWORK_MENU;
-        } else if (_homeMenuIndex == 1) {
+        } else if (homeMenuIndex == 1) {
             _playing = false;
         }
     }
@@ -95,6 +99,7 @@ void Core::_manageEventMenuNetwork(events_e event)
 
     if (event == events_e::ENTER) {
         if (index == 2) {
+            _background->setStr("Engine/Image/starfield.jpg");
             _scene = scene_e::GAME;
         } else {
             textMode = !textMode;
@@ -169,13 +174,21 @@ void Core::loop()
             }
             break;
         case scene_e::GAME:
-            std::cout << "afficher le jeu" << std::endl;
+            // Here add function that receive en manage data from server
+            // If server send new entity info => add new Drawable with info inside, first param called name == entity's id
+            // If server send position info => use getName to get your entity and update what server said
+
+            // There send input to server
+            _manageGameEvent(event);
+
+            //draw all entities each frames using their positions
             for (auto &i : _drawables) {
+                // this if is just for test, remove when server/client avec working
                 if (i->getName() == "player") {
                     auto j = i->getPosition();
                     i->setPosition({j.first, j.second - 1});
                 }
-            _libGraphic->draw(i, i->getPosition());
+                _libGraphic->draw(i, i->getPosition());
             }
             break;
         default:
@@ -213,5 +226,12 @@ void Core::loadLib(const std::string &filepath)
     if (_libGraphic.get() == nullptr) {
         throw std::runtime_error("Error during lib loading");
     }
+
+}
+
+
+void Core::_manageGameEvent(events_e event)
+{
+    // Send event info to server here
 
 }
