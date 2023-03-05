@@ -37,14 +37,18 @@ public:
     void refreshWindow() final;
     void draw(std::shared_ptr<Drawable> image, const std::pair<int, int> &position) final;
     events_e pollEvent() final;
+    std::string getText(std::string str) final;
 
 private:
     void load(std::shared_ptr<Drawable> image);
 
     std::shared_ptr<sf::RenderWindow> _window;
     sf::Event _event;
+    sf::Font _font;
     std::map<std::string, SMFLObject_t> _db;
-    static const std::map<int, events_e> _confButton;
+    static const std::map<int, events_e> _confInputs;
+    std::map<colors_e, sf::Color> _confColors;
+    std::map<sf::Keyboard::Key, char> _confNumberInput;
 };
 
 #endif
