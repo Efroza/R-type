@@ -24,7 +24,6 @@ jobs:
 
     - name: Remove grub-efi-amd64-signed error
       run: |
-        sudo apt remove shim-signed grub-efi-amd64-bin –allow-remove-essential
         sudo apt --only-upgrade install -y grub-efi-amd64-signed
 
     - name: Dependencies
