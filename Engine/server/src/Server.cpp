@@ -44,7 +44,7 @@ void Server::print_all_clients() const {
 }
 
 void Server::send_to_all_clients(Server_data type, uint16_t id) {
-    Header_server header;
+    Header_server header = {0};
     header.data_type = type;
     header.id = id;
     for (const auto& iter : client_info_map) {

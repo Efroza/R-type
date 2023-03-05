@@ -18,7 +18,7 @@
 #include "../BaseComponent/animation.hpp"
 #include "../BaseComponent/collusion.hpp"
 #include "../BaseComponent/network.hpp"
-#include "network_player.hpp"
+#include "../BaseComponent/network_player.hpp"
 
 //system
 void animation_system(registry &reg

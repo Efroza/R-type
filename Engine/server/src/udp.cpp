@@ -5,7 +5,10 @@
 ** udp
 */
 
+#include <mutex>
 #include "../include/server.hpp"
+#include "../BaseComponent/interaction.hpp"
+#include "../BaseComponent/network_player.hpp"
 
 using namespace asio;
 
@@ -64,6 +67,7 @@ void UDP_Server::launch_udp_server()
     std::thread receive(&UDP_Server::receive_thread, this, std::ref(socket), std::ref(remote), std::ref(endpoints)); // Create thread to receive data from clients
     std::thread send(&UDP_Server::send_thread, this, std::ref(socket), std::ref(remote), std::ref(endpoints)); // Create thread to send data to clients
 
+    std::cout << "ben oui ta remis sa marche juste pas tu force" << std::endl;
     receive.join(); // Wait for threads 'receive' to finish
     send.join(); // Wait for threads 'send' to finish
 }
@@ -148,7 +152,7 @@ void UDP_Server::send_position(ip::udp::socket& socket, std::vector<ip::udp::end
 
 void UDP_Server::send_position(std::uint16_t client_id, Position position_to_send) // Send struct position to clients
 {
-    Header header;
+    Header header = {0};
     header.data_type = POSITION; // Set data type to position
     header.id = client_id;
     for (auto &endpoint : endpoints)
@@ -191,6 +195,25 @@ void UDP_Server::receive_thread(ip::udp::socket& socket, ip::udp::endpoint& remo
 }
 
 /**
+ * 
+*/
+
+void new_interaction(registry *reg, uint16_t client_id, Interaction interaction)
+{
+    if (reg == nullptr)
+        return;
+    sparse_array<component::interaction> &interactions = reg->get_components<component::interaction>();
+    sparse_array<component::network_player> &players = reg->get_components<component::network_player>();
+
+    for (std::uint32_t i = 0; i < interactions.size() && i < players.size(); ++i) {
+        if (players[i] && interactions[i]) {
+            if (players[i].value().client_id == client_id)
+                interactions[i].value().set_typing(interaction.value);
+        }
+    }
+}
+
+/**
  *@brief This function will translate the message received from a client.
  *@return void
  *@param socket the socket of the server to send data to client
@@ -205,11 +228,23 @@ void UDP_Server::receive_data(ip::udp::socket& socket, ip::udp::endpoint& remote
 {
     Position position;
     Messages message;
-    if (header.data_type == POSITION) { // If data type is position (two int32)
+    Interaction interaction;
+
+    if (header.data_type == POSITION)
+    { // If data type is position (two int32)
         std::cout << "POSITION" << std::endl;
         socket.receive_from(asio::buffer(&position, sizeof(Position)), remote);
         std::cout << "Received from client " << header.id << ": " << position.x << " " << position.y << std::endl;
-    } else { // If data type is message (string32 + int32)
+    }
+    else if (header.data_type == INTERACTION)
+    {
+        std::cout <<  "INTERACTION" << std::endl;
+        socket.receive_from(asio::buffer(&interaction, sizeof(Interaction)), remote);
+        std::cout << "Receive from client [" << header.id << "] interaction: " << interaction.value << std::endl;
+        new_interaction(this->reg, header.id, interaction);
+    }
+    else
+    { // If data type is message (string32 + int32)
         std::cout << "MESSAGE" << std::endl;
         socket.receive_from(asio::buffer(&message, sizeof(Messages)), remote);
         std::cout << "Received from client " << header.id << ": " << message.size << " ";
