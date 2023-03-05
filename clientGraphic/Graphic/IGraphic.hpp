@@ -24,6 +24,7 @@ public:
     virtual void refreshWindow() = 0;
     virtual void draw(std::shared_ptr<Drawable> image, const std::pair<int, int> &position) = 0;
     virtual events_e pollEvent() = 0;
+    virtual std::string getText(std::string str) = 0;
 };
 
 extern "C" IGraphic* createGraphLib();
