@@ -64,12 +64,15 @@ set(SRCS2
     ./client/src/tcp.cpp
     ./client/src/udp.cpp
     ./shared/src/ClientInfo.cpp
+    ./clientGraphic/Drawable/Drawable.cpp
     )
     
 set(HEADERS2
     ./client/include/client.hpp
     ./shared/include/headers.hpp
     ./shared/include/ClientInfo.hpp
+    ./clientGraphic/Drawable/Drawable.hpp
+    ./clientGraphic/Graphic/IGraphic.hpp
     )
 
 set(GRAPHC_FILES
@@ -170,6 +173,7 @@ target_include_directories(${PROJECT_NAME}_client_graphic PRIVATE clientGraphic/
 target_link_libraries(${PROJECT_NAME}_client_graphic ${CMAKE_DL_LIBS})
 add_executable(${PROJECT_NAME}_server ${SRCS1} ${HEADERS1})
 add_executable(${PROJECT_NAME}_client ${SRCS2} ${HEADERS2})
+target_include_directories(${PROJECT_NAME}_client PRIVATE clientGraphic/Graphic)
 target_link_libraries(${PROJECT_NAME}_server ${CONAN_LIBS})
 target_link_libraries(${PROJECT_NAME}_client ${CONAN_LIBS})
 message("${Green} Done${ColorReset}")
