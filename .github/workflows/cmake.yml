@@ -22,9 +22,9 @@ jobs:
     - name: Install Doxygen
       run: sudo apt-get update && sudo apt-get install -y --no-install-recommends doxygen graphviz  
 
-    - name: Remove grub-efi-amd64-signed error
-      run: |
-        sudo apt-get install -y grub-pc 'grub-efi*-'
+    # - name: Remove grub-efi-amd64-signed error
+    #   run: |
+    #     sudo apt-get install -y grub-pc 'grub-efi*-'
 
     - name: Dependencies
       run: |
