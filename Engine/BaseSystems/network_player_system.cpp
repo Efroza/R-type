@@ -14,6 +14,7 @@ void network_player_system(registry &reg, sparse_array<component::position> &pos
 {
     Position position = {0};
 
+    // std::cout << network.size() << std::endl;
     for (size_t i = 0; i < positions.size() && i < network.size(); ++i)
     {
         if (positions[i] && network[i])

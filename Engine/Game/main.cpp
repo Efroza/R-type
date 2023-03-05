@@ -13,6 +13,7 @@
 #include <SFML/Window.hpp>
 #include <functional>
 #include <memory>
+#include <mutex>
 // #include "IGraphic.hpp"
 #include "../Parsing/parsing.hpp"
 #include "../Include/systems.hpp"
@@ -27,6 +28,7 @@
 /**
  * @file main.cpp
  */
+
 
 /**
  * @brief Create the gameplay.
@@ -114,7 +116,8 @@ int main(int ac, char **av)
 {
     if (ac != 2)
         return 84;
-    try {
+    try
+    {
         data db;
         Yaml yaml(av[1]);
         if (yaml.data_exist("config_json") == false || yaml.data_exist("config_interaction") == false)
@@ -122,7 +125,9 @@ int main(int ac, char **av)
         registry reg;
         init_databases(db);
         game(reg, db, yaml);
-    } catch(std::exception const &e) {
+    }
+    catch (std::exception const &e)
+    {
         std::cout << e.what() << std::endl;
         return 84;
     }
