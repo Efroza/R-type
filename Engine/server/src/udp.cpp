@@ -145,7 +145,7 @@ void UDP_Server::send_position(ip::udp::socket& socket, std::vector<ip::udp::end
 /**
  * @brief This function will send the struct position to the clients.
  * @return void
- * @param position_to_send structure who contain a x and y
+ * @param position_to_send structure who contain a x and y<
  * @details This function will send a certain position to the clients.
  * @details It will first send the struct position to the clients, then the struct header to know that it is a position.
  */

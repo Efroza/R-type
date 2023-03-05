@@ -29,6 +29,7 @@
  * @file main.cpp
  */
 
+
 /**
  * @brief Create a new entity for the new client.
  * @param client_id Id of the new client.
