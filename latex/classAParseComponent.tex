@@ -1,0 +1,158 @@
+\hypertarget{classAParseComponent}{}\doxysection{AParse\+Component Class Reference}
+\label{classAParseComponent}\index{AParseComponent@{AParseComponent}}
+Inheritance diagram for AParse\+Component\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.513514cm]{classAParseComponent}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classAParseComponent_a7dc2601ccb8752cbe6f9a8b402c3187e}{AParse\+Component}} (std\+::string const \&name=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{classAParseComponent_a7dc2601ccb8752cbe6f9a8b402c3187e}{AParse\+Component\+::\+AParse\+Component}} object. \end{DoxyCompactList}\item 
+std\+::string \& \mbox{\hyperlink{classAParseComponent_a9233d4a20743c04d36baa0203a55f47b}{get\+\_\+name}} () noexcept
+\begin{DoxyCompactList}\small\item\em Get the name object. \end{DoxyCompactList}\item 
+std\+::uint8\+\_\+t \mbox{\hyperlink{classAParseComponent_a23f49549a5a91eb0f3dcf799c37f71d8}{number\+\_\+arguments\+\_\+needed}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Get the number arguments needed object. \end{DoxyCompactList}\item 
+parse\+\_\+map \mbox{\hyperlink{classAParseComponent_a45c2c97ea3e7ac0b797d6f8b9b39508a}{get\+\_\+arguments}} () noexcept
+\begin{DoxyCompactList}\small\item\em This function return all the arguments fo the component in a map. \end{DoxyCompactList}\item 
+parse\+\_\+map const  \& \mbox{\hyperlink{classAParseComponent_a7d8f9017e638f1e7c6a9135e96ca9042}{argument\+\_\+needed}} () noexcept
+\begin{DoxyCompactList}\small\item\em This function return the arguments needed by the component in a const map. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classAParseComponent_a89b650cd9079975933c174f3413e16f8}\label{classAParseComponent_a89b650cd9079975933c174f3413e16f8}} 
+{\footnotesize template$<$class type $>$ }\\void {\bfseries set\+\_\+argument\+\_\+needed} (std\+::string const \&name)
+\item 
+bool \mbox{\hyperlink{classAParseComponent_a0af21e1db6b063092f3007cd987eeaad}{good\+\_\+arg}} (Json\+::\+Value const \&json, std\+::string const \&key) const noexcept
+\begin{DoxyCompactList}\small\item\em Set the argument needed object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classAParseComponent_ab26e97a99696c312cd471d4c10c8b764}\label{classAParseComponent_ab26e97a99696c312cd471d4c10c8b764}} 
+virtual void {\bfseries load\+\_\+component} (\mbox{\hyperlink{structentity__t}{entity\+\_\+t}} const \&e, \mbox{\hyperlink{classregistry}{registry}} \&reg, \mbox{\hyperlink{classdata}{data}} \&db, Json\+::\+Value const \&json) const =0
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAParseComponent_a4cb817d1df576c9820f9b100cb4b4c39}\label{classAParseComponent_a4cb817d1df576c9820f9b100cb4b4c39}} 
+std\+::string {\bfseries \+\_\+name}
+\item 
+\mbox{\Hypertarget{classAParseComponent_a67c6b6753fe23f95fab2d38e1095a6ad}\label{classAParseComponent_a67c6b6753fe23f95fab2d38e1095a6ad}} 
+parse\+\_\+map {\bfseries \+\_\+args}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classAParseComponent_a7dc2601ccb8752cbe6f9a8b402c3187e}\label{classAParseComponent_a7dc2601ccb8752cbe6f9a8b402c3187e}} 
+\index{AParseComponent@{AParseComponent}!AParseComponent@{AParseComponent}}
+\index{AParseComponent@{AParseComponent}!AParseComponent@{AParseComponent}}
+\doxysubsubsection{\texorpdfstring{AParseComponent()}{AParseComponent()}}
+{\footnotesize\ttfamily AParse\+Component\+::\+AParse\+Component (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{classAParseComponent_a7dc2601ccb8752cbe6f9a8b402c3187e}{AParse\+Component\+::\+AParse\+Component}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the component \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classAParseComponent_a7d8f9017e638f1e7c6a9135e96ca9042}\label{classAParseComponent_a7d8f9017e638f1e7c6a9135e96ca9042}} 
+\index{AParseComponent@{AParseComponent}!argument\_needed@{argument\_needed}}
+\index{argument\_needed@{argument\_needed}!AParseComponent@{AParseComponent}}
+\doxysubsubsection{\texorpdfstring{argument\_needed()}{argument\_needed()}}
+{\footnotesize\ttfamily IParse\+Component\+::parse\+\_\+map const  \& AParse\+Component\+::argument\+\_\+needed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [noexcept]}}
+
+
+
+This function return the arguments needed by the component in a const map. 
+
+\begin{DoxyReturn}{Returns}
+IParse\+Component\+::parse\+\_\+map const \& 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classIParseComponent}{IParse\+Component}}.
+
+\mbox{\Hypertarget{classAParseComponent_a45c2c97ea3e7ac0b797d6f8b9b39508a}\label{classAParseComponent_a45c2c97ea3e7ac0b797d6f8b9b39508a}} 
+\index{AParseComponent@{AParseComponent}!get\_arguments@{get\_arguments}}
+\index{get\_arguments@{get\_arguments}!AParseComponent@{AParseComponent}}
+\doxysubsubsection{\texorpdfstring{get\_arguments()}{get\_arguments()}}
+{\footnotesize\ttfamily IParse\+Component\+::parse\+\_\+map AParse\+Component\+::get\+\_\+arguments (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [noexcept]}}
+
+
+
+This function return all the arguments fo the component in a map. 
+
+\begin{DoxyReturn}{Returns}
+IParse\+Component\+::parse\+\_\+map 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classIParseComponent}{IParse\+Component}}.
+
+\mbox{\Hypertarget{classAParseComponent_a9233d4a20743c04d36baa0203a55f47b}\label{classAParseComponent_a9233d4a20743c04d36baa0203a55f47b}} 
+\index{AParseComponent@{AParseComponent}!get\_name@{get\_name}}
+\index{get\_name@{get\_name}!AParseComponent@{AParseComponent}}
+\doxysubsubsection{\texorpdfstring{get\_name()}{get\_name()}}
+{\footnotesize\ttfamily std\+::string \& AParse\+Component\+::get\+\_\+name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [noexcept]}}
+
+
+
+Get the name object. 
+
+\begin{DoxyReturn}{Returns}
+std\+::string 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classIParseComponent}{IParse\+Component}}.
+
+\mbox{\Hypertarget{classAParseComponent_a0af21e1db6b063092f3007cd987eeaad}\label{classAParseComponent_a0af21e1db6b063092f3007cd987eeaad}} 
+\index{AParseComponent@{AParseComponent}!good\_arg@{good\_arg}}
+\index{good\_arg@{good\_arg}!AParseComponent@{AParseComponent}}
+\doxysubsubsection{\texorpdfstring{good\_arg()}{good\_arg()}}
+{\footnotesize\ttfamily bool AParse\+Component\+::good\+\_\+arg (\begin{DoxyParamCaption}\item[{Json\+::\+Value const \&}]{json,  }\item[{std\+::string const \&}]{key }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [noexcept]}}
+
+
+
+Set the argument needed object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & json object \\
+\hline
+{\em key} & key of the argument \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the argument is set correctly and false otherwise 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classIParseComponent}{IParse\+Component}}.
+
+\mbox{\Hypertarget{classAParseComponent_a23f49549a5a91eb0f3dcf799c37f71d8}\label{classAParseComponent_a23f49549a5a91eb0f3dcf799c37f71d8}} 
+\index{AParseComponent@{AParseComponent}!number\_arguments\_needed@{number\_arguments\_needed}}
+\index{number\_arguments\_needed@{number\_arguments\_needed}!AParseComponent@{AParseComponent}}
+\doxysubsubsection{\texorpdfstring{number\_arguments\_needed()}{number\_arguments\_needed()}}
+{\footnotesize\ttfamily std\+::uint8\+\_\+t AParse\+Component\+::number\+\_\+arguments\+\_\+needed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [noexcept]}}
+
+
+
+Get the number arguments needed object. 
+
+\begin{DoxyReturn}{Returns}
+std\+::uint8\+\_\+t 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classIParseComponent}{IParse\+Component}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Engine/\+Parse\+Component/AParse\+Component.\+hpp\item 
+Engine/\+Parse\+Component/\mbox{\hyperlink{AParseComponent_8cpp}{AParse\+Component.\+cpp}}\end{DoxyCompactItemize}

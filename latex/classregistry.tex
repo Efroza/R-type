@@ -1,0 +1,52 @@
+\hypertarget{classregistry}{}\doxysection{registry Class Reference}
+\label{classregistry}\index{registry@{registry}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classregistry_a19c4f7403bb0f2aa5f3f92f8b982fdb1}\label{classregistry_a19c4f7403bb0f2aa5f3f92f8b982fdb1}} 
+{\footnotesize template$<$class Component $>$ }\\\mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ Component $>$ \& {\bfseries register\+\_\+component} ()
+\item 
+\mbox{\Hypertarget{classregistry_a99ec6244fa73ca7a6042048230a91e9a}\label{classregistry_a99ec6244fa73ca7a6042048230a91e9a}} 
+{\footnotesize template$<$class Component $>$ }\\\mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ Component $>$ \& {\bfseries get\+\_\+components} ()
+\item 
+\mbox{\Hypertarget{classregistry_ae35d18b5d8c07828cc5c55bc94f9f4f8}\label{classregistry_ae35d18b5d8c07828cc5c55bc94f9f4f8}} 
+{\footnotesize template$<$class Component $>$ }\\\mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ Component $>$ const  \& {\bfseries get\+\_\+components} () const
+\item 
+\mbox{\Hypertarget{classregistry_a75d49eb0c9936d57146007f06cbaf735}\label{classregistry_a75d49eb0c9936d57146007f06cbaf735}} 
+\mbox{\hyperlink{structentity__t}{entity\+\_\+t}} {\bfseries spawn\+\_\+entity} ()
+\item 
+\mbox{\Hypertarget{classregistry_a46504238b07876a0e1fd62242e553dde}\label{classregistry_a46504238b07876a0e1fd62242e553dde}} 
+\mbox{\hyperlink{structentity__t}{entity\+\_\+t}} {\bfseries entity\+\_\+from\+\_\+index} (std \+::size\+\_\+t idx)
+\item 
+\mbox{\Hypertarget{classregistry_a824730a42d46a27c6141462b2cfb787f}\label{classregistry_a824730a42d46a27c6141462b2cfb787f}} 
+bool {\bfseries is\+\_\+kill} (\mbox{\hyperlink{structentity__t}{entity\+\_\+t}} const \&e)
+\item 
+\mbox{\Hypertarget{classregistry_a6c967fb2267fd8eaeb155f2be5b5650c}\label{classregistry_a6c967fb2267fd8eaeb155f2be5b5650c}} 
+void {\bfseries kill\+\_\+entity} (\mbox{\hyperlink{structentity__t}{entity\+\_\+t}} const \&e)
+\item 
+\mbox{\Hypertarget{classregistry_acd9a38dbc718a518ee6104d9a8f1a345}\label{classregistry_acd9a38dbc718a518ee6104d9a8f1a345}} 
+void {\bfseries copy\+\_\+component} (\mbox{\hyperlink{structentity__t}{entity\+\_\+t}} src, \mbox{\hyperlink{structentity__t}{entity\+\_\+t}} dest)
+\item 
+\mbox{\Hypertarget{classregistry_a6b99e9015fbc171015a58158d44451fc}\label{classregistry_a6b99e9015fbc171015a58158d44451fc}} 
+{\footnotesize template$<$typename Component $>$ }\\\mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ Component $>$\+::reference\+\_\+type {\bfseries add\+\_\+component} (\mbox{\hyperlink{structentity__t}{entity\+\_\+t}} const \&to, Component \&\&c)
+\item 
+\mbox{\Hypertarget{classregistry_aee0a2c1599ad6fa75e0f9609825f8e30}\label{classregistry_aee0a2c1599ad6fa75e0f9609825f8e30}} 
+{\footnotesize template$<$typename Component , typename... Params$>$ }\\\mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ Component $>$\+::reference\+\_\+type {\bfseries emplace\+\_\+component} (\mbox{\hyperlink{structentity__t}{entity\+\_\+t}} const \&to, Params \&\&...p)
+\item 
+\mbox{\Hypertarget{classregistry_ae6ae3ba636214bb3972a99492923bf7c}\label{classregistry_ae6ae3ba636214bb3972a99492923bf7c}} 
+{\footnotesize template$<$typename Component $>$ }\\void {\bfseries remove\+\_\+component} (\mbox{\hyperlink{structentity__t}{entity\+\_\+t}} const \&from)
+\item 
+\mbox{\Hypertarget{classregistry_af9596641371a7191d44293d13c1f69bf}\label{classregistry_af9596641371a7191d44293d13c1f69bf}} 
+{\footnotesize template$<$class... Components, typename Function $>$ }\\void {\bfseries add\+\_\+system} (Function \&\&f)
+\item 
+\mbox{\Hypertarget{classregistry_a7453ec1f4862192b6d4091488c15a3ab}\label{classregistry_a7453ec1f4862192b6d4091488c15a3ab}} 
+{\footnotesize template$<$class... Components, typename Function $>$ }\\void {\bfseries add\+\_\+system} (Function const \&f)
+\item 
+\mbox{\Hypertarget{classregistry_a1fda5cc52e611441228f8b1c26302060}\label{classregistry_a1fda5cc52e611441228f8b1c26302060}} 
+void {\bfseries run\+\_\+systems} ()
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Engine/\+Include/\mbox{\hyperlink{registry_8hpp}{registry.\+hpp}}\end{DoxyCompactItemize}

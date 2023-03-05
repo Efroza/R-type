@@ -22,6 +22,13 @@
 #include <map>
 #include <stdint.h>
 
+/**
+ * @file ClientInfo.hpp
+ */
+
+/**
+ * @brief Class that contains all the information about a client.
+*/
 class ClientInfo {
     public:
         ClientInfo() : _id(0), _hp(0), _x(0), _y(0) {};

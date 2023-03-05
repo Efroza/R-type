@@ -1,0 +1,25 @@
+\hypertarget{Engine_2server_2src_2main_8cpp}{}\doxysection{Engine/server/src/main.cpp File Reference}
+\label{Engine_2server_2src_2main_8cpp}\index{Engine/server/src/main.cpp@{Engine/server/src/main.cpp}}
+{\ttfamily \#include \char`\"{}../include/server.\+hpp\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{Engine_2server_2src_2main_8cpp_a0c99d968a34e803d378692bde2e3f18f}{main}} (int ac, char $\ast$$\ast$av)
+\begin{DoxyCompactList}\small\item\em Launch a TCP server and UDP server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{Engine_2server_2src_2main_8cpp_a0c99d968a34e803d378692bde2e3f18f}\label{Engine_2server_2src_2main_8cpp_a0c99d968a34e803d378692bde2e3f18f}} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{ac,  }\item[{char $\ast$$\ast$}]{av }\end{DoxyParamCaption})}
+
+
+
+Launch a TCP server and UDP server. 
+
+\begin{DoxyReturn}{Returns}
+int
+\end{DoxyReturn}
+Launch a TCP server and UDP server both of them are called in threads. They are both in threads so we can use them at the same time and they are joined at the end of the main so the program doesn\textquotesingle{}t end before the threads. 

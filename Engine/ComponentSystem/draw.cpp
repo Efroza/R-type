@@ -31,7 +31,6 @@ componentSystem::draw::~draw()
  * @details The function is declared as extern "C", which specifies that it has C linkage (i.e., it can be called from C code).
  * @details This is necessary because the component system is loaded as a shared library.
  */
-
 extern "C" IComponentSystem *createComponentSystem()
 {
     return new componentSystem::draw;
@@ -44,7 +43,6 @@ extern "C" IComponentSystem *createComponentSystem()
  * @param db Represent the data object for storing the image data.
  * @param file The file path of the image.
  */
-
 static void load_texture(std::uint8_t id, data *db, const std::string &file)
 {
     sf::Texture texture;
@@ -66,7 +64,6 @@ static void load_texture(std::uint8_t id, data *db, const std::string &file)
  * @param window The window in which the image will be drawn.
  * @details The function will draw all images in the window.
  */
-
 static void create_sprite(std::uint8_t id, data *db, component::image &image, component::position &position)
 {
     if (db->data_exist<sf::Sprite>(id) == true)
@@ -89,7 +86,6 @@ static void create_sprite(std::uint8_t id, data *db, component::image &image, co
  * @param window Where the event will be managed (SFML), where the image will be drawn
  * @param interactions The sparse array of interaction components like (up, down, left, right, etc...)
  */
-
 static void handle_event(sf::Event &event, sf::RenderWindow &window, sparse_array<component::interaction> &interactions)
 {
     while (window.pollEvent(event)) {
@@ -113,7 +109,6 @@ static void handle_event(sf::Event &event, sf::RenderWindow &window, sparse_arra
  * @param positions The sparse array of position components associated with the images.
  * @param draw The sparse array of draw components associated with the images.
  */
-
 void draw_system(registry &reg
 , sparse_array<component::image> &images
 , sparse_array<component::position> &positions
@@ -159,7 +154,6 @@ void draw_system(registry &reg
  * @param db Where the rect will be stored
  * @param rect Component that will help to create the rect object in SFML
  */
-
 static void create_rect(std::uint32_t id, data *db, component::rect &rect)
 {
     if (db == nullptr || db->data_exist<sf::Texture>(id) == false)
@@ -185,7 +179,6 @@ static void create_rect(std::uint32_t id, data *db, component::rect &rect)
  * @param rect Component that will help to update the rect object in SFML
  * @details The function will update the rect object in SFML, to check is state and update it.
  */
-
 static void update_rect(std::uint32_t id, data *db, component::rect &rect)
 {
     if (db == nullptr || db->data_exist<sf::IntRect>(id) == false)
@@ -205,7 +198,6 @@ static void update_rect(std::uint32_t id, data *db, component::rect &rect)
  * @param rect Component that will help to load the rect object in SFML
  * @details The function will load the rect object in SFML.
  */
-
 static void load_rect(std::uint32_t id, data *db, component::rect &rect)
 {
     if (db == nullptr || db->data_exist<sf::Sprite>(id) == false || db->data_exist<sf::IntRect>(id) == false)
@@ -227,7 +219,6 @@ static void load_rect(std::uint32_t id, data *db, component::rect &rect)
   * @details database pointer. If so, it checks if the entity has a valid sf::IntRect object in
   * @details the database. If not, it creates one, otherwise it updates and loads the existing one.
   */
-
 void draw_rect_system(registry &reg
 , sparse_array<component::rect> &rects
 , sparse_array<component::image> &images

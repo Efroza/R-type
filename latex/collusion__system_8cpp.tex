@@ -1,0 +1,30 @@
+\hypertarget{collusion__system_8cpp}{}\doxysection{Engine/\+Base\+Systems/collusion\+\_\+system.cpp File Reference}
+\label{collusion__system_8cpp}\index{Engine/BaseSystems/collusion\_system.cpp@{Engine/BaseSystems/collusion\_system.cpp}}
+{\ttfamily \#include \char`\"{}../\+Include/systems.\+hpp\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{collusion__system_8cpp_a7afb222ee64c4d65583af8852edd8c1a}{collusion\+\_\+system}} (\mbox{\hyperlink{classregistry}{registry}} \&reg, \mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1collusion}{component\+::collusion}} $>$ \&collusion, \mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1image}{component\+::image}} $>$ \&image)
+\begin{DoxyCompactList}\small\item\em Check if two entities are colliding. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{collusion__system_8cpp_a7afb222ee64c4d65583af8852edd8c1a}\label{collusion__system_8cpp_a7afb222ee64c4d65583af8852edd8c1a}} 
+\index{collusion\_system.cpp@{collusion\_system.cpp}!collusion\_system@{collusion\_system}}
+\index{collusion\_system@{collusion\_system}!collusion\_system.cpp@{collusion\_system.cpp}}
+\doxysubsubsection{\texorpdfstring{collusion\_system()}{collusion\_system()}}
+{\footnotesize\ttfamily void collusion\+\_\+system (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classregistry}{registry}} \&}]{reg,  }\item[{\mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1collusion}{component\+::collusion}} $>$ \&}]{collusion,  }\item[{\mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1image}{component\+::image}} $>$ \&}]{image }\end{DoxyParamCaption})}
+
+
+
+Check if two entities are colliding. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reg} & Registry of the engine, used to contain all the component system. \\
+\hline
+{\em collusion} & Component system of the collision. \\
+\hline
+{\em image} & To get the sprite of the entity which is colliding. \\
+\hline
+\end{DoxyParams}

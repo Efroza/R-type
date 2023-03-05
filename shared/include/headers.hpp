@@ -12,6 +12,10 @@
 #include <vector>
 #include "./ClientInfo.hpp"
 
+/**
+ * @file headers.hpp
+*/
+
 enum Type
 {
     POSITION = 0,

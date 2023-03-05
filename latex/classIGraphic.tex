@@ -1,0 +1,52 @@
+\hypertarget{classIGraphic}{}\doxysection{IGraphic Class Reference}
+\label{classIGraphic}\index{IGraphic@{IGraphic}}
+
+
+Interface for graphic library.  
+
+
+
+
+{\ttfamily \#include $<$IGraphic.\+hpp$>$}
+
+Inheritance diagram for IGraphic\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classIGraphic}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classIGraphic_a2c4863cde11f199e08540f74f34616fa}\label{classIGraphic_a2c4863cde11f199e08540f74f34616fa}} 
+virtual const std\+::string \& {\bfseries get\+Name} () const =0
+\item 
+\mbox{\Hypertarget{classIGraphic_a97bddaf4f9397593ba4eaee050258088}\label{classIGraphic_a97bddaf4f9397593ba4eaee050258088}} 
+virtual void {\bfseries initialize} (int x, int y, const std\+::string \&name)=0
+\item 
+\mbox{\Hypertarget{classIGraphic_a20054c7774e841a1345876c1fcfd5f9b}\label{classIGraphic_a20054c7774e841a1345876c1fcfd5f9b}} 
+virtual void {\bfseries destroy} ()=0
+\item 
+\mbox{\Hypertarget{classIGraphic_ad3213fdfb7d48d42b1a5a4809524e3f4}\label{classIGraphic_ad3213fdfb7d48d42b1a5a4809524e3f4}} 
+virtual void {\bfseries clear\+Window} ()=0
+\item 
+\mbox{\Hypertarget{classIGraphic_a7fb8dde6daaf1a7811adaab82483fcf9}\label{classIGraphic_a7fb8dde6daaf1a7811adaab82483fcf9}} 
+virtual void {\bfseries refresh\+Window} ()=0
+\item 
+\mbox{\Hypertarget{classIGraphic_a35922bc439135530b09a26e73c09047c}\label{classIGraphic_a35922bc439135530b09a26e73c09047c}} 
+virtual void {\bfseries draw} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classDrawable}{Drawable}} $>$ image, const std\+::pair$<$ int, int $>$ \&position)=0
+\item 
+\mbox{\Hypertarget{classIGraphic_ae66caf6ce3f0bb2573ce992ccba870d7}\label{classIGraphic_ae66caf6ce3f0bb2573ce992ccba870d7}} 
+virtual events\+\_\+e {\bfseries poll\+Event} ()=0
+\item 
+\mbox{\Hypertarget{classIGraphic_abf4fb350582d8f564f0c39efb89c15d4}\label{classIGraphic_abf4fb350582d8f564f0c39efb89c15d4}} 
+virtual std\+::string {\bfseries get\+Text} (std\+::string str)=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface for graphic library. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+client\+Graphic/\+Graphic/\mbox{\hyperlink{IGraphic_8hpp}{IGraphic.\+hpp}}\end{DoxyCompactItemize}

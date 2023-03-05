@@ -14,6 +14,13 @@
 #include <unistd.h>
 #endif
 
+/**
+ * @file network_player_system.cpp
+*/
+
+/**
+ * @brief This function is used to send the position of the player to the server.
+*/
 void network_player_system(registry &reg, sparse_array<component::position> &positions, sparse_array<component::network_player> &network)
 {
     Position position = {0};

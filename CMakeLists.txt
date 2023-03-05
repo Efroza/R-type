@@ -19,17 +19,6 @@ endif()
 
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
-message("${Green}Checking if doxygen exist in ${CMAKE_BINARY_DIR}${ColorReset}")
-find_package(Doxygen)
-if(DOXYGEN_FOUND)
-  add_custom_target(doc
-    ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    COMMENT "Generating API documentation with Doxygen" VERBATIM
-  )
-endif(DOXYGEN_FOUND)
-
-
 message("${Green} Installing dependencies${ColorReset}")
 conan_cmake_configure(REQUIRES sfml/2.5.1 asio/1.24.0 jsoncpp/1.9.5 yaml-cpp/0.7.0
   GENERATORS cmake)

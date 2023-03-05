@@ -12,6 +12,13 @@
 #include "../Drawable/Drawable.hpp"
 #include "events.hpp"
 
+/**
+ * @file IGraphic.hpp
+ */
+
+/**
+ * @brief Interface for graphic library.
+ */
 class IGraphic
 {
 public:

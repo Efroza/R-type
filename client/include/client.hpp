@@ -22,6 +22,13 @@
 using asio::ip::tcp;
 using asio::ip::udp;
 
+/**
+ * @file client.hpp
+ */
+
+/**
+ * @brief This class will create a client.
+ */
 class Client {
     public :
         Client(const std::string& host, const std::string& port);

@@ -1,0 +1,122 @@
+\hypertarget{systems_8hpp}{}\doxysection{Engine/\+Include/systems.hpp File Reference}
+\label{systems_8hpp}\index{Engine/Include/systems.hpp@{Engine/Include/systems.hpp}}
+{\ttfamily \#include \char`\"{}registry.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Component\+System/draw.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Base\+Component/image.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Base\+Component/position.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Base\+Component/rect.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Base\+Component/interaction.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}interactive.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Base\+Component/animation.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Base\+Component/collusion.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Base\+Component/network.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Base\+Component/network\+\_\+player.\+hpp\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{systems_8hpp_a62352628ea12928c082ecfe493e702ea}{animation\+\_\+system}} (\mbox{\hyperlink{classregistry}{registry}} \&reg, \mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1image}{component\+::image}} $>$ \&images, \mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1rect}{component\+::rect}} $>$ \&rects, \mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{structcomponent_1_1animation}{component\+::animation}} $>$ \&animations)
+\begin{DoxyCompactList}\small\item\em Updates the animation system by processing all relevant image, rectangle, and animation components. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{systems_8hpp_a640cda344703f3a8014f12c4b7249919}{interaction\+\_\+system}} (\mbox{\hyperlink{classregistry}{registry}} \&reg, \mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1interaction}{component\+::interaction}} $>$ \&interactions)
+\begin{DoxyCompactList}\small\item\em Updates the interaction system by processing all relevant interaction components. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{systems_8hpp_a7afb222ee64c4d65583af8852edd8c1a}{collusion\+\_\+system}} (\mbox{\hyperlink{classregistry}{registry}} \&reg, \mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1collusion}{component\+::collusion}} $>$ \&collusion, \mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1image}{component\+::image}} $>$ \&image)
+\begin{DoxyCompactList}\small\item\em Check if two entities are colliding. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{systems_8hpp_a9de70f72c33c4f49ba64daf6a1a65f31}\label{systems_8hpp_a9de70f72c33c4f49ba64daf6a1a65f31}} 
+void \mbox{\hyperlink{systems_8hpp_a9de70f72c33c4f49ba64daf6a1a65f31}{network\+\_\+position\+\_\+system}} (\mbox{\hyperlink{classregistry}{registry}} \&reg, \mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{structcomponent_1_1position}{component\+::position}} $>$ \&positions, \mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1network}{component\+::network}} $>$ \&network)
+\begin{DoxyCompactList}\small\item\em This function is used to send the position of the player to the server. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{systems_8hpp_ac55900840b12414e9e6f974ab1e2256c}\label{systems_8hpp_ac55900840b12414e9e6f974ab1e2256c}} 
+void \mbox{\hyperlink{systems_8hpp_ac55900840b12414e9e6f974ab1e2256c}{network\+\_\+player\+\_\+system}} (\mbox{\hyperlink{classregistry}{registry}} \&reg, \mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{structcomponent_1_1position}{component\+::position}} $>$ \&positions, \mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1network__player}{component\+::network\+\_\+player}} $>$ \&network)
+\begin{DoxyCompactList}\small\item\em This function is used to send the position of the player to the server. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{systems_8hpp_aa249cc8a49842dd1eb4f103196437c14}{load\+\_\+component}} (\mbox{\hyperlink{classregistry}{registry}} \&reg)
+\begin{DoxyCompactList}\small\item\em Load all the components in the registry. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{systems_8hpp_a1713719ec5ec37aea6c1388fb1f38d63}{load\+\_\+system}} (\mbox{\hyperlink{classregistry}{registry}} \&reg)
+\begin{DoxyCompactList}\small\item\em Load all the systems in the registry. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{systems_8hpp_a62352628ea12928c082ecfe493e702ea}\label{systems_8hpp_a62352628ea12928c082ecfe493e702ea}} 
+\index{systems.hpp@{systems.hpp}!animation\_system@{animation\_system}}
+\index{animation\_system@{animation\_system}!systems.hpp@{systems.hpp}}
+\doxysubsubsection{\texorpdfstring{animation\_system()}{animation\_system()}}
+{\footnotesize\ttfamily void animation\+\_\+system (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classregistry}{registry}} \&}]{reg,  }\item[{\mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1image}{component\+::image}} $>$ \&}]{images,  }\item[{\mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1rect}{component\+::rect}} $>$ \&}]{rects,  }\item[{\mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{structcomponent_1_1animation}{component\+::animation}} $>$ \&}]{animations }\end{DoxyParamCaption})}
+
+
+
+Updates the animation system by processing all relevant image, rectangle, and animation components. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reg} & The registry containing all entities and their associated components. \\
+\hline
+{\em images} & The sparse array of image components. \\
+\hline
+{\em rects} & The sparse array of rectangle components. \\
+\hline
+{\em animations} & The sparse array of animation components. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{systems_8hpp_a7afb222ee64c4d65583af8852edd8c1a}\label{systems_8hpp_a7afb222ee64c4d65583af8852edd8c1a}} 
+\index{systems.hpp@{systems.hpp}!collusion\_system@{collusion\_system}}
+\index{collusion\_system@{collusion\_system}!systems.hpp@{systems.hpp}}
+\doxysubsubsection{\texorpdfstring{collusion\_system()}{collusion\_system()}}
+{\footnotesize\ttfamily void collusion\+\_\+system (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classregistry}{registry}} \&}]{reg,  }\item[{\mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1collusion}{component\+::collusion}} $>$ \&}]{collusion,  }\item[{\mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1image}{component\+::image}} $>$ \&}]{image }\end{DoxyParamCaption})}
+
+
+
+Check if two entities are colliding. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reg} & Registry of the engine, used to contain all the component system. \\
+\hline
+{\em collusion} & Component system of the collision. \\
+\hline
+{\em image} & To get the sprite of the entity which is colliding. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{systems_8hpp_a640cda344703f3a8014f12c4b7249919}\label{systems_8hpp_a640cda344703f3a8014f12c4b7249919}} 
+\index{systems.hpp@{systems.hpp}!interaction\_system@{interaction\_system}}
+\index{interaction\_system@{interaction\_system}!systems.hpp@{systems.hpp}}
+\doxysubsubsection{\texorpdfstring{interaction\_system()}{interaction\_system()}}
+{\footnotesize\ttfamily void interaction\+\_\+system (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classregistry}{registry}} \&}]{reg,  }\item[{\mbox{\hyperlink{classsparse__array}{sparse\+\_\+array}}$<$ \mbox{\hyperlink{classcomponent_1_1interaction}{component\+::interaction}} $>$ \&}]{interactions }\end{DoxyParamCaption})}
+
+
+
+Updates the interaction system by processing all relevant interaction components. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reg} & The registry containing all entities and their associated components. \\
+\hline
+{\em interactions} & The sparse array of interaction components. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{systems_8hpp_aa249cc8a49842dd1eb4f103196437c14}\label{systems_8hpp_aa249cc8a49842dd1eb4f103196437c14}} 
+\index{systems.hpp@{systems.hpp}!load\_component@{load\_component}}
+\index{load\_component@{load\_component}!systems.hpp@{systems.hpp}}
+\doxysubsubsection{\texorpdfstring{load\_component()}{load\_component()}}
+{\footnotesize\ttfamily void load\+\_\+component (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classregistry}{registry}} \&}]{reg }\end{DoxyParamCaption})}
+
+
+
+Load all the components in the registry. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reg} & Container of all the components. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{systems_8hpp_a1713719ec5ec37aea6c1388fb1f38d63}\label{systems_8hpp_a1713719ec5ec37aea6c1388fb1f38d63}} 
+\index{systems.hpp@{systems.hpp}!load\_system@{load\_system}}
+\index{load\_system@{load\_system}!systems.hpp@{systems.hpp}}
+\doxysubsubsection{\texorpdfstring{load\_system()}{load\_system()}}
+{\footnotesize\ttfamily void load\+\_\+system (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classregistry}{registry}} \&}]{reg }\end{DoxyParamCaption})}
+
+
+
+Load all the systems in the registry. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reg} & Container of all the systems. \\
+\hline
+\end{DoxyParams}

@@ -8,7 +8,11 @@
 #ifndef INTERACTIVE_HPP_
 #define INTERACTIVE_HPP_
 
-    #include "registry.hpp"
+#include "registry.hpp"
+
+/**
+ * @file interactive.hpp
+*/
 
 void down_deplacement(entity_t &e, registry &reg);
 void up_deplacement_function(entity_t &e, registry &reg);
