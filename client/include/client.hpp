@@ -9,7 +9,10 @@
 #define CLIENT_HPP_
 
 #ifdef _WIN32
+#include <windows.h>
 #include "../../framework.h"
+#else
+#include <dlfcn.h>
 #endif
 
 #include "../../shared/include/headers.hpp"
@@ -19,8 +22,21 @@
 #include <cstdint>
 #include <array>
 
+#include <stdexcept>
+#include <functional>
+#include <iostream>
+#include <string>
+#include <list>
+#include "IGraphic.hpp"
+
 using asio::ip::tcp;
 using asio::ip::udp;
+
+enum scene_e {
+    HOME,
+    // NETWORK_MENU,
+    GAME
+};
 
 /**
  * @file client.hpp
@@ -58,5 +74,28 @@ class Client {
         std::vector<ClientInfo*> _other_clients;
         const std::string& _host;
         const std::string& _port;
+
+
+
+        void loadLib(const std::string &filepath);
+        void _manageEventMenuHome(events_e event);
+        // void _manageEventMenuNetwork(events_e event);
+        void _manageGameEvent(events_e event, udp::socket& socket, udp::endpoint& server_endpoint);
+        void _manage_receive(const asio::error_code& error, std::size_t caca);
+    
+        std::unique_ptr<IGraphic> _libGraphic;
+        std::list<std::shared_ptr<Drawable>> _drawables;
+        std::list<std::shared_ptr<Drawable>> _homeMenuDrawables;
+        // std::list<std::shared_ptr<Drawable>> _networkMenuDrawables;
+        std::shared_ptr<Drawable> _playBtn;
+        std::shared_ptr<Drawable> _exitBtn;
+        std::shared_ptr<Drawable> _hostBtn;
+        std::shared_ptr<Drawable> _ipBtn;
+        std::shared_ptr<Drawable> _lunchBtn;
+        std::shared_ptr<Drawable> _background;
+        // std::string _host;
+        // std::string _ip;
+        scene_e _scene;
+        bool _playing;
 };
 #endif /* !CLIENT_HPP_ */
