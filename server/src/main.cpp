@@ -17,12 +17,15 @@
  * @details Launch a TCP server and UDP server both of them are called in threads. They are both in threads so we can use them at the same time and they are joined at the end of the main so the program doesn't end before the threads.
  */
 int main(int ac, char **av) {
-    if (ac != 2) {
-        std::cerr << "Usage: ./r-type_server.exe <port>" << std::endl;
-        return 84;
+    try {
+        if (ac != 2) {
+            std::cerr << "Usage: ./r-type_server.exe <port>" << std::endl;
+            return 84;
+        }
+        TCP_Server main_server(std::stoi(av[1]));
+        UDP_Server udp_server(std::stoi(av[1]) + 1);
+    } catch (std::exception &e) {
+        std::cerr << e.what() << std::endl;
     }
-    TCP_Server main_server(std::stoi(av[1]));
-    UDP_Server udp_server(std::stoi(av[1]) + 1);
-
     return 0;
 }

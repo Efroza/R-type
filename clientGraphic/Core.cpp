@@ -18,7 +18,11 @@
 
 Core::Core() : _scene(scene_e::HOME), _playing(true), _homeMenuIndex(0)
 {
+    #ifdef _WIN32
+    this->loadLib("./bin/SFML.dll");
+    #else
     this->loadLib("lib/libSFML.so");//faut mettre le path de la lib graphique
+    #endif
 
     auto background = std::make_shared<Drawable>("background", "./Engine/Image/background.jpg", std::pair<int, int>(1920, 1080), std::pair<int, int>(0, 0));
     this->_homeMenuDrawables.push_back(background);
@@ -189,9 +193,10 @@ void Core::loop()
 void Core::loadLib(const std::string &filepath)
 {
     #ifdef _WIN32 // Windows
+    // std::cout << filepath << std::endl;
     HINSTANCE handle = LoadLibrary(filepath.c_str());
     if (!handle) {
-        throw std::runtime_error("Error LoadLibrary: " + std::to_string(GetLastError()));
+        throw std::runtime_error("Error Load Library: " + std::to_string(GetLastError()));
     }
     IGraphic *(*funcPtr)() = reinterpret_cast<IGraphic *(*)()>(GetProcAddress(handle, "createGraphLib"));
     if (!funcPtr) {

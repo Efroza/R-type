@@ -8,7 +8,11 @@
 #include "../Include/registry.hpp"
 #include "../BaseComponent/position.hpp"
 #include "../BaseComponent/network.hpp"
+#ifdef _WIN32
+#include <windows.h>
+#else
 #include <unistd.h>
+#endif
 
 void network_position_system(registry &reg, sparse_array<component::position> &positions, sparse_array<component::network> &network)
 {

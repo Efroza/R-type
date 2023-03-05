@@ -78,7 +78,7 @@ struct Direction {
 };
 
 struct Connection {
-    uint16_t id_lobby;
+    int16_t id_lobby;
 };
 struct Connected {
     std::vector<uint16_t> clients_id;

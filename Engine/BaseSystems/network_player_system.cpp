@@ -8,7 +8,11 @@
 #include "../Include/registry.hpp"
 #include "../BaseComponent/position.hpp"
 #include "../BaseComponent/network_player.hpp"
+#ifdef _WIN32
+#include <windows.h>
+#else
 #include <unistd.h>
+#endif
 
 void network_player_system(registry &reg, sparse_array<component::position> &positions, sparse_array<component::network_player> &network)
 {
@@ -25,7 +29,11 @@ void network_player_system(registry &reg, sparse_array<component::position> &pos
             position.x = positions[i].value().x;
             position.y = positions[i].value().y;
             server->send_position(client_id, position);
+            #ifdef _WIN32
+            Sleep(1);
+            #else
             sleep(1);
+            #endif
         }
     }
 }
