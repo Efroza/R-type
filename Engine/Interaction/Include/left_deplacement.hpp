@@ -8,11 +8,7 @@
 #ifndef left_DEPLACEMENT_HPP_
 #define left_DEPLACEMENT_HPP_
 
-#include "ILoad_Interaction.hpp"
-
-/**
- * @file left_deplacement.hpp
-*/
+#include "../ILoad_Interaction.hpp"
 
 class left_deplacement : public ILoad_Interaction
 {

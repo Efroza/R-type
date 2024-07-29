@@ -8,11 +8,7 @@
 #ifndef down_DEPLACEMENT_HPP_
 #define down_DEPLACEMENT_HPP_
 
-#include "ILoad_Interaction.hpp"
-
-/**
- * @file down_deplacement.hpp
-*/
+#include "../ILoad_Interaction.hpp"
 
 class down_deplacement : public ILoad_Interaction
 {

@@ -8,14 +8,7 @@
 #ifndef COLLUSION_HPP_
 #define COLLUSION_HPP_
 
-/**
- * @file collusion.hpp
- */
-
 namespace component {
-    /**
-     * @brief This class is used to create a collusion.
-     */
     class collusion {
         public:
             collusion(){};

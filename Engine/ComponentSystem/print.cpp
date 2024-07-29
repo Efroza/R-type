@@ -7,7 +7,7 @@
 
 #include "print.hpp"
 #include "IComponentSystem.hpp"
-#include "rect.hpp"
+#include "../BaseComponent/rect.hpp"
 
 componentSystem::print::print()
 : name("print")
@@ -18,10 +18,17 @@ componentSystem::print::~print()
 {
 }
 
+#ifdef _WIN32
+extern "C" __declspec(dllexport) IComponentSystem *createComponentSystem()
+{
+    return new componentSystem::print;
+}
+#else
 extern "C" IComponentSystem *createComponentSystem()
 {
     return new componentSystem::print;
 }
+#endif
 
 void system_print(registry &reg, sparse_array<component::rect> &position, sparse_array<component::print> &prints)
 {

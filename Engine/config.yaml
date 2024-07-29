@@ -1,5 +1,5 @@
 config_json:
-  - ./Config/test.json
+  - ./Config/other.json
 
 config_interaction:
   - ./Interaction/up_deplacement.so

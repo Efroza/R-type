@@ -19,6 +19,17 @@ endif()
 
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
+message("${Green}Checking if doxygen exist in ${CMAKE_BINARY_DIR}${ColorReset}")
+find_package(Doxygen)
+if(DOXYGEN_FOUND)
+  add_custom_target(doc
+    ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    COMMENT "Generating API documentation with Doxygen" VERBATIM
+  )
+endif(DOXYGEN_FOUND)
+
+
 message("${Green} Installing dependencies${ColorReset}")
 conan_cmake_configure(REQUIRES sfml/2.5.1 asio/1.24.0 jsoncpp/1.9.5 yaml-cpp/0.7.0
   GENERATORS cmake)
@@ -64,14 +75,17 @@ set(HEADERS2
     ./clientGraphic/Graphic/IGraphic.hpp
     )
 
-set(GRAPHC_FILES
-    ./clientGraphic/main.cpp
-    ./clientGraphic/Core.cpp
-    ./clientGraphic/Core.hpp
-    ./clientGraphic/Graphic/IGraphic.hpp
-    ./clientGraphic/Drawable/Drawable.hpp
-    ./clientGraphic/Drawable/Drawable.cpp
-)
+# set(GRAPHIC_FILES
+#     ./clientGraphic/main.cpp
+#     # ./clientGraphic/Core.cpp
+#     ./clientGraphic/Drawable/Drawable.cpp
+# )
+
+# set(GRAPHIC_HEADERS
+#     # ./clientGraphic/Core.hpp
+#     ./clientGraphic/Graphic/IGraphic.hpp
+#     ./clientGraphic/Drawable/Drawable.hpp
+# )
 
 set(SRCS3
     ./Engine/Game/main.cpp
@@ -144,7 +158,7 @@ set(HEADERS3
 
 message("${Green} Building ${PROJECT_NAME}${ColorReset}")
 add_executable(${PROJECT_NAME}_graphic ${SRCS3} ${HEADERS3})
-target_compile_options(${PROJECT_NAME}_graphic PRIVATE 
+target_compile_options(${PROJECT_NAME}_graphic PRIVATE
     -I./Engine/Include
     -I./Engine/BaseComponent
     -I./Engine/ParseComponent
@@ -155,20 +169,25 @@ target_compile_options(${PROJECT_NAME}_graphic PRIVATE
     -I./Engine/ComponentSystem
     -I./Engine/server/include
 )
-target_link_libraries(${PROJECT_NAME}_graphic ${CONAN_LIBS} dl)
+target_link_libraries(${PROJECT_NAME}_graphic ${CONAN_LIBS})
 include(clientGraphic/Graphic/SFML/SFML_lib.cmake)
-add_executable(${PROJECT_NAME}_client_graphic ${GRAPHC_FILES})
-target_include_directories(${PROJECT_NAME}_client_graphic PRIVATE clientGraphic/Graphic)
-target_link_libraries(${PROJECT_NAME}_client_graphic ${CMAKE_DL_LIBS})
+include(Engine/Interaction/Interaction_lib.cmake)
+include(Engine/ComponentSystem/CMakeLists.txt)
+# add_executable(${PROJECT_NAME}_client_graphic ${GRAPHIC_FILES} ${GRAPHIC_HEADERS})
+# target_include_directories(${PROJECT_NAME}_client_graphic PRIVATE clientGraphic/Graphic)
+# target_link_libraries(${PROJECT_NAME}_client_graphic ${CMAKE_DL_LIBS} ${CONAN_LIBS})
 add_executable(${PROJECT_NAME}_server ${SRCS1} ${HEADERS1})
 add_executable(${PROJECT_NAME}_client ${SRCS2} ${HEADERS2})
 target_include_directories(${PROJECT_NAME}_client PRIVATE clientGraphic/Graphic)
 target_link_libraries(${PROJECT_NAME}_server ${CONAN_LIBS})
 target_link_libraries(${PROJECT_NAME}_client ${CONAN_LIBS})
+target_include_directories(${PROJECT_NAME}_client PRIVATE clientGraphic/Graphic)
+target_include_directories(${PROJECT_NAME}_client PRIVATE Engine/Interaction)
+target_include_directories(${PROJECT_NAME}_client PRIVATE Engine/ComponentSystem)
 message("${Green} Done${ColorReset}")
 include(InstallRequiredSystemLibraries)
 install(TARGETS ${PROJECT_NAME}_server RUNTIME DESTINATION bin)
 install(TARGETS ${PROJECT_NAME}_client RUNTIME DESTINATION bin)
 install(TARGETS ${PROJECT_NAME}_graphic RUNTIME DESTINATION bin)
-install(TARGETS ${PROJECT_NAME}_client_graphic RUNTIME DESTINATION bin)
+# install(TARGETS ${PROJECT_NAME}_client_graphic RUNTIME DESTINATION bin)
 include(CPack)

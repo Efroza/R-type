@@ -81,24 +81,28 @@ void Client::receive_data_client_udp(Header header, udp::socket& socket, udp::en
 {
     Messages response = {0};
     Position position = {0};
+    std::shared_ptr<Drawable> entite(nullptr);
 
     bool dog = false;
     for (auto &i : _drawables) {
         if (i->getName() == std::to_string(header.id)) {
             std::cout << "G TROUVÉ" << std::endl;
+            entite = i;
             dog = true;
         }
     }
     if (!dog) {
-        _drawables.push_back(std::make_shared<Drawable>(std::to_string(header.id), "./Engine/Image/spaceship_jet.png", std::pair<int, int>(200, 176), std::pair<int, int>(200, 200)));
+        entite = std::make_shared<Drawable>(std::to_string(header.id), "./Engine/Image/spaceship_jet.png", std::pair<int, int>(200, 176), std::pair<int, int>(200, 200));
+        _drawables.push_back(entite);
     }
     if (header.data_type == MESSAGE) { // If the data received is a message
         socket.receive_from(asio::buffer(&response, sizeof(Messages)), sender_endpoint, 0, ec);
         std::cout << "MESSAGE" << std::endl;
         std::cout << "Received from server: " << response.size << " ";
         std::cout.write(response.message, response.size) << std::endl;
-    } else { // If the data received is a position
+    } else if (header.data_type == POSITION) { // If the data received is a position
         socket.receive_from(asio::buffer(&position, sizeof(Position)), sender_endpoint, 0, ec);
+        entite->setPosition(std::pair<int, int>(position.x, position.y));
         std::cout << "POSITION" << std::endl;
         std::cout << "Received from server: " << position.x << " " << position.y << std::endl;
     }
@@ -287,14 +291,15 @@ void Client::_manageEventMenuHome(events_e event)
 void Client::_manageGameEvent(events_e event, udp::socket& socket, udp::endpoint& server_endpoint)
 {
     Header header_to_send = {0};
-    Position pos = {0};
-    header_to_send.data_type = POSITION;
-    pos.x = 1;
-    pos.y = 2;
+    Interaction interaction = {0};
+    header_to_send.data_type = INTERACTION;
+    // pos.x = 1;
+    // pos.y = 2;
     // Send event info to server here
+    interaction.value = event;
     if (event != events_e::NONE) {
         socket.send_to(asio::buffer(&header_to_send, sizeof(header_to_send)), server_endpoint);
-        socket.send_to(asio::buffer(&pos, sizeof(pos)), server_endpoint);
+        socket.send_to(asio::buffer(&interaction, sizeof(interaction)), server_endpoint);
         // send_struct_client_udp(socket, server_endpoint, "1,1");
     }
 

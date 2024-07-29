@@ -10,15 +10,8 @@
 
 #include <cinttypes>
 
-/**
- * @file rect.hpp
-*/
-
 namespace component
 {
-    /**
-     * @brief This class is used to create a rectangle.
-    */
     class rect
     {
         public:

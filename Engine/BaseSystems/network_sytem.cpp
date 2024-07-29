@@ -14,20 +14,17 @@
 #include <unistd.h>
 #endif
 
-/**
- * @file network_sytem.cpp
- */
-
-/**
- * @brief This function is used to send the position of the player to the server.
-*/
 void network_position_system(registry &reg, sparse_array<component::position> &positions, sparse_array<component::network> &network)
 {
     for (size_t i = 0; i < positions.size() && i < network.size(); ++i)
     {
         if (positions[i] && network[i]) {
             // std::cout << '[' << positions[i].value().x << "][" << positions[i].value().y << "]" << std::endl;
+            // #ifdef _WIN32
+            // Sleep(1);
+            // #else
             // sleep(1);
+            // #endif
         }
     }
 }

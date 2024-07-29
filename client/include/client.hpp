@@ -8,19 +8,19 @@
 #ifndef CLIENT_HPP_
 #define CLIENT_HPP_
 
-#ifdef _WIN32
-#include <windows.h>
-#include "../../framework.h"
-#else
-#include <dlfcn.h>
-#endif
-
 #include "../../shared/include/headers.hpp"
 #include "../../shared/include/ClientInfo.hpp"
 #include <asio.hpp>
 #include <thread>
 #include <cstdint>
 #include <array>
+
+#ifdef _WIN32
+#include <windows.h>
+#include "../../framework.h"
+#else
+#include <dlfcn.h>
+#endif
 
 #include <stdexcept>
 #include <functional>
@@ -38,13 +38,6 @@ enum scene_e {
     GAME
 };
 
-/**
- * @file client.hpp
- */
-
-/**
- * @brief This class will create a client.
- */
 class Client {
     public :
         Client(const std::string& host, const std::string& port);

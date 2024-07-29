@@ -16,10 +16,6 @@
 #include <memory>
 #include <vector>
 
-/**
- * @file sparse_array.hpp
-*/
-
 template <typename Component> // You can also mirror the definition of std :: vector ,
 // that takes an additional allocator.
 class sparse_array

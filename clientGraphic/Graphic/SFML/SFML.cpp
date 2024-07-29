@@ -21,11 +21,17 @@ const std::map<int, events_e> SFML::_confInputs {
     {sf::Keyboard::Key::Enter,  events_e::ENTER},
 };
 
-
+#ifdef _WIN32
+extern "C" __declspec(dllexport) IGraphic* createGraphLib()
+{
+    return (new SFML());
+}
+#else
 extern "C" IGraphic* createGraphLib()
 {
     return (new SFML());
 }
+#endif
 
 SFML::SFML() : AGraphic("SFML")
 {

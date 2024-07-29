@@ -4,6 +4,10 @@
 ** File description:
 ** Core
 */
+#include <stdexcept>
+#include <functional>
+#include <iostream>
+#include "Core.hpp"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -11,15 +15,11 @@
 #include <dlfcn.h>
 #endif
 
-#include <stdexcept>
-#include <functional>
-#include <iostream>
-#include "Core.hpp"
 
-Core::Core() : _scene(scene_e::HOME), _playing(true)
+Core::Core() : _scene(scene_a::HOME), _playing(true)
 {
     #ifdef _WIN32
-    this->loadLib("./bin/SFML.dll");
+    this->loadLib("bin/SFML.dll");
     #else
     this->loadLib("lib/libSFML.so");//faut mettre le path de la lib graphique
     #endif
@@ -89,7 +89,7 @@ void Core::_manageEventMenuHome(events_e event)
         _exitBtn->setColor(WHITE);
     } else if (event == events_e::ENTER) {
         if (homeMenuIndex == 0) {
-            _scene = scene_e::NETWORK_MENU;
+            _scene = scene_a::NETWORK_MENU;
         } else if (homeMenuIndex == 1) {
             _playing = false;
         }
@@ -104,7 +104,7 @@ void Core::_manageEventMenuNetwork(events_e event)
     if (event == events_e::ENTER) {
         if (index == 2) {
             _background->setStr("Engine/Image/starfield.jpg");
-            _scene = scene_e::GAME;
+            _scene = scene_a::GAME;
         } else {
             textMode = !textMode;
         }
@@ -138,15 +138,22 @@ void Core::_manageEventMenuNetwork(events_e event)
 void Core::loop()
 {
     events_e event = NONE;
+    Interaction interaction;
 
+    while (client == nullptr); // wait client is not null;
+    if (client == nullptr)
+        return;
     _libGraphic->initialize(1920, 1080, "Rtype");
-    while (_playing) {
+    while (_playing)
+    {
         event = _libGraphic->pollEvent();
         if (event == events_e::CLOSE) {
             _playing = false;
         } else if (event == events_e::ENTER) {
             std::cout << "ENTER\n";
         } else if (event == events_e::KEY_LEFT) {
+            interaction.value = 1;
+            // client->send_interaction_client_udp(interaction);
             std::cout << "KEY_LEFT\n";
         } else if (event == events_e::KEY_RIGHT) {
             std::cout << "KEY_RIGHT\n";
@@ -160,13 +167,13 @@ void Core::loop()
         }
         _libGraphic->clearWindow();
         switch (_scene) {
-        case scene_e::HOME:
+        case scene_a::HOME:
             _manageEventMenuHome(event);
             for (auto &i : _homeMenuDrawables) {
                 _libGraphic->draw(i, i->getPosition());
             }
             break;
-        case scene_e::NETWORK_MENU:
+        case scene_a::NETWORK_MENU:
             _manageEventMenuNetwork(event);
             for (auto &i : _networkMenuDrawables) {
                 if (i->getName() == "text-selected-host") {
@@ -177,7 +184,7 @@ void Core::loop()
                 _libGraphic->draw(i, i->getPosition());
             }
             break;
-        case scene_e::GAME:
+        case scene_a::GAME:
             // Here add function that receive en manage data from server
             // If server send new entity info => add new Drawable with info inside, first param called name == entity's id
             // If server send position info => use getName to get your entity and update what server said

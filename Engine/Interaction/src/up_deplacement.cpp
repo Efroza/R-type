@@ -5,9 +5,9 @@
 ** up_deplacement
 */
 
-#include "registry.hpp"
-#include "position.hpp"
-#include "up_deplacement.hpp"
+#include "../../Include/registry.hpp"
+#include "../../BaseComponent/position.hpp"
+#include "../Include/up_deplacement.hpp"
 
 /**
  * @file up_deplacement.cpp
@@ -19,10 +19,17 @@
  * @return ILoad_Interaction*
  * @details This function is called by the plugin loader to create a new instance of the plugin
  */
+#ifdef _WIN32
+extern "C" __declspec(dllexport) ILoad_Interaction *createInteraction()
+{
+    return new up_deplacement;
+}
+#else
 extern "C" ILoad_Interaction *createInteraction()
 {
     return new up_deplacement;
 }
+#endif
 
 /**
  * @brief Function called when the interaction is triggered
@@ -31,6 +38,7 @@ extern "C" ILoad_Interaction *createInteraction()
  * @param reg The registry of the game
  * @details This function will make the entity move up by 20 pixels
  */
+
 void up_deplacement_function(entity_t &e, registry &reg)
 {
     sparse_array<component::position> &all_pos = reg.get_components<component::position>();
@@ -57,6 +65,7 @@ up_deplacement::~up_deplacement()
  * @return std::string
  * @details This function will return the name of the interaction
  */
+
 std::string up_deplacement::get_name() const noexcept
 {
     return name;
@@ -68,6 +77,7 @@ std::string up_deplacement::get_name() const noexcept
  * @return ILoad_Interaction::interaction_function
  * @details This function will return the function of the interaction
  */
+
 ILoad_Interaction::interaction_function const &up_deplacement::get_function() const noexcept
 {
     return function;

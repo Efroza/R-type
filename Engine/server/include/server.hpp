@@ -14,9 +14,9 @@
 
 #include <fstream>
 #include <functional>
-#include "../../shared/include/headers.hpp"
-#include "../../shared/include/ClientInfo.hpp"
-#include "registry.hpp"
+#include "../../../shared/include/headers.hpp"
+#include "../../../shared/include/ClientInfo.hpp"
+#include "../../Include/registry.hpp"
 
 class Server {
     public:

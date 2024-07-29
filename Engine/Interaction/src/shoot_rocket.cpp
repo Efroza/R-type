@@ -1,17 +1,18 @@
 /*
 ** EPITECH PROJECT, 2023
-** JAM-1-2023
+** Engine
 ** File description:
-** right_deplacement
+** shoot_rocket
 */
 
-#include "../../Include/registry.hpp"
-#include "../../BaseComponent/position.hpp"
-#include "../Include/right_deplacement.hpp"
-
 /**
- * @file right_deplacement.cpp
+ * @file shoot_rocket.cpp
  */
+
+#include "../ILoad_Interaction.hpp"
+#include "../Include/shoot_rocket.hpp"
+#include "../../BaseComponent/position.hpp"
+#include "../../BaseComponent/network_player.hpp"
 
 /**
  * @brief Create a Interaction object
@@ -19,16 +20,15 @@
  * @return ILoad_Interaction*
  * @details This function is called by the plugin loader to create a new instance of the plugin
  */
-
 #ifdef _WIN32
 extern "C" __declspec(dllexport) ILoad_Interaction *createInteraction()
-{
-    return new right_deplacement;
+{ 
+    return new shoot_rocket;
 }
 #else
 extern "C" ILoad_Interaction *createInteraction()
 {
-    return new right_deplacement;
+    return new shoot_rocket;
 }
 #endif
 
@@ -40,22 +40,20 @@ extern "C" ILoad_Interaction *createInteraction()
  * @details This function will make the entity move right by 20 pixels
  */
 
-void right_deplacement_function(entity_t &e, registry &reg)
+void shoot_rocket_function(entity_t &e, registry &reg)
 {
-    sparse_array<component::position> &all_pos = reg.get_components<component::position>();
-    auto &maybe_pos = all_pos[e];
-    if (!maybe_pos)
-        return;
-    component::position &pos = maybe_pos.value();
-    pos.x += 20;
+    entity_t rocket = reg.spawn_entity();
+    reg.add_component<component::position>(rocket, std::move(component::position(500, 500)));
+    reg.add_component<component::network_player>(rocket, std::move(component::network_player()));
+    std::cout << "SHOOOOOOOOT" << std::endl;
 }
 
-right_deplacement::right_deplacement()
-    : name("right_deplacement"), function(right_deplacement_function)
+shoot_rocket::shoot_rocket()
+    : name("shoot_rocket"), function(shoot_rocket_function)
 {
 }
 
-right_deplacement::~right_deplacement()
+shoot_rocket::~shoot_rocket()
 {
 }
 
@@ -66,7 +64,7 @@ right_deplacement::~right_deplacement()
  * @details This function will return the name of the interaction
  */
 
-std::string right_deplacement::get_name() const noexcept
+std::string shoot_rocket::get_name() const noexcept
 {
     return name;
 }
@@ -78,7 +76,7 @@ std::string right_deplacement::get_name() const noexcept
  * @details This function will return the function of the interaction
  */
 
-ILoad_Interaction::interaction_function const &right_deplacement::get_function() const noexcept
+ILoad_Interaction::interaction_function const &shoot_rocket::get_function() const noexcept
 {
     return function;
 }

@@ -5,12 +5,12 @@
 ** handling_component_system
 */
 
+#include "handling_component_system.hpp"
 #ifdef _WIN32
 #include <windows.h>
 #else
 #include <dlfcn.h>
 #endif
-#include "handling_component_system.hpp"
 
 /**
  * @file handling_component_system.cpp

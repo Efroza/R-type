@@ -22,6 +22,7 @@
  * @param rects The sparse array of rectangle components.
  * @param animations The sparse array of animation components.
  */
+
 void animation_system(registry &reg
 ,sparse_array<component::image> &images, sparse_array<component::rect> &rects, sparse_array<component::animation> &animations)
 {

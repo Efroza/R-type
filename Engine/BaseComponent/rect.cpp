@@ -78,6 +78,7 @@ component::rect::~rect()
  * @param cols The number of columns.
  * @details The number of columns will be reset if not already set in the constructor.
  */
+
 void component::rect::set_cols(int_size cols) noexcept
 {
     _cols = cols;
@@ -89,6 +90,7 @@ void component::rect::set_cols(int_size cols) noexcept
  * @param lines The number of lines.
  * @details The number of lines will be reset if not already set in the constructor.
  */
+
 void component::rect::set_lines(int_size lines) noexcept
 {
     _lines = lines;
@@ -110,6 +112,7 @@ void component::rect::set_lines(int_size lines) noexcept
  * @return component::rect::int_size
  * @details If the number of columns is not set, it will return 0.
  */
+
 component::rect::int_size component::rect::get_cols() const noexcept
 {
     return _cols;
@@ -121,6 +124,7 @@ component::rect::int_size component::rect::get_cols() const noexcept
  * @return component::rect::int_size
  * @details If the number of lines is not set, it will return 0.
  */
+
 component::rect::int_size component::rect::get_lines() const noexcept
 {
     return _lines;
@@ -132,6 +136,7 @@ component::rect::int_size component::rect::get_lines() const noexcept
  * @return component::rect::int_size
  * @details It will return the width of the rect in relation of the entire size of the entity.
  */
+
 void component::rect::select_row(int_size row) noexcept
 {
     if (row > _lines)
@@ -148,6 +153,7 @@ void component::rect::select_row(int_size row) noexcept
  * @return component::rect::int_size
  * @details It will return the height of the rect in relation of the entire size of the entity.
  */
+
 void component::rect::select_col(int_size col) noexcept
 {
     if (col > _cols)
@@ -185,6 +191,7 @@ void component::rect::animation() noexcept
  * @return true
  * @return false
  */
+
 bool component::rect::size_is_set() const noexcept
 {
     return _size_height != 0 && _size_width != 0;

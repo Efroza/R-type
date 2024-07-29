@@ -21,7 +21,11 @@
 */
 Client::Client(const std::string& host, const std::string& port) : _host(host), _port(port), _scene(scene_e::HOME), _playing(true)
 {
+    #ifdef _WIN32
+    this->loadLib("bin/SFML.dll");
+    #else
     this->loadLib("lib/libSFML.so");//faut mettre le path de la lib graphique
+    #endif
 
     auto background = std::make_shared<Drawable>("background", "./Engine/Image/background.jpg", std::pair<int, int>(1920, 1080), std::pair<int, int>(0, 0));
     this->_homeMenuDrawables.push_back(background);

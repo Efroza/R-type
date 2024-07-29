@@ -9,17 +9,10 @@
 #define NETWORK_PLAYER_HPP_
 
 #include <cinttypes>
-#include "server.hpp"
-
-/**
- * @file network_player.hpp
-*/
+#include "../server/include/server.hpp"
 
 namespace component
 {
-    /**
-     * @brief This class is used to create a network_player.
-     */
     class network_player
     {
         public:

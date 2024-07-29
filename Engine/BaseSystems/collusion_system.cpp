@@ -18,6 +18,7 @@
  * @param collusion Component system of the collision.
  * @param image To get the sprite of the entity which is colliding.
  */
+
 void collusion_system(registry &reg, sparse_array<component::collusion> &collusion, sparse_array<component::image> &image)
 {
     if (image.size() == 0)

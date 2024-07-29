@@ -17,6 +17,7 @@
  *
  * @param reg Container of all the components.
  */
+
 void load_component(registry &reg)
 {
     reg.register_component<component::image>();

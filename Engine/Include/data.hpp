@@ -15,10 +15,6 @@
 #include <list>
 #include "entity.hpp"
 
-/**
- * @file data.hpp
-*/
-
 class data
 {
 public:

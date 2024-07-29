@@ -10,14 +10,7 @@
 
 #include <SFML/Graphics.hpp>
 
-/**
- * @file position.hpp
- */
-
 namespace component {
-    /**
-     * @brief This class is used to create a position.
-     */
     struct position
     {
         position(int x, int y) : x(x), y(y), pos(x, y) {}

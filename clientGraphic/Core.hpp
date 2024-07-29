@@ -9,12 +9,13 @@
 #include <string>
 #include <list>
 #include "IGraphic.hpp"
+#include "../client/include/client.hpp"
 
 /**
  * @file Core.hpp
 */
 
-enum scene_e {
+enum scene_a {
     HOME,
     NETWORK_MENU,
     GAME
@@ -31,6 +32,9 @@ public:
     ~Core();
 
     void loop();
+public:
+    Client *client;
+
 private:
     void loadLib(const std::string &filepath);
     void _manageEventMenuHome(events_e event);
@@ -49,6 +53,6 @@ private:
     std::shared_ptr<Drawable> _background;
     std::string _host;
     std::string _ip;
-    scene_e _scene;
+    scene_a _scene;
     bool _playing;
 };

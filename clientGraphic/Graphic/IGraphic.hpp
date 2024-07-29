@@ -34,6 +34,10 @@ public:
     virtual std::string getText(std::string str) = 0;
 };
 
+#ifdef _WIN32
+extern "C" __declspec(dllexport) IGraphic* createGraphLib();
+#else
 extern "C" IGraphic* createGraphLib();
+#endif
 
 #endif
